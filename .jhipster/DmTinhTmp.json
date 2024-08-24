@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240820091657"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "maTinh",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenTinh",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DmTinhTmp",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

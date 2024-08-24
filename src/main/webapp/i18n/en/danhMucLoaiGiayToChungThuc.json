@@ -1,0 +1,25 @@
+{
+  "gatewayApp": {
+    "danhMucLoaiGiayToChungThuc": {
+      "home": {
+        "title": "Danh Muc Loai Giay To Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Danh Muc Loai Giay To Chung Thuc",
+        "createOrEditLabel": "Create or edit a Danh Muc Loai Giay To Chung Thuc",
+        "notFound": "No Danh Muc Loai Giay To Chung Thucs found"
+      },
+      "created": "A new Danh Muc Loai Giay To Chung Thuc is created with identifier {{ param }}",
+      "updated": "A Danh Muc Loai Giay To Chung Thuc is updated with identifier {{ param }}",
+      "deleted": "A Danh Muc Loai Giay To Chung Thuc is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Danh Muc Loai Giay To Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Danh Muc Loai Giay To Chung Thuc"
+      },
+      "id": "ID",
+      "idLoaiGiayTo": "Id Loai Giay To",
+      "dienGiai": "Dien Giai"
+    }
+  }
+}

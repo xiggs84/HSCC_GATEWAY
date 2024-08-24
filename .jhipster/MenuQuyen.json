@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240820090657"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idQuyen",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "listMenu",
+      "fieldType": "String"
+    }
+  ],
+  "name": "MenuQuyen",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

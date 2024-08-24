@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820091357"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "maXa",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenXa",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maHuyen",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DanhMucXa",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

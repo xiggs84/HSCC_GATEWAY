@@ -1,0 +1,25 @@
+{
+  "gatewayApp": {
+    "danhMucLoaiGiayToChungThuc": {
+      "home": {
+        "title": "Danh Muc Loai Giay To Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Danh Muc Loai Giay To Chung Thuc",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Danh Muc Loai Giay To Chung Thuc",
+        "notFound": "No Danh Muc Loai Giay To Chung Thucs found"
+      },
+      "created": "Một Danh Muc Loai Giay To Chung Thuc mới được tạo với định danh {{ param }}",
+      "updated": "Một Danh Muc Loai Giay To Chung Thuc cập nhật với định danh {{ param }}",
+      "deleted": "Một Danh Muc Loai Giay To Chung Thuc đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Danh Muc Loai Giay To Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Danh Muc Loai Giay To Chung Thuc"
+      },
+      "id": "ID",
+      "idLoaiGiayTo": "Id Loai Giay To",
+      "dienGiai": "Dien Giai"
+    }
+  }
+}

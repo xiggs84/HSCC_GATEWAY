@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "cauHinhMauChungThuc": {
+      "home": {
+        "title": "Cau Hinh Mau Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Cau Hinh Mau Chung Thuc",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Cau Hinh Mau Chung Thuc",
+        "notFound": "No Cau Hinh Mau Chung Thucs found"
+      },
+      "created": "Một Cau Hinh Mau Chung Thuc mới được tạo với định danh {{ param }}",
+      "updated": "Một Cau Hinh Mau Chung Thuc cập nhật với định danh {{ param }}",
+      "deleted": "Một Cau Hinh Mau Chung Thuc đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Cau Hinh Mau Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Cau Hinh Mau Chung Thuc"
+      },
+      "id": "ID",
+      "idLoai": "Id Loai",
+      "dienGiai": "Dien Giai",
+      "khungGia": "Khung Gia",
+      "hasBenB": "Has Ben B",
+      "hasTaiSan": "Has Tai San",
+      "trangThai": "Trang Thai",
+      "fileChungThuc": "File Chung Thuc",
+      "srcChungThuc": "Src Chung Thuc",
+      "ngayThaoTac": "Ngay Thao Tac",
+      "nguoiThaoTac": "Nguoi Thao Tac",
+      "idDonVi": "Id Don Vi",
+      "idLoaiSo": "Id Loai So"
+    }
+  }
+}

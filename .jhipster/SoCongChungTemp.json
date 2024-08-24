@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820092757"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idHopDong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idMaster",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "soCc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "SoCongChungTemp",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

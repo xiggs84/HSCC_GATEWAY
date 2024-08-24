@@ -1,0 +1,27 @@
+{
+  "gatewayApp": {
+    "soCongChungTemp": {
+      "home": {
+        "title": "So Cong Chung Temps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một So Cong Chung Temp",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật So Cong Chung Temp",
+        "notFound": "No So Cong Chung Temps found"
+      },
+      "created": "Một So Cong Chung Temp mới được tạo với định danh {{ param }}",
+      "updated": "Một So Cong Chung Temp cập nhật với định danh {{ param }}",
+      "deleted": "Một So Cong Chung Temp đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa So Cong Chung Temp {{ id }}?"
+      },
+      "detail": {
+        "title": "So Cong Chung Temp"
+      },
+      "id": "ID",
+      "idHopDong": "Id Hop Dong",
+      "idMaster": "Id Master",
+      "soCc": "So Cc",
+      "ngayThaoTac": "Ngay Thao Tac"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240820094257"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idHopDong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fKey",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ketQua",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayPhatHanh",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "LogHoaDonDienTu",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

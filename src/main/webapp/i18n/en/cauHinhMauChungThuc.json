@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "cauHinhMauChungThuc": {
+      "home": {
+        "title": "Cau Hinh Mau Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cau Hinh Mau Chung Thuc",
+        "createOrEditLabel": "Create or edit a Cau Hinh Mau Chung Thuc",
+        "notFound": "No Cau Hinh Mau Chung Thucs found"
+      },
+      "created": "A new Cau Hinh Mau Chung Thuc is created with identifier {{ param }}",
+      "updated": "A Cau Hinh Mau Chung Thuc is updated with identifier {{ param }}",
+      "deleted": "A Cau Hinh Mau Chung Thuc is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cau Hinh Mau Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Cau Hinh Mau Chung Thuc"
+      },
+      "id": "ID",
+      "idLoai": "Id Loai",
+      "dienGiai": "Dien Giai",
+      "khungGia": "Khung Gia",
+      "hasBenB": "Has Ben B",
+      "hasTaiSan": "Has Tai San",
+      "trangThai": "Trang Thai",
+      "fileChungThuc": "File Chung Thuc",
+      "srcChungThuc": "Src Chung Thuc",
+      "ngayThaoTac": "Ngay Thao Tac",
+      "nguoiThaoTac": "Nguoi Thao Tac",
+      "idDonVi": "Id Don Vi",
+      "idLoaiSo": "Id Loai So"
+    }
+  }
+}

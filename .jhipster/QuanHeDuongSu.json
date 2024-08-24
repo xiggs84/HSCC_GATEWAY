@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240820093357"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idDuongSu",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idDuongSuQh",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idQuanHe",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "thongTinQuanHe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "QuanHeDuongSu",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

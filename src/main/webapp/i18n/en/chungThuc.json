@@ -1,0 +1,47 @@
+{
+  "gatewayApp": {
+    "chungThuc": {
+      "home": {
+        "title": "Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chung Thuc",
+        "createOrEditLabel": "Create or edit a Chung Thuc",
+        "notFound": "No Chung Thucs found"
+      },
+      "created": "A new Chung Thuc is created with identifier {{ param }}",
+      "updated": "A Chung Thuc is updated with identifier {{ param }}",
+      "deleted": "A Chung Thuc is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Chung Thuc"
+      },
+      "id": "ID",
+      "idChungThuc": "Id Chung Thuc",
+      "idDonVi": "Id Don Vi",
+      "nguoiYeuCau": "Nguoi Yeu Cau",
+      "nguoiChungThuc": "Nguoi Chung Thuc",
+      "nguoiThaoTac": "Nguoi Thao Tac",
+      "ngayChungThuc": "Ngay Chung Thuc",
+      "ngayThaoTac": "Ngay Thao Tac",
+      "soTienThu": "So Tien Thu",
+      "soBanSao": "So Ban Sao",
+      "vanBan": "Van Ban",
+      "trangThai": "Trang Thai",
+      "idLoaiGiayTo": "Id Loai Giay To",
+      "quyenSo": "Quyen So",
+      "duongSu": "Duong Su",
+      "taiSan": "Tai San",
+      "strSearch": "Str Search",
+      "srcChungThuc": "Src Chung Thuc",
+      "thongTinChungThuc": "Thong Tin Chung Thuc",
+      "chuKyNgoaiTruSo": "Chu Ky Ngoai Tru So",
+      "idCtGoc": "Id Ct Goc",
+      "ngayText": "Ngay Text",
+      "chucDanhCanBo": "Chuc Danh Can Bo",
+      "ldPheDuyet": "Ld Phe Duyet",
+      "chucDanhLd": "Chuc Danh Ld"
+    }
+  }
+}

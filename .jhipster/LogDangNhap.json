@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820095557"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "ngayDangNhap",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "ipAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idCanBo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenDangNhap",
+      "fieldType": "String"
+    }
+  ],
+  "name": "LogDangNhap",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

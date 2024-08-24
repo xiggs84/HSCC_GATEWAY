@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "duongSuTrungCmndBak": {
+      "home": {
+        "title": "Duong Su Trung Cmnd Baks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Duong Su Trung Cmnd Bak",
+        "createOrEditLabel": "Create or edit a Duong Su Trung Cmnd Bak",
+        "notFound": "No Duong Su Trung Cmnd Baks found"
+      },
+      "created": "A new Duong Su Trung Cmnd Bak is created with identifier {{ param }}",
+      "updated": "A Duong Su Trung Cmnd Bak is updated with identifier {{ param }}",
+      "deleted": "A Duong Su Trung Cmnd Bak is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Duong Su Trung Cmnd Bak {{ id }}?"
+      },
+      "detail": {
+        "title": "Duong Su Trung Cmnd Bak"
+      },
+      "id": "ID",
+      "idDuongSu": "Id Duong Su",
+      "tenDuongSu": "Ten Duong Su",
+      "idLoaiDs": "Id Loai Ds",
+      "diaChi": "Dia Chi",
+      "trangThai": "Trang Thai",
+      "thongTinDs": "Thong Tin Ds",
+      "ngayThaoTac": "Ngay Thao Tac",
+      "nguoiThaoTac": "Nguoi Thao Tac",
+      "idDsGoc": "Id Ds Goc",
+      "idTinhTrang": "Id Tinh Trang",
+      "idMaster": "Id Master",
+      "idDonVi": "Id Don Vi",
+      "strSearch": "Str Search",
+      "soGiayTo": "So Giay To"
+    }
+  }
+}

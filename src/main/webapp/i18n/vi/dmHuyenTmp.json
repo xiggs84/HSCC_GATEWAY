@@ -1,0 +1,26 @@
+{
+  "gatewayApp": {
+    "dmHuyenTmp": {
+      "home": {
+        "title": "Dm Huyen Tmps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Dm Huyen Tmp",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Dm Huyen Tmp",
+        "notFound": "No Dm Huyen Tmps found"
+      },
+      "created": "Một Dm Huyen Tmp mới được tạo với định danh {{ param }}",
+      "updated": "Một Dm Huyen Tmp cập nhật với định danh {{ param }}",
+      "deleted": "Một Dm Huyen Tmp đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Dm Huyen Tmp {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Huyen Tmp"
+      },
+      "id": "ID",
+      "maHuyen": "Ma Huyen",
+      "tenHuyen": "Ten Huyen",
+      "maTinh": "Ma Tinh"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820091557"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idLuotQuet",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idCongDan",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "DonViScanQr",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

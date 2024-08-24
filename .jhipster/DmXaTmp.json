@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240820091857"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "maXa",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenXa",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maHuyen",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DmXaTmp",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

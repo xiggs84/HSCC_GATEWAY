@@ -1,0 +1,113 @@
+{
+  "annotations": {
+    "changelogDate": "20240820094657"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idLoaiHd",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dienGiai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idVaiTro1",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idVaiTro2",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fileHopDong",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srcHopDong",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dieuKhoan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nguoiThaoTac",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "srcLoiChung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idNhom",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fileLoiChung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chuyenTaiSan",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "loaiSuaDoi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "loaiHuyBo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "trangThaiDuyet",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idPhanLoaiHopDong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "srcCv",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srcTb",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srcTtpc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dgTen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nhomTen",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idVaiTro3",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DanhMucLoaiHopDong",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

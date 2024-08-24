@@ -1,0 +1,25 @@
+{
+  "gatewayApp": {
+    "dmTinhTmp": {
+      "home": {
+        "title": "Dm Tinh Tmps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Dm Tinh Tmp",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Dm Tinh Tmp",
+        "notFound": "No Dm Tinh Tmps found"
+      },
+      "created": "Một Dm Tinh Tmp mới được tạo với định danh {{ param }}",
+      "updated": "Một Dm Tinh Tmp cập nhật với định danh {{ param }}",
+      "deleted": "Một Dm Tinh Tmp đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Dm Tinh Tmp {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Tinh Tmp"
+      },
+      "id": "ID",
+      "maTinh": "Ma Tinh",
+      "tenTinh": "Ten Tinh"
+    }
+  }
+}

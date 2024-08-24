@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820095757"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idLog",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "noiDung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "key",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "LogDownloadFileDrive",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

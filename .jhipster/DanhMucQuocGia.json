@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240820091957"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idQuocGia",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenQuocGia",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenTiengAnh",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DanhMucQuocGia",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

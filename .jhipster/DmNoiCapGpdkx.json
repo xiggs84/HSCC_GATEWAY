@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240820092157"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idNoiCap",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dienGiai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DmNoiCapGpdkx",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

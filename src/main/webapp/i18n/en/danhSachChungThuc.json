@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "danhSachChungThuc": {
+      "home": {
+        "title": "Danh Sach Chung Thucs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Danh Sach Chung Thuc",
+        "createOrEditLabel": "Create or edit a Danh Sach Chung Thuc",
+        "notFound": "No Danh Sach Chung Thucs found"
+      },
+      "created": "A new Danh Sach Chung Thuc is created with identifier {{ param }}",
+      "updated": "A Danh Sach Chung Thuc is updated with identifier {{ param }}",
+      "deleted": "A Danh Sach Chung Thuc is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Danh Sach Chung Thuc {{ id }}?"
+      },
+      "detail": {
+        "title": "Danh Sach Chung Thuc"
+      },
+      "id": "ID",
+      "idChungThuc": "Id Chung Thuc",
+      "idDonVi": "Id Don Vi",
+      "nguoiChungThuc": "Nguoi Chung Thuc",
+      "nguoiThaoTac": "Nguoi Thao Tac",
+      "ngayChungThuc": "Ngay Chung Thuc",
+      "ngayThaoTac": "Ngay Thao Tac",
+      "trangThai": "Trang Thai",
+      "idLoaiGiayTo": "Id Loai Giay To",
+      "quyenSo": "Quyen So",
+      "srcChungThuc": "Src Chung Thuc",
+      "chuKyNgoaiTruSo": "Chu Ky Ngoai Tru So",
+      "ngayText": "Ngay Text",
+      "strSearch": "Str Search",
+      "soTienThu": "So Tien Thu",
+      "ldPheDuyet": "Ld Phe Duyet"
+    }
+  }
+}

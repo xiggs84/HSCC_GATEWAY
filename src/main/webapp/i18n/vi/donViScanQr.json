@@ -1,0 +1,27 @@
+{
+  "gatewayApp": {
+    "donViScanQr": {
+      "home": {
+        "title": "Don Vi Scan Qrs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Don Vi Scan Qr",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Don Vi Scan Qr",
+        "notFound": "No Don Vi Scan Qrs found"
+      },
+      "created": "Một Don Vi Scan Qr mới được tạo với định danh {{ param }}",
+      "updated": "Một Don Vi Scan Qr cập nhật với định danh {{ param }}",
+      "deleted": "Một Don Vi Scan Qr đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Don Vi Scan Qr {{ id }}?"
+      },
+      "detail": {
+        "title": "Don Vi Scan Qr"
+      },
+      "id": "ID",
+      "idLuotQuet": "Id Luot Quet",
+      "idDonVi": "Id Don Vi",
+      "idCongDan": "Id Cong Dan",
+      "ngayThaoTac": "Ngay Thao Tac"
+    }
+  }
+}

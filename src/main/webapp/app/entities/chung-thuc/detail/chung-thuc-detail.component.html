@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (chungThuc()) {
+      <div>
+        <h2 data-cy="chungThucDetailsHeading"><span jhiTranslate="gatewayApp.chungThuc.detail.title">Chung Thuc</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.idChungThuc">Id Chung Thuc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.idChungThuc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.idDonVi">Id Don Vi</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.idDonVi }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.nguoiYeuCau">Nguoi Yeu Cau</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.nguoiYeuCau }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.nguoiChungThuc">Nguoi Chung Thuc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.nguoiChungThuc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.nguoiThaoTac">Nguoi Thao Tac</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.nguoiThaoTac }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.ngayChungThuc">Ngay Chung Thuc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.ngayChungThuc | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.ngayThaoTac">Ngay Thao Tac</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.ngayThaoTac | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.soTienThu">So Tien Thu</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.soTienThu }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.soBanSao">So Ban Sao</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.soBanSao }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.vanBan">Van Ban</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.vanBan }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.trangThai">Trang Thai</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.trangThai }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.idLoaiGiayTo">Id Loai Giay To</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.idLoaiGiayTo }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.quyenSo">Quyen So</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.quyenSo }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.duongSu">Duong Su</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.duongSu }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.taiSan">Tai San</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.taiSan }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.strSearch">Str Search</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.strSearch }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.srcChungThuc">Src Chung Thuc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.srcChungThuc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.thongTinChungThuc">Thong Tin Chung Thuc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.thongTinChungThuc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.chuKyNgoaiTruSo">Chu Ky Ngoai Tru So</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.chuKyNgoaiTruSo }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.idCtGoc">Id Ct Goc</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.idCtGoc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.ngayText">Ngay Text</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.ngayText }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.chucDanhCanBo">Chuc Danh Can Bo</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.chucDanhCanBo }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.ldPheDuyet">Ld Phe Duyet</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.ldPheDuyet }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.chungThuc.chucDanhLd">Chuc Danh Ld</span></dt>
+          <dd>
+            <span>{{ chungThuc()!.chucDanhLd }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
+        </button>
+
+        <button type="button" [routerLink]="['/chung-thuc', chungThuc()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

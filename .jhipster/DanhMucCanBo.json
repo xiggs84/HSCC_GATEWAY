@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "changelogDate": "20240820090457"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idCanBo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenCanBo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diaChi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "namSinh",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "soDienThoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "soCmnd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenDangNhap",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "matKhau",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "clientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientSecret",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usernameKyso",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "passwordKyso",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DanhMucCanBo",
+  "relationships": [],
+  "searchEngine": "no"
+}

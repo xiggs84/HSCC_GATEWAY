@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (donViScanQr()) {
+      <div>
+        <h2 data-cy="donViScanQrDetailsHeading"><span jhiTranslate="gatewayApp.donViScanQr.detail.title">Don Vi Scan Qr</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ donViScanQr()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.donViScanQr.idLuotQuet">Id Luot Quet</span></dt>
+          <dd>
+            <span>{{ donViScanQr()!.idLuotQuet }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.donViScanQr.idDonVi">Id Don Vi</span></dt>
+          <dd>
+            <span>{{ donViScanQr()!.idDonVi }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.donViScanQr.idCongDan">Id Cong Dan</span></dt>
+          <dd>
+            <span>{{ donViScanQr()!.idCongDan }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.donViScanQr.ngayThaoTac">Ngay Thao Tac</span></dt>
+          <dd>
+            <span>{{ donViScanQr()!.ngayThaoTac | formatMediumDate }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
+        </button>
+
+        <button type="button" [routerLink]="['/don-vi-scan-qr', donViScanQr()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

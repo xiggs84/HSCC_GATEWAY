@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20240820101657"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idVietTat",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tuVietTat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dienGiai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nguoiThaoTac",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DanhMucTuVietTat",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

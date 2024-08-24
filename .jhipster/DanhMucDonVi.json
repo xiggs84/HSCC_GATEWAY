@@ -1,0 +1,133 @@
+{
+  "annotations": {
+    "changelogDate": "20240820090957"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "tenDonVi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diaChi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nguoiDaiDien",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "soDienThoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idDonViQl",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "loaiDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayKhaiBao",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idTinh",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idHuyen",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idPhuongXa",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "soNha",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maSoThue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idCapQl",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "loaiNhiemVu",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "hoaDonDt",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "maDonViIgate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maCoQuanIgate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "capDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "kySo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "qrScan",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "verifyIdCard",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "isVerifyFace",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "isElastic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "apikeyCccd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apikeyFace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "verifyCodeCccd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usernameElastic",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "passwordElastic",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DanhMucDonVi",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

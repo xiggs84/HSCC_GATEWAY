@@ -1,0 +1,109 @@
+{
+  "annotations": {
+    "changelogDate": "20240820092357"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idChungThuc",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nguoiYeuCau",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nguoiChungThuc",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nguoiThaoTac",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayChungThuc",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "soTienThu",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "soBanSao",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "vanBan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idLoaiGiayTo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "quyenSo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "duongSu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "taiSan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "strSearch",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srcChungThuc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thongTinChungThuc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chuKyNgoaiTruSo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idCtGoc",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayText",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chucDanhCanBo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ldPheDuyet",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "chucDanhLd",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ChungThuc",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

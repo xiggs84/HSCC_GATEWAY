@@ -1,0 +1,25 @@
+{
+  "gatewayApp": {
+    "dmTinhTmp": {
+      "home": {
+        "title": "Dm Tinh Tmps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dm Tinh Tmp",
+        "createOrEditLabel": "Create or edit a Dm Tinh Tmp",
+        "notFound": "No Dm Tinh Tmps found"
+      },
+      "created": "A new Dm Tinh Tmp is created with identifier {{ param }}",
+      "updated": "A Dm Tinh Tmp is updated with identifier {{ param }}",
+      "deleted": "A Dm Tinh Tmp is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dm Tinh Tmp {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Tinh Tmp"
+      },
+      "id": "ID",
+      "maTinh": "Ma Tinh",
+      "tenTinh": "Ten Tinh"
+    }
+  }
+}

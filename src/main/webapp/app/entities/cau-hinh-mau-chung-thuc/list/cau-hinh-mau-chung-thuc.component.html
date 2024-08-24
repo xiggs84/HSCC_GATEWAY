@@ -1,0 +1,182 @@
+<div>
+  <h2 id="page-heading" data-cy="CauHinhMauChungThucHeading">
+    <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.home.title">Cau Hinh Mau Chung Thucs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cau-hinh-mau-chung-thuc"
+        [routerLink]="['/cau-hinh-mau-chung-thuc/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.home.createLabel">Thêm mới một Cau Hinh Mau Chung Thuc</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (cauHinhMauChungThucs?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.home.notFound">No Cau Hinh Mau Chung Thucs found</span>
+    </div>
+  }
+
+  @if (cauHinhMauChungThucs && cauHinhMauChungThucs.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idLoai">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.idLoai">Id Loai</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dienGiai">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.dienGiai">Dien Giai</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="khungGia">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.khungGia">Khung Gia</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hasBenB">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.hasBenB">Has Ben B</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hasTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.hasTaiSan">Has Tai San</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="trangThai">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.trangThai">Trang Thai</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fileChungThuc">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.fileChungThuc">File Chung Thuc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="srcChungThuc">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.srcChungThuc">Src Chung Thuc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ngayThaoTac">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.ngayThaoTac">Ngay Thao Tac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nguoiThaoTac">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.nguoiThaoTac">Nguoi Thao Tac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idDonVi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.idDonVi">Id Don Vi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idLoaiSo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.cauHinhMauChungThuc.idLoaiSo">Id Loai So</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cauHinhMauChungThuc of cauHinhMauChungThucs; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/cau-hinh-mau-chung-thuc', cauHinhMauChungThuc.id, 'view']">{{ cauHinhMauChungThuc.id }}</a>
+              </td>
+              <td>{{ cauHinhMauChungThuc.idLoai }}</td>
+              <td>{{ cauHinhMauChungThuc.dienGiai }}</td>
+              <td>{{ cauHinhMauChungThuc.khungGia }}</td>
+              <td>{{ cauHinhMauChungThuc.hasBenB }}</td>
+              <td>{{ cauHinhMauChungThuc.hasTaiSan }}</td>
+              <td>{{ cauHinhMauChungThuc.trangThai }}</td>
+              <td>{{ cauHinhMauChungThuc.fileChungThuc }}</td>
+              <td>{{ cauHinhMauChungThuc.srcChungThuc }}</td>
+              <td>{{ cauHinhMauChungThuc.ngayThaoTac | formatMediumDate }}</td>
+              <td>{{ cauHinhMauChungThuc.nguoiThaoTac }}</td>
+              <td>{{ cauHinhMauChungThuc.idDonVi }}</td>
+              <td>{{ cauHinhMauChungThuc.idLoaiSo }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/cau-hinh-mau-chung-thuc', cauHinhMauChungThuc.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/cau-hinh-mau-chung-thuc', cauHinhMauChungThuc.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(cauHinhMauChungThuc)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

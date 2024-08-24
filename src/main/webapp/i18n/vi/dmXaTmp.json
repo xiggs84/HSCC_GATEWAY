@@ -1,0 +1,26 @@
+{
+  "gatewayApp": {
+    "dmXaTmp": {
+      "home": {
+        "title": "Dm Xa Tmps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Dm Xa Tmp",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Dm Xa Tmp",
+        "notFound": "No Dm Xa Tmps found"
+      },
+      "created": "Một Dm Xa Tmp mới được tạo với định danh {{ param }}",
+      "updated": "Một Dm Xa Tmp cập nhật với định danh {{ param }}",
+      "deleted": "Một Dm Xa Tmp đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Dm Xa Tmp {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Xa Tmp"
+      },
+      "id": "ID",
+      "maXa": "Ma Xa",
+      "tenXa": "Ten Xa",
+      "maHuyen": "Ma Huyen"
+    }
+  }
+}

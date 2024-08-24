@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240820095857"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idLog",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nguoiThaoTac",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "noiDung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "slKq",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "kqSearch",
+      "fieldType": "String"
+    }
+  ],
+  "name": "LogSearchDsTs",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}

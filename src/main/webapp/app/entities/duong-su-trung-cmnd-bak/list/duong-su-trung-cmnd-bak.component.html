@@ -1,0 +1,198 @@
+<div>
+  <h2 id="page-heading" data-cy="DuongSuTrungCmndBakHeading">
+    <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.home.title">Duong Su Trung Cmnd Baks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-duong-su-trung-cmnd-bak"
+        [routerLink]="['/duong-su-trung-cmnd-bak/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.home.createLabel">Thêm mới một Duong Su Trung Cmnd Bak</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (duongSuTrungCmndBaks?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.home.notFound">No Duong Su Trung Cmnd Baks found</span>
+    </div>
+  }
+
+  @if (duongSuTrungCmndBaks && duongSuTrungCmndBaks.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idDuongSu">Id Duong Su</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tenDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.tenDuongSu">Ten Duong Su</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idLoaiDs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idLoaiDs">Id Loai Ds</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="diaChi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.diaChi">Dia Chi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="trangThai">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.trangThai">Trang Thai</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thongTinDs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.thongTinDs">Thong Tin Ds</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ngayThaoTac">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.ngayThaoTac">Ngay Thao Tac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nguoiThaoTac">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.nguoiThaoTac">Nguoi Thao Tac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idDsGoc">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idDsGoc">Id Ds Goc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idTinhTrang">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idTinhTrang">Id Tinh Trang</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idMaster">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idMaster">Id Master</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idDonVi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idDonVi">Id Don Vi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="strSearch">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.strSearch">Str Search</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soGiayTo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.soGiayTo">So Giay To</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (duongSuTrungCmndBak of duongSuTrungCmndBaks; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/duong-su-trung-cmnd-bak', duongSuTrungCmndBak.id, 'view']">{{ duongSuTrungCmndBak.id }}</a>
+              </td>
+              <td>{{ duongSuTrungCmndBak.idDuongSu }}</td>
+              <td>{{ duongSuTrungCmndBak.tenDuongSu }}</td>
+              <td>{{ duongSuTrungCmndBak.idLoaiDs }}</td>
+              <td>{{ duongSuTrungCmndBak.diaChi }}</td>
+              <td>{{ duongSuTrungCmndBak.trangThai }}</td>
+              <td>{{ duongSuTrungCmndBak.thongTinDs }}</td>
+              <td>{{ duongSuTrungCmndBak.ngayThaoTac | formatMediumDate }}</td>
+              <td>{{ duongSuTrungCmndBak.nguoiThaoTac }}</td>
+              <td>{{ duongSuTrungCmndBak.idDsGoc }}</td>
+              <td>{{ duongSuTrungCmndBak.idTinhTrang }}</td>
+              <td>{{ duongSuTrungCmndBak.idMaster }}</td>
+              <td>{{ duongSuTrungCmndBak.idDonVi }}</td>
+              <td>{{ duongSuTrungCmndBak.strSearch }}</td>
+              <td>{{ duongSuTrungCmndBak.soGiayTo }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/duong-su-trung-cmnd-bak', duongSuTrungCmndBak.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/duong-su-trung-cmnd-bak', duongSuTrungCmndBak.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(duongSuTrungCmndBak)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

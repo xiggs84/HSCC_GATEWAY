@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (dmHuyenTmp()) {
+      <div>
+        <h2 data-cy="dmHuyenTmpDetailsHeading"><span jhiTranslate="gatewayApp.dmHuyenTmp.detail.title">Dm Huyen Tmp</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ dmHuyenTmp()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmHuyenTmp.maHuyen">Ma Huyen</span></dt>
+          <dd>
+            <span>{{ dmHuyenTmp()!.maHuyen }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmHuyenTmp.tenHuyen">Ten Huyen</span></dt>
+          <dd>
+            <span>{{ dmHuyenTmp()!.tenHuyen }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmHuyenTmp.maTinh">Ma Tinh</span></dt>
+          <dd>
+            <span>{{ dmHuyenTmp()!.maTinh }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
+        </button>
+
+        <button type="button" [routerLink]="['/dm-huyen-tmp', dmHuyenTmp()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

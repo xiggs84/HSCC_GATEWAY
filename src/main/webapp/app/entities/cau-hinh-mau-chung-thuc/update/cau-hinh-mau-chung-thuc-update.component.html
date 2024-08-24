@@ -1,0 +1,141 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-cau-hinh-mau-chung-thuc-heading"
+        data-cy="CauHinhMauChungThucCreateUpdateHeading"
+        jhiTranslate="gatewayApp.cauHinhMauChungThuc.home.createOrEditLabel"
+      >
+        Thêm mới hoặc cập nhật Cau Hinh Mau Chung Thuc
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.cauHinhMauChungThuc.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idLoai" jhiTranslate="gatewayApp.cauHinhMauChungThuc.idLoai">Id Loai</label>
+          <input type="number" class="form-control" name="idLoai" id="field_idLoai" data-cy="idLoai" formControlName="idLoai" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dienGiai" jhiTranslate="gatewayApp.cauHinhMauChungThuc.dienGiai">Dien Giai</label>
+          <input type="text" class="form-control" name="dienGiai" id="field_dienGiai" data-cy="dienGiai" formControlName="dienGiai" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_khungGia" jhiTranslate="gatewayApp.cauHinhMauChungThuc.khungGia">Khung Gia</label>
+          <input type="number" class="form-control" name="khungGia" id="field_khungGia" data-cy="khungGia" formControlName="khungGia" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hasBenB" jhiTranslate="gatewayApp.cauHinhMauChungThuc.hasBenB">Has Ben B</label>
+          <input type="number" class="form-control" name="hasBenB" id="field_hasBenB" data-cy="hasBenB" formControlName="hasBenB" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hasTaiSan" jhiTranslate="gatewayApp.cauHinhMauChungThuc.hasTaiSan">Has Tai San</label>
+          <input type="number" class="form-control" name="hasTaiSan" id="field_hasTaiSan" data-cy="hasTaiSan" formControlName="hasTaiSan" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_trangThai" jhiTranslate="gatewayApp.cauHinhMauChungThuc.trangThai">Trang Thai</label>
+          <input type="number" class="form-control" name="trangThai" id="field_trangThai" data-cy="trangThai" formControlName="trangThai" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fileChungThuc" jhiTranslate="gatewayApp.cauHinhMauChungThuc.fileChungThuc"
+            >File Chung Thuc</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fileChungThuc"
+            id="field_fileChungThuc"
+            data-cy="fileChungThuc"
+            formControlName="fileChungThuc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_srcChungThuc" jhiTranslate="gatewayApp.cauHinhMauChungThuc.srcChungThuc"
+            >Src Chung Thuc</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="srcChungThuc"
+            id="field_srcChungThuc"
+            data-cy="srcChungThuc"
+            formControlName="srcChungThuc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ngayThaoTac" jhiTranslate="gatewayApp.cauHinhMauChungThuc.ngayThaoTac">Ngay Thao Tac</label>
+          <div class="input-group">
+            <input
+              id="field_ngayThaoTac"
+              data-cy="ngayThaoTac"
+              type="text"
+              class="form-control"
+              name="ngayThaoTac"
+              ngbDatepicker
+              #ngayThaoTacDp="ngbDatepicker"
+              formControlName="ngayThaoTac"
+            />
+            <button type="button" class="btn btn-secondary" (click)="ngayThaoTacDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nguoiThaoTac" jhiTranslate="gatewayApp.cauHinhMauChungThuc.nguoiThaoTac"
+            >Nguoi Thao Tac</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nguoiThaoTac"
+            id="field_nguoiThaoTac"
+            data-cy="nguoiThaoTac"
+            formControlName="nguoiThaoTac"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idDonVi" jhiTranslate="gatewayApp.cauHinhMauChungThuc.idDonVi">Id Don Vi</label>
+          <input type="number" class="form-control" name="idDonVi" id="field_idDonVi" data-cy="idDonVi" formControlName="idDonVi" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idLoaiSo" jhiTranslate="gatewayApp.cauHinhMauChungThuc.idLoaiSo">Id Loai So</label>
+          <input type="number" class="form-control" name="idLoaiSo" id="field_idLoaiSo" data-cy="idLoaiSo" formControlName="idLoaiSo" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Hủy</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

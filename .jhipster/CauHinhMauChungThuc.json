@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "changelogDate": "20240820092457"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "idLoai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dienGiai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "khungGia",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "hasBenB",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "hasTaiSan",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "trangThai",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fileChungThuc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srcChungThuc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ngayThaoTac",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nguoiThaoTac",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idDonVi",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idLoaiSo",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "CauHinhMauChungThuc",
+  "relationships": [],
+  "searchEngine": "no",
+  "skipServer": true
+}
