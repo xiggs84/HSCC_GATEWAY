@@ -1,0 +1,61 @@
+.header {
+  background-color: #001529; /* Màu nền của header */
+  color: white; /* Màu chữ */
+  font-size: 24px; /* Kích thước chữ */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ đẹp hơn */
+  padding: 16px 24px; /* Padding trên và dưới là 16px, trái và phải là 24px */
+  display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+  align-items: center; /* Căn chỉnh nội dung theo chiều dọc giữa */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ cho hiệu ứng chiều sâu */
+  border-bottom: 2px solid #003a6c; /* Thêm đường viền dưới cùng để phân tách với phần nội dung bên dưới */
+}
+
+
+.site-card-wrapper {
+  margin: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+
+  .stat-icon {
+    font-size: 32px;
+    color: #1890ff;
+  }
+
+  .stat-content {
+    flex-grow: 1;
+    margin-left: 16px;
+    text-align: center;
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .stat-title {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .stat-arrow {
+    font-size: 20px;
+    color: green;
+  }
+}
+
+.chart-container {
+  margin: 24px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 400px;
+}

@@ -1,0 +1,91 @@
+<nz-row [nzGutter]="[16, 16]">
+  <nz-col nzSpan="6">
+    <div>
+      <label for="unit">Đơn vị:</label>
+      <input nz-input id="unit" type="text" value="VNPTTG" readonly />
+    </div>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <div>
+      <label for="type">Loại hợp đồng:</label>
+      <nz-select id="type" [(ngModel)]="selectedOption">
+        <nz-option *ngFor="let option of selectOptions" [nzValue]="option">
+          {{ option }}
+        </nz-option>
+      </nz-select>
+    </div>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <div>
+      <label for="search">Tìm kiếm:</label>
+      <input nz-input id="search" type="text" [(ngModel)]="searchValue" />
+    </div>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <div>
+      <label for="status">Trạng thái:</label>
+      <nz-select id="status" [(ngModel)]="selectedStatus">
+        <nz-option *ngFor="let option of statusOptions" [nzValue]="option">
+          {{ option }}
+        </nz-option>
+      </nz-select>
+    </div>
+  </nz-col>
+</nz-row>
+
+<nz-row [nzGutter]="[16, 16]">
+  <nz-col nzSpan="6">
+    <div>
+      <label for="startDate">Từ ngày:</label>
+      <nz-date-picker id="startDate" [(ngModel)]="startDate"></nz-date-picker>
+    </div>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <div>
+      <label for="endDate">Đến ngày:</label>
+      <nz-date-picker id="endDate" [(ngModel)]="endDate"></nz-date-picker>
+    </div>
+  </nz-col>
+  <nz-col nzSpan="6" nzOffset="6">
+    <div>
+      <button nz-button nzType="primary" (click)="search()">Tìm kiếm</button>
+      <button nz-button nzType="default" (click)="reset()">Làm mới</button>
+    </div>
+  </nz-col>
+</nz-row>
+
+<nz-table [nzData]="listOfData" nzBordered nzSize="small" nzShowPagination class="custom-table">
+  <thead>
+  <tr>
+    <th nzWidth="100px">Stt</th>
+    <th>Ngày lập</th>
+    <th>Thông tin</th>
+    <th>Trạng thái</th>
+    <th>Thao tác</th>
+    <th>Người tạo hợp đồng</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listOfData; let index = index">
+    <td>{{ index + 1 }}</td>
+    <td>{{ data.date }}</td>
+    <td [innerHTML]="data.description"></td>
+    <td>{{ data.status }}</td>
+    <td>
+      <div class="action-icons">
+        <ng-container *ngFor="let action of data.actions">
+          <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip"></i>
+        </ng-container>
+      </div>
+    </td>
+    <td>Quản trị viên</td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+
+
+
+
+

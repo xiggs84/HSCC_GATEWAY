@@ -1,0 +1,60 @@
+<nz-layout>
+  <nz-header class="header">Thống kê chi tiết quét xác thực CCCD</nz-header>
+  <nz-content>
+    <div class="container">
+      <div class="filter-container">
+        <div class="filter-item filter-item-select">
+          <nz-select [(ngModel)]="selectedUnit" (ngModelChange)="onUnitChange($event)" nzAllowClear nzPlaceHolder="Chọn đơn vị">
+            <nz-option *ngFor="let unit of units" [nzValue]="unit.value" [nzLabel]="unit.label"></nz-option>
+          </nz-select>
+        </div>
+        <div class="filter-item filter-item-date">
+          <nz-date-picker [(ngModel)]="startDate" (ngModelChange)="onStartDateChange($event)" nzPlaceHolder="Từ ngày"></nz-date-picker>
+        </div>
+        <div class="filter-item filter-item-date">
+          <nz-date-picker [(ngModel)]="endDate" (ngModelChange)="onEndDateChange($event)" nzPlaceHolder="Đến ngày"></nz-date-picker>
+        </div>
+        <div class="filter-item filter-item-search">
+          <nz-input-group>
+            <input nz-input [(ngModel)]="searchValue" placeholder="Tìm kiếm" />
+            <button nz-button nzType="primary" (click)="search()">
+              <span nz-icon nzType="search"></span>
+            </button>
+          </nz-input-group>
+        </div>
+      </div>
+      <div class="actions">
+        <button nz-button nzType="primary" (click)="showReport()">
+          <span nz-icon nzType="file-text"></span>
+          Xem báo cáo
+        </button>
+        <button nz-button nzType="primary" (click)="exportFile()">
+          <span nz-icon nzType="download"></span>
+          Tải file
+        </button>
+      </div>
+      <nz-table [nzLoading]="isLoading" [nzData]="tableData" nzBordered nzSize="small" nzShowPagination>
+        <thead>
+        <tr>
+          <th>STT</th>
+          <th>Đương sự</th>
+          <th>Số CCCD</th>
+          <th>Trạng thái</th>
+          <th>Cán bộ xác thực</th>
+          <th>Ngày thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of tableData; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{item.duongSu}}</td>
+          <td>{{item.soCccd}}</td>
+          <td>{{item.trangThai}}</td>
+          <td>{{item.canBoXacThuc}}</td>
+          <td>{{item.ngayThaoTac}}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-content>
+</nz-layout>
