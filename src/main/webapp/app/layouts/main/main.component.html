@@ -5,9 +5,17 @@
 </div>
 
 <div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
-  </div>
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <router-outlet name="sidebar"></router-outlet>
+    </div>
 
-  <jhi-footer></jhi-footer>
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="card jh-card">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
