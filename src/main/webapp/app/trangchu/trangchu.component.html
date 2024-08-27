@@ -1,0 +1,46 @@
+<nz-layout>
+  <nz-content>
+    <div class="site-card-wrapper">
+      <nz-row [nzGutter]="16">
+        <nz-col nzSpan="8">
+          <div class="stat-card">
+            <i nz-icon nzType="file" nzTheme="outline" class="stat-icon"></i>
+            <div class="stat-content">
+              <div class="stat-number">11</div>
+              <div class="stat-title">Hồ sơ trong ngày</div>
+            </div>
+            <i nz-icon nzType="arrow-up" nzTheme="outline" class="stat-arrow"></i>
+          </div>
+        </nz-col>
+        <nz-col nzSpan="8">
+          <div class="stat-card">
+            <i nz-icon nzType="file-text" nzTheme="outline" class="stat-icon"></i>
+            <div class="stat-content">
+              <div class="stat-number">2390</div>
+              <div class="stat-title">Hồ sơ trong tuần</div>
+            </div>
+            <i nz-icon nzType="arrow-up" nzTheme="outline" class="stat-arrow"></i>
+          </div>
+        </nz-col>
+        <nz-col nzSpan="8">
+          <div class="stat-card">
+            <i nz-icon nzType="bar-chart" nzTheme="outline" class="stat-icon"></i>
+            <div class="stat-content">
+              <div class="stat-number">10663</div>
+              <div class="stat-title">Hồ sơ trong tháng</div>
+            </div>
+            <i nz-icon nzType="arrow-up" nzTheme="outline" class="stat-arrow"></i>
+          </div>
+        </nz-col>
+      </nz-row>
+    </div>
+    <div *ngIf="isBrowser" class="chart-container">
+      <canvas baseChart
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              chartType="bar">
+      </canvas>
+    </div>
+  </nz-content>
+</nz-layout>

@@ -24,11 +24,17 @@ import routes from './app.routes';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { AppPageTitleStrategy } from './app-page-title-strategy';
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
+
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker'
+import SharedModule from '../app/shared/shared.module';
+import {NZ_I18N, vi_VN} from "ng-zorro-antd/i18n";
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -59,8 +65,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, ...routerFeatures),
     importProvidersFrom(BrowserModule),
     importProvidersFrom(NzIconModule),
-    importProvidersFrom(NoopAnimationsModule),
+    importProvidersFrom(BrowserAnimationsModule),
     { provide: NZ_ICONS, useValue: icons },
+    importProvidersFrom(NzLayoutModule),
+    importProvidersFrom(NzGridModule),
+    importProvidersFrom(NzDatePickerModule),
+    importProvidersFrom(SharedModule),
+    { provide: NZ_I18N, useValue: vi_VN },
     // Set this to true to enable service worker (PWA)
     importProvidersFrom(ServiceWorkerModule.register('ngsw-worker.js', { enabled: false })),
     importProvidersFrom(TranslationModule),

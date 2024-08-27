@@ -7,7 +7,10 @@ import { errorRoute } from './layouts/error/error.route';
 import HomeComponent from './home/home.component';
 import NavbarComponent from './layouts/navbar/navbar.component';
 import LoginComponent from './login/login.component';
-import {SidebarComponent} from './layouts/sidebar/sidebar.component'
+import {TrangchuComponent} from './trangchu/trangchu.component'
+import {ChonhopdongComponent} from './pages/chonhopdong/chonhopdong.component'
+import {DanhsachhopdongComponent} from './pages/danhsachhopdong/danhsachhopdong.component'
+import {ThongkexacthuccccdComponent} from './pages/thongkexacthuccccd/thongkexacthuccccd.component'
 const routes: Routes = [
   {
     path: '',
@@ -15,14 +18,29 @@ const routes: Routes = [
     title: 'home.title',
   },
   {
-    path: '',
-    component: NavbarComponent,
-    outlet: 'navbar',
+    path: 'trangchu',
+    component: TrangchuComponent,
+    title: 'trangchu',
+  },
+  {
+    path: 'chonhopdong',
+    component: ChonhopdongComponent,
+    title: 'chonhopdong',
+  },
+  {
+    path: 'danhsachhopdong',
+    component: DanhsachhopdongComponent,
+    title: 'danhsachhopdong',
+  },
+  {
+    path: 'thongkexacthuccccd',
+    component: ThongkexacthuccccdComponent,
+    title: 'thongkexacthuccccd',
   },
   {
     path: '',
-    component: SidebarComponent,
-    outlet: 'sidebar',
+    component: NavbarComponent,
+    outlet: 'navbar',
   },
   {
     path: 'admin',

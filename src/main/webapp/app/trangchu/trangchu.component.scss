@@ -1,0 +1,48 @@
+.site-card-wrapper {
+  margin: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+
+  .stat-icon {
+    font-size: 32px;
+    color: #1890ff;
+  }
+
+  .stat-content {
+    flex-grow: 1;
+    margin-left: 16px;
+    text-align: center;
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .stat-title {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .stat-arrow {
+    font-size: 20px;
+    color: green;
+  }
+}
+
+.chart-container {
+  margin: 24px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 400px;
+}

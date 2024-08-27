@@ -1,0 +1,90 @@
+.custom-table td {
+  vertical-align: top;
+}
+nz-table{
+  margin-top: 20px;
+}
+.action-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  justify-items: center;
+  align-items: center;
+}
+
+.action-icons i {
+  font-size: 16px;
+  color: #1890ff;
+}
+
+.custom-table {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+
+  th, td {
+    padding: 10px; // Tăng padding cho các ô của bảng
+  }
+
+  th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+}
+
+.filter-wrapper {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  nz-form-item {
+    margin-bottom: 1px;
+
+    nz-form-label {
+      font-weight: bold;
+      width: 120px; // Cân chỉnh chiều rộng nhãn
+    }
+
+    nz-form-control {
+      width: calc(100% - 120px); // Cân chỉnh kích thước control dựa trên label
+    }
+  }
+
+  nz-col {
+    margin-bottom: 10px; // Thêm khoảng cách giữa các hàng lọc
+  }
+
+  nz-select {
+    width: 150px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1px; /* Thêm khoảng cách giữa icon và text */
+      min-width: 50px; /* Đảm bảo các nút có cùng chiều rộng */
+      text-align: center;
+
+      i {
+        font-size: 16px;
+      }
+
+      span {
+        flex-grow: 1;
+        display: inline-block;
+      }
+    }
+  }
+}
+
