@@ -1,15 +1,7 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 
-<div>
-  <router-outlet name="navbar"></router-outlet>
-</div>
-
 <div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar -->
-    <div class="col-md-3">
       <router-outlet name="sidebar"></router-outlet>
-    </div>
 
     <!-- Main Content -->
     <div class="col-md-9">
@@ -17,5 +9,4 @@
         <router-outlet></router-outlet>
       </div>
     </div>
-  </div>
 </div>

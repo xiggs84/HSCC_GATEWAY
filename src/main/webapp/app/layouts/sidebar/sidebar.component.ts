@@ -1,20 +1,10 @@
 import { Component } from '@angular/core';
-import {NzSiderComponent} from "ng-zorro-antd/layout";
-import {NzMenuDirective, NzMenuItemComponent, NzSubMenuComponent} from "ng-zorro-antd/menu";
-import {RouterLink} from "@angular/router";
-import {NzIconDirective} from "ng-zorro-antd/icon";
+import SharedModule from '../../shared/shared.module';
 
 @Component({
   selector: 'jhi-sidebar',
   standalone: true,
-  imports: [
-    NzSiderComponent,
-    NzMenuDirective,
-    RouterLink,
-    NzMenuItemComponent,
-    NzIconDirective,
-    NzSubMenuComponent
-  ],
+  imports: [SharedModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

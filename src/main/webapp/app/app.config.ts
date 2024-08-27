@@ -1,5 +1,6 @@
 import { ApplicationConfig, LOCALE_ID, importProvidersFrom, inject } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   Router,
   RouterFeatures,
@@ -56,6 +57,7 @@ export const appConfig: ApplicationConfig = {
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
     { provide: TitleStrategy, useClass: AppPageTitleStrategy },
+    provideAnimations(),
     // jhipster-needle-angular-add-module JHipster will add new module here
   ],
 };
