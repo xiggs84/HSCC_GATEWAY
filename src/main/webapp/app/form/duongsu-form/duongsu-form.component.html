@@ -1,0 +1,20 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Thêm mới Đương sự" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form [formGroup]="duongSuForm" nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Loại Đương sự</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-select formControlName="loaiDuongSu" nzPlaceHolder="Chọn loại đương sự">
+          <nz-option nzValue="caNhan" nzLabel="Cá nhân"></nz-option>
+          <nz-option nzValue="toChuc" nzLabel="Tổ chức"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Họ Tên</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="hoTen" placeholder="Nhập họ tên" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

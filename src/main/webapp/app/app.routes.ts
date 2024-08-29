@@ -11,11 +11,17 @@ import {TrangchuComponent} from './trangchu/trangchu.component'
 import {ChonhopdongComponent} from './pages/chonhopdong/chonhopdong.component'
 import {DanhsachhopdongComponent} from './pages/danhsachhopdong/danhsachhopdong.component'
 import {ThongkexacthuccccdComponent} from './pages/thongkexacthuccccd/thongkexacthuccccd.component'
+import {MuabanchuyennhuongComponent} from './pages/loaihopdong/muabanchuyennhuong/muabanchuyennhuong.component'
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     title: 'home.title',
+  },
+  {
+    path: 'muabanchuyennhuong',
+    component: MuabanchuyennhuongComponent,
+    title: "",
   },
   {
     path: 'trangchu',

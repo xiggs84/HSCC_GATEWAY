@@ -1,0 +1,55 @@
+.custom-card {
+  position: relative;
+}
+
+.card-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table th:first-child {
+  width: 40px;
+}
+
+.custom-table th:nth-child(3),
+.custom-table th:nth-child(5){
+  width: 150px;
+}
+
+.custom-table .action-buttons {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.custom-table .action-buttons button {
+  margin-left: 5px;
+}
+
+.margin-top-16 {
+  margin-top: 16px;
+}
+
+.text-right {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+

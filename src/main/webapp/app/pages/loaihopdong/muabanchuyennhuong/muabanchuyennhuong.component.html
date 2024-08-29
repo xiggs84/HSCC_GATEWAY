@@ -1,0 +1,236 @@
+<form nz-form [nzLayout]="'vertical'">
+  <nz-card nzTitle="Thông tin chung">
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Loại hợp đồng</nz-form-label>
+          <nz-form-control>
+            <nz-select nzPlaceHolder="Chọn loại hợp đồng" class="full-width">
+              <nz-option nzValue="1" nzLabel="Hợp đồng chuyển nhượng quyền sử dụng đất"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Ngày lập hợp đồng</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker nzPlaceHolder="Chọn ngày" class="full-width"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+  </nz-card>
+
+  <nz-row [nzGutter]="16">
+    <nz-col nzSpan="12">
+      <nz-card nzTitle="Bên A" class="custom-card">
+        <nz-form-item>
+          <table class="custom-table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Mã số</th>
+              <th>Tên ĐS</th>
+              <th>Vợ/chồng</th>
+              <th>Vai trò</th>
+              <th class="action-buttons">
+                <button nz-button nzShape="circle" nzType="default">
+                  <i nz-icon nzType="qrcode"></i>
+                </button>
+                <button nz-button nzShape="circle" nzType="default" (click)="duongSuForm.showModal()">
+                  <i nz-icon nzType="plus"></i>
+                </button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="6"><input nz-input placeholder="Nhập thông tin đương sự" /></td>
+            </tr>
+            </tbody>
+          </table>
+        </nz-form-item>
+      </nz-card>
+    </nz-col>
+    <jhi-duongsu-form #duongSuForm></jhi-duongsu-form>
+    <nz-col nzSpan="12">
+      <nz-card nzTitle="Bên B" class="custom-card">
+        <nz-form-item>
+          <table class="custom-table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Mã số</th>
+              <th>Tên ĐS</th>
+              <th>Vợ/chồng</th>
+              <th>Vai trò</th>
+              <th class="action-buttons">
+                <button nz-button nzShape="circle" nzType="default">
+                  <i nz-icon nzType="qrcode"></i>
+                </button>
+                <button nz-button nzShape="circle" nzType="default" (click)="duongSuForm.showModal()">
+                  <i nz-icon nzType="plus"></i>
+                </button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="6"><input nz-input placeholder="Nhập thông tin đương sự" /></td>
+            </tr>
+            </tbody>
+          </table>
+        </nz-form-item>
+      </nz-card>
+    </nz-col>
+  </nz-row>
+
+  <nz-row [nzGutter]="16" class="margin-top-16">
+    <nz-col nzSpan="12">
+      <nz-card nzTitle="Tài sản" class="custom-card">
+        <nz-form-item>
+          <table class="custom-table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Tên tài sản</th>
+              <th class="action-buttons">
+                <button nz-button nzShape="circle" nzType="default">
+                  <i nz-icon nzType="plus"></i>
+                </button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="3"><input nz-input placeholder="Nhập tên tài sản để tìm kiếm" /></td>
+            </tr>
+            </tbody>
+          </table>
+        </nz-form-item>
+      </nz-card>
+    </nz-col>
+
+    <nz-col nzSpan="12">
+      <nz-card nzTitle="Văn bản, giấy tờ liên quan" class="custom-card">
+        <nz-form-item>
+          <table class="custom-table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Tên tập tin</th>
+              <th>Diễn giải</th>
+              <th class="action-buttons">
+                <button nz-button nzShape="circle" nzType="default">
+                  <i nz-icon nzType="plus"></i>
+                </button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="3">Không có tập tin được chọn!</td>
+            </tr>
+            </tbody>
+          </table>
+        </nz-form-item>
+      </nz-card>
+    </nz-col>
+  </nz-row>
+
+  <nz-card nzTitle="Thông tin chuyển nhượng" class="custom-card">
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Giá trị (VND)</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="Nhập giá trị..." />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Phương thức thanh toán</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="Thanh toán hết một lần bằng tiền đồng Việt Nam" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-form-item>
+      <nz-form-label>Thông tin thêm</nz-form-label>
+      <nz-form-control>
+        <textarea nz-input placeholder="Thông tin gồm chuyển nhượng, tặng cho, thuê, vay..."></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-card>
+
+  <nz-card nzTitle="Thông tin khác" class="custom-card">
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'notary'">Công chứng viên</nz-form-label>
+          <nz-form-control>
+            <nz-select id="notary" style="width: 100%">
+              <nz-option nzValue="option1" nzLabel="Tùy chọn 1"></nz-option>
+              <nz-option nzValue="option2" nzLabel="Tùy chọn 2"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'signDate'">Ngày ký</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker id="signDate" nzPlaceHolder="Chọn ngày" style="width: 100%"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'copyNumber'">Số bản</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="copyNumber" placeholder="Nhập số bản" style="width: 100%" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'sheetNumber'">Số tờ</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="sheetNumber" placeholder="Nhập số tờ" style="width: 100%" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="16">
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'pageNumber'">Số trang</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="pageNumber" placeholder="Nhập số tờ" style="width: 100%" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'outsideOffice'">
+            Ký ngoài trụ sở
+            <label nz-checkbox [(ngModel)]="isOutsideOffice" name="outsideOffice" style="margin-left: 10px;"></label>
+          </nz-form-label>
+          <nz-form-control>
+            <input nz-input id="outsideOfficeAddress" *ngIf="isOutsideOffice" placeholder="Địa chỉ ngoài trụ sở" style="width: 100%" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+  </nz-card>
+
+  <div class="text-right">
+    <button nz-button nzType="primary">Lưu</button>
+  </div>
+</form>
+
