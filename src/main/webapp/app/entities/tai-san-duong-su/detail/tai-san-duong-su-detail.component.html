@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (taiSanDuongSu()) {
+    @if (taiSanDuongSu(); as taiSanDuongSuRef) {
       <div>
         <h2 data-cy="taiSanDuongSuDetailsHeading"><span jhiTranslate="gatewayApp.taiSanDuongSu.detail.title">Tai San Duong Su</span></h2>
 
@@ -13,35 +13,31 @@
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.id }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idTaiSan">Id Tai San</span></dt>
-          <dd>
-            <span>{{ taiSanDuongSu()!.idTaiSan }}</span>
+            <span>{{ taiSanDuongSuRef.id }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idDuongSu">Id Duong Su</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.idDuongSu }}</span>
+            <span>{{ taiSanDuongSuRef.idDuongSu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.trangThai }}</span>
+            <span>{{ taiSanDuongSuRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ taiSanDuongSuRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idHopDong">Id Hop Dong</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.idHopDong }}</span>
+            <span>{{ taiSanDuongSuRef.idHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idLoaiHopDong">Id Loai Hop Dong</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.idLoaiHopDong }}</span>
+            <span>{{ taiSanDuongSuRef.idLoaiHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idChungThuc">Id Chung Thuc</span></dt>
           <dd>
-            <span>{{ taiSanDuongSu()!.idChungThuc }}</span>
+            <span>{{ taiSanDuongSuRef.idChungThuc }}</span>
           </dd>
         </dl>
 
@@ -49,7 +45,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/tai-san-duong-su', taiSanDuongSu()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/tai-san-duong-su', taiSanDuongSuRef.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

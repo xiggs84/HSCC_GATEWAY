@@ -17,7 +17,7 @@ export class DanhMucHuyenService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-huyens');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-huyens', 'canbodonvi');
 
   create(danhMucHuyen: NewDanhMucHuyen): Observable<EntityResponseType> {
     return this.http.post<IDanhMucHuyen>(this.resourceUrl, danhMucHuyen, { observe: 'response' });
@@ -76,5 +76,11 @@ export class DanhMucHuyenService {
       return [...danhMucHuyensToAdd, ...danhMucHuyenCollection];
     }
     return danhMucHuyenCollection;
+  }
+
+  getQuanHuyenByTinh(maTinh: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDanhMucHuyen[]>(`${this.resourceUrl}/by-ma-tinh/${maTinh}`, {
+      observe: 'response',
+    });
   }
 }

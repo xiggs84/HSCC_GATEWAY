@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDanhMucDonVi, NewDanhMucDonVi } from '../danh-muc-don-vi.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idDonVi: unknown }> = Partial<Omit<T, 'idDonVi'>> & { idDonVi: T['idDonVi'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,30 +14,25 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DanhMucDonViFormGroupInput = IDanhMucDonVi | PartialWithRequiredKeyOf<NewDanhMucDonVi>;
 
-type DanhMucDonViFormDefaults = Pick<NewDanhMucDonVi, 'id'>;
+type DanhMucDonViFormDefaults = Pick<NewDanhMucDonVi, 'idDonVi'>;
 
 type DanhMucDonViFormGroupContent = {
-  id: FormControl<IDanhMucDonVi['id'] | NewDanhMucDonVi['id']>;
-  idDonVi: FormControl<IDanhMucDonVi['idDonVi']>;
+  idDonVi: FormControl<IDanhMucDonVi['idDonVi'] | NewDanhMucDonVi['idDonVi']>;
   tenDonVi: FormControl<IDanhMucDonVi['tenDonVi']>;
   diaChi: FormControl<IDanhMucDonVi['diaChi']>;
   nguoiDaiDien: FormControl<IDanhMucDonVi['nguoiDaiDien']>;
   soDienThoai: FormControl<IDanhMucDonVi['soDienThoai']>;
   idDonViQl: FormControl<IDanhMucDonVi['idDonViQl']>;
-  loaiDonVi: FormControl<IDanhMucDonVi['loaiDonVi']>;
   ngayKhaiBao: FormControl<IDanhMucDonVi['ngayKhaiBao']>;
   trangThai: FormControl<IDanhMucDonVi['trangThai']>;
-  idTinh: FormControl<IDanhMucDonVi['idTinh']>;
-  idHuyen: FormControl<IDanhMucDonVi['idHuyen']>;
-  idPhuongXa: FormControl<IDanhMucDonVi['idPhuongXa']>;
   soNha: FormControl<IDanhMucDonVi['soNha']>;
   maSoThue: FormControl<IDanhMucDonVi['maSoThue']>;
-  idCapQl: FormControl<IDanhMucDonVi['idCapQl']>;
+  capQuanLy: FormControl<IDanhMucDonVi['capQuanLy']>;
   loaiNhiemVu: FormControl<IDanhMucDonVi['loaiNhiemVu']>;
   hoaDonDt: FormControl<IDanhMucDonVi['hoaDonDt']>;
   maDonViIgate: FormControl<IDanhMucDonVi['maDonViIgate']>;
   maCoQuanIgate: FormControl<IDanhMucDonVi['maCoQuanIgate']>;
-  capDonVi: FormControl<IDanhMucDonVi['capDonVi']>;
+  loaiDonVi: FormControl<IDanhMucDonVi['loaiDonVi']>;
   kySo: FormControl<IDanhMucDonVi['kySo']>;
   qrScan: FormControl<IDanhMucDonVi['qrScan']>;
   verifyIdCard: FormControl<IDanhMucDonVi['verifyIdCard']>;
@@ -54,39 +49,34 @@ export type DanhMucDonViFormGroup = FormGroup<DanhMucDonViFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DanhMucDonViFormService {
-  createDanhMucDonViFormGroup(danhMucDonVi: DanhMucDonViFormGroupInput = { id: null }): DanhMucDonViFormGroup {
+  createDanhMucDonViFormGroup(danhMucDonVi: DanhMucDonViFormGroupInput = { idDonVi: null }): DanhMucDonViFormGroup {
     const danhMucDonViRawValue = {
       ...this.getFormDefaults(),
       ...danhMucDonVi,
     };
     return new FormGroup<DanhMucDonViFormGroupContent>({
-      id: new FormControl(
-        { value: danhMucDonViRawValue.id, disabled: true },
+      idDonVi: new FormControl(
+        { value: danhMucDonViRawValue.idDonVi, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idDonVi: new FormControl(danhMucDonViRawValue.idDonVi),
       tenDonVi: new FormControl(danhMucDonViRawValue.tenDonVi),
       diaChi: new FormControl(danhMucDonViRawValue.diaChi),
       nguoiDaiDien: new FormControl(danhMucDonViRawValue.nguoiDaiDien),
       soDienThoai: new FormControl(danhMucDonViRawValue.soDienThoai),
       idDonViQl: new FormControl(danhMucDonViRawValue.idDonViQl),
-      loaiDonVi: new FormControl(danhMucDonViRawValue.loaiDonVi),
       ngayKhaiBao: new FormControl(danhMucDonViRawValue.ngayKhaiBao),
       trangThai: new FormControl(danhMucDonViRawValue.trangThai),
-      idTinh: new FormControl(danhMucDonViRawValue.idTinh),
-      idHuyen: new FormControl(danhMucDonViRawValue.idHuyen),
-      idPhuongXa: new FormControl(danhMucDonViRawValue.idPhuongXa),
       soNha: new FormControl(danhMucDonViRawValue.soNha),
       maSoThue: new FormControl(danhMucDonViRawValue.maSoThue),
-      idCapQl: new FormControl(danhMucDonViRawValue.idCapQl),
+      capQuanLy: new FormControl(danhMucDonViRawValue.capQuanLy),
       loaiNhiemVu: new FormControl(danhMucDonViRawValue.loaiNhiemVu),
       hoaDonDt: new FormControl(danhMucDonViRawValue.hoaDonDt),
       maDonViIgate: new FormControl(danhMucDonViRawValue.maDonViIgate),
       maCoQuanIgate: new FormControl(danhMucDonViRawValue.maCoQuanIgate),
-      capDonVi: new FormControl(danhMucDonViRawValue.capDonVi),
+      loaiDonVi: new FormControl(danhMucDonViRawValue.loaiDonVi),
       kySo: new FormControl(danhMucDonViRawValue.kySo),
       qrScan: new FormControl(danhMucDonViRawValue.qrScan),
       verifyIdCard: new FormControl(danhMucDonViRawValue.verifyIdCard),
@@ -109,14 +99,14 @@ export class DanhMucDonViFormService {
     form.reset(
       {
         ...danhMucDonViRawValue,
-        id: { value: danhMucDonViRawValue.id, disabled: true },
+        idDonVi: { value: danhMucDonViRawValue.idDonVi, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DanhMucDonViFormDefaults {
     return {
-      id: null,
+      idDonVi: null,
     };
   }
 }

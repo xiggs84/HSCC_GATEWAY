@@ -17,7 +17,8 @@ describe('CauHinhThongTinLoaiTaiSan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: CauHinhThongTinLoaiTaiSanDetailComponent,
+              loadComponent: () =>
+                import('./cau-hinh-thong-tin-loai-tai-san-detail.component').then(m => m.CauHinhThongTinLoaiTaiSanDetailComponent),
               resolve: { cauHinhThongTinLoaiTaiSan: () => of({ id: 123 }) },
             },
           ],

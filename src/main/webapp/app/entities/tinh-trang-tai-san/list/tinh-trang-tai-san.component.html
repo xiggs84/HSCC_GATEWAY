@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idTinhTrang">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.tinhTrangTaiSan.idTinhTrang">Id Tinh Trang</span>
@@ -67,18 +60,17 @@
           </tr>
         </thead>
         <tbody>
-          @for (tinhTrangTaiSan of tinhTrangTaiSans; track trackId) {
+          @for (tinhTrangTaiSan of tinhTrangTaiSans; track trackIdTinhTrang) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.id, 'view']">{{ tinhTrangTaiSan.id }}</a>
+                <a [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.idTinhTrang, 'view']">{{ tinhTrangTaiSan.idTinhTrang }}</a>
               </td>
-              <td>{{ tinhTrangTaiSan.idTinhTrang }}</td>
               <td>{{ tinhTrangTaiSan.dienGiai }}</td>
               <td>{{ tinhTrangTaiSan.trangThai }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.id, 'view']"
+                    [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.idTinhTrang, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -87,7 +79,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.id, 'edit']"
+                    [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.idTinhTrang, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >

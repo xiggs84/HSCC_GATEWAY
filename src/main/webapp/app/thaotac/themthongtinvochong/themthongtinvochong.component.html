@@ -1,0 +1,81 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Tìm kiếm đương sự"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'1100px'">
+
+  <ng-container *nzModalContent>
+    <nz-input-group [nzSuffix]="suffixTemplate">
+      <input type="text" nz-input placeholder="Nhập tên đương sự" />
+    </nz-input-group>
+    <ng-template #suffixTemplate>
+      <button nz-button nzType="primary" (click)="handleSearch()">Tìm kiếm</button>
+    </ng-template>
+
+    <nz-table #basicTable [nzData]="listOfData" [nzBordered]="true">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Đương sự</th>
+        <th>CMND/Passport</th>
+        <th>Địa chỉ thường trú</th>
+        <th>Giới tính</th>
+        <th>Tình trạng hôn nhân</th>
+        <th>Chọn</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of listOfData; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.cmnd }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.gender }}</td>
+        <td>{{ data.maritalStatus }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="handleSelect(data)">Chọn</button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+
+  <ng-container *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isVisibleDetail"
+  nzTitle="Thông tin giấy chứng nhận kết hôn"
+  (nzOnCancel)="handleCancelDetail()"
+  [nzWidth]="'600px'">
+
+  <ng-container *nzModalContent>
+    <nz-form-item class="compact-form-item">
+      <nz-form-label [nzSpan]="24">Giấy chứng nhận kết hôn:</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <input nz-input placeholder="Nhập số giấy chứng nhận" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="compact-form-item">
+      <nz-form-label [nzSpan]="24">Ngày cấp:</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <nz-date-picker style="width: 100%;" nzPlaceHolder="Chọn ngày cấp"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="compact-form-item">
+      <nz-form-label [nzSpan]="24">Nơi cấp:</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <input nz-input placeholder="Nhập nơi cấp" />
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
+  <ng-container *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancelDetail()">Đóng</button>
+    <button nz-button nzType="primary" (click)="handleSave()">Lưu</button>
+  </ng-container>
+</nz-modal>

@@ -8,17 +8,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idTaiSan.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.dmTaiSan.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idTaiSan" jhiTranslate="gatewayApp.dmTaiSan.idTaiSan">Id Tai San</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idTaiSan"
+              id="field_idTaiSan"
+              data-cy="idTaiSan"
+              formControlName="idTaiSan"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idTaiSan" jhiTranslate="gatewayApp.dmTaiSan.idTaiSan">Id Tai San</label>
-          <input type="number" class="form-control" name="idTaiSan" id="field_idTaiSan" data-cy="idTaiSan" formControlName="idTaiSan" />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_tenTaiSan" jhiTranslate="gatewayApp.dmTaiSan.tenTaiSan">Ten Tai San</label>
@@ -40,11 +43,6 @@
             data-cy="thongTinTs"
             formControlName="thongTinTs"
           />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idLoaiTs" jhiTranslate="gatewayApp.dmTaiSan.idLoaiTs">Id Loai Ts</label>
-          <input type="number" class="form-control" name="idLoaiTs" id="field_idLoaiTs" data-cy="idLoaiTs" formControlName="idLoaiTs" />
         </div>
 
         <div class="mb-3">
@@ -96,18 +94,6 @@
         <div class="mb-3">
           <label class="form-label" for="field_maTaiSan" jhiTranslate="gatewayApp.dmTaiSan.maTaiSan">Ma Tai San</label>
           <input type="text" class="form-control" name="maTaiSan" id="field_maTaiSan" data-cy="maTaiSan" formControlName="maTaiSan" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idTinhTrang" jhiTranslate="gatewayApp.dmTaiSan.idTinhTrang">Id Tinh Trang</label>
-          <input
-            type="number"
-            class="form-control"
-            name="idTinhTrang"
-            id="field_idTinhTrang"
-            data-cy="idTinhTrang"
-            formControlName="idTinhTrang"
-          />
         </div>
 
         <div class="mb-3">

@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (taisanSaiQsddDgc()) {
+    @if (taisanSaiQsddDgc(); as taisanSaiQsddDgcRef) {
       <div>
         <h2 data-cy="taisanSaiQsddDgcDetailsHeading">
           <span jhiTranslate="gatewayApp.taisanSaiQsddDgc.detail.title">Taisan Sai Qsdd Dgc</span>
@@ -15,15 +15,15 @@
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
           <dd>
-            <span>{{ taisanSaiQsddDgc()!.id }}</span>
+            <span>{{ taisanSaiQsddDgcRef.id }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisanSaiQsddDgc.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ taisanSaiQsddDgc()!.idMaster }}</span>
+            <span>{{ taisanSaiQsddDgcRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisanSaiQsddDgc.noiCapQsdd">Noi Cap Qsdd</span></dt>
           <dd>
-            <span>{{ taisanSaiQsddDgc()!.noiCapQsdd }}</span>
+            <span>{{ taisanSaiQsddDgcRef.noiCapQsdd }}</span>
           </dd>
         </dl>
 
@@ -31,7 +31,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/taisan-sai-qsdd-dgc', taisanSaiQsddDgc()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/taisan-sai-qsdd-dgc', taisanSaiQsddDgcRef.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

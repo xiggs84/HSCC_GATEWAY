@@ -1,8 +1,7 @@
 export interface ITinhTrangTaiSan {
-  id: number;
-  idTinhTrang?: number | null;
+  idTinhTrang: number;
   dienGiai?: string | null;
   trangThai?: number | null;
 }
 
-export type NewTinhTrangTaiSan = Omit<ITinhTrangTaiSan, 'id'> & { id: null };
+export type NewTinhTrangTaiSan = Omit<ITinhTrangTaiSan, 'idTinhTrang'> & { idTinhTrang: null };

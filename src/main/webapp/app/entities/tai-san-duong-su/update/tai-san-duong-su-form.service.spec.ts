@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../tai-san-duong-su.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../tai-san-duong-su.test-samples';
 
 import { TaiSanDuongSuFormService } from './tai-san-duong-su-form.service';
 
@@ -20,7 +20,6 @@ describe('TaiSanDuongSu Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idTaiSan: expect.any(Object),
             idDuongSu: expect.any(Object),
             trangThai: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -37,7 +36,6 @@ describe('TaiSanDuongSu Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idTaiSan: expect.any(Object),
             idDuongSu: expect.any(Object),
             trangThai: expect.any(Object),
             ngayThaoTac: expect.any(Object),

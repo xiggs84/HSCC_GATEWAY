@@ -1,15 +1,16 @@
-import { Component, NgZone, inject, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { combineLatest, filter, Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
-import { sortStateSignal, SortDirective, SortByDirective, type SortState, SortService } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe } from 'app/shared/date';
+import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
+import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { FormsModule } from '@angular/forms';
-import { SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
+import { DataUtils } from 'app/core/util/data-util.service';
 import { IDuongSu } from '../duong-su.model';
-import { EntityArrayResponseType, DuongSuService } from '../service/duong-su.service';
+import { DuongSuService, EntityArrayResponseType } from '../service/duong-su.service';
 import { DuongSuDeleteDialogComponent } from '../delete/duong-su-delete-dialog.component';
 
 @Component({
@@ -38,10 +39,11 @@ export class DuongSuComponent implements OnInit {
   protected duongSuService = inject(DuongSuService);
   protected activatedRoute = inject(ActivatedRoute);
   protected sortService = inject(SortService);
+  protected dataUtils = inject(DataUtils);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (_index: number, item: IDuongSu): number => this.duongSuService.getDuongSuIdentifier(item);
+  trackIdDuongSu = (_index: number, item: IDuongSu): number => this.duongSuService.getDuongSuIdentifier(item);
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
@@ -54,6 +56,14 @@ export class DuongSuComponent implements OnInit {
         }),
       )
       .subscribe();
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   delete(duongSu: IDuongSu): void {

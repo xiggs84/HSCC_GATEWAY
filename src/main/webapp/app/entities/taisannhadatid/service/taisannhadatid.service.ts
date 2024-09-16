@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { ITaisannhadatid, NewTaisannhadatid } from '../taisannhadatid.model';
 
-export type PartialUpdateTaisannhadatid = Partial<ITaisannhadatid> & Pick<ITaisannhadatid, 'id'>;
+export type PartialUpdateTaisannhadatid = Partial<ITaisannhadatid> & Pick<ITaisannhadatid, 'idTaiSan'>;
 
 export type EntityResponseType = HttpResponse<ITaisannhadatid>;
 export type EntityArrayResponseType = HttpResponse<ITaisannhadatid[]>;
@@ -48,15 +48,15 @@ export class TaisannhadatidService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getTaisannhadatidIdentifier(taisannhadatid: Pick<ITaisannhadatid, 'id'>): number {
-    return taisannhadatid.id;
+  getTaisannhadatidIdentifier(taisannhadatid: Pick<ITaisannhadatid, 'idTaiSan'>): number {
+    return taisannhadatid.idTaiSan;
   }
 
-  compareTaisannhadatid(o1: Pick<ITaisannhadatid, 'id'> | null, o2: Pick<ITaisannhadatid, 'id'> | null): boolean {
+  compareTaisannhadatid(o1: Pick<ITaisannhadatid, 'idTaiSan'> | null, o2: Pick<ITaisannhadatid, 'idTaiSan'> | null): boolean {
     return o1 && o2 ? this.getTaisannhadatidIdentifier(o1) === this.getTaisannhadatidIdentifier(o2) : o1 === o2;
   }
 
-  addTaisannhadatidToCollectionIfMissing<Type extends Pick<ITaisannhadatid, 'id'>>(
+  addTaisannhadatidToCollectionIfMissing<Type extends Pick<ITaisannhadatid, 'idTaiSan'>>(
     taisannhadatidCollection: Type[],
     ...taisannhadatidsToCheck: (Type | null | undefined)[]
   ): Type[] {

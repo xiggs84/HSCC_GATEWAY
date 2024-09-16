@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaiSanComponent } from './list/tai-san.component';
-import { TaiSanDetailComponent } from './detail/tai-san-detail.component';
-import { TaiSanUpdateComponent } from './update/tai-san-update.component';
 import TaiSanResolve from './route/tai-san-routing-resolve.service';
 
 const taiSanRoute: Routes = [
   {
     path: '',
-    component: TaiSanComponent,
+    loadComponent: () => import('./list/tai-san.component').then(m => m.TaiSanComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idTaiSan,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: TaiSanDetailComponent,
+    path: ':idTaiSan/view',
+    loadComponent: () => import('./detail/tai-san-detail.component').then(m => m.TaiSanDetailComponent),
     resolve: {
       taiSan: TaiSanResolve,
     },
@@ -26,15 +23,15 @@ const taiSanRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaiSanUpdateComponent,
+    loadComponent: () => import('./update/tai-san-update.component').then(m => m.TaiSanUpdateComponent),
     resolve: {
       taiSan: TaiSanResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: TaiSanUpdateComponent,
+    path: ':idTaiSan/edit',
+    loadComponent: () => import('./update/tai-san-update.component').then(m => m.TaiSanUpdateComponent),
     resolve: {
       taiSan: TaiSanResolve,
     },

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITaisanSaiQsddDgc } from '../taisan-sai-qsdd-dgc.model';
 import { TaisanSaiQsddDgcService } from '../service/taisan-sai-qsdd-dgc.service';
-import { TaisanSaiQsddDgcFormService, TaisanSaiQsddDgcFormGroup } from './taisan-sai-qsdd-dgc-form.service';
+import { TaisanSaiQsddDgcFormGroup, TaisanSaiQsddDgcFormService } from './taisan-sai-qsdd-dgc-form.service';
 
 @Component({
   standalone: true,

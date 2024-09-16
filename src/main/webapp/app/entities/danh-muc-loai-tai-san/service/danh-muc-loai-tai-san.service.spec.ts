@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { IDanhMucLoaiTaiSan } from '../danh-muc-loai-tai-san.model';
 import {
-  sampleWithRequiredData,
+  sampleWithFullData,
   sampleWithNewData,
   sampleWithPartialData,
-  sampleWithFullData,
+  sampleWithRequiredData,
 } from '../danh-muc-loai-tai-san.test-samples';
 
 import { DanhMucLoaiTaiSanService } from './danh-muc-loai-tai-san.service';
@@ -170,7 +170,7 @@ describe('DanhMucLoaiTaiSan Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idLoaiTs: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareDanhMucLoaiTaiSan(entity1, entity2);
@@ -181,8 +181,8 @@ describe('DanhMucLoaiTaiSan Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idLoaiTs: 123 };
+        const entity2 = { idLoaiTs: 456 };
 
         const compareResult1 = service.compareDanhMucLoaiTaiSan(entity1, entity2);
         const compareResult2 = service.compareDanhMucLoaiTaiSan(entity2, entity1);
@@ -192,8 +192,8 @@ describe('DanhMucLoaiTaiSan Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idLoaiTs: 123 };
+        const entity2 = { idLoaiTs: 123 };
 
         const compareResult1 = service.compareDanhMucLoaiTaiSan(entity1, entity2);
         const compareResult2 = service.compareDanhMucLoaiTaiSan(entity2, entity1);

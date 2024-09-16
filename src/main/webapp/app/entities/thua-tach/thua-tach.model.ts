@@ -1,9 +1,7 @@
 export interface IThuaTach {
-  id: number;
-  idThuaTach?: number | null;
-  idTaiSan?: number | null;
+  idThuaTach: number;
   thongTinThuaTach?: string | null;
   trangThai?: number | null;
 }
 
-export type NewThuaTach = Omit<IThuaTach, 'id'> & { id: null };
+export type NewThuaTach = Omit<IThuaTach, 'idThuaTach'> & { idThuaTach: null };

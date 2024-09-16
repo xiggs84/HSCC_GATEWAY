@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ITaiSanDgc, NewTaiSanDgc } from '../tai-san-dgc.model';
 
@@ -18,18 +18,15 @@ type TaiSanDgcFormDefaults = Pick<NewTaiSanDgc, 'id'>;
 
 type TaiSanDgcFormGroupContent = {
   id: FormControl<ITaiSanDgc['id'] | NewTaiSanDgc['id']>;
-  idTaiSan: FormControl<ITaiSanDgc['idTaiSan']>;
   tenTaiSan: FormControl<ITaiSanDgc['tenTaiSan']>;
   trangThai: FormControl<ITaiSanDgc['trangThai']>;
   thongTinTs: FormControl<ITaiSanDgc['thongTinTs']>;
-  idLoaiTs: FormControl<ITaiSanDgc['idLoaiTs']>;
   ghiChu: FormControl<ITaiSanDgc['ghiChu']>;
   ngayThaoTac: FormControl<ITaiSanDgc['ngayThaoTac']>;
   nguoiThaoTac: FormControl<ITaiSanDgc['nguoiThaoTac']>;
   idDuongSu: FormControl<ITaiSanDgc['idDuongSu']>;
   idTsGoc: FormControl<ITaiSanDgc['idTsGoc']>;
   maTaiSan: FormControl<ITaiSanDgc['maTaiSan']>;
-  idTinhTrang: FormControl<ITaiSanDgc['idTinhTrang']>;
   idLoaiNganChan: FormControl<ITaiSanDgc['idLoaiNganChan']>;
   ngayBdNganChan: FormControl<ITaiSanDgc['ngayBdNganChan']>;
   ngayKtNganChan: FormControl<ITaiSanDgc['ngayKtNganChan']>;
@@ -59,18 +56,15 @@ export class TaiSanDgcFormService {
           validators: [Validators.required],
         },
       ),
-      idTaiSan: new FormControl(taiSanDgcRawValue.idTaiSan),
       tenTaiSan: new FormControl(taiSanDgcRawValue.tenTaiSan),
       trangThai: new FormControl(taiSanDgcRawValue.trangThai),
       thongTinTs: new FormControl(taiSanDgcRawValue.thongTinTs),
-      idLoaiTs: new FormControl(taiSanDgcRawValue.idLoaiTs),
       ghiChu: new FormControl(taiSanDgcRawValue.ghiChu),
       ngayThaoTac: new FormControl(taiSanDgcRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(taiSanDgcRawValue.nguoiThaoTac),
       idDuongSu: new FormControl(taiSanDgcRawValue.idDuongSu),
       idTsGoc: new FormControl(taiSanDgcRawValue.idTsGoc),
       maTaiSan: new FormControl(taiSanDgcRawValue.maTaiSan),
-      idTinhTrang: new FormControl(taiSanDgcRawValue.idTinhTrang),
       idLoaiNganChan: new FormControl(taiSanDgcRawValue.idLoaiNganChan),
       ngayBdNganChan: new FormControl(taiSanDgcRawValue.ngayBdNganChan),
       ngayKtNganChan: new FormControl(taiSanDgcRawValue.ngayKtNganChan),

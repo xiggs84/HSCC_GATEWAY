@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ITaiSanDuongSu, NewTaiSanDuongSu } from '../tai-san-duong-su.model';
 
@@ -18,7 +18,6 @@ type TaiSanDuongSuFormDefaults = Pick<NewTaiSanDuongSu, 'id'>;
 
 type TaiSanDuongSuFormGroupContent = {
   id: FormControl<ITaiSanDuongSu['id'] | NewTaiSanDuongSu['id']>;
-  idTaiSan: FormControl<ITaiSanDuongSu['idTaiSan']>;
   idDuongSu: FormControl<ITaiSanDuongSu['idDuongSu']>;
   trangThai: FormControl<ITaiSanDuongSu['trangThai']>;
   ngayThaoTac: FormControl<ITaiSanDuongSu['ngayThaoTac']>;
@@ -44,7 +43,6 @@ export class TaiSanDuongSuFormService {
           validators: [Validators.required],
         },
       ),
-      idTaiSan: new FormControl(taiSanDuongSuRawValue.idTaiSan),
       idDuongSu: new FormControl(taiSanDuongSuRawValue.idDuongSu),
       trangThai: new FormControl(taiSanDuongSuRawValue.trangThai),
       ngayThaoTac: new FormControl(taiSanDuongSuRawValue.ngayThaoTac),

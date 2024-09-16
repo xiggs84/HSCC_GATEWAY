@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaisannhadatidComponent } from './list/taisannhadatid.component';
-import { TaisannhadatidDetailComponent } from './detail/taisannhadatid-detail.component';
-import { TaisannhadatidUpdateComponent } from './update/taisannhadatid-update.component';
 import TaisannhadatidResolve from './route/taisannhadatid-routing-resolve.service';
 
 const taisannhadatidRoute: Routes = [
   {
     path: '',
-    component: TaisannhadatidComponent,
+    loadComponent: () => import('./list/taisannhadatid.component').then(m => m.TaisannhadatidComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idTaiSan,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: TaisannhadatidDetailComponent,
+    path: ':idTaiSan/view',
+    loadComponent: () => import('./detail/taisannhadatid-detail.component').then(m => m.TaisannhadatidDetailComponent),
     resolve: {
       taisannhadatid: TaisannhadatidResolve,
     },
@@ -26,15 +23,15 @@ const taisannhadatidRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaisannhadatidUpdateComponent,
+    loadComponent: () => import('./update/taisannhadatid-update.component').then(m => m.TaisannhadatidUpdateComponent),
     resolve: {
       taisannhadatid: TaisannhadatidResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: TaisannhadatidUpdateComponent,
+    path: ':idTaiSan/edit',
+    loadComponent: () => import('./update/taisannhadatid-update.component').then(m => m.TaisannhadatidUpdateComponent),
     resolve: {
       taisannhadatid: TaisannhadatidResolve,
     },

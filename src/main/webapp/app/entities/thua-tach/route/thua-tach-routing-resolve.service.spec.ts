@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 import { IThuaTach } from '../thua-tach.model';
@@ -38,8 +38,8 @@ describe('ThuaTach routing resolve service', () => {
   describe('resolve', () => {
     it('should return IThuaTach returned by find', () => {
       // GIVEN
-      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      service.find = jest.fn(idThuaTach => of(new HttpResponse({ body: { idThuaTach } })));
+      mockActivatedRouteSnapshot.params = { idThuaTach: 123 };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -52,7 +52,7 @@ describe('ThuaTach routing resolve service', () => {
 
       // THEN
       expect(service.find).toHaveBeenCalledWith(123);
-      expect(resultThuaTach).toEqual({ id: 123 });
+      expect(resultThuaTach).toEqual({ idThuaTach: 123 });
     });
 
     it('should return null if id is not provided', () => {
@@ -77,7 +77,7 @@ describe('ThuaTach routing resolve service', () => {
     it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<IThuaTach>({ body: null })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      mockActivatedRouteSnapshot.params = { idThuaTach: 123 };
 
       // WHEN
       TestBed.runInInjectionContext(() => {

@@ -1,22 +1,21 @@
 import { ITaisannhadatid, NewTaisannhadatid } from './taisannhadatid.model';
 
 export const sampleWithRequiredData: ITaisannhadatid = {
-  id: 2602,
+  idTaiSan: 1693,
 };
 
 export const sampleWithPartialData: ITaisannhadatid = {
-  id: 26253,
-  idTaiSan: 22812,
+  idTaiSan: 18517,
+  thongTinTs: 'quicker fog',
 };
 
 export const sampleWithFullData: ITaisannhadatid = {
-  id: 20062,
-  idTaiSan: 30860,
-  thongTinTs: 'since dinner',
+  idTaiSan: 15261,
+  thongTinTs: 'winnow caress',
 };
 
 export const sampleWithNewData: NewTaisannhadatid = {
-  id: null,
+  idTaiSan: null,
 };
 
 Object.freeze(sampleWithNewData);

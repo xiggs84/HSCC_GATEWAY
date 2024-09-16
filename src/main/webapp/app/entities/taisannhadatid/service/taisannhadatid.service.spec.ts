@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { ITaisannhadatid } from '../taisannhadatid.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../taisannhadatid.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../taisannhadatid.test-samples';
 
 import { TaisannhadatidService } from './taisannhadatid.service';
 
@@ -165,7 +165,7 @@ describe('Taisannhadatid Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareTaisannhadatid(entity1, entity2);
@@ -176,8 +176,8 @@ describe('Taisannhadatid Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 456 };
 
         const compareResult1 = service.compareTaisannhadatid(entity1, entity2);
         const compareResult2 = service.compareTaisannhadatid(entity2, entity1);
@@ -187,8 +187,8 @@ describe('Taisannhadatid Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 123 };
 
         const compareResult1 = service.compareTaisannhadatid(entity1, entity2);
         const compareResult2 = service.compareTaisannhadatid(entity2, entity1);

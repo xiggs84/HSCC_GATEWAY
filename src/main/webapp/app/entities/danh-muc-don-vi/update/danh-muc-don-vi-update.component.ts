@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,9 +7,12 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IDanhMucDonVi } from '../danh-muc-don-vi.model';
+import { CapQuanLy } from 'app/entities/enumerations/cap-quan-ly.model';
+import { NhiemVu } from 'app/entities/enumerations/nhiem-vu.model';
+import { LoaiDonVi } from 'app/entities/enumerations/loai-don-vi.model';
 import { DanhMucDonViService } from '../service/danh-muc-don-vi.service';
-import { DanhMucDonViFormService, DanhMucDonViFormGroup } from './danh-muc-don-vi-form.service';
+import { IDanhMucDonVi } from '../danh-muc-don-vi.model';
+import { DanhMucDonViFormGroup, DanhMucDonViFormService } from './danh-muc-don-vi-form.service';
 
 @Component({
   standalone: true,
@@ -20,6 +23,9 @@ import { DanhMucDonViFormService, DanhMucDonViFormGroup } from './danh-muc-don-v
 export class DanhMucDonViUpdateComponent implements OnInit {
   isSaving = false;
   danhMucDonVi: IDanhMucDonVi | null = null;
+  capQuanLyValues = Object.keys(CapQuanLy);
+  nhiemVuValues = Object.keys(NhiemVu);
+  loaiDonViValues = Object.keys(LoaiDonVi);
 
   protected danhMucDonViService = inject(DanhMucDonViService);
   protected danhMucDonViFormService = inject(DanhMucDonViFormService);
@@ -44,7 +50,7 @@ export class DanhMucDonViUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const danhMucDonVi = this.danhMucDonViFormService.getDanhMucDonVi(this.editForm);
-    if (danhMucDonVi.id !== null) {
+    if (danhMucDonVi.idDonVi !== null) {
       this.subscribeToSaveResponse(this.danhMucDonViService.update(danhMucDonVi));
     } else {
       this.subscribeToSaveResponse(this.danhMucDonViService.create(danhMucDonVi));

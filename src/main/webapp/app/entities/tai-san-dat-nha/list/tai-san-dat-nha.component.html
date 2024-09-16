@@ -42,13 +42,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idTaiSan">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.taiSanDatNha.idTaiSan">Id Tai San</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="tenTaiSan">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.taiSanDatNha.tenTaiSan">Ten Tai San</span>
@@ -66,13 +59,6 @@
             <th scope="col" jhiSortBy="thongTinTs">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.taiSanDatNha.thongTinTs">Thong Tin Ts</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiTs">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.taiSanDatNha.idLoaiTs">Id Loai Ts</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -115,13 +101,6 @@
             <th scope="col" jhiSortBy="maTaiSan">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.taiSanDatNha.maTaiSan">Ma Tai San</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idTinhTrang">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.taiSanDatNha.idTinhTrang">Id Tinh Trang</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -212,18 +191,15 @@
               <td>
                 <a [routerLink]="['/tai-san-dat-nha', taiSanDatNha.id, 'view']">{{ taiSanDatNha.id }}</a>
               </td>
-              <td>{{ taiSanDatNha.idTaiSan }}</td>
               <td>{{ taiSanDatNha.tenTaiSan }}</td>
               <td>{{ taiSanDatNha.trangThai }}</td>
               <td>{{ taiSanDatNha.thongTinTs }}</td>
-              <td>{{ taiSanDatNha.idLoaiTs }}</td>
               <td>{{ taiSanDatNha.ghiChu }}</td>
               <td>{{ taiSanDatNha.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ taiSanDatNha.nguoiThaoTac }}</td>
               <td>{{ taiSanDatNha.idDuongSu }}</td>
               <td>{{ taiSanDatNha.idTsGoc }}</td>
               <td>{{ taiSanDatNha.maTaiSan }}</td>
-              <td>{{ taiSanDatNha.idTinhTrang }}</td>
               <td>{{ taiSanDatNha.idLoaiNganChan }}</td>
               <td>{{ taiSanDatNha.ngayBdNganChan | formatMediumDate }}</td>
               <td>{{ taiSanDatNha.ngayKtNganChan | formatMediumDate }}</td>

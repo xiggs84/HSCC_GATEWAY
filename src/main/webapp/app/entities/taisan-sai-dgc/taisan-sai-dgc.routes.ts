@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaisanSaiDgcComponent } from './list/taisan-sai-dgc.component';
-import { TaisanSaiDgcDetailComponent } from './detail/taisan-sai-dgc-detail.component';
-import { TaisanSaiDgcUpdateComponent } from './update/taisan-sai-dgc-update.component';
 import TaisanSaiDgcResolve from './route/taisan-sai-dgc-routing-resolve.service';
 
 const taisanSaiDgcRoute: Routes = [
   {
     path: '',
-    component: TaisanSaiDgcComponent,
+    loadComponent: () => import('./list/taisan-sai-dgc.component').then(m => m.TaisanSaiDgcComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: TaisanSaiDgcDetailComponent,
+    loadComponent: () => import('./detail/taisan-sai-dgc-detail.component').then(m => m.TaisanSaiDgcDetailComponent),
     resolve: {
       taisanSaiDgc: TaisanSaiDgcResolve,
     },
@@ -26,7 +23,7 @@ const taisanSaiDgcRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaisanSaiDgcUpdateComponent,
+    loadComponent: () => import('./update/taisan-sai-dgc-update.component').then(m => m.TaisanSaiDgcUpdateComponent),
     resolve: {
       taisanSaiDgc: TaisanSaiDgcResolve,
     },
@@ -34,7 +31,7 @@ const taisanSaiDgcRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: TaisanSaiDgcUpdateComponent,
+    loadComponent: () => import('./update/taisan-sai-dgc-update.component').then(m => m.TaisanSaiDgcUpdateComponent),
     resolve: {
       taisanSaiDgc: TaisanSaiDgcResolve,
     },

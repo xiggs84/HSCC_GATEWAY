@@ -1,16 +1,16 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
 import { isPresent } from 'app/core/util/operators';
-import { DATE_FORMAT } from 'app/config/input.constants';
+import {DATE_FORMAT, DATE_TIME_FORMAT} from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDuongSu, NewDuongSu } from '../duong-su.model';
 
-export type PartialUpdateDuongSu = Partial<IDuongSu> & Pick<IDuongSu, 'id'>;
+export type PartialUpdateDuongSu = Partial<IDuongSu> & Pick<IDuongSu, 'idDuongSu'>;
 
 type RestOf<T extends IDuongSu | NewDuongSu> = Omit<T, 'ngayThaoTac'> & {
   ngayThaoTac?: string | null;
@@ -30,7 +30,7 @@ export class DuongSuService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/duong-sus');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/duong-sus','duongsu');
 
   create(duongSu: NewDuongSu): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(duongSu);
@@ -70,15 +70,15 @@ export class DuongSuService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDuongSuIdentifier(duongSu: Pick<IDuongSu, 'id'>): number {
-    return duongSu.id;
+  getDuongSuIdentifier(duongSu: Pick<IDuongSu, 'idDuongSu'>): number {
+    return duongSu.idDuongSu;
   }
 
-  compareDuongSu(o1: Pick<IDuongSu, 'id'> | null, o2: Pick<IDuongSu, 'id'> | null): boolean {
+  compareDuongSu(o1: Pick<IDuongSu, 'idDuongSu'> | null, o2: Pick<IDuongSu, 'idDuongSu'> | null): boolean {
     return o1 && o2 ? this.getDuongSuIdentifier(o1) === this.getDuongSuIdentifier(o2) : o1 === o2;
   }
 
-  addDuongSuToCollectionIfMissing<Type extends Pick<IDuongSu, 'id'>>(
+  addDuongSuToCollectionIfMissing<Type extends Pick<IDuongSu, 'idDuongSu'>>(
     duongSuCollection: Type[],
     ...duongSusToCheck: (Type | null | undefined)[]
   ): Type[] {
@@ -101,9 +101,12 @@ export class DuongSuService {
   protected convertDateFromClient<T extends IDuongSu | NewDuongSu | PartialUpdateDuongSu>(duongSu: T): RestOf<T> {
     return {
       ...duongSu,
-      ngayThaoTac: duongSu.ngayThaoTac?.format(DATE_FORMAT) ?? null,
+      ngayThaoTac: duongSu.ngayThaoTac instanceof dayjs
+        ? duongSu.ngayThaoTac.format(DATE_TIME_FORMAT)
+        : dayjs(duongSu.ngayThaoTac).format(DATE_TIME_FORMAT),
     };
   }
+
 
   protected convertDateFromServer(restDuongSu: RestDuongSu): IDuongSu {
     return {
@@ -122,5 +125,23 @@ export class DuongSuService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+  
+  findBySoGiayTo(soGiayTo: string): Observable<EntityResponseType> {
+    return this.http
+      .get<RestDuongSu>(`${this.resourceUrl}/search`, {
+        params: new HttpParams().set('soGiayTo', soGiayTo),
+        observe: 'response'
+      })
+      .pipe(map(res => this.convertResponseFromServer(res)));
+  }  
+
+  findByIdDuongSu(idDuongSu: number): Observable<EntityResponseType> {
+    return this.http
+      .get<RestDuongSu>(`${this.resourceUrl}/search`, {
+        params: new HttpParams().set('idDuongSu', idDuongSu.toString()),
+        observe: 'response'
+      })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 }

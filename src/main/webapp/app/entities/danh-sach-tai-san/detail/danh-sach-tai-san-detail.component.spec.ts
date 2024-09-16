@@ -17,7 +17,7 @@ describe('DanhSachTaiSan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DanhSachTaiSanDetailComponent,
+              loadComponent: () => import('./danh-sach-tai-san-detail.component').then(m => m.DanhSachTaiSanDetailComponent),
               resolve: { danhSachTaiSan: () => of({ id: 123 }) },
             },
           ],

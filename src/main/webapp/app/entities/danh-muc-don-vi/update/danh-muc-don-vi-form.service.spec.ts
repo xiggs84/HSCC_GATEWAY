@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../danh-muc-don-vi.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../danh-muc-don-vi.test-samples';
 
 import { DanhMucDonViFormService } from './danh-muc-don-vi-form.service';
 
@@ -19,27 +19,22 @@ describe('DanhMucDonVi Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idDonVi: expect.any(Object),
             tenDonVi: expect.any(Object),
             diaChi: expect.any(Object),
             nguoiDaiDien: expect.any(Object),
             soDienThoai: expect.any(Object),
             idDonViQl: expect.any(Object),
-            loaiDonVi: expect.any(Object),
             ngayKhaiBao: expect.any(Object),
             trangThai: expect.any(Object),
-            idTinh: expect.any(Object),
-            idHuyen: expect.any(Object),
-            idPhuongXa: expect.any(Object),
             soNha: expect.any(Object),
             maSoThue: expect.any(Object),
-            idCapQl: expect.any(Object),
+            capQuanLy: expect.any(Object),
             loaiNhiemVu: expect.any(Object),
             hoaDonDt: expect.any(Object),
             maDonViIgate: expect.any(Object),
             maCoQuanIgate: expect.any(Object),
-            capDonVi: expect.any(Object),
+            loaiDonVi: expect.any(Object),
             kySo: expect.any(Object),
             qrScan: expect.any(Object),
             verifyIdCard: expect.any(Object),
@@ -59,27 +54,22 @@ describe('DanhMucDonVi Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idDonVi: expect.any(Object),
             tenDonVi: expect.any(Object),
             diaChi: expect.any(Object),
             nguoiDaiDien: expect.any(Object),
             soDienThoai: expect.any(Object),
             idDonViQl: expect.any(Object),
-            loaiDonVi: expect.any(Object),
             ngayKhaiBao: expect.any(Object),
             trangThai: expect.any(Object),
-            idTinh: expect.any(Object),
-            idHuyen: expect.any(Object),
-            idPhuongXa: expect.any(Object),
             soNha: expect.any(Object),
             maSoThue: expect.any(Object),
-            idCapQl: expect.any(Object),
+            capQuanLy: expect.any(Object),
             loaiNhiemVu: expect.any(Object),
             hoaDonDt: expect.any(Object),
             maDonViIgate: expect.any(Object),
             maCoQuanIgate: expect.any(Object),
-            capDonVi: expect.any(Object),
+            loaiDonVi: expect.any(Object),
             kySo: expect.any(Object),
             qrScan: expect.any(Object),
             verifyIdCard: expect.any(Object),
@@ -122,22 +112,22 @@ describe('DanhMucDonVi Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IDanhMucDonVi should not enable id FormControl', () => {
+      it('passing IDanhMucDonVi should not enable idDonVi FormControl', () => {
         const formGroup = service.createDanhMucDonViFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDonVi.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDonVi.disabled).toBe(true);
       });
 
-      it('passing NewDanhMucDonVi should disable id FormControl', () => {
+      it('passing NewDanhMucDonVi should disable idDonVi FormControl', () => {
         const formGroup = service.createDanhMucDonViFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDonVi.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idDonVi: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDonVi.disabled).toBe(true);
       });
     });
   });

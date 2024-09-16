@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ITaiSanDatNha } from '../tai-san-dat-nha.model';
 import { TaiSanDatNhaService } from '../service/tai-san-dat-nha.service';
 
 const taiSanDatNhaResolve = (route: ActivatedRouteSnapshot): Observable<null | ITaiSanDatNha> => {
-  const id = route.params['id'];
+  const id = route.params.id;
   if (id) {
     return inject(TaiSanDatNhaService)
       .find(id)
@@ -16,10 +16,9 @@ const taiSanDatNhaResolve = (route: ActivatedRouteSnapshot): Observable<null | I
         mergeMap((taiSanDatNha: HttpResponse<ITaiSanDatNha>) => {
           if (taiSanDatNha.body) {
             return of(taiSanDatNha.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IDanhMucDonVi } from '../danh-muc-don-vi.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../danh-muc-don-vi.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../danh-muc-don-vi.test-samples';
 
 import { DanhMucDonViService, RestDanhMucDonVi } from './danh-muc-don-vi.service';
 
@@ -167,7 +167,7 @@ describe('DanhMucDonVi Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idDonVi: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareDanhMucDonVi(entity1, entity2);
@@ -178,8 +178,8 @@ describe('DanhMucDonVi Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idDonVi: 123 };
+        const entity2 = { idDonVi: 456 };
 
         const compareResult1 = service.compareDanhMucDonVi(entity1, entity2);
         const compareResult2 = service.compareDanhMucDonVi(entity2, entity1);
@@ -189,8 +189,8 @@ describe('DanhMucDonVi Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idDonVi: 123 };
+        const entity2 = { idDonVi: 123 };
 
         const compareResult1 = service.compareDanhMucDonVi(entity1, entity2);
         const compareResult2 = service.compareDanhMucDonVi(entity2, entity1);

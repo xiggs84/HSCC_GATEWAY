@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,9 +7,14 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IDuongSu } from '../duong-su.model';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
+import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
+import { LoaiDuongSu } from 'app/entities/enumerations/loai-duong-su.model';
+import { LoaiGiayTo } from 'app/entities/enumerations/loai-giay-to.model';
 import { DuongSuService } from '../service/duong-su.service';
-import { DuongSuFormService, DuongSuFormGroup } from './duong-su-form.service';
+import { IDuongSu } from '../duong-su.model';
+import { DuongSuFormGroup, DuongSuFormService } from './duong-su-form.service';
 
 @Component({
   standalone: true,
@@ -20,7 +25,11 @@ import { DuongSuFormService, DuongSuFormGroup } from './duong-su-form.service';
 export class DuongSuUpdateComponent implements OnInit {
   isSaving = false;
   duongSu: IDuongSu | null = null;
+  loaiDuongSuValues = Object.keys(LoaiDuongSu);
+  loaiGiayToValues = Object.keys(LoaiGiayTo);
 
+  protected dataUtils = inject(DataUtils);
+  protected eventManager = inject(EventManager);
   protected duongSuService = inject(DuongSuService);
   protected duongSuFormService = inject(DuongSuFormService);
   protected activatedRoute = inject(ActivatedRoute);
@@ -37,6 +46,21 @@ export class DuongSuUpdateComponent implements OnInit {
     });
   }
 
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    this.dataUtils.openFile(base64String, contentType);
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({
+      error: (err: FileLoadError) =>
+        this.eventManager.broadcast(new EventWithContent<AlertError>('gatewayApp.error', { ...err, key: `error.file.${err.key}` })),
+    });
+  }
+
   previousState(): void {
     window.history.back();
   }
@@ -44,7 +68,7 @@ export class DuongSuUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const duongSu = this.duongSuFormService.getDuongSu(this.editForm);
-    if (duongSu.id !== null) {
+    if (duongSu.idDuongSu !== null) {
       this.subscribeToSaveResponse(this.duongSuService.update(duongSu));
     } else {
       this.subscribeToSaveResponse(this.duongSuService.create(duongSu));

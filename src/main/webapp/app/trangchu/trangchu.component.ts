@@ -1,12 +1,12 @@
-import {Component, Inject, PLATFORM_ID} from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import SharedModule from '../shared/shared.module';
-import {isPlatformBrowser} from "@angular/common";
-import {BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, Tooltip} from "chart.js";
+import { isPlatformBrowser } from "@angular/common";
+import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, Tooltip } from "chart.js";
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import {BaseChartDirective} from "ng2-charts";
-import {DataService} from '../shared/api/data.service';
-import {catchError, tap} from "rxjs/operators";
-import {throwError} from "rxjs";
+import { BaseChartDirective } from "ng2-charts";
+import { TrangchuService } from './service/trangchu.service';
+import { catchError, tap } from "rxjs/operators";
+import { throwError } from "rxjs";
 
 interface ChartDataset {
   data: number[];
@@ -26,19 +26,17 @@ export class TrangchuComponent {
   weeklyRecords: number = 0;
   monthlyRecords: number = 0;
 
-  // Khai báo kiểu dữ liệu cho chartData
   chartData: ChartDataset[] = [
     { data: [], label: 'Số lượng hồ sơ' }
   ];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
-    private dataService: DataService
+    private trangChuService: TrangchuService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
-      // Đăng ký các thành phần của Chart.js và plugin chỉ trên phía client
       Chart.register(
         BarController,
         BarElement,
@@ -46,25 +44,15 @@ export class TrangchuComponent {
         LinearScale,
         Tooltip,
         Legend,
-        DataLabelsPlugin // Đăng ký plugin
+        DataLabelsPlugin
       );
       this.loadData();
     }
   }
 
   loadData(): void {
-    const currentYear = new Date().getFullYear();
-    const currentDate = new Date().toISOString().split('T')[0];
-    // API url cho dữ liệu hàng tháng
-    const monthlyApiUrl = `http://localhost:8080/services/hopdong/api/hop-dong-cong-chungs/count/nam?year=${currentYear}`;
-
-    // API url cho dữ liệu hàng ngày, hàng tuần và hàng tháng
-    const recordsApiUrl = `http://localhost:8080/services/hopdong/api/hop-dong-cong-chungs/count?date=${currentDate}`;
-
-    // Lấy dữ liệu hàng tháng
-    this.dataService.getData(monthlyApiUrl).pipe(
-      tap((data: any) => { // Chỉ định kiểu dữ liệu của response nếu cần
-        // Tạo mảng dữ liệu cho biểu đồ từ dữ liệu API
+    this.trangChuService.getMonthlyData().pipe(
+      tap((data: any) => {
         const monthlyData = [
           data.thang1 || 0,
           data.thang2 || 0,
@@ -80,19 +68,17 @@ export class TrangchuComponent {
           data.thang12 || 0
         ];
 
-        // Cập nhật chartData với dữ liệu mới
         this.chartData = [
           { data: monthlyData, label: 'Số lượng hồ sơ' }
         ];
       }),
       catchError(error => {
         console.error('Error fetching monthly data', error);
-        return throwError(() => new Error('Error fetching monthly data')); // Ném lỗi tiếp tục để xử lý sau
+        return throwError(() => new Error('Error fetching monthly data'));
       })
     ).subscribe();
 
-    // Lấy dữ liệu hàng ngày, hàng tuần và hàng tháng
-    this.dataService.getData(recordsApiUrl).pipe(
+    this.trangChuService.getRecordsData().pipe(
       tap(data => {
         this.dailyRecords = data.dailyRecords || 0;
         this.weeklyRecords = data.weeklyRecords || 0;
@@ -100,15 +86,13 @@ export class TrangchuComponent {
       }),
       catchError(error => {
         console.error('Error fetching records data', error);
-        return throwError(() => new Error('Error fetching records data')); // Ném lỗi tiếp tục để xử lý sau
+        return throwError(() => new Error('Error fetching records data'));
       })
     ).subscribe();
   }
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   chartLabels = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -117,9 +101,9 @@ export class TrangchuComponent {
         anchor: 'end',
         align: 'top',
         formatter(value: number) {
-          return value.toLocaleString(); // Hiển thị số cụ thể
+          return value.toLocaleString();
         },
-        color: '#000', // Màu sắc của số liệu
+        color: '#000',
         font: {
           weight: 'bold',
         }

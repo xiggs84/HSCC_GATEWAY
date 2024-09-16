@@ -17,7 +17,7 @@ export class DanhMucXaService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-xas');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-xas', 'canbodonvi');
 
   create(danhMucXa: NewDanhMucXa): Observable<EntityResponseType> {
     return this.http.post<IDanhMucXa>(this.resourceUrl, danhMucXa, { observe: 'response' });
@@ -70,5 +70,11 @@ export class DanhMucXaService {
       return [...danhMucXasToAdd, ...danhMucXaCollection];
     }
     return danhMucXaCollection;
+  }
+
+  getXaPhuongByHuyen(maHuyen: number) {
+    return this.http.get<IDanhMucXa[]>(`${this.resourceUrl}/by-ma-huyen/${maHuyen}`, {
+      observe: 'response',
+    });
   }
 }

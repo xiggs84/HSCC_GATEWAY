@@ -1,0 +1,67 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Thông tin đương sự"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'800px'">
+
+  <ng-container *nzModalContent>
+    <nz-form-item>
+      <nz-form-label>Tên đương sự</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Ngày sinh</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Giới tính</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Hộ khẩu</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Số nhà</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Địa chỉ tạm trú</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Số điện thoại</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Giấy tờ tùy thân</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Số giấy tờ tùy thân</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Nơi cấp</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Ngày cấp</nz-form-label>
+      <nz-form-control><span class="separator"></span></nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
+  <ng-container *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+  </ng-container>
+</nz-modal>

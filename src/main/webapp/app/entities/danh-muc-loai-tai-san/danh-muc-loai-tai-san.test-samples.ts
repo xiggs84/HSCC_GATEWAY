@@ -1,25 +1,22 @@
 import { IDanhMucLoaiTaiSan, NewDanhMucLoaiTaiSan } from './danh-muc-loai-tai-san.model';
 
 export const sampleWithRequiredData: IDanhMucLoaiTaiSan = {
-  id: 16057,
+  idLoaiTs: 31252,
 };
 
 export const sampleWithPartialData: IDanhMucLoaiTaiSan = {
-  id: 3353,
-  trangThai: 7109,
-  searchStr: 'equally where',
+  idLoaiTs: 30082,
+  trangThai: 13482,
 };
 
 export const sampleWithFullData: IDanhMucLoaiTaiSan = {
-  id: 14924,
-  idLoaiTs: 10369,
-  dienGiai: 'ew absent geez',
-  trangThai: 6119,
-  searchStr: 'and',
+  idLoaiTs: 12739,
+  dienGiai: 'evenly if',
+  trangThai: 20543,
 };
 
 export const sampleWithNewData: NewDanhMucLoaiTaiSan = {
-  id: null,
+  idLoaiTs: null,
 };
 
 Object.freeze(sampleWithNewData);

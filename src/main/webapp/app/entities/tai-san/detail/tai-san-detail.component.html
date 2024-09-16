@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (taiSan()) {
+    @if (taiSan(); as taiSanRef) {
       <div>
         <h2 data-cy="taiSanDetailsHeading"><span jhiTranslate="gatewayApp.taiSan.detail.title">Tai San</span></h2>
 
@@ -11,105 +11,93 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ taiSan()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idTaiSan">Id Tai San</span></dt>
           <dd>
-            <span>{{ taiSan()!.idTaiSan }}</span>
+            <span>{{ taiSanRef.idTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.tenTaiSan">Ten Tai San</span></dt>
           <dd>
-            <span>{{ taiSan()!.tenTaiSan }}</span>
+            <span>{{ taiSanRef.tenTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ taiSan()!.trangThai }}</span>
+            <span>{{ taiSanRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.thongTinTs">Thong Tin Ts</span></dt>
           <dd>
-            <span>{{ taiSan()!.thongTinTs }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.taiSan.idLoaiTs">Id Loai Ts</span></dt>
-          <dd>
-            <span>{{ taiSan()!.idLoaiTs }}</span>
+            <span>{{ taiSanRef.thongTinTs }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.ghiChu">Ghi Chu</span></dt>
           <dd>
-            <span>{{ taiSan()!.ghiChu }}</span>
+            <span>{{ taiSanRef.ghiChu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ taiSan()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ taiSanRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.nguoiThaoTac">Nguoi Thao Tac</span></dt>
           <dd>
-            <span>{{ taiSan()!.nguoiThaoTac }}</span>
+            <span>{{ taiSanRef.nguoiThaoTac }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idDuongSu">Id Duong Su</span></dt>
           <dd>
-            <span>{{ taiSan()!.idDuongSu }}</span>
+            <span>{{ taiSanRef.idDuongSu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idTsGoc">Id Ts Goc</span></dt>
           <dd>
-            <span>{{ taiSan()!.idTsGoc }}</span>
+            <span>{{ taiSanRef.idTsGoc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.maTaiSan">Ma Tai San</span></dt>
           <dd>
-            <span>{{ taiSan()!.maTaiSan }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.taiSan.idTinhTrang">Id Tinh Trang</span></dt>
-          <dd>
-            <span>{{ taiSan()!.idTinhTrang }}</span>
+            <span>{{ taiSanRef.maTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idLoaiNganChan">Id Loai Ngan Chan</span></dt>
           <dd>
-            <span>{{ taiSan()!.idLoaiNganChan }}</span>
+            <span>{{ taiSanRef.idLoaiNganChan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.ngayBdNganChan">Ngay Bd Ngan Chan</span></dt>
           <dd>
-            <span>{{ taiSan()!.ngayBdNganChan | formatMediumDate }}</span>
+            <span>{{ taiSanRef.ngayBdNganChan | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.ngayKtNganChan">Ngay Kt Ngan Chan</span></dt>
           <dd>
-            <span>{{ taiSan()!.ngayKtNganChan | formatMediumDate }}</span>
+            <span>{{ taiSanRef.ngayKtNganChan | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ taiSan()!.idMaster }}</span>
+            <span>{{ taiSanRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.strSearch">Str Search</span></dt>
           <dd>
-            <span>{{ taiSan()!.strSearch }}</span>
+            <span>{{ taiSanRef.strSearch }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ taiSan()!.idDonVi }}</span>
+            <span>{{ taiSanRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.soHsCv">So Hs Cv</span></dt>
           <dd>
-            <span>{{ taiSan()!.soHsCv }}</span>
+            <span>{{ taiSanRef.soHsCv }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.soCc">So Cc</span></dt>
           <dd>
-            <span>{{ taiSan()!.soCc }}</span>
+            <span>{{ taiSanRef.soCc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.soVaoSo">So Vao So</span></dt>
           <dd>
-            <span>{{ taiSan()!.soVaoSo }}</span>
+            <span>{{ taiSanRef.soVaoSo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.moTa">Mo Ta</span></dt>
           <dd>
-            <span>{{ taiSan()!.moTa }}</span>
+            <span>{{ taiSanRef.moTa }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.loaiNganChan">Loai Ngan Chan</span></dt>
           <dd>
-            <span>{{ taiSan()!.loaiNganChan }}</span>
+            <span>{{ taiSanRef.loaiNganChan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSan.syncStatus">Sync Status</span></dt>
           <dd>
-            <span>{{ taiSan()!.syncStatus }}</span>
+            <span>{{ taiSanRef.syncStatus }}</span>
           </dd>
         </dl>
 
@@ -117,7 +105,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/tai-san', taiSan()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/tai-san', taiSanRef.idTaiSan, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

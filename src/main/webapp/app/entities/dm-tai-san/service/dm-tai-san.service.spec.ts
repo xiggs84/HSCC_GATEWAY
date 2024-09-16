@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IDmTaiSan } from '../dm-tai-san.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../dm-tai-san.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../dm-tai-san.test-samples';
 
 import { DmTaiSanService, RestDmTaiSan } from './dm-tai-san.service';
 
@@ -169,7 +169,7 @@ describe('DmTaiSan Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareDmTaiSan(entity1, entity2);
@@ -180,8 +180,8 @@ describe('DmTaiSan Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 456 };
 
         const compareResult1 = service.compareDmTaiSan(entity1, entity2);
         const compareResult2 = service.compareDmTaiSan(entity2, entity1);
@@ -191,8 +191,8 @@ describe('DmTaiSan Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 123 };
 
         const compareResult1 = service.compareDmTaiSan(entity1, entity2);
         const compareResult2 = service.compareDmTaiSan(entity2, entity1);

@@ -1,25 +1,22 @@
 import { IThuaTach, NewThuaTach } from './thua-tach.model';
 
 export const sampleWithRequiredData: IThuaTach = {
-  id: 23012,
+  idThuaTach: 17477,
 };
 
 export const sampleWithPartialData: IThuaTach = {
-  id: 11748,
-  idThuaTach: 6361,
-  trangThai: 13055,
+  idThuaTach: 5866,
+  thongTinThuaTach: 'boo',
 };
 
 export const sampleWithFullData: IThuaTach = {
-  id: 24391,
-  idThuaTach: 565,
-  idTaiSan: 20533,
-  thongTinThuaTach: 'helpfully',
-  trangThai: 26968,
+  idThuaTach: 12170,
+  thongTinThuaTach: 'pollutant equatorial amusing',
+  trangThai: 11741,
 };
 
 export const sampleWithNewData: NewThuaTach = {
-  id: null,
+  idThuaTach: null,
 };
 
 Object.freeze(sampleWithNewData);

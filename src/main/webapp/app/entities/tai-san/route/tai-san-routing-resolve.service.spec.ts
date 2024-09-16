@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 import { ITaiSan } from '../tai-san.model';
@@ -38,8 +38,8 @@ describe('TaiSan routing resolve service', () => {
   describe('resolve', () => {
     it('should return ITaiSan returned by find', () => {
       // GIVEN
-      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      service.find = jest.fn(idTaiSan => of(new HttpResponse({ body: { idTaiSan } })));
+      mockActivatedRouteSnapshot.params = { idTaiSan: 123 };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -52,7 +52,7 @@ describe('TaiSan routing resolve service', () => {
 
       // THEN
       expect(service.find).toHaveBeenCalledWith(123);
-      expect(resultTaiSan).toEqual({ id: 123 });
+      expect(resultTaiSan).toEqual({ idTaiSan: 123 });
     });
 
     it('should return null if id is not provided', () => {
@@ -77,7 +77,7 @@ describe('TaiSan routing resolve service', () => {
     it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<ITaiSan>({ body: null })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      mockActivatedRouteSnapshot.params = { idTaiSan: 123 };
 
       // WHEN
       TestBed.runInInjectionContext(() => {

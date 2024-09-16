@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IThuaTach } from '../thua-tach.model';
 import { ThuaTachService } from '../service/thua-tach.service';
-import { ThuaTachFormService, ThuaTachFormGroup } from './thua-tach-form.service';
+import { ThuaTachFormGroup, ThuaTachFormService } from './thua-tach-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class ThuaTachUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const thuaTach = this.thuaTachFormService.getThuaTach(this.editForm);
-    if (thuaTach.id !== null) {
+    if (thuaTach.idThuaTach !== null) {
       this.subscribeToSaveResponse(this.thuaTachService.update(thuaTach));
     } else {
       this.subscribeToSaveResponse(this.thuaTachService.create(thuaTach));

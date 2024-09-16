@@ -1,19 +1,18 @@
 import { ITaisanSaiDgc, NewTaisanSaiDgc } from './taisan-sai-dgc.model';
 
 export const sampleWithRequiredData: ITaisanSaiDgc = {
-  id: 26018,
+  id: 16238,
 };
 
 export const sampleWithPartialData: ITaisanSaiDgc = {
-  id: 23282,
-  thongTinTsDung: 'finally',
+  id: 30874,
 };
 
 export const sampleWithFullData: ITaisanSaiDgc = {
-  id: 25586,
-  idMaster: 2275,
-  thongTinTs: 'line',
-  thongTinTsDung: 'provided',
+  id: 31233,
+  idMaster: 18136,
+  thongTinTs: 'llama gosh',
+  thongTinTsDung: 'phooey',
 };
 
 export const sampleWithNewData: NewTaisanSaiDgc = {

@@ -17,8 +17,8 @@ describe('TinhTrangTaiSan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TinhTrangTaiSanDetailComponent,
-              resolve: { tinhTrangTaiSan: () => of({ id: 123 }) },
+              loadComponent: () => import('./tinh-trang-tai-san-detail.component').then(m => m.TinhTrangTaiSanDetailComponent),
+              resolve: { tinhTrangTaiSan: () => of({ idTinhTrang: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('TinhTrangTaiSan Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', TinhTrangTaiSanDetailComponent);
 
       // THEN
-      expect(instance.tinhTrangTaiSan()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.tinhTrangTaiSan()).toEqual(expect.objectContaining({ idTinhTrang: 123 }));
     });
   });
 

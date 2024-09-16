@@ -1,0 +1,34 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Lịch sử giao dịch đương sự"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'1100px'">
+  <nz-table [nzData]="data" *nzModalContent nzBordered nzSize="small">
+    <thead>
+    <tr>
+      <th nzWidth="10px">#</th>
+      <th>Loại hợp đồng</th>
+      <th>Ngày ký hợp đồng</th>
+      <th>Số công chứng và tên sổ</th>
+      <th>Thông tin chung</th>
+      <th>Người thực hiện</th>
+      <th>Trạng thái</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of data; let index = index">
+      <td>{{ index + 1 }}</td>
+      <td>{{ item['Loại hợp đồng'] }}</td>
+      <td>{{ item['Ngày ký hợp đồng'] }}</td>
+      <td>{{ item['Số công chứng và tên sổ'] }}</td>
+      <td>{{ item['Thông tin chung'] }}</td>
+      <td>{{ item['Người thực hiện'] }}</td>
+      <td>{{ item['Trạng thái'] }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-container *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+  </ng-container>
+</nz-modal>

@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaiSanDgcComponent } from './list/tai-san-dgc.component';
-import { TaiSanDgcDetailComponent } from './detail/tai-san-dgc-detail.component';
-import { TaiSanDgcUpdateComponent } from './update/tai-san-dgc-update.component';
 import TaiSanDgcResolve from './route/tai-san-dgc-routing-resolve.service';
 
 const taiSanDgcRoute: Routes = [
   {
     path: '',
-    component: TaiSanDgcComponent,
+    loadComponent: () => import('./list/tai-san-dgc.component').then(m => m.TaiSanDgcComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: TaiSanDgcDetailComponent,
+    loadComponent: () => import('./detail/tai-san-dgc-detail.component').then(m => m.TaiSanDgcDetailComponent),
     resolve: {
       taiSanDgc: TaiSanDgcResolve,
     },
@@ -26,7 +23,7 @@ const taiSanDgcRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaiSanDgcUpdateComponent,
+    loadComponent: () => import('./update/tai-san-dgc-update.component').then(m => m.TaiSanDgcUpdateComponent),
     resolve: {
       taiSanDgc: TaiSanDgcResolve,
     },
@@ -34,7 +31,7 @@ const taiSanDgcRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: TaiSanDgcUpdateComponent,
+    loadComponent: () => import('./update/tai-san-dgc-update.component').then(m => m.TaiSanDgcUpdateComponent),
     resolve: {
       taiSanDgc: TaiSanDgcResolve,
     },

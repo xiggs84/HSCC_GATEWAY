@@ -1,0 +1,137 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Thêm mới Tài sản"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzWidth]="'800px'"
+>
+  <form [formGroup]="taiSanForm" nz-form *nzModalContent class="custom-modal">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Loại tài sản</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-select formControlName="loaiTaiSan" nzPlaceHolder="Chọn loại tài sản">
+          <!-- Add options here -->
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired class="custom-label">Tên phiếu tài sản</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="tenPhieuTaiSan" placeholder="Nhập tên phiếu tài sản" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Địa chỉ nhà</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="diaChiNha" placeholder="Nhập địa chỉ nhà" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Tổng diện tích sử dụng</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="tongDienTichSuDung" placeholder="Nhập tổng diện tích sử dụng" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Diện tích sàn</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="dienTichSan" placeholder="Nhập diện tích sàn" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Kết cấu</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="ketCau" placeholder="Nhập kết cấu" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Số tầng</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="soTang" placeholder="Nhập số tầng" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Thửa đất số</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="thuaDatSo" placeholder="Nhập thửa đất số" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Tờ bản đồ số</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="toBanDoSo" placeholder="Nhập tờ bản đồ số" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Loại đất</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="loaiDat" placeholder="Nhập loại đất" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Hạng đất</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="hangDat" placeholder="Nhập hạng đất" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Thời hạn sử dụng</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="thoiHanSuDung" placeholder="Nhập thời hạn sử dụng" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Hình thức sử dụng (chung)</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="hinhThucSuDungChung" placeholder="Nhập hình thức sử dụng (chung)" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Hình thức sử dụng (riêng)</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="hinhThucSuDungRieng" placeholder="Nhập hình thức sử dụng (riêng)" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Mục đích sử dụng đất</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="mucDichSuDungDat" placeholder="Nhập mục đích sử dụng đất" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Nguồn gốc thửa đất</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="nguonGocThuaDat" placeholder="Nhập nguồn gốc thửa đất" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Ghi chú</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="ghiChu" placeholder="Nhập ghi chú" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" class="custom-label">Sở hữu theo</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="soHuuTheo" placeholder="Nhập sở hữu theo" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

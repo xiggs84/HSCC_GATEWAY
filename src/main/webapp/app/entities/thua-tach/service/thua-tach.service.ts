@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IThuaTach, NewThuaTach } from '../thua-tach.model';
 
-export type PartialUpdateThuaTach = Partial<IThuaTach> & Pick<IThuaTach, 'id'>;
+export type PartialUpdateThuaTach = Partial<IThuaTach> & Pick<IThuaTach, 'idThuaTach'>;
 
 export type EntityResponseType = HttpResponse<IThuaTach>;
 export type EntityArrayResponseType = HttpResponse<IThuaTach[]>;
@@ -44,15 +44,15 @@ export class ThuaTachService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getThuaTachIdentifier(thuaTach: Pick<IThuaTach, 'id'>): number {
-    return thuaTach.id;
+  getThuaTachIdentifier(thuaTach: Pick<IThuaTach, 'idThuaTach'>): number {
+    return thuaTach.idThuaTach;
   }
 
-  compareThuaTach(o1: Pick<IThuaTach, 'id'> | null, o2: Pick<IThuaTach, 'id'> | null): boolean {
+  compareThuaTach(o1: Pick<IThuaTach, 'idThuaTach'> | null, o2: Pick<IThuaTach, 'idThuaTach'> | null): boolean {
     return o1 && o2 ? this.getThuaTachIdentifier(o1) === this.getThuaTachIdentifier(o2) : o1 === o2;
   }
 
-  addThuaTachToCollectionIfMissing<Type extends Pick<IThuaTach, 'id'>>(
+  addThuaTachToCollectionIfMissing<Type extends Pick<IThuaTach, 'idThuaTach'>>(
     thuaTachCollection: Type[],
     ...thuaTachesToCheck: (Type | null | undefined)[]
   ): Type[] {

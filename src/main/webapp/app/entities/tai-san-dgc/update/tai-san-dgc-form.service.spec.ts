@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../tai-san-dgc.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../tai-san-dgc.test-samples';
 
 import { TaiSanDgcFormService } from './tai-san-dgc-form.service';
 
@@ -20,18 +20,15 @@ describe('TaiSanDgc Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idTaiSan: expect.any(Object),
             tenTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinTs: expect.any(Object),
-            idLoaiTs: expect.any(Object),
             ghiChu: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDuongSu: expect.any(Object),
             idTsGoc: expect.any(Object),
             maTaiSan: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             ngayBdNganChan: expect.any(Object),
             ngayKtNganChan: expect.any(Object),
@@ -52,18 +49,15 @@ describe('TaiSanDgc Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idTaiSan: expect.any(Object),
             tenTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinTs: expect.any(Object),
-            idLoaiTs: expect.any(Object),
             ghiChu: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDuongSu: expect.any(Object),
             idTsGoc: expect.any(Object),
             maTaiSan: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             ngayBdNganChan: expect.any(Object),
             ngayKtNganChan: expect.any(Object),

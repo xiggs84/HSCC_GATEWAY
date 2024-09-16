@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaiSanDuongSuComponent } from './list/tai-san-duong-su.component';
-import { TaiSanDuongSuDetailComponent } from './detail/tai-san-duong-su-detail.component';
-import { TaiSanDuongSuUpdateComponent } from './update/tai-san-duong-su-update.component';
 import TaiSanDuongSuResolve from './route/tai-san-duong-su-routing-resolve.service';
 
 const taiSanDuongSuRoute: Routes = [
   {
     path: '',
-    component: TaiSanDuongSuComponent,
+    loadComponent: () => import('./list/tai-san-duong-su.component').then(m => m.TaiSanDuongSuComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: TaiSanDuongSuDetailComponent,
+    loadComponent: () => import('./detail/tai-san-duong-su-detail.component').then(m => m.TaiSanDuongSuDetailComponent),
     resolve: {
       taiSanDuongSu: TaiSanDuongSuResolve,
     },
@@ -26,7 +23,7 @@ const taiSanDuongSuRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaiSanDuongSuUpdateComponent,
+    loadComponent: () => import('./update/tai-san-duong-su-update.component').then(m => m.TaiSanDuongSuUpdateComponent),
     resolve: {
       taiSanDuongSu: TaiSanDuongSuResolve,
     },
@@ -34,7 +31,7 @@ const taiSanDuongSuRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: TaiSanDuongSuUpdateComponent,
+    loadComponent: () => import('./update/tai-san-duong-su-update.component').then(m => m.TaiSanDuongSuUpdateComponent),
     resolve: {
       taiSanDuongSu: TaiSanDuongSuResolve,
     },

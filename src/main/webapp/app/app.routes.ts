@@ -7,11 +7,16 @@ import { errorRoute } from './layouts/error/error.route';
 import HomeComponent from './home/home.component';
 import NavbarComponent from './layouts/navbar/navbar.component';
 import LoginComponent from './login/login.component';
+import {SidebarComponent} from './layouts/sidebar/sidebar.component'
+import {HeaderComponent} from './layouts/header/header.component'
 import {TrangchuComponent} from './trangchu/trangchu.component'
 import {ChonhopdongComponent} from './pages/chonhopdong/chonhopdong.component'
 import {DanhsachhopdongComponent} from './pages/danhsachhopdong/danhsachhopdong.component'
 import {ThongkexacthuccccdComponent} from './pages/thongkexacthuccccd/thongkexacthuccccd.component'
 import {MuabanchuyennhuongComponent} from './pages/loaihopdong/muabanchuyennhuong/muabanchuyennhuong.component'
+import {LoaitaisanComponent} from './danhmuc/loaitaisan/loaitaisan.component'
+import {DuongsuComponent} from "./danhmuc/duongsu/duongsu/duongsu.component";
+import {DonviComponent} from "./danhmuc/donvi/donvi.component";
 const routes: Routes = [
   {
     path: '',
@@ -44,9 +49,34 @@ const routes: Routes = [
     title: 'thongkexacthuccccd',
   },
   {
+    path: 'loaitaisan',
+    component: LoaitaisanComponent,
+    title: 'loaitaisan',
+  },
+  {
+    path: 'duongsu',
+    component: DuongsuComponent,
+    title: 'duongsu',
+  },
+  {
+    path: 'donvi',
+    component: DonviComponent,
+    title: 'donvi',
+  },
+  {
     path: '',
     component: NavbarComponent,
     outlet: 'navbar',
+  },
+  {
+    path: '',
+    component: HeaderComponent,
+    outlet: 'header',
+  },
+  {
+    path: '',
+    component: SidebarComponent,
+    outlet: 'sidebar',
   },
   {
     path: 'admin',
@@ -69,6 +99,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import(`./entities/entity.routes`),
   },
+  // {
+  //   path: 'taohopdong',
+  //   loadChildren: () => import('./pages/loaihopdong/loaihopdong.routes'),
+  // },
   ...errorRoute,
 ];
 

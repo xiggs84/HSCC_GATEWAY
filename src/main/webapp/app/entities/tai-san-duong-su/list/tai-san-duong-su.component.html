@@ -42,13 +42,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idTaiSan">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.taiSanDuongSu.idTaiSan">Id Tai San</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idDuongSu">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.taiSanDuongSu.idDuongSu">Id Duong Su</span>
@@ -100,7 +93,6 @@
               <td>
                 <a [routerLink]="['/tai-san-duong-su', taiSanDuongSu.id, 'view']">{{ taiSanDuongSu.id }}</a>
               </td>
-              <td>{{ taiSanDuongSu.idTaiSan }}</td>
               <td>{{ taiSanDuongSu.idDuongSu }}</td>
               <td>{{ taiSanDuongSu.trangThai }}</td>
               <td>{{ taiSanDuongSu.ngayThaoTac | formatMediumDate }}</td>

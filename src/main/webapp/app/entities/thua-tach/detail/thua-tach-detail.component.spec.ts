@@ -17,8 +17,8 @@ describe('ThuaTach Management Detail Component', () => {
           [
             {
               path: '**',
-              component: ThuaTachDetailComponent,
-              resolve: { thuaTach: () => of({ id: 123 }) },
+              loadComponent: () => import('./thua-tach-detail.component').then(m => m.ThuaTachDetailComponent),
+              resolve: { thuaTach: () => of({ idThuaTach: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('ThuaTach Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', ThuaTachDetailComponent);
 
       // THEN
-      expect(instance.thuaTach()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.thuaTach()).toEqual(expect.objectContaining({ idThuaTach: 123 }));
     });
   });
 

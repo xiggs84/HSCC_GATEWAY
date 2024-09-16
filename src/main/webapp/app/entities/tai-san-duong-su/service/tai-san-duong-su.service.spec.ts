@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ITaiSanDuongSu } from '../tai-san-duong-su.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../tai-san-duong-su.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tai-san-duong-su.test-samples';
 
-import { TaiSanDuongSuService, RestTaiSanDuongSu } from './tai-san-duong-su.service';
+import { RestTaiSanDuongSu, TaiSanDuongSuService } from './tai-san-duong-su.service';
 
 const requireRestSample: RestTaiSanDuongSu = {
   ...sampleWithRequiredData,

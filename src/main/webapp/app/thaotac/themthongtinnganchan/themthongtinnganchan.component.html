@@ -1,0 +1,71 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Thông tin ngăn chặn"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'800px'">
+  <form nz-form *nzModalContent [nzLayout]="'vertical'">
+    <nz-row [nzGutter]="16"> <!-- Thêm khoảng cách giữa các cột -->
+      <nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label>Loại ngăn chặn</nz-form-label>
+          <nz-form-control>
+            <nz-select [(ngModel)]="loaiNgchan" name="loaiNgchan" nzPlaceHolder="Chọn loại ngăn chặn">
+              <nz-option *ngFor="let option of loaiNgchanOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Số CC</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker class="full-width" [(ngModel)]="soCc" name="soCc"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Mô tả</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="moTa" name="moTa" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Ngày ngăn chặn (PCC)</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker class="full-width" [(ngModel)]="ngayNgchanPcc" name="ngayNgchanPcc"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label>Số hồ sơ CV</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="soHoSoCv" name="soHoSoCv" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Số vào sổ</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="soVaoSo" name="soVaoSo" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Ngày ngăn chặn (Công văn)</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker class="full-width" [(ngModel)]="ngayNgchanCv" name="ngayNgchanCv"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Ngày kết thúc ngăn chặn</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker class="full-width" [(ngModel)]="ngayKetThucNgchan" name="ngayKetThucNgchan"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+  </form>
+</nz-modal>

@@ -17,7 +17,7 @@ describe('TaiSanDatNha Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TaiSanDatNhaDetailComponent,
+              loadComponent: () => import('./tai-san-dat-nha-detail.component').then(m => m.TaiSanDatNhaDetailComponent),
               resolve: { taiSanDatNha: () => of({ id: 123 }) },
             },
           ],

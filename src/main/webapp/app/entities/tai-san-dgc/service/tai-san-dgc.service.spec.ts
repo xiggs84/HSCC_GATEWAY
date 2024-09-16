@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ITaiSanDgc } from '../tai-san-dgc.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../tai-san-dgc.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tai-san-dgc.test-samples';
 
-import { TaiSanDgcService, RestTaiSanDgc } from './tai-san-dgc.service';
+import { RestTaiSanDgc, TaiSanDgcService } from './tai-san-dgc.service';
 
 const requireRestSample: RestTaiSanDgc = {
   ...sampleWithRequiredData,

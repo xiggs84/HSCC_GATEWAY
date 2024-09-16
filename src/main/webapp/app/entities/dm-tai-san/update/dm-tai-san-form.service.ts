@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDmTaiSan, NewDmTaiSan } from '../dm-tai-san.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idTaiSan: unknown }> = Partial<Omit<T, 'idTaiSan'>> & { idTaiSan: T['idTaiSan'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,22 +14,19 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DmTaiSanFormGroupInput = IDmTaiSan | PartialWithRequiredKeyOf<NewDmTaiSan>;
 
-type DmTaiSanFormDefaults = Pick<NewDmTaiSan, 'id'>;
+type DmTaiSanFormDefaults = Pick<NewDmTaiSan, 'idTaiSan'>;
 
 type DmTaiSanFormGroupContent = {
-  id: FormControl<IDmTaiSan['id'] | NewDmTaiSan['id']>;
-  idTaiSan: FormControl<IDmTaiSan['idTaiSan']>;
+  idTaiSan: FormControl<IDmTaiSan['idTaiSan'] | NewDmTaiSan['idTaiSan']>;
   tenTaiSan: FormControl<IDmTaiSan['tenTaiSan']>;
   trangThai: FormControl<IDmTaiSan['trangThai']>;
   thongTinTs: FormControl<IDmTaiSan['thongTinTs']>;
-  idLoaiTs: FormControl<IDmTaiSan['idLoaiTs']>;
   ghiChu: FormControl<IDmTaiSan['ghiChu']>;
   ngayThaoTac: FormControl<IDmTaiSan['ngayThaoTac']>;
   nguoiThaoTac: FormControl<IDmTaiSan['nguoiThaoTac']>;
   idDuongSu: FormControl<IDmTaiSan['idDuongSu']>;
   idTsGoc: FormControl<IDmTaiSan['idTsGoc']>;
   maTaiSan: FormControl<IDmTaiSan['maTaiSan']>;
-  idTinhTrang: FormControl<IDmTaiSan['idTinhTrang']>;
   idLoaiNganChan: FormControl<IDmTaiSan['idLoaiNganChan']>;
   ngayBdNganChan: FormControl<IDmTaiSan['ngayBdNganChan']>;
   ngayKtNganChan: FormControl<IDmTaiSan['ngayKtNganChan']>;
@@ -47,31 +44,28 @@ export type DmTaiSanFormGroup = FormGroup<DmTaiSanFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DmTaiSanFormService {
-  createDmTaiSanFormGroup(dmTaiSan: DmTaiSanFormGroupInput = { id: null }): DmTaiSanFormGroup {
+  createDmTaiSanFormGroup(dmTaiSan: DmTaiSanFormGroupInput = { idTaiSan: null }): DmTaiSanFormGroup {
     const dmTaiSanRawValue = {
       ...this.getFormDefaults(),
       ...dmTaiSan,
     };
     return new FormGroup<DmTaiSanFormGroupContent>({
-      id: new FormControl(
-        { value: dmTaiSanRawValue.id, disabled: true },
+      idTaiSan: new FormControl(
+        { value: dmTaiSanRawValue.idTaiSan, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idTaiSan: new FormControl(dmTaiSanRawValue.idTaiSan),
       tenTaiSan: new FormControl(dmTaiSanRawValue.tenTaiSan),
       trangThai: new FormControl(dmTaiSanRawValue.trangThai),
       thongTinTs: new FormControl(dmTaiSanRawValue.thongTinTs),
-      idLoaiTs: new FormControl(dmTaiSanRawValue.idLoaiTs),
       ghiChu: new FormControl(dmTaiSanRawValue.ghiChu),
       ngayThaoTac: new FormControl(dmTaiSanRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(dmTaiSanRawValue.nguoiThaoTac),
       idDuongSu: new FormControl(dmTaiSanRawValue.idDuongSu),
       idTsGoc: new FormControl(dmTaiSanRawValue.idTsGoc),
       maTaiSan: new FormControl(dmTaiSanRawValue.maTaiSan),
-      idTinhTrang: new FormControl(dmTaiSanRawValue.idTinhTrang),
       idLoaiNganChan: new FormControl(dmTaiSanRawValue.idLoaiNganChan),
       ngayBdNganChan: new FormControl(dmTaiSanRawValue.ngayBdNganChan),
       ngayKtNganChan: new FormControl(dmTaiSanRawValue.ngayKtNganChan),
@@ -95,14 +89,14 @@ export class DmTaiSanFormService {
     form.reset(
       {
         ...dmTaiSanRawValue,
-        id: { value: dmTaiSanRawValue.id, disabled: true },
+        idTaiSan: { value: dmTaiSanRawValue.idTaiSan, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DmTaiSanFormDefaults {
     return {
-      id: null,
+      idTaiSan: null,
     };
   }
 }

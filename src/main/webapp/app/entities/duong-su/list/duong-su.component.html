@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idDuongSu">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.idDuongSu">Id Duong Su</span>
@@ -56,9 +49,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idLoaiDs">
+            <th scope="col" jhiSortBy="loaiDuongSu">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSu.idLoaiDs">Id Loai Ds</span>
+                <span jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -66,6 +59,34 @@
             <th scope="col" jhiSortBy="diaChi">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.diaChi">Dia Chi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soDienThoai">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.soDienThoai">So Dien Thoai</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fax">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.fax">Fax</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="website">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.website">Website</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -105,13 +126,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idTinhTrang">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSu.idTinhTrang">Id Tinh Trang</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idMaster">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.idMaster">Id Master</span>
@@ -133,9 +147,23 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="loaiGiayTo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col" jhiSortBy="soGiayTo">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.soGiayTo">So Giay To</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ghiChu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.ghiChu">Ghi Chu</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -158,35 +186,52 @@
           </tr>
         </thead>
         <tbody>
-          @for (duongSu of duongSus; track trackId) {
+          @for (duongSu of duongSus; track trackIdDuongSu) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/duong-su', duongSu.id, 'view']">{{ duongSu.id }}</a>
+                <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'view']">{{ duongSu.idDuongSu }}</a>
               </td>
-              <td>{{ duongSu.idDuongSu }}</td>
               <td>{{ duongSu.tenDuongSu }}</td>
-              <td>{{ duongSu.idLoaiDs }}</td>
+              <td [jhiTranslate]="'gatewayApp.LoaiDuongSu.' + (duongSu.loaiDuongSu ?? 'null')">
+                {{ { null: '', CaNhan: 'Cá nhân', ToChuc: 'Tổ chức', ToChucTinDung: 'Tổ chức tín dụng' }[duongSu.loaiDuongSu ?? 'null'] }}
+              </td>
               <td>{{ duongSu.diaChi }}</td>
+              <td>{{ duongSu.soDienThoai }}</td>
+              <td>{{ duongSu.email }}</td>
+              <td>{{ duongSu.fax }}</td>
+              <td>{{ duongSu.website }}</td>
               <td>{{ duongSu.trangThai }}</td>
               <td>{{ duongSu.thongTinDs }}</td>
               <td>{{ duongSu.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ duongSu.nguoiThaoTac }}</td>
               <td>{{ duongSu.idDsGoc }}</td>
-              <td>{{ duongSu.idTinhTrang }}</td>
               <td>{{ duongSu.idMaster }}</td>
               <td>{{ duongSu.idDonVi }}</td>
               <td>{{ duongSu.strSearch }}</td>
+              <td [jhiTranslate]="'gatewayApp.LoaiGiayTo.' + (duongSu.loaiGiayTo ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    Cmnd: 'Chứng minh nhân dân',
+                    Cccd: 'Căn cước công dân',
+                    Cc: 'Căn cước',
+                    Hc: 'Hộ chiếu',
+                    K: 'Giấy tờ hợp lệ khác',
+                  }[duongSu.loaiGiayTo ?? 'null']
+                }}
+              </td>
               <td>{{ duongSu.soGiayTo }}</td>
+              <td>{{ duongSu.ghiChu }}</td>
               <td>{{ duongSu.idLoaiNganChan }}</td>
               <td>{{ duongSu.syncStatus }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/duong-su', duongSu.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/duong-su', duongSu.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

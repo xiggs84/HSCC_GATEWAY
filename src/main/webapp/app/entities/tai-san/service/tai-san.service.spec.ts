@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ITaiSan } from '../tai-san.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../tai-san.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tai-san.test-samples';
 
-import { TaiSanService, RestTaiSan } from './tai-san.service';
+import { RestTaiSan, TaiSanService } from './tai-san.service';
 
 const requireRestSample: RestTaiSan = {
   ...sampleWithRequiredData,
@@ -169,7 +169,7 @@ describe('TaiSan Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareTaiSan(entity1, entity2);
@@ -180,8 +180,8 @@ describe('TaiSan Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 456 };
 
         const compareResult1 = service.compareTaiSan(entity1, entity2);
         const compareResult2 = service.compareTaiSan(entity2, entity1);
@@ -191,8 +191,8 @@ describe('TaiSan Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idTaiSan: 123 };
+        const entity2 = { idTaiSan: 123 };
 
         const compareResult1 = service.compareTaiSan(entity1, entity2);
         const compareResult2 = service.compareTaiSan(entity2, entity1);

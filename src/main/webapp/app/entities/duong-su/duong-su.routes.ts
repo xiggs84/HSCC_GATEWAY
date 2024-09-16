@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { DuongSuComponent } from './list/duong-su.component';
-import { DuongSuDetailComponent } from './detail/duong-su-detail.component';
-import { DuongSuUpdateComponent } from './update/duong-su-update.component';
 import DuongSuResolve from './route/duong-su-routing-resolve.service';
 
 const duongSuRoute: Routes = [
   {
     path: '',
-    component: DuongSuComponent,
+    loadComponent: () => import('./list/duong-su.component').then(m => m.DuongSuComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idDuongSu,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DuongSuDetailComponent,
+    path: ':idDuongSu/view',
+    loadComponent: () => import('./detail/duong-su-detail.component').then(m => m.DuongSuDetailComponent),
     resolve: {
       duongSu: DuongSuResolve,
     },
@@ -26,15 +23,15 @@ const duongSuRoute: Routes = [
   },
   {
     path: 'new',
-    component: DuongSuUpdateComponent,
+    loadComponent: () => import('./update/duong-su-update.component').then(m => m.DuongSuUpdateComponent),
     resolve: {
       duongSu: DuongSuResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DuongSuUpdateComponent,
+    path: ':idDuongSu/edit',
+    loadComponent: () => import('./update/duong-su-update.component').then(m => m.DuongSuUpdateComponent),
     resolve: {
       duongSu: DuongSuResolve,
     },

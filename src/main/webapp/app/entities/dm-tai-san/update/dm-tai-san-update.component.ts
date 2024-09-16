@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IDmTaiSan } from '../dm-tai-san.model';
 import { DmTaiSanService } from '../service/dm-tai-san.service';
-import { DmTaiSanFormService, DmTaiSanFormGroup } from './dm-tai-san-form.service';
+import { DmTaiSanFormGroup, DmTaiSanFormService } from './dm-tai-san-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class DmTaiSanUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const dmTaiSan = this.dmTaiSanFormService.getDmTaiSan(this.editForm);
-    if (dmTaiSan.id !== null) {
+    if (dmTaiSan.idTaiSan !== null) {
       this.subscribeToSaveResponse(this.dmTaiSanService.update(dmTaiSan));
     } else {
       this.subscribeToSaveResponse(this.dmTaiSanService.create(dmTaiSan));

@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (taisanSaiDgc()) {
+    @if (taisanSaiDgc(); as taisanSaiDgcRef) {
       <div>
         <h2 data-cy="taisanSaiDgcDetailsHeading"><span jhiTranslate="gatewayApp.taisanSaiDgc.detail.title">Taisan Sai Dgc</span></h2>
 
@@ -13,19 +13,19 @@
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
           <dd>
-            <span>{{ taisanSaiDgc()!.id }}</span>
+            <span>{{ taisanSaiDgcRef.id }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisanSaiDgc.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ taisanSaiDgc()!.idMaster }}</span>
+            <span>{{ taisanSaiDgcRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisanSaiDgc.thongTinTs">Thong Tin Ts</span></dt>
           <dd>
-            <span>{{ taisanSaiDgc()!.thongTinTs }}</span>
+            <span>{{ taisanSaiDgcRef.thongTinTs }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisanSaiDgc.thongTinTsDung">Thong Tin Ts Dung</span></dt>
           <dd>
-            <span>{{ taisanSaiDgc()!.thongTinTsDung }}</span>
+            <span>{{ taisanSaiDgcRef.thongTinTsDung }}</span>
           </dd>
         </dl>
 
@@ -33,7 +33,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/taisan-sai-dgc', taisanSaiDgc()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/taisan-sai-dgc', taisanSaiDgcRef.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

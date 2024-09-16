@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../tinh-trang-tai-san.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../tinh-trang-tai-san.test-samples';
 
 import { TinhTrangTaiSanFormService } from './tinh-trang-tai-san-form.service';
 
@@ -19,7 +19,6 @@ describe('TinhTrangTaiSan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTinhTrang: expect.any(Object),
             dienGiai: expect.any(Object),
             trangThai: expect.any(Object),
@@ -32,7 +31,6 @@ describe('TinhTrangTaiSan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTinhTrang: expect.any(Object),
             dienGiai: expect.any(Object),
             trangThai: expect.any(Object),
@@ -68,22 +66,22 @@ describe('TinhTrangTaiSan Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing ITinhTrangTaiSan should not enable id FormControl', () => {
+      it('passing ITinhTrangTaiSan should not enable idTinhTrang FormControl', () => {
         const formGroup = service.createTinhTrangTaiSanFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTinhTrang.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTinhTrang.disabled).toBe(true);
       });
 
-      it('passing NewTinhTrangTaiSan should disable id FormControl', () => {
+      it('passing NewTinhTrangTaiSan should disable idTinhTrang FormControl', () => {
         const formGroup = service.createTinhTrangTaiSanFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTinhTrang.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idTinhTrang: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTinhTrang.disabled).toBe(true);
       });
     });
   });

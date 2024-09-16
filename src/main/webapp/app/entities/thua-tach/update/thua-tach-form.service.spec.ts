@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../thua-tach.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../thua-tach.test-samples';
 
 import { ThuaTachFormService } from './thua-tach-form.service';
 
@@ -19,9 +19,7 @@ describe('ThuaTach Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idThuaTach: expect.any(Object),
-            idTaiSan: expect.any(Object),
             thongTinThuaTach: expect.any(Object),
             trangThai: expect.any(Object),
           }),
@@ -33,9 +31,7 @@ describe('ThuaTach Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idThuaTach: expect.any(Object),
-            idTaiSan: expect.any(Object),
             thongTinThuaTach: expect.any(Object),
             trangThai: expect.any(Object),
           }),
@@ -70,22 +66,22 @@ describe('ThuaTach Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IThuaTach should not enable id FormControl', () => {
+      it('passing IThuaTach should not enable idThuaTach FormControl', () => {
         const formGroup = service.createThuaTachFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idThuaTach.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idThuaTach.disabled).toBe(true);
       });
 
-      it('passing NewThuaTach should disable id FormControl', () => {
+      it('passing NewThuaTach should disable idThuaTach FormControl', () => {
         const formGroup = service.createThuaTachFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idThuaTach.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idThuaTach: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idThuaTach.disabled).toBe(true);
       });
     });
   });

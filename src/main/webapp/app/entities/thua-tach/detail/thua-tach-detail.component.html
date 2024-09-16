@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (thuaTach()) {
+    @if (thuaTach(); as thuaTachRef) {
       <div>
         <h2 data-cy="thuaTachDetailsHeading"><span jhiTranslate="gatewayApp.thuaTach.detail.title">Thua Tach</span></h2>
 
@@ -11,25 +11,17 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ thuaTach()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.thuaTach.idThuaTach">Id Thua Tach</span></dt>
           <dd>
-            <span>{{ thuaTach()!.idThuaTach }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.thuaTach.idTaiSan">Id Tai San</span></dt>
-          <dd>
-            <span>{{ thuaTach()!.idTaiSan }}</span>
+            <span>{{ thuaTachRef.idThuaTach }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.thuaTach.thongTinThuaTach">Thong Tin Thua Tach</span></dt>
           <dd>
-            <span>{{ thuaTach()!.thongTinThuaTach }}</span>
+            <span>{{ thuaTachRef.thongTinThuaTach }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.thuaTach.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ thuaTach()!.trangThai }}</span>
+            <span>{{ thuaTachRef.trangThai }}</span>
           </dd>
         </dl>
 
@@ -37,7 +29,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/thua-tach', thuaTach()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/thua-tach', thuaTachRef.idThuaTach, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

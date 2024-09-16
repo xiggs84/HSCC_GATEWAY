@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TaisanSaiQsddDgcComponent } from './list/taisan-sai-qsdd-dgc.component';
-import { TaisanSaiQsddDgcDetailComponent } from './detail/taisan-sai-qsdd-dgc-detail.component';
-import { TaisanSaiQsddDgcUpdateComponent } from './update/taisan-sai-qsdd-dgc-update.component';
 import TaisanSaiQsddDgcResolve from './route/taisan-sai-qsdd-dgc-routing-resolve.service';
 
 const taisanSaiQsddDgcRoute: Routes = [
   {
     path: '',
-    component: TaisanSaiQsddDgcComponent,
+    loadComponent: () => import('./list/taisan-sai-qsdd-dgc.component').then(m => m.TaisanSaiQsddDgcComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: TaisanSaiQsddDgcDetailComponent,
+    loadComponent: () => import('./detail/taisan-sai-qsdd-dgc-detail.component').then(m => m.TaisanSaiQsddDgcDetailComponent),
     resolve: {
       taisanSaiQsddDgc: TaisanSaiQsddDgcResolve,
     },
@@ -26,7 +23,7 @@ const taisanSaiQsddDgcRoute: Routes = [
   },
   {
     path: 'new',
-    component: TaisanSaiQsddDgcUpdateComponent,
+    loadComponent: () => import('./update/taisan-sai-qsdd-dgc-update.component').then(m => m.TaisanSaiQsddDgcUpdateComponent),
     resolve: {
       taisanSaiQsddDgc: TaisanSaiQsddDgcResolve,
     },
@@ -34,7 +31,7 @@ const taisanSaiQsddDgcRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: TaisanSaiQsddDgcUpdateComponent,
+    loadComponent: () => import('./update/taisan-sai-qsdd-dgc-update.component').then(m => m.TaisanSaiQsddDgcUpdateComponent),
     resolve: {
       taisanSaiQsddDgc: TaisanSaiQsddDgcResolve,
     },

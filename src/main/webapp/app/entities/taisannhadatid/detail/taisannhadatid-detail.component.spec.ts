@@ -17,8 +17,8 @@ describe('Taisannhadatid Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TaisannhadatidDetailComponent,
-              resolve: { taisannhadatid: () => of({ id: 123 }) },
+              loadComponent: () => import('./taisannhadatid-detail.component').then(m => m.TaisannhadatidDetailComponent),
+              resolve: { taisannhadatid: () => of({ idTaiSan: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('Taisannhadatid Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', TaisannhadatidDetailComponent);
 
       // THEN
-      expect(instance.taisannhadatid()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.taisannhadatid()).toEqual(expect.objectContaining({ idTaiSan: 123 }));
     });
   });
 

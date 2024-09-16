@@ -2,7 +2,6 @@ import dayjs from 'dayjs/esm';
 
 export interface ITaiSanDuongSu {
   id: number;
-  idTaiSan?: number | null;
   idDuongSu?: number | null;
   trangThai?: number | null;
   ngayThaoTac?: dayjs.Dayjs | null;

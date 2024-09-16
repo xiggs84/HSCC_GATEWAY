@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idDonVi">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucDonVi.idDonVi">Id Don Vi</span>
@@ -84,13 +77,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="loaiDonVi">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="ngayKhaiBao">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucDonVi.ngayKhaiBao">Ngay Khai Bao</span>
@@ -101,27 +87,6 @@
             <th scope="col" jhiSortBy="trangThai">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucDonVi.trangThai">Trang Thai</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idTinh">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.idTinh">Id Tinh</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idHuyen">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.idHuyen">Id Huyen</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idPhuongXa">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.idPhuongXa">Id Phuong Xa</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -140,9 +105,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idCapQl">
+            <th scope="col" jhiSortBy="capQuanLy">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.idCapQl">Id Cap Ql</span>
+                <span jhiTranslate="gatewayApp.danhMucDonVi.capQuanLy">Cap Quan Ly</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -175,9 +140,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="capDonVi">
+            <th scope="col" jhiSortBy="loaiDonVi">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.capDonVi">Cap Don Vi</span>
+                <span jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -256,31 +221,40 @@
           </tr>
         </thead>
         <tbody>
-          @for (danhMucDonVi of danhMucDonVis; track trackId) {
+          @for (danhMucDonVi of danhMucDonVis; track trackIdDonVi) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-don-vi', danhMucDonVi.id, 'view']">{{ danhMucDonVi.id }}</a>
+                <a [routerLink]="['/danh-muc-don-vi', danhMucDonVi.idDonVi, 'view']">{{ danhMucDonVi.idDonVi }}</a>
               </td>
-              <td>{{ danhMucDonVi.idDonVi }}</td>
               <td>{{ danhMucDonVi.tenDonVi }}</td>
               <td>{{ danhMucDonVi.diaChi }}</td>
               <td>{{ danhMucDonVi.nguoiDaiDien }}</td>
               <td>{{ danhMucDonVi.soDienThoai }}</td>
               <td>{{ danhMucDonVi.idDonViQl }}</td>
-              <td>{{ danhMucDonVi.loaiDonVi }}</td>
               <td>{{ danhMucDonVi.ngayKhaiBao | formatMediumDate }}</td>
               <td>{{ danhMucDonVi.trangThai }}</td>
-              <td>{{ danhMucDonVi.idTinh }}</td>
-              <td>{{ danhMucDonVi.idHuyen }}</td>
-              <td>{{ danhMucDonVi.idPhuongXa }}</td>
               <td>{{ danhMucDonVi.soNha }}</td>
               <td>{{ danhMucDonVi.maSoThue }}</td>
-              <td>{{ danhMucDonVi.idCapQl }}</td>
-              <td>{{ danhMucDonVi.loaiNhiemVu }}</td>
+              <td [jhiTranslate]="'gatewayApp.CapQuanLy.' + (danhMucDonVi.capQuanLy ?? 'null')">
+                {{
+                  { null: '', DON_VI_TRUC_THUOC: 'Đơn vị trực thuộc', CAP_SO: 'Cấp sở', CAP_PHONG: 'Cấp phòng', VNPT: 'VNPT' }[
+                    danhMucDonVi.capQuanLy ?? 'null'
+                  ]
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.NhiemVu.' + (danhMucDonVi.loaiNhiemVu ?? 'null')">
+                {{
+                  { null: '', CONG_CHUNG: 'Công chứng', CHUNG_THUC: 'Chứng thực', CONG_CHUNG_CHUNG_THUC: 'Cả hai' }[
+                    danhMucDonVi.loaiNhiemVu ?? 'null'
+                  ]
+                }}
+              </td>
               <td>{{ danhMucDonVi.hoaDonDt }}</td>
               <td>{{ danhMucDonVi.maDonViIgate }}</td>
               <td>{{ danhMucDonVi.maCoQuanIgate }}</td>
-              <td>{{ danhMucDonVi.capDonVi }}</td>
+              <td [jhiTranslate]="'gatewayApp.LoaiDonVi.' + (danhMucDonVi.loaiDonVi ?? 'null')">
+                {{ { null: '', SO_TU_PHAP: 'Trực thuộc sở Tư Pháp', TU_NHAN: 'Tư nhân' }[danhMucDonVi.loaiDonVi ?? 'null'] }}
+              </td>
               <td>{{ danhMucDonVi.kySo }}</td>
               <td>{{ danhMucDonVi.qrScan }}</td>
               <td>{{ danhMucDonVi.verifyIdCard }}</td>
@@ -293,12 +267,20 @@
               <td>{{ danhMucDonVi.passwordElastic }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/danh-muc-don-vi', danhMucDonVi.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/danh-muc-don-vi', danhMucDonVi.idDonVi, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/danh-muc-don-vi', danhMucDonVi.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/danh-muc-don-vi', danhMucDonVi.idDonVi, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

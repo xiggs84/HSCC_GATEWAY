@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { sampleWithRequiredData } from '../thua-tach.test-samples';
@@ -25,13 +25,13 @@ describe('ThuaTach Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'idThuaTach,asc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idThuaTach,desc',
               }),
             ),
             snapshot: {
@@ -39,7 +39,7 @@ describe('ThuaTach Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idThuaTach,desc',
               }),
             },
           },
@@ -59,7 +59,7 @@ describe('ThuaTach Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ idThuaTach: 123 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +69,7 @@ describe('ThuaTach Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ idThuaTach: 456 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -84,16 +84,16 @@ describe('ThuaTach Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.thuaTaches?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.thuaTaches?.[0]).toEqual(expect.objectContaining({ idThuaTach: 123 }));
   });
 
-  describe('trackId', () => {
+  describe('trackIdThuaTach', () => {
     it('Should forward to thuaTachService', () => {
-      const entity = { id: 123 };
+      const entity = { idThuaTach: 123 };
       jest.spyOn(service, 'getThuaTachIdentifier');
-      const id = comp.trackId(0, entity);
+      const idThuaTach = comp.trackIdThuaTach(0, entity);
       expect(service.getThuaTachIdentifier).toHaveBeenCalledWith(entity);
-      expect(id).toBe(entity.id);
+      expect(idThuaTach).toBe(entity.idThuaTach);
     });
   });
 
@@ -117,7 +117,7 @@ describe('ThuaTach Management Component', () => {
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['idThuaTach,desc'] }));
   });
 
   describe('delete', () => {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../dm-tai-san.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../dm-tai-san.test-samples';
 
 import { DmTaiSanFormService } from './dm-tai-san-form.service';
 
@@ -19,19 +19,16 @@ describe('DmTaiSan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTaiSan: expect.any(Object),
             tenTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinTs: expect.any(Object),
-            idLoaiTs: expect.any(Object),
             ghiChu: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDuongSu: expect.any(Object),
             idTsGoc: expect.any(Object),
             maTaiSan: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             ngayBdNganChan: expect.any(Object),
             ngayKtNganChan: expect.any(Object),
@@ -52,19 +49,16 @@ describe('DmTaiSan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTaiSan: expect.any(Object),
             tenTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinTs: expect.any(Object),
-            idLoaiTs: expect.any(Object),
             ghiChu: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDuongSu: expect.any(Object),
             idTsGoc: expect.any(Object),
             maTaiSan: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             ngayBdNganChan: expect.any(Object),
             ngayKtNganChan: expect.any(Object),
@@ -108,22 +102,22 @@ describe('DmTaiSan Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IDmTaiSan should not enable id FormControl', () => {
+      it('passing IDmTaiSan should not enable idTaiSan FormControl', () => {
         const formGroup = service.createDmTaiSanFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
       });
 
-      it('passing NewDmTaiSan should disable id FormControl', () => {
+      it('passing NewDmTaiSan should disable idTaiSan FormControl', () => {
         const formGroup = service.createDmTaiSanFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idTaiSan: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
       });
     });
   });

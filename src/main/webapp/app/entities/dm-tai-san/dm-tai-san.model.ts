@@ -1,19 +1,16 @@
 import dayjs from 'dayjs/esm';
 
 export interface IDmTaiSan {
-  id: number;
-  idTaiSan?: number | null;
+  idTaiSan: number;
   tenTaiSan?: string | null;
   trangThai?: number | null;
   thongTinTs?: string | null;
-  idLoaiTs?: number | null;
   ghiChu?: string | null;
   ngayThaoTac?: dayjs.Dayjs | null;
   nguoiThaoTac?: number | null;
   idDuongSu?: number | null;
   idTsGoc?: number | null;
   maTaiSan?: string | null;
-  idTinhTrang?: number | null;
   idLoaiNganChan?: number | null;
   ngayBdNganChan?: dayjs.Dayjs | null;
   ngayKtNganChan?: dayjs.Dayjs | null;
@@ -27,4 +24,4 @@ export interface IDmTaiSan {
   loaiNganChan?: number | null;
 }
 
-export type NewDmTaiSan = Omit<IDmTaiSan, 'id'> & { id: null };
+export type NewDmTaiSan = Omit<IDmTaiSan, 'idTaiSan'> & { idTaiSan: null };

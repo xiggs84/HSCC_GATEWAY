@@ -12,24 +12,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idTinhTrang.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.tinhTrangTaiSan.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idTinhTrang" jhiTranslate="gatewayApp.tinhTrangTaiSan.idTinhTrang">Id Tinh Trang</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idTinhTrang"
+              id="field_idTinhTrang"
+              data-cy="idTinhTrang"
+              formControlName="idTinhTrang"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idTinhTrang" jhiTranslate="gatewayApp.tinhTrangTaiSan.idTinhTrang">Id Tinh Trang</label>
-          <input
-            type="number"
-            class="form-control"
-            name="idTinhTrang"
-            id="field_idTinhTrang"
-            data-cy="idTinhTrang"
-            formControlName="idTinhTrang"
-          />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_dienGiai" jhiTranslate="gatewayApp.tinhTrangTaiSan.dienGiai">Dien Giai</label>

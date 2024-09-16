@@ -12,17 +12,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idDonVi.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.danhMucDonVi.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idDonVi" jhiTranslate="gatewayApp.danhMucDonVi.idDonVi">Id Don Vi</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idDonVi"
+              id="field_idDonVi"
+              data-cy="idDonVi"
+              formControlName="idDonVi"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idDonVi" jhiTranslate="gatewayApp.danhMucDonVi.idDonVi">Id Don Vi</label>
-          <input type="number" class="form-control" name="idDonVi" id="field_idDonVi" data-cy="idDonVi" formControlName="idDonVi" />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_tenDonVi" jhiTranslate="gatewayApp.danhMucDonVi.tenDonVi">Ten Don Vi</label>
@@ -64,11 +67,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_loaiDonVi" jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</label>
-          <input type="number" class="form-control" name="loaiDonVi" id="field_loaiDonVi" data-cy="loaiDonVi" formControlName="loaiDonVi" />
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_ngayKhaiBao" jhiTranslate="gatewayApp.danhMucDonVi.ngayKhaiBao">Ngay Khai Bao</label>
           <div class="input-group">
             <input
@@ -93,28 +91,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idTinh" jhiTranslate="gatewayApp.danhMucDonVi.idTinh">Id Tinh</label>
-          <input type="number" class="form-control" name="idTinh" id="field_idTinh" data-cy="idTinh" formControlName="idTinh" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idHuyen" jhiTranslate="gatewayApp.danhMucDonVi.idHuyen">Id Huyen</label>
-          <input type="number" class="form-control" name="idHuyen" id="field_idHuyen" data-cy="idHuyen" formControlName="idHuyen" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idPhuongXa" jhiTranslate="gatewayApp.danhMucDonVi.idPhuongXa">Id Phuong Xa</label>
-          <input
-            type="number"
-            class="form-control"
-            name="idPhuongXa"
-            id="field_idPhuongXa"
-            data-cy="idPhuongXa"
-            formControlName="idPhuongXa"
-          />
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_soNha" jhiTranslate="gatewayApp.danhMucDonVi.soNha">So Nha</label>
           <input type="text" class="form-control" name="soNha" id="field_soNha" data-cy="soNha" formControlName="soNha" />
         </div>
@@ -125,20 +101,23 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idCapQl" jhiTranslate="gatewayApp.danhMucDonVi.idCapQl">Id Cap Ql</label>
-          <input type="number" class="form-control" name="idCapQl" id="field_idCapQl" data-cy="idCapQl" formControlName="idCapQl" />
+          <label class="form-label" for="field_capQuanLy" jhiTranslate="gatewayApp.danhMucDonVi.capQuanLy">Cap Quan Ly</label>
+          <select class="form-control" name="capQuanLy" formControlName="capQuanLy" id="field_capQuanLy" data-cy="capQuanLy">
+            <option [ngValue]="null">{{ 'gatewayApp.CapQuanLy.null' | translate }}</option>
+            @for (capQuanLy of capQuanLyValues; track $index) {
+              <option [value]="capQuanLy">{{ 'gatewayApp.CapQuanLy.' + capQuanLy | translate }}</option>
+            }
+          </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_loaiNhiemVu" jhiTranslate="gatewayApp.danhMucDonVi.loaiNhiemVu">Loai Nhiem Vu</label>
-          <input
-            type="number"
-            class="form-control"
-            name="loaiNhiemVu"
-            id="field_loaiNhiemVu"
-            data-cy="loaiNhiemVu"
-            formControlName="loaiNhiemVu"
-          />
+          <select class="form-control" name="loaiNhiemVu" formControlName="loaiNhiemVu" id="field_loaiNhiemVu" data-cy="loaiNhiemVu">
+            <option [ngValue]="null">{{ 'gatewayApp.NhiemVu.null' | translate }}</option>
+            @for (nhiemVu of nhiemVuValues; track $index) {
+              <option [value]="nhiemVu">{{ 'gatewayApp.NhiemVu.' + nhiemVu | translate }}</option>
+            }
+          </select>
         </div>
 
         <div class="mb-3">
@@ -171,8 +150,13 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_capDonVi" jhiTranslate="gatewayApp.danhMucDonVi.capDonVi">Cap Don Vi</label>
-          <input type="number" class="form-control" name="capDonVi" id="field_capDonVi" data-cy="capDonVi" formControlName="capDonVi" />
+          <label class="form-label" for="field_loaiDonVi" jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</label>
+          <select class="form-control" name="loaiDonVi" formControlName="loaiDonVi" id="field_loaiDonVi" data-cy="loaiDonVi">
+            <option [ngValue]="null">{{ 'gatewayApp.LoaiDonVi.null' | translate }}</option>
+            @for (loaiDonVi of loaiDonViValues; track $index) {
+              <option [value]="loaiDonVi">{{ 'gatewayApp.LoaiDonVi.' + loaiDonVi | translate }}</option>
+            }
+          </select>
         </div>
 
         <div class="mb-3">

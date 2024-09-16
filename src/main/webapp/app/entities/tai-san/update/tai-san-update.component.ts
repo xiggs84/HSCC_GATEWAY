@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITaiSan } from '../tai-san.model';
 import { TaiSanService } from '../service/tai-san.service';
-import { TaiSanFormService, TaiSanFormGroup } from './tai-san-form.service';
+import { TaiSanFormGroup, TaiSanFormService } from './tai-san-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class TaiSanUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const taiSan = this.taiSanFormService.getTaiSan(this.editForm);
-    if (taiSan.id !== null) {
+    if (taiSan.idTaiSan !== null) {
       this.subscribeToSaveResponse(this.taiSanService.update(taiSan));
     } else {
       this.subscribeToSaveResponse(this.taiSanService.create(taiSan));

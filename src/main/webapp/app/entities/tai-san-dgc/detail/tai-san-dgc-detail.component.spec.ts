@@ -17,7 +17,7 @@ describe('TaiSanDgc Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TaiSanDgcDetailComponent,
+              loadComponent: () => import('./tai-san-dgc-detail.component').then(m => m.TaiSanDgcDetailComponent),
               resolve: { taiSanDgc: () => of({ id: 123 }) },
             },
           ],

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITinhTrangTaiSan } from '../tinh-trang-tai-san.model';
 import { TinhTrangTaiSanService } from '../service/tinh-trang-tai-san.service';
-import { TinhTrangTaiSanFormService, TinhTrangTaiSanFormGroup } from './tinh-trang-tai-san-form.service';
+import { TinhTrangTaiSanFormGroup, TinhTrangTaiSanFormService } from './tinh-trang-tai-san-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class TinhTrangTaiSanUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const tinhTrangTaiSan = this.tinhTrangTaiSanFormService.getTinhTrangTaiSan(this.editForm);
-    if (tinhTrangTaiSan.id !== null) {
+    if (tinhTrangTaiSan.idTinhTrang !== null) {
       this.subscribeToSaveResponse(this.tinhTrangTaiSanService.update(tinhTrangTaiSan));
     } else {
       this.subscribeToSaveResponse(this.tinhTrangTaiSanService.create(tinhTrangTaiSan));

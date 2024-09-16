@@ -1,13 +1,13 @@
 @if (dmTaiSan) {
-  <form name="deleteForm" (ngSubmit)="confirmDelete(dmTaiSan.id!)">
+  <form name="deleteForm" (ngSubmit)="confirmDelete(dmTaiSan.idTaiSan!)">
     <div class="modal-header">
       <h4 class="modal-title" data-cy="dmTaiSanDeleteDialogHeading" jhiTranslate="entity.delete.title">Xác nhận hành động xóa</h4>
     </div>
 
     <div class="modal-body">
       <jhi-alert-error></jhi-alert-error>
-      <p id="jhi-delete-dmTaiSan-heading" jhiTranslate="gatewayApp.dmTaiSan.delete.question" [translateValues]="{ id: dmTaiSan.id }">
-        Bạn có chắc là muốn xóa Dm Tai San {{ dmTaiSan.id }}?
+      <p id="jhi-delete-dmTaiSan-heading" jhiTranslate="gatewayApp.dmTaiSan.delete.question" [translateValues]="{ id: dmTaiSan.idTaiSan }">
+        Bạn có chắc là muốn xóa Dm Tai San {{ dmTaiSan.idTaiSan }}?
       </p>
     </div>
 

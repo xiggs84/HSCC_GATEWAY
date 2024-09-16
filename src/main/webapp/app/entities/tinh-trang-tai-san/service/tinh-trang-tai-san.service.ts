@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { ITinhTrangTaiSan, NewTinhTrangTaiSan } from '../tinh-trang-tai-san.model';
 
-export type PartialUpdateTinhTrangTaiSan = Partial<ITinhTrangTaiSan> & Pick<ITinhTrangTaiSan, 'id'>;
+export type PartialUpdateTinhTrangTaiSan = Partial<ITinhTrangTaiSan> & Pick<ITinhTrangTaiSan, 'idTinhTrang'>;
 
 export type EntityResponseType = HttpResponse<ITinhTrangTaiSan>;
 export type EntityArrayResponseType = HttpResponse<ITinhTrangTaiSan[]>;
@@ -48,15 +48,15 @@ export class TinhTrangTaiSanService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getTinhTrangTaiSanIdentifier(tinhTrangTaiSan: Pick<ITinhTrangTaiSan, 'id'>): number {
-    return tinhTrangTaiSan.id;
+  getTinhTrangTaiSanIdentifier(tinhTrangTaiSan: Pick<ITinhTrangTaiSan, 'idTinhTrang'>): number {
+    return tinhTrangTaiSan.idTinhTrang;
   }
 
-  compareTinhTrangTaiSan(o1: Pick<ITinhTrangTaiSan, 'id'> | null, o2: Pick<ITinhTrangTaiSan, 'id'> | null): boolean {
+  compareTinhTrangTaiSan(o1: Pick<ITinhTrangTaiSan, 'idTinhTrang'> | null, o2: Pick<ITinhTrangTaiSan, 'idTinhTrang'> | null): boolean {
     return o1 && o2 ? this.getTinhTrangTaiSanIdentifier(o1) === this.getTinhTrangTaiSanIdentifier(o2) : o1 === o2;
   }
 
-  addTinhTrangTaiSanToCollectionIfMissing<Type extends Pick<ITinhTrangTaiSan, 'id'>>(
+  addTinhTrangTaiSanToCollectionIfMissing<Type extends Pick<ITinhTrangTaiSan, 'idTinhTrang'>>(
     tinhTrangTaiSanCollection: Type[],
     ...tinhTrangTaiSansToCheck: (Type | null | undefined)[]
   ): Type[] {

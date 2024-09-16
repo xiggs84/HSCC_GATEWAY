@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { ITaiSan, NewTaiSan } from '../tai-san.model';
 
-export type PartialUpdateTaiSan = Partial<ITaiSan> & Pick<ITaiSan, 'id'>;
+export type PartialUpdateTaiSan = Partial<ITaiSan> & Pick<ITaiSan, 'idTaiSan'>;
 
 type RestOf<T extends ITaiSan | NewTaiSan> = Omit<T, 'ngayThaoTac' | 'ngayBdNganChan' | 'ngayKtNganChan'> & {
   ngayThaoTac?: string | null;
@@ -72,15 +72,15 @@ export class TaiSanService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getTaiSanIdentifier(taiSan: Pick<ITaiSan, 'id'>): number {
-    return taiSan.id;
+  getTaiSanIdentifier(taiSan: Pick<ITaiSan, 'idTaiSan'>): number {
+    return taiSan.idTaiSan;
   }
 
-  compareTaiSan(o1: Pick<ITaiSan, 'id'> | null, o2: Pick<ITaiSan, 'id'> | null): boolean {
+  compareTaiSan(o1: Pick<ITaiSan, 'idTaiSan'> | null, o2: Pick<ITaiSan, 'idTaiSan'> | null): boolean {
     return o1 && o2 ? this.getTaiSanIdentifier(o1) === this.getTaiSanIdentifier(o2) : o1 === o2;
   }
 
-  addTaiSanToCollectionIfMissing<Type extends Pick<ITaiSan, 'id'>>(
+  addTaiSanToCollectionIfMissing<Type extends Pick<ITaiSan, 'idTaiSan'>>(
     taiSanCollection: Type[],
     ...taiSansToCheck: (Type | null | undefined)[]
   ): Type[] {

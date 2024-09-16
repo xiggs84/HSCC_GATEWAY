@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { TinhTrangTaiSanComponent } from './list/tinh-trang-tai-san.component';
-import { TinhTrangTaiSanDetailComponent } from './detail/tinh-trang-tai-san-detail.component';
-import { TinhTrangTaiSanUpdateComponent } from './update/tinh-trang-tai-san-update.component';
 import TinhTrangTaiSanResolve from './route/tinh-trang-tai-san-routing-resolve.service';
 
 const tinhTrangTaiSanRoute: Routes = [
   {
     path: '',
-    component: TinhTrangTaiSanComponent,
+    loadComponent: () => import('./list/tinh-trang-tai-san.component').then(m => m.TinhTrangTaiSanComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idTinhTrang,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: TinhTrangTaiSanDetailComponent,
+    path: ':idTinhTrang/view',
+    loadComponent: () => import('./detail/tinh-trang-tai-san-detail.component').then(m => m.TinhTrangTaiSanDetailComponent),
     resolve: {
       tinhTrangTaiSan: TinhTrangTaiSanResolve,
     },
@@ -26,15 +23,15 @@ const tinhTrangTaiSanRoute: Routes = [
   },
   {
     path: 'new',
-    component: TinhTrangTaiSanUpdateComponent,
+    loadComponent: () => import('./update/tinh-trang-tai-san-update.component').then(m => m.TinhTrangTaiSanUpdateComponent),
     resolve: {
       tinhTrangTaiSan: TinhTrangTaiSanResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: TinhTrangTaiSanUpdateComponent,
+    path: ':idTinhTrang/edit',
+    loadComponent: () => import('./update/tinh-trang-tai-san-update.component').then(m => m.TinhTrangTaiSanUpdateComponent),
     resolve: {
       tinhTrangTaiSan: TinhTrangTaiSanResolve,
     },

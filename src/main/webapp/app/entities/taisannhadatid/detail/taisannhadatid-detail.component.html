@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (taisannhadatid()) {
+    @if (taisannhadatid(); as taisannhadatidRef) {
       <div>
         <h2 data-cy="taisannhadatidDetailsHeading"><span jhiTranslate="gatewayApp.taisannhadatid.detail.title">Taisannhadatid</span></h2>
 
@@ -11,17 +11,13 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ taisannhadatid()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.taisannhadatid.idTaiSan">Id Tai San</span></dt>
           <dd>
-            <span>{{ taisannhadatid()!.idTaiSan }}</span>
+            <span>{{ taisannhadatidRef.idTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taisannhadatid.thongTinTs">Thong Tin Ts</span></dt>
           <dd>
-            <span>{{ taisannhadatid()!.thongTinTs }}</span>
+            <span>{{ taisannhadatidRef.thongTinTs }}</span>
           </dd>
         </dl>
 
@@ -29,7 +25,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/taisannhadatid', taisannhadatid()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/taisannhadatid', taisannhadatidRef.idTaiSan, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

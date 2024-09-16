@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITaisannhadatid } from '../taisannhadatid.model';
 import { TaisannhadatidService } from '../service/taisannhadatid.service';
-import { TaisannhadatidFormService, TaisannhadatidFormGroup } from './taisannhadatid-form.service';
+import { TaisannhadatidFormGroup, TaisannhadatidFormService } from './taisannhadatid-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class TaisannhadatidUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const taisannhadatid = this.taisannhadatidFormService.getTaisannhadatid(this.editForm);
-    if (taisannhadatid.id !== null) {
+    if (taisannhadatid.idTaiSan !== null) {
       this.subscribeToSaveResponse(this.taisannhadatidService.update(taisannhadatid));
     } else {
       this.subscribeToSaveResponse(this.taisannhadatidService.create(taisannhadatid));

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITaiSanDuongSu } from '../tai-san-duong-su.model';
 import { TaiSanDuongSuService } from '../service/tai-san-duong-su.service';
-import { TaiSanDuongSuFormService, TaiSanDuongSuFormGroup } from './tai-san-duong-su-form.service';
+import { TaiSanDuongSuFormGroup, TaiSanDuongSuFormService } from './tai-san-duong-su-form.service';
 
 @Component({
   standalone: true,

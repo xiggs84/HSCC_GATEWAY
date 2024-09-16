@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { ITaisanSaiQsddDgc } from '../taisan-sai-qsdd-dgc.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../taisan-sai-qsdd-dgc.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../taisan-sai-qsdd-dgc.test-samples';
 
 import { TaisanSaiQsddDgcService } from './taisan-sai-qsdd-dgc.service';
 

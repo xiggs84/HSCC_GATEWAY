@@ -8,17 +8,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idDuongSu.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.duongSu.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idDuongSu" jhiTranslate="gatewayApp.duongSu.idDuongSu">Id Duong Su</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idDuongSu"
+              id="field_idDuongSu"
+              data-cy="idDuongSu"
+              formControlName="idDuongSu"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idDuongSu" jhiTranslate="gatewayApp.duongSu.idDuongSu">Id Duong Su</label>
-          <input type="number" class="form-control" name="idDuongSu" id="field_idDuongSu" data-cy="idDuongSu" formControlName="idDuongSu" />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_tenDuongSu" jhiTranslate="gatewayApp.duongSu.tenDuongSu">Ten Duong Su</label>
@@ -33,8 +36,13 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idLoaiDs" jhiTranslate="gatewayApp.duongSu.idLoaiDs">Id Loai Ds</label>
-          <input type="number" class="form-control" name="idLoaiDs" id="field_idLoaiDs" data-cy="idLoaiDs" formControlName="idLoaiDs" />
+          <label class="form-label" for="field_loaiDuongSu" jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</label>
+          <select class="form-control" name="loaiDuongSu" formControlName="loaiDuongSu" id="field_loaiDuongSu" data-cy="loaiDuongSu">
+            <option [ngValue]="null">{{ 'gatewayApp.LoaiDuongSu.null' | translate }}</option>
+            @for (loaiDuongSu of loaiDuongSuValues; track $index) {
+              <option [value]="loaiDuongSu">{{ 'gatewayApp.LoaiDuongSu.' + loaiDuongSu | translate }}</option>
+            }
+          </select>
         </div>
 
         <div class="mb-3">
@@ -43,20 +51,67 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label" for="field_soDienThoai" jhiTranslate="gatewayApp.duongSu.soDienThoai">So Dien Thoai</label>
+          <input
+            type="text"
+            class="form-control"
+            name="soDienThoai"
+            id="field_soDienThoai"
+            data-cy="soDienThoai"
+            formControlName="soDienThoai"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="gatewayApp.duongSu.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fax" jhiTranslate="gatewayApp.duongSu.fax">Fax</label>
+          <input type="text" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_website" jhiTranslate="gatewayApp.duongSu.website">Website</label>
+          <input type="text" class="form-control" name="website" id="field_website" data-cy="website" formControlName="website" />
+        </div>
+
+        @let trangThaiRef = editForm.get('trangThai')!;
+        <div class="mb-3">
           <label class="form-label" for="field_trangThai" jhiTranslate="gatewayApp.duongSu.trangThai">Trang Thai</label>
           <input type="number" class="form-control" name="trangThai" id="field_trangThai" data-cy="trangThai" formControlName="trangThai" />
+          @if (trangThaiRef.invalid && (trangThaiRef.dirty || trangThaiRef.touched)) {
+            <div>
+              @if (editForm.get('trangThai')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >Trường này phải lớn hơn 0.</small
+                >
+              }
+              @if (editForm.get('trangThai')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >Trường này phải nhỏ hơn 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('trangThai')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Trường này phải là một số.</small
+              >
+            </div>
+          }
         </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_thongTinDs" jhiTranslate="gatewayApp.duongSu.thongTinDs">Thong Tin Ds</label>
-          <input
-            type="text"
+          <textarea
             class="form-control"
             name="thongTinDs"
             id="field_thongTinDs"
             data-cy="thongTinDs"
             formControlName="thongTinDs"
-          />
+          ></textarea>
         </div>
 
         <div class="mb-3">
@@ -96,18 +151,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idTinhTrang" jhiTranslate="gatewayApp.duongSu.idTinhTrang">Id Tinh Trang</label>
-          <input
-            type="number"
-            class="form-control"
-            name="idTinhTrang"
-            id="field_idTinhTrang"
-            data-cy="idTinhTrang"
-            formControlName="idTinhTrang"
-          />
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_idMaster" jhiTranslate="gatewayApp.duongSu.idMaster">Id Master</label>
           <input type="text" class="form-control" name="idMaster" id="field_idMaster" data-cy="idMaster" formControlName="idMaster" />
         </div>
@@ -123,8 +166,23 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label" for="field_loaiGiayTo" jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</label>
+          <select class="form-control" name="loaiGiayTo" formControlName="loaiGiayTo" id="field_loaiGiayTo" data-cy="loaiGiayTo">
+            <option [ngValue]="null">{{ 'gatewayApp.LoaiGiayTo.null' | translate }}</option>
+            @for (loaiGiayTo of loaiGiayToValues; track $index) {
+              <option [value]="loaiGiayTo">{{ 'gatewayApp.LoaiGiayTo.' + loaiGiayTo | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
           <label class="form-label" for="field_soGiayTo" jhiTranslate="gatewayApp.duongSu.soGiayTo">So Giay To</label>
           <input type="text" class="form-control" name="soGiayTo" id="field_soGiayTo" data-cy="soGiayTo" formControlName="soGiayTo" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ghiChu" jhiTranslate="gatewayApp.duongSu.ghiChu">Ghi Chu</label>
+          <input type="text" class="form-control" name="ghiChu" id="field_ghiChu" data-cy="ghiChu" formControlName="ghiChu" />
         </div>
 
         <div class="mb-3">
@@ -139,6 +197,7 @@
           />
         </div>
 
+        @let syncStatusRef = editForm.get('syncStatus')!;
         <div class="mb-3">
           <label class="form-label" for="field_syncStatus" jhiTranslate="gatewayApp.duongSu.syncStatus">Sync Status</label>
           <input
@@ -149,6 +208,26 @@
             data-cy="syncStatus"
             formControlName="syncStatus"
           />
+          @if (syncStatusRef.invalid && (syncStatusRef.dirty || syncStatusRef.touched)) {
+            <div>
+              @if (editForm.get('syncStatus')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >Trường này phải lớn hơn 0.</small
+                >
+              }
+              @if (editForm.get('syncStatus')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >Trường này phải nhỏ hơn 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('syncStatus')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Trường này phải là một số.</small
+              >
+            </div>
+          }
         </div>
       </div>
 

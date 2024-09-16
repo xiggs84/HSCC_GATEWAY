@@ -1,0 +1,163 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="1000px">
+  <div *nzModalContent>
+    <nz-spin *ngIf="isLoading" nzTip="Đang tải..." [nzSpinning]="isLoading"></nz-spin>
+    <div *ngIf="!isLoading">
+    <form nz-form [nzLayout]="'horizontal'">
+      <nz-row [nzGutter]="16">
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'ten-don-vi'" nzSpan="8">Tên đơn vị</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <input id="ten-don-vi" nz-input [(ngModel)]="newItem.tenDonVi" name="tenDonVi" placeholder="Nhập tên đơn vị" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'loai-don-vi'" nzSpan="8">Loại đơn vị</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select id="loai-don-vi" nzPlaceHolder="Chọn loại đơn vị" [(ngModel)]="newItem.loaiDonVi" name="loaiDonVi">
+                <nz-option *ngFor="let option of loaiDonViOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'nhiem-vu'" nzSpan="8">Nhiệm vụ</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select id="nhiem-vu" nzPlaceHolder="Chọn nhiệm vụ" [(ngModel)]="newItem.loaiNhiemVu" name="nhiemVu">
+                <nz-option *ngFor="let option of nhiemVuOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'ma-so-thue'" nzSpan="8">Mã số thuế</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <input id="ma-so-thue" nz-input [(ngModel)]="newItem.maSoThue" name="maSoThue" placeholder="Nhập mã số thuế" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'so-dien-thoai'" nzSpan="8">Số điện thoại</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <input id="so-dien-thoai" nz-input [(ngModel)]="newItem.soDienThoai" name="soDienThoai" placeholder="Nhập số điện thoại" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'cap-quan-ly'" nzSpan="8">Cấp quản lý</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select id="cap-quan-ly" nzPlaceHolder="Chọn cấp quản lý" [(ngModel)]="newItem.capQuanLy" name="capQuanLy">
+                <nz-option *ngFor="let option of capQuanLyOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'nguoi-dai-dien'" nzSpan="8">Người đại diện</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <input id="nguoi-dai-dien" nz-input [(ngModel)]="newItem.nguoiDaiDien" name="nguoiDaiDien" placeholder="Nhập người đại diện" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'don-vi-quan-ly'" nzSpan="8">Đơn vị quản lý</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select id="don-vi-quan-ly" nzPlaceHolder="Chọn đơn vị quản lý" [(ngModel)]="newItem.idDonViQl" name="donViQuanLy">
+                <nz-option nzLabel="Đơn vị A" nzValue="donViA"></nz-option>
+                <nz-option nzLabel="Đơn vị B" nzValue="donViB"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'tinh-thanh-pho'" nzSpan="8">Tỉnh/Thành phố</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select
+                id="tinh-thanh-pho"
+                nzPlaceHolder="Chọn tỉnh/thành phố"
+                [(ngModel)]="selectedtinhId"
+                (ngModelChange)="ontinhChange($event)"
+                name="tinhThanhPho"
+                nzShowSearch
+                [nzFilterOption]="filterOption"
+              >
+                <nz-option *ngFor="let tinh of tinhs" [nzLabel]="tinh.tenTinh!" [nzValue]="tinh.maTinh"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'quan-huyen'" nzSpan="8">Quận/Huyện</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select
+                id="quan-huyen"
+                nzPlaceHolder="Chọn quận/huyện"
+                [(ngModel)]="selectedhuyenId"
+                (ngModelChange)="onhuyenChange($event)"
+                nzShowSearch
+                [nzFilterOption]="filterOption"
+                name="quanHuyen"
+              >
+                <nz-option *ngFor="let huyen of huyens" [nzLabel]="huyen.tenHuyen!" [nzValue]="huyen.maHuyen"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'xa-phuong'" nzSpan="8">Xã/Phường/Thị trấn</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select
+                id="xa-phuong"
+                nzPlaceHolder="Chọn xã/phường/thị trấn"
+                [(ngModel)]="selectedxaId"
+                name="xaPhuong"
+              >
+                <nz-option *ngFor="let xa of xas" [nzLabel]="xa.tenXa!" [nzValue]="xa.maXa"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'hoa-don-dien-tu'" nzSpan="8">Sử dụng hóa đơn điện tử</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-switch [(ngModel)]="newItem.hoaDonDt" [ngModelOptions]="{standalone: true}" name="hoaDonDt"></nz-switch>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label class="custom-label" [nzFor]="'so-nha'" nzSpan="8">Số nhà</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <input id="so-nha" nz-input [(ngModel)]="newItem.soNha" name="soNha" placeholder="Nhập số nhà" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+      </nz-row>
+    </form>
+    </div>
+  </div>
+</nz-modal>

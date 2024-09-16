@@ -17,7 +17,7 @@ describe('TaisanSaiQsddDgc Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TaisanSaiQsddDgcDetailComponent,
+              loadComponent: () => import('./taisan-sai-qsdd-dgc-detail.component').then(m => m.TaisanSaiQsddDgcDetailComponent),
               resolve: { taisanSaiQsddDgc: () => of({ id: 123 }) },
             },
           ],

@@ -1,7 +1,6 @@
 export interface ITaisannhadatid {
-  id: number;
-  idTaiSan?: number | null;
+  idTaiSan: number;
   thongTinTs?: string | null;
 }
 
-export type NewTaisannhadatid = Omit<ITaisannhadatid, 'id'> & { id: null };
+export type NewTaisannhadatid = Omit<ITaisannhadatid, 'idTaiSan'> & { idTaiSan: null };

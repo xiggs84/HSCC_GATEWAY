@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idTaiSan">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmTaiSan.idTaiSan">Id Tai San</span>
@@ -66,13 +59,6 @@
             <th scope="col" jhiSortBy="thongTinTs">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmTaiSan.thongTinTs">Thong Tin Ts</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiTs">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.dmTaiSan.idLoaiTs">Id Loai Ts</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -115,13 +101,6 @@
             <th scope="col" jhiSortBy="maTaiSan">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmTaiSan.maTaiSan">Ma Tai San</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idTinhTrang">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.dmTaiSan.idTinhTrang">Id Tinh Trang</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -207,23 +186,20 @@
           </tr>
         </thead>
         <tbody>
-          @for (dmTaiSan of dmTaiSans; track trackId) {
+          @for (dmTaiSan of dmTaiSans; track trackIdTaiSan) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/dm-tai-san', dmTaiSan.id, 'view']">{{ dmTaiSan.id }}</a>
+                <a [routerLink]="['/dm-tai-san', dmTaiSan.idTaiSan, 'view']">{{ dmTaiSan.idTaiSan }}</a>
               </td>
-              <td>{{ dmTaiSan.idTaiSan }}</td>
               <td>{{ dmTaiSan.tenTaiSan }}</td>
               <td>{{ dmTaiSan.trangThai }}</td>
               <td>{{ dmTaiSan.thongTinTs }}</td>
-              <td>{{ dmTaiSan.idLoaiTs }}</td>
               <td>{{ dmTaiSan.ghiChu }}</td>
               <td>{{ dmTaiSan.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ dmTaiSan.nguoiThaoTac }}</td>
               <td>{{ dmTaiSan.idDuongSu }}</td>
               <td>{{ dmTaiSan.idTsGoc }}</td>
               <td>{{ dmTaiSan.maTaiSan }}</td>
-              <td>{{ dmTaiSan.idTinhTrang }}</td>
               <td>{{ dmTaiSan.idLoaiNganChan }}</td>
               <td>{{ dmTaiSan.ngayBdNganChan | formatMediumDate }}</td>
               <td>{{ dmTaiSan.ngayKtNganChan | formatMediumDate }}</td>
@@ -237,12 +213,12 @@
               <td>{{ dmTaiSan.loaiNganChan }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/dm-tai-san', dmTaiSan.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a [routerLink]="['/dm-tai-san', dmTaiSan.idTaiSan, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/dm-tai-san', dmTaiSan.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a [routerLink]="['/dm-tai-san', dmTaiSan.idTaiSan, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

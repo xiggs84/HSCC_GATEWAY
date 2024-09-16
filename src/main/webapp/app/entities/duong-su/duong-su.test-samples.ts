@@ -3,42 +3,50 @@ import dayjs from 'dayjs/esm';
 import { IDuongSu, NewDuongSu } from './duong-su.model';
 
 export const sampleWithRequiredData: IDuongSu = {
-  id: 21175,
+  idDuongSu: 27729,
 };
 
 export const sampleWithPartialData: IDuongSu = {
-  id: 16516,
-  idDuongSu: 532,
-  tenDuongSu: 'voice yippee',
-  diaChi: 'rowdy anenst supposing',
-  trangThai: 7594,
-  nguoiThaoTac: 16692,
-  idTinhTrang: 31710,
-  syncStatus: 15907,
+  idDuongSu: 17260,
+  tenDuongSu: 'whenever now rubric',
+  diaChi: 'victorious if',
+  soDienThoai: 'juxtapose school',
+  trangThai: 0,
+  thongTinDs: '../fake-data/blob/hipster.txt',
+  ngayThaoTac: dayjs('2024-08-19'),
+  idDsGoc: 22976,
+  idMaster: 'meh',
+  idDonVi: 3045,
+  soGiayTo: 'plain given',
+  syncStatus: 0,
 };
 
 export const sampleWithFullData: IDuongSu = {
-  id: 12837,
-  idDuongSu: 12642,
-  tenDuongSu: 'rapidly',
-  idLoaiDs: 21383,
-  diaChi: 'drum excluding delirious',
-  trangThai: 8078,
-  thongTinDs: 'especially',
+  idDuongSu: 516,
+  tenDuongSu: 'thrifty',
+  loaiDuongSu: 'ToChucTinDung',
+  diaChi: 'rediscovery',
+  soDienThoai: 'strictly',
+  email: 'BaThien.Nguyen@yahoo.com',
+  fax: 'explode lest powerfully',
+  website: 'competent',
+  trangThai: 1,
+  thongTinDs: '../fake-data/blob/hipster.txt',
   ngayThaoTac: dayjs('2024-08-19'),
-  nguoiThaoTac: 5411,
-  idDsGoc: 28975,
-  idTinhTrang: 19413,
-  idMaster: 'diligently vice before',
-  idDonVi: 10690,
-  strSearch: 'lest suspiciously',
-  soGiayTo: 'beyond mixed',
-  idLoaiNganChan: 25497,
-  syncStatus: 8876,
+  nguoiThaoTac: 10747,
+  idDsGoc: 23286,
+  idMaster: 'when',
+  idDonVi: 7172,
+  strSearch: 'revere',
+  loaiGiayTo: 'Cccd',
+  soGiayTo: 'coconut',
+  ghiChu: 'gosh',
+  idLoaiNganChan: 1718,
+  syncStatus: 1,
 };
 
 export const sampleWithNewData: NewDuongSu = {
-  id: null,
+  idDuongSu: null,
 };
 
 Object.freeze(sampleWithNewData);

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
 import { ThuaTachService } from '../service/thua-tach.service';
 import { IThuaTach } from '../thua-tach.model';
@@ -44,7 +44,7 @@ describe('ThuaTach Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const thuaTach: IThuaTach = { id: 456 };
+      const thuaTach: IThuaTach = { idThuaTach: 456 };
 
       activatedRoute.data = of({ thuaTach });
       comp.ngOnInit();
@@ -57,7 +57,7 @@ describe('ThuaTach Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IThuaTach>>();
-      const thuaTach = { id: 123 };
+      const thuaTach = { idThuaTach: 123 };
       jest.spyOn(thuaTachFormService, 'getThuaTach').mockReturnValue(thuaTach);
       jest.spyOn(thuaTachService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -80,8 +80,8 @@ describe('ThuaTach Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IThuaTach>>();
-      const thuaTach = { id: 123 };
-      jest.spyOn(thuaTachFormService, 'getThuaTach').mockReturnValue({ id: null });
+      const thuaTach = { idThuaTach: 123 };
+      jest.spyOn(thuaTachFormService, 'getThuaTach').mockReturnValue({ idThuaTach: null });
       jest.spyOn(thuaTachService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ thuaTach: null });
@@ -103,7 +103,7 @@ describe('ThuaTach Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IThuaTach>>();
-      const thuaTach = { id: 123 };
+      const thuaTach = { idThuaTach: 123 };
       jest.spyOn(thuaTachService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ thuaTach });

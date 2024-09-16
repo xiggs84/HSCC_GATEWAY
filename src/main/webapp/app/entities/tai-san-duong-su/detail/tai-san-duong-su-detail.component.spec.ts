@@ -17,7 +17,7 @@ describe('TaiSanDuongSu Management Detail Component', () => {
           [
             {
               path: '**',
-              component: TaiSanDuongSuDetailComponent,
+              loadComponent: () => import('./tai-san-duong-su-detail.component').then(m => m.TaiSanDuongSuDetailComponent),
               resolve: { taiSanDuongSu: () => of({ id: 123 }) },
             },
           ],

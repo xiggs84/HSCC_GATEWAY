@@ -17,8 +17,8 @@ describe('DmTaiSan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DmTaiSanDetailComponent,
-              resolve: { dmTaiSan: () => of({ id: 123 }) },
+              loadComponent: () => import('./dm-tai-san-detail.component').then(m => m.DmTaiSanDetailComponent),
+              resolve: { dmTaiSan: () => of({ idTaiSan: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DmTaiSan Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DmTaiSanDetailComponent);
 
       // THEN
-      expect(instance.dmTaiSan()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.dmTaiSan()).toEqual(expect.objectContaining({ idTaiSan: 123 }));
     });
   });
 

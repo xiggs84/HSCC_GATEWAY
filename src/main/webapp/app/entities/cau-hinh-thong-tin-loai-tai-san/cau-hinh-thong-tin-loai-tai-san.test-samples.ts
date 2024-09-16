@@ -1,29 +1,29 @@
 import { ICauHinhThongTinLoaiTaiSan, NewCauHinhThongTinLoaiTaiSan } from './cau-hinh-thong-tin-loai-tai-san.model';
 
 export const sampleWithRequiredData: ICauHinhThongTinLoaiTaiSan = {
-  id: 6386,
+  id: 16391,
 };
 
 export const sampleWithPartialData: ICauHinhThongTinLoaiTaiSan = {
-  id: 28712,
-  noiDung: 'even mmm since',
-  javascript: 'before ack meh',
-  css: 'supposing',
-  idLoaiTs: 9146,
-  trangThai: 15435,
-  xml: 'grace macrame',
+  id: 28624,
+  javascript: 'now hornet fully',
+  css: 'but',
+  idLoaiTs: 20603,
+  idDonVi: 1278,
+  trangThai: 32405,
+  xml: 'that group',
 };
 
 export const sampleWithFullData: ICauHinhThongTinLoaiTaiSan = {
-  id: 16059,
-  idCauHinh: 23701,
-  noiDung: 'swank',
-  javascript: 'impel',
-  css: 'incommode',
-  idLoaiTs: 19027,
-  idDonVi: 16758,
-  trangThai: 5972,
-  xml: 'hut duh',
+  id: 22533,
+  idCauHinh: 1714,
+  noiDung: 'around boo solemnly',
+  javascript: 'degrease because dental',
+  css: 'dimly',
+  idLoaiTs: 454,
+  idDonVi: 26938,
+  trangThai: 1162,
+  xml: 'constant clear string',
 };
 
 export const sampleWithNewData: NewCauHinhThongTinLoaiTaiSan = {

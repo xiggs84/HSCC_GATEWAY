@@ -137,11 +137,6 @@ const routes: Routes = [
     loadChildren: () => import('./tinh-trang-duong-su/tinh-trang-duong-su.routes'),
   },
   {
-    path: 'duong-su',
-    data: { pageTitle: 'gatewayApp.duongSu.home.title' },
-    loadChildren: () => import('./duong-su/duong-su.routes'),
-  },
-  {
     path: 'cau-hinh-thong-tin-duong-su',
     data: { pageTitle: 'gatewayApp.cauHinhThongTinDuongSu.home.title' },
     loadChildren: () => import('./cau-hinh-thong-tin-duong-su/cau-hinh-thong-tin-duong-su.routes'),
@@ -327,11 +322,6 @@ const routes: Routes = [
     loadChildren: () => import('./cau-hinh-thong-tin-loai-tai-san/cau-hinh-thong-tin-loai-tai-san.routes'),
   },
   {
-    path: 'danh-muc-loai-tai-san',
-    data: { pageTitle: 'gatewayApp.danhMucLoaiTaiSan.home.title' },
-    loadChildren: () => import('./danh-muc-loai-tai-san/danh-muc-loai-tai-san.routes'),
-  },
-  {
     path: 'tai-san',
     data: { pageTitle: 'gatewayApp.taiSan.home.title' },
     loadChildren: () => import('./tai-san/tai-san.routes'),
@@ -370,6 +360,11 @@ const routes: Routes = [
     path: 'danh-muc-tu-viet-tat',
     data: { pageTitle: 'gatewayApp.danhMucTuVietTat.home.title' },
     loadChildren: () => import('./danh-muc-tu-viet-tat/danh-muc-tu-viet-tat.routes'),
+  },
+  {
+    path: 'duong-su',
+    data: { pageTitle: 'gatewayApp.duongSu.home.title' },
+    loadChildren: () => import('./duong-su/duong-su.routes'),
   },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];

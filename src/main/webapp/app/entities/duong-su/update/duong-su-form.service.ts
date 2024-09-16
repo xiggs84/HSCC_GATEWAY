@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDuongSu, NewDuongSu } from '../duong-su.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idDuongSu: unknown }> = Partial<Omit<T, 'idDuongSu'>> & { idDuongSu: T['idDuongSu'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,24 +14,28 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DuongSuFormGroupInput = IDuongSu | PartialWithRequiredKeyOf<NewDuongSu>;
 
-type DuongSuFormDefaults = Pick<NewDuongSu, 'id'>;
+type DuongSuFormDefaults = Pick<NewDuongSu, 'idDuongSu'>;
 
 type DuongSuFormGroupContent = {
-  id: FormControl<IDuongSu['id'] | NewDuongSu['id']>;
-  idDuongSu: FormControl<IDuongSu['idDuongSu']>;
+  idDuongSu: FormControl<IDuongSu['idDuongSu'] | NewDuongSu['idDuongSu']>;
   tenDuongSu: FormControl<IDuongSu['tenDuongSu']>;
-  idLoaiDs: FormControl<IDuongSu['idLoaiDs']>;
+  loaiDuongSu: FormControl<IDuongSu['loaiDuongSu']>;
   diaChi: FormControl<IDuongSu['diaChi']>;
+  soDienThoai: FormControl<IDuongSu['soDienThoai']>;
+  email: FormControl<IDuongSu['email']>;
+  fax: FormControl<IDuongSu['fax']>;
+  website: FormControl<IDuongSu['website']>;
   trangThai: FormControl<IDuongSu['trangThai']>;
   thongTinDs: FormControl<IDuongSu['thongTinDs']>;
   ngayThaoTac: FormControl<IDuongSu['ngayThaoTac']>;
   nguoiThaoTac: FormControl<IDuongSu['nguoiThaoTac']>;
   idDsGoc: FormControl<IDuongSu['idDsGoc']>;
-  idTinhTrang: FormControl<IDuongSu['idTinhTrang']>;
   idMaster: FormControl<IDuongSu['idMaster']>;
   idDonVi: FormControl<IDuongSu['idDonVi']>;
   strSearch: FormControl<IDuongSu['strSearch']>;
+  loaiGiayTo: FormControl<IDuongSu['loaiGiayTo']>;
   soGiayTo: FormControl<IDuongSu['soGiayTo']>;
+  ghiChu: FormControl<IDuongSu['ghiChu']>;
   idLoaiNganChan: FormControl<IDuongSu['idLoaiNganChan']>;
   syncStatus: FormControl<IDuongSu['syncStatus']>;
 };
@@ -40,35 +44,43 @@ export type DuongSuFormGroup = FormGroup<DuongSuFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DuongSuFormService {
-  createDuongSuFormGroup(duongSu: DuongSuFormGroupInput = { id: null }): DuongSuFormGroup {
+  createDuongSuFormGroup(duongSu: DuongSuFormGroupInput = { idDuongSu: null }): DuongSuFormGroup {
     const duongSuRawValue = {
       ...this.getFormDefaults(),
       ...duongSu,
     };
     return new FormGroup<DuongSuFormGroupContent>({
-      id: new FormControl(
-        { value: duongSuRawValue.id, disabled: true },
+      idDuongSu: new FormControl(
+        { value: duongSuRawValue.idDuongSu, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idDuongSu: new FormControl(duongSuRawValue.idDuongSu),
       tenDuongSu: new FormControl(duongSuRawValue.tenDuongSu),
-      idLoaiDs: new FormControl(duongSuRawValue.idLoaiDs),
+      loaiDuongSu: new FormControl(duongSuRawValue.loaiDuongSu),
       diaChi: new FormControl(duongSuRawValue.diaChi),
-      trangThai: new FormControl(duongSuRawValue.trangThai),
+      soDienThoai: new FormControl(duongSuRawValue.soDienThoai),
+      email: new FormControl(duongSuRawValue.email),
+      fax: new FormControl(duongSuRawValue.fax),
+      website: new FormControl(duongSuRawValue.website),
+      trangThai: new FormControl(duongSuRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
       thongTinDs: new FormControl(duongSuRawValue.thongTinDs),
       ngayThaoTac: new FormControl(duongSuRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(duongSuRawValue.nguoiThaoTac),
       idDsGoc: new FormControl(duongSuRawValue.idDsGoc),
-      idTinhTrang: new FormControl(duongSuRawValue.idTinhTrang),
       idMaster: new FormControl(duongSuRawValue.idMaster),
       idDonVi: new FormControl(duongSuRawValue.idDonVi),
       strSearch: new FormControl(duongSuRawValue.strSearch),
+      loaiGiayTo: new FormControl(duongSuRawValue.loaiGiayTo),
       soGiayTo: new FormControl(duongSuRawValue.soGiayTo),
+      ghiChu: new FormControl(duongSuRawValue.ghiChu),
       idLoaiNganChan: new FormControl(duongSuRawValue.idLoaiNganChan),
-      syncStatus: new FormControl(duongSuRawValue.syncStatus),
+      syncStatus: new FormControl(duongSuRawValue.syncStatus, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
     });
   }
 
@@ -81,14 +93,14 @@ export class DuongSuFormService {
     form.reset(
       {
         ...duongSuRawValue,
-        id: { value: duongSuRawValue.id, disabled: true },
+        idDuongSu: { value: duongSuRawValue.idDuongSu, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DuongSuFormDefaults {
     return {
-      id: null,
+      idDuongSu: null,
     };
   }
 }

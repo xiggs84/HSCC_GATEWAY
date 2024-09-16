@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../taisannhadatid.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../taisannhadatid.test-samples';
 
 import { TaisannhadatidFormService } from './taisannhadatid-form.service';
 
@@ -19,7 +19,6 @@ describe('Taisannhadatid Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTaiSan: expect.any(Object),
             thongTinTs: expect.any(Object),
           }),
@@ -31,7 +30,6 @@ describe('Taisannhadatid Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idTaiSan: expect.any(Object),
             thongTinTs: expect.any(Object),
           }),
@@ -66,22 +64,22 @@ describe('Taisannhadatid Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing ITaisannhadatid should not enable id FormControl', () => {
+      it('passing ITaisannhadatid should not enable idTaiSan FormControl', () => {
         const formGroup = service.createTaisannhadatidFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
       });
 
-      it('passing NewTaisannhadatid should disable id FormControl', () => {
+      it('passing NewTaisannhadatid should disable idTaiSan FormControl', () => {
         const formGroup = service.createTaisannhadatidFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idTaiSan: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idTaiSan.disabled).toBe(true);
       });
     });
   });

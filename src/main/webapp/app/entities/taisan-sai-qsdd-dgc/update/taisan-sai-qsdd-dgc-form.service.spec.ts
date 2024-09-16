@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../taisan-sai-qsdd-dgc.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../taisan-sai-qsdd-dgc.test-samples';
 
 import { TaisanSaiQsddDgcFormService } from './taisan-sai-qsdd-dgc-form.service';
 
