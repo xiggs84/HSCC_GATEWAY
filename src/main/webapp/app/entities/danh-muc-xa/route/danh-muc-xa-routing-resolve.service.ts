@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { IDanhMucXa } from '../danh-muc-xa.model';
 import { DanhMucXaService } from '../service/danh-muc-xa.service';
 
 const danhMucXaResolve = (route: ActivatedRouteSnapshot): Observable<null | IDanhMucXa> => {
-  const id = route.params['id'];
+  const id = route.params.maXa;
   if (id) {
     return inject(DanhMucXaService)
       .find(id)
@@ -16,10 +16,9 @@ const danhMucXaResolve = (route: ActivatedRouteSnapshot): Observable<null | IDan
         mergeMap((danhMucXa: HttpResponse<IDanhMucXa>) => {
           if (danhMucXa.body) {
             return of(danhMucXa.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../danh-muc-huyen.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../danh-muc-huyen.test-samples';
 
 import { DanhMucHuyenFormService } from './danh-muc-huyen-form.service';
 
@@ -19,11 +19,9 @@ describe('DanhMucHuyen Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             maHuyen: expect.any(Object),
             tenHuyen: expect.any(Object),
             maTinh: expect.any(Object),
-            trangThai: expect.any(Object),
           }),
         );
       });
@@ -33,11 +31,9 @@ describe('DanhMucHuyen Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             maHuyen: expect.any(Object),
             tenHuyen: expect.any(Object),
             maTinh: expect.any(Object),
-            trangThai: expect.any(Object),
           }),
         );
       });
@@ -66,26 +62,6 @@ describe('DanhMucHuyen Form Service', () => {
         const danhMucHuyen = service.getDanhMucHuyen(formGroup) as any;
 
         expect(danhMucHuyen).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IDanhMucHuyen should not enable id FormControl', () => {
-        const formGroup = service.createDanhMucHuyenFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewDanhMucHuyen should disable id FormControl', () => {
-        const formGroup = service.createDanhMucHuyenFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

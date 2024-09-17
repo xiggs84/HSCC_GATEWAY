@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { DanhMucXaComponent } from './list/danh-muc-xa.component';
-import { DanhMucXaDetailComponent } from './detail/danh-muc-xa-detail.component';
-import { DanhMucXaUpdateComponent } from './update/danh-muc-xa-update.component';
 import DanhMucXaResolve from './route/danh-muc-xa-routing-resolve.service';
 
 const danhMucXaRoute: Routes = [
   {
     path: '',
-    component: DanhMucXaComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/danh-muc-xa.component').then(m => m.DanhMucXaComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DanhMucXaDetailComponent,
+    path: ':maXa/view',
+    loadComponent: () => import('./detail/danh-muc-xa-detail.component').then(m => m.DanhMucXaDetailComponent),
     resolve: {
       danhMucXa: DanhMucXaResolve,
     },
@@ -26,15 +20,15 @@ const danhMucXaRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhMucXaUpdateComponent,
+    loadComponent: () => import('./update/danh-muc-xa-update.component').then(m => m.DanhMucXaUpdateComponent),
     resolve: {
       danhMucXa: DanhMucXaResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DanhMucXaUpdateComponent,
+    path: ':maXa/edit',
+    loadComponent: () => import('./update/danh-muc-xa-update.component').then(m => m.DanhMucXaUpdateComponent),
     resolve: {
       danhMucXa: DanhMucXaResolve,
     },

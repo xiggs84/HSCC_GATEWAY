@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="maHuyen">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucHuyen.maHuyen">Ma Huyen</span>
@@ -63,34 +56,33 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="trangThai">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucHuyen.trangThai">Trang Thai</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (danhMucHuyen of danhMucHuyens; track trackId) {
+          @for (danhMucHuyen of danhMucHuyens; track trackMaHuyen) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-huyen', danhMucHuyen.id, 'view']">{{ danhMucHuyen.id }}</a>
+                <a [routerLink]="['/danh-muc-huyen', danhMucHuyen.maHuyen, 'view']">{{ danhMucHuyen.maHuyen }}</a>
               </td>
-              <td>{{ danhMucHuyen.maHuyen }}</td>
               <td>{{ danhMucHuyen.tenHuyen }}</td>
               <td>{{ danhMucHuyen.maTinh }}</td>
-              <td>{{ danhMucHuyen.trangThai }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/danh-muc-huyen', danhMucHuyen.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/danh-muc-huyen', danhMucHuyen.maHuyen, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/danh-muc-huyen', danhMucHuyen.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/danh-muc-huyen', danhMucHuyen.maHuyen, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

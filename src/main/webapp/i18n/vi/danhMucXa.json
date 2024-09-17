@@ -17,11 +17,9 @@
       "detail": {
         "title": "Danh Muc Xa"
       },
-      "id": "ID",
       "maXa": "Ma Xa",
       "tenXa": "Ten Xa",
-      "maHuyen": "Ma Huyen",
-      "trangThai": "Trang Thai"
+      "maHuyen": "Ma Huyen"
     }
   }
 }

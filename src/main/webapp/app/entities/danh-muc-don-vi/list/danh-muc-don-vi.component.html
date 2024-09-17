@@ -105,20 +105,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="capQuanLy">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.capQuanLy">Cap Quan Ly</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="loaiNhiemVu">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.loaiNhiemVu">Loai Nhiem Vu</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="hoaDonDt">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucDonVi.hoaDonDt">Hoa Don Dt</span>
@@ -136,13 +122,6 @@
             <th scope="col" jhiSortBy="maCoQuanIgate">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucDonVi.maCoQuanIgate">Ma Co Quan Igate</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="loaiDonVi">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -217,6 +196,45 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="idNhiemVu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.idNhiemVu">Id Nhiem Vu</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idLoaiDv">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.idLoaiDv">Id Loai Dv</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="idCapQl">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.idCapQl">Id Cap Ql</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="capQuanLy.idCapQl">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.capQuanLy">Cap Quan Ly</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="loaiDonVi.idLoaiDv">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.loaiDonVi">Loai Don Vi</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nhiemVu.idNhiemVu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucDonVi.nhiemVu">Nhiem Vu</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -235,26 +253,9 @@
               <td>{{ danhMucDonVi.trangThai }}</td>
               <td>{{ danhMucDonVi.soNha }}</td>
               <td>{{ danhMucDonVi.maSoThue }}</td>
-              <td [jhiTranslate]="'gatewayApp.CapQuanLy.' + (danhMucDonVi.capQuanLy ?? 'null')">
-                {{
-                  { null: '', DON_VI_TRUC_THUOC: 'Đơn vị trực thuộc', CAP_SO: 'Cấp sở', CAP_PHONG: 'Cấp phòng', VNPT: 'VNPT' }[
-                    danhMucDonVi.capQuanLy ?? 'null'
-                  ]
-                }}
-              </td>
-              <td [jhiTranslate]="'gatewayApp.NhiemVu.' + (danhMucDonVi.loaiNhiemVu ?? 'null')">
-                {{
-                  { null: '', CONG_CHUNG: 'Công chứng', CHUNG_THUC: 'Chứng thực', CONG_CHUNG_CHUNG_THUC: 'Cả hai' }[
-                    danhMucDonVi.loaiNhiemVu ?? 'null'
-                  ]
-                }}
-              </td>
               <td>{{ danhMucDonVi.hoaDonDt }}</td>
               <td>{{ danhMucDonVi.maDonViIgate }}</td>
               <td>{{ danhMucDonVi.maCoQuanIgate }}</td>
-              <td [jhiTranslate]="'gatewayApp.LoaiDonVi.' + (danhMucDonVi.loaiDonVi ?? 'null')">
-                {{ { null: '', SO_TU_PHAP: 'Trực thuộc sở Tư Pháp', TU_NHAN: 'Tư nhân' }[danhMucDonVi.loaiDonVi ?? 'null'] }}
-              </td>
               <td>{{ danhMucDonVi.kySo }}</td>
               <td>{{ danhMucDonVi.qrScan }}</td>
               <td>{{ danhMucDonVi.verifyIdCard }}</td>
@@ -265,6 +266,30 @@
               <td>{{ danhMucDonVi.verifyCodeCccd }}</td>
               <td>{{ danhMucDonVi.usernameElastic }}</td>
               <td>{{ danhMucDonVi.passwordElastic }}</td>
+              <td>{{ danhMucDonVi.idNhiemVu }}</td>
+              <td>{{ danhMucDonVi.idLoaiDv }}</td>
+              <td>{{ danhMucDonVi.idCapQl }}</td>
+              <td>
+                @if (danhMucDonVi.capQuanLy) {
+                  <div>
+                    <a [routerLink]="['/cap-quan-ly', danhMucDonVi.capQuanLy.idCapQl, 'view']">{{ danhMucDonVi.capQuanLy.idCapQl }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (danhMucDonVi.loaiDonVi) {
+                  <div>
+                    <a [routerLink]="['/loai-don-vi', danhMucDonVi.loaiDonVi.idLoaiDv, 'view']">{{ danhMucDonVi.loaiDonVi.idLoaiDv }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (danhMucDonVi.nhiemVu) {
+                  <div>
+                    <a [routerLink]="['/nhiem-vu', danhMucDonVi.nhiemVu.idNhiemVu, 'view']">{{ danhMucDonVi.nhiemVu.idNhiemVu }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a

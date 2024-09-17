@@ -1,26 +1,22 @@
 import { IDanhMucXa, NewDanhMucXa } from './danh-muc-xa.model';
 
 export const sampleWithRequiredData: IDanhMucXa = {
-  id: 11607,
+  maXa: '2ddce082-628c-41e1-ab55-1863ee25ee32',
 };
 
 export const sampleWithPartialData: IDanhMucXa = {
-  id: 28893,
-  tenXa: 'field knowledgeably',
-  maHuyen: 16235,
-  trangThai: 22337,
+  maXa: 'e5a7e285-302a-4838-8374-fa230eeaf24f',
+  tenXa: 'exactly woot enthusiastically',
 };
 
 export const sampleWithFullData: IDanhMucXa = {
-  id: 12782,
-  maXa: 28519,
-  tenXa: 'concerning',
-  maHuyen: 5005,
-  trangThai: 29719,
+  maXa: 'ca4117d5-fbe4-41c3-b60e-91d44c881fce',
+  tenXa: 'cleverly lovable whereas',
+  maHuyen: 'a amid dim',
 };
 
 export const sampleWithNewData: NewDanhMucXa = {
-  id: null,
+  maXa: null,
 };
 
 Object.freeze(sampleWithNewData);

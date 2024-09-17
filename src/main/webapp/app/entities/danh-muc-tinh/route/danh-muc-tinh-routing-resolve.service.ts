@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { IDanhMucTinh } from '../danh-muc-tinh.model';
 import { DanhMucTinhService } from '../service/danh-muc-tinh.service';
 
 const danhMucTinhResolve = (route: ActivatedRouteSnapshot): Observable<null | IDanhMucTinh> => {
-  const id = route.params['id'];
+  const id = route.params.maTinh;
   if (id) {
     return inject(DanhMucTinhService)
       .find(id)
@@ -16,10 +16,9 @@ const danhMucTinhResolve = (route: ActivatedRouteSnapshot): Observable<null | ID
         mergeMap((danhMucTinh: HttpResponse<IDanhMucTinh>) => {
           if (danhMucTinh.body) {
             return of(danhMucTinh.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

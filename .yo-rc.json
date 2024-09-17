@@ -4,6 +4,7 @@
     "authenticationType": "jwt",
     "baseName": "gateway",
     "buildTool": "gradle",
+    "creationTimestamp": 1726564534632,
     "devDatabaseType": "h2Disk",
     "devServerPort": 4200,
     "entities": [
@@ -79,12 +80,15 @@
       "TinhTrangTaiSan",
       "VanBan",
       "DanhMucLoaiVanBan",
-      "DanhMucTuVietTat"
+      "DanhMucTuVietTat",
+      "CapQuanLy",
+      "LoaiDonVi",
+      "NhiemVu"
     ],
-    "jhipsterVersion": "8.6.0",
+    "jhipsterVersion": "8.7.0",
     "jwtSecretKey": "ZDUxNmVkMzBmMzFlNmM1MzJlMzU1OTM1YzhiYzQ2ODkwOTIyZDk1OTk2M2FkYzg5OTcxZmRlZTU3ZGQ4YWY4MTk4MGMyMDdmMmMyOGJmZGZmNzkyZTRiMzIyMTc3YTg4ZDZjM2Y0Mzg3ODc4NzAyMjliMTgxNzhmOGVhYjlhYjE=",
     "languages": ["vi", "en"],
-    "lastLiquibaseTimestamp": 1724149017000,
+    "lastLiquibaseTimestamp": 1726564936000,
     "monorepository": true,
     "nativeLanguage": "vi",
     "packageFolder": "vn/vnpt",

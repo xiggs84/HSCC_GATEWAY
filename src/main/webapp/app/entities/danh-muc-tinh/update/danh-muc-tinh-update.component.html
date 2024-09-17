@@ -12,26 +12,22 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.danhMucTinh.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-          </div>
-        }
-
         <div class="mb-3">
           <label class="form-label" for="field_maTinh" jhiTranslate="gatewayApp.danhMucTinh.maTinh">Ma Tinh</label>
-          <input type="number" class="form-control" name="maTinh" id="field_maTinh" data-cy="maTinh" formControlName="maTinh" />
+          <input
+            type="text"
+            class="form-control"
+            name="maTinh"
+            id="field_maTinh"
+            data-cy="maTinh"
+            formControlName="maTinh"
+            [readonly]="editForm.get('maTinh')!.disabled"
+          />
         </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_tenTinh" jhiTranslate="gatewayApp.danhMucTinh.tenTinh">Ten Tinh</label>
           <input type="text" class="form-control" name="tenTinh" id="field_tenTinh" data-cy="tenTinh" formControlName="tenTinh" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_trangThai" jhiTranslate="gatewayApp.danhMucTinh.trangThai">Trang Thai</label>
-          <input type="number" class="form-control" name="trangThai" id="field_trangThai" data-cy="trangThai" formControlName="trangThai" />
         </div>
       </div>
 

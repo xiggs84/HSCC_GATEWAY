@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 import { IDanhMucTinh } from '../danh-muc-tinh.model';
@@ -38,8 +38,8 @@ describe('DanhMucTinh routing resolve service', () => {
   describe('resolve', () => {
     it('should return IDanhMucTinh returned by find', () => {
       // GIVEN
-      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      service.find = jest.fn(maTinh => of(new HttpResponse({ body: { maTinh } })));
+      mockActivatedRouteSnapshot.params = { maTinh: 'ABC' };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -51,8 +51,8 @@ describe('DanhMucTinh routing resolve service', () => {
       });
 
       // THEN
-      expect(service.find).toHaveBeenCalledWith(123);
-      expect(resultDanhMucTinh).toEqual({ id: 123 });
+      expect(service.find).toHaveBeenCalledWith('ABC');
+      expect(resultDanhMucTinh).toEqual({ maTinh: 'ABC' });
     });
 
     it('should return null if id is not provided', () => {
@@ -77,7 +77,7 @@ describe('DanhMucTinh routing resolve service', () => {
     it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<IDanhMucTinh>({ body: null })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      mockActivatedRouteSnapshot.params = { maTinh: 'ABC' };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -89,7 +89,7 @@ describe('DanhMucTinh routing resolve service', () => {
       });
 
       // THEN
-      expect(service.find).toHaveBeenCalledWith(123);
+      expect(service.find).toHaveBeenCalledWith('ABC');
       expect(resultDanhMucTinh).toEqual(undefined);
       expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });

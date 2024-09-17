@@ -2,20 +2,19 @@
   "annotations": {
     "changelogDate": "20240820091157"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
   "fields": [
     {
       "fieldName": "maTinh",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "tenTinh",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "trangThai",
-      "fieldType": "Long"
     }
   ],
   "name": "DanhMucTinh",

@@ -17,10 +17,8 @@
       "detail": {
         "title": "Danh Muc Tinh"
       },
-      "id": "ID",
       "maTinh": "Ma Tinh",
-      "tenTinh": "Ten Tinh",
-      "trangThai": "Trang Thai"
+      "tenTinh": "Ten Tinh"
     }
   }
 }

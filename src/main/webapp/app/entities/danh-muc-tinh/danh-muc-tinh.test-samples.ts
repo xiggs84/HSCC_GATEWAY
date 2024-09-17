@@ -1,23 +1,20 @@
 import { IDanhMucTinh, NewDanhMucTinh } from './danh-muc-tinh.model';
 
 export const sampleWithRequiredData: IDanhMucTinh = {
-  id: 31455,
+  maTinh: 'c335f95e-f7af-4229-b2c7-854c7fb6917d',
 };
 
 export const sampleWithPartialData: IDanhMucTinh = {
-  id: 8463,
-  maTinh: 8630,
+  maTinh: 'bcf558ad-3269-43ef-807c-364621e8fcf4',
 };
 
 export const sampleWithFullData: IDanhMucTinh = {
-  id: 3380,
-  maTinh: 19404,
-  tenTinh: 'bowl atrophy',
-  trangThai: 22600,
+  maTinh: '5d07294a-8ef1-484b-a442-738df77fe9ca',
+  tenTinh: 'highway telnet',
 };
 
 export const sampleWithNewData: NewDanhMucTinh = {
-  id: null,
+  maTinh: null,
 };
 
 Object.freeze(sampleWithNewData);

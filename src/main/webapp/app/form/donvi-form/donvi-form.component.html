@@ -17,7 +17,7 @@
           <nz-form-item>
             <nz-form-label class="custom-label" [nzFor]="'loai-don-vi'" nzSpan="8">Loại đơn vị</nz-form-label>
             <nz-form-control nzSpan="16">
-              <nz-select id="loai-don-vi" nzPlaceHolder="Chọn loại đơn vị" [(ngModel)]="newItem.loaiDonVi" name="loaiDonVi">
+              <nz-select id="loai-don-vi" nzPlaceHolder="Chọn loại đơn vị" [(ngModel)]="newItem.idLoaiDv" name="loaiDonVi">
                 <nz-option *ngFor="let option of loaiDonViOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
               </nz-select>
             </nz-form-control>
@@ -28,7 +28,7 @@
           <nz-form-item>
             <nz-form-label class="custom-label" [nzFor]="'nhiem-vu'" nzSpan="8">Nhiệm vụ</nz-form-label>
             <nz-form-control nzSpan="16">
-              <nz-select id="nhiem-vu" nzPlaceHolder="Chọn nhiệm vụ" [(ngModel)]="newItem.loaiNhiemVu" name="nhiemVu">
+              <nz-select id="nhiem-vu" nzPlaceHolder="Chọn nhiệm vụ" [(ngModel)]="newItem.idNhiemVu" name="nhiemVu">
                 <nz-option *ngFor="let option of nhiemVuOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
               </nz-select>
             </nz-form-control>
@@ -57,7 +57,7 @@
           <nz-form-item>
             <nz-form-label class="custom-label" [nzFor]="'cap-quan-ly'" nzSpan="8">Cấp quản lý</nz-form-label>
             <nz-form-control nzSpan="16">
-              <nz-select id="cap-quan-ly" nzPlaceHolder="Chọn cấp quản lý" [(ngModel)]="newItem.capQuanLy" name="capQuanLy">
+              <nz-select id="cap-quan-ly" nzPlaceHolder="Chọn cấp quản lý" [(ngModel)]="newItem.idCapQl" name="capQuanLy">
                 <nz-option *ngFor="let option of capQuanLyOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
               </nz-select>
             </nz-form-control>
@@ -77,13 +77,20 @@
           <nz-form-item>
             <nz-form-label class="custom-label" [nzFor]="'don-vi-quan-ly'" nzSpan="8">Đơn vị quản lý</nz-form-label>
             <nz-form-control nzSpan="16">
-              <nz-select id="don-vi-quan-ly" nzPlaceHolder="Chọn đơn vị quản lý" [(ngModel)]="newItem.idDonViQl" name="donViQuanLy">
-                <nz-option nzLabel="Đơn vị A" nzValue="donViA"></nz-option>
-                <nz-option nzLabel="Đơn vị B" nzValue="donViB"></nz-option>
+              <nz-select
+                id="don-vi-quan-ly"
+                nzPlaceHolder="Chọn đơn vị quản lý"
+                [(ngModel)]="newItem.idDonViQl"
+                name="donViQuanLy"
+                nzShowSearch
+                [nzFilterOption]="filterOption"
+              >
+              <nz-option *ngFor="let donVi of donViQuanLyOptions" [nzLabel]="donVi.label" [nzValue]="donVi.value"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
         </nz-col>
+
 
         <nz-col nzSpan="12">
           <nz-form-item>

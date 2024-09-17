@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { DanhMucTinhComponent } from './list/danh-muc-tinh.component';
-import { DanhMucTinhDetailComponent } from './detail/danh-muc-tinh-detail.component';
-import { DanhMucTinhUpdateComponent } from './update/danh-muc-tinh-update.component';
 import DanhMucTinhResolve from './route/danh-muc-tinh-routing-resolve.service';
 
 const danhMucTinhRoute: Routes = [
   {
     path: '',
-    component: DanhMucTinhComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/danh-muc-tinh.component').then(m => m.DanhMucTinhComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DanhMucTinhDetailComponent,
+    path: ':maTinh/view',
+    loadComponent: () => import('./detail/danh-muc-tinh-detail.component').then(m => m.DanhMucTinhDetailComponent),
     resolve: {
       danhMucTinh: DanhMucTinhResolve,
     },
@@ -26,15 +20,15 @@ const danhMucTinhRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhMucTinhUpdateComponent,
+    loadComponent: () => import('./update/danh-muc-tinh-update.component').then(m => m.DanhMucTinhUpdateComponent),
     resolve: {
       danhMucTinh: DanhMucTinhResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DanhMucTinhUpdateComponent,
+    path: ':maTinh/edit',
+    loadComponent: () => import('./update/danh-muc-tinh-update.component').then(m => m.DanhMucTinhUpdateComponent),
     resolve: {
       danhMucTinh: DanhMucTinhResolve,
     },

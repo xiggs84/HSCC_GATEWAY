@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { sampleWithRequiredData } from '../danh-muc-xa.test-samples';
@@ -25,13 +25,13 @@ describe('DanhMucXa Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'maXa,asc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'maXa,desc',
               }),
             ),
             snapshot: {
@@ -39,7 +39,7 @@ describe('DanhMucXa Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'maXa,desc',
               }),
             },
           },
@@ -59,7 +59,7 @@ describe('DanhMucXa Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ maXa: 'ABC' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +69,7 @@ describe('DanhMucXa Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ maXa: 'CBA' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -84,16 +84,16 @@ describe('DanhMucXa Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.danhMucXas?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.danhMucXas?.[0]).toEqual(expect.objectContaining({ maXa: 'ABC' }));
   });
 
-  describe('trackId', () => {
+  describe('trackMaXa', () => {
     it('Should forward to danhMucXaService', () => {
-      const entity = { id: 123 };
+      const entity = { maXa: 'ABC' };
       jest.spyOn(service, 'getDanhMucXaIdentifier');
-      const id = comp.trackId(0, entity);
+      const maXa = comp.trackMaXa(0, entity);
       expect(service.getDanhMucXaIdentifier).toHaveBeenCalledWith(entity);
-      expect(id).toBe(entity.id);
+      expect(maXa).toBe(entity.maXa);
     });
   });
 
@@ -117,7 +117,7 @@ describe('DanhMucXa Management Component', () => {
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['maXa,desc'] }));
   });
 
   describe('delete', () => {

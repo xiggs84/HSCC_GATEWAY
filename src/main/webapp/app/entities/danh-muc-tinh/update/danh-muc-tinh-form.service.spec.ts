@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../danh-muc-tinh.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../danh-muc-tinh.test-samples';
 
 import { DanhMucTinhFormService } from './danh-muc-tinh-form.service';
 
@@ -19,10 +19,8 @@ describe('DanhMucTinh Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             maTinh: expect.any(Object),
             tenTinh: expect.any(Object),
-            trangThai: expect.any(Object),
           }),
         );
       });
@@ -32,10 +30,8 @@ describe('DanhMucTinh Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             maTinh: expect.any(Object),
             tenTinh: expect.any(Object),
-            trangThai: expect.any(Object),
           }),
         );
       });
@@ -64,26 +60,6 @@ describe('DanhMucTinh Form Service', () => {
         const danhMucTinh = service.getDanhMucTinh(formGroup) as any;
 
         expect(danhMucTinh).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IDanhMucTinh should not enable id FormControl', () => {
-        const formGroup = service.createDanhMucTinhFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewDanhMucTinh should disable id FormControl', () => {
-        const formGroup = service.createDanhMucTinhFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

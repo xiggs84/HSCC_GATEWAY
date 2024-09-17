@@ -1,9 +1,7 @@
 export interface IDanhMucHuyen {
-  id: number;
-  maHuyen?: number | null;
+  maHuyen: string;
   tenHuyen?: string | null;
-  maTinh?: number | null;
-  trangThai?: number | null;
+  maTinh?: string | null;
 }
 
-export type NewDanhMucHuyen = Omit<IDanhMucHuyen, 'id'> & { id: null };
+export type NewDanhMucHuyen = Omit<IDanhMucHuyen, 'maHuyen'> & { maHuyen: null };

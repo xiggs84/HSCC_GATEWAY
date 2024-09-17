@@ -17,27 +17,19 @@
       "detail": {
         "title": "Danh Muc Don Vi"
       },
-      "id": "ID",
       "idDonVi": "Id Don Vi",
       "tenDonVi": "Ten Don Vi",
       "diaChi": "Dia Chi",
       "nguoiDaiDien": "Nguoi Dai Dien",
       "soDienThoai": "So Dien Thoai",
       "idDonViQl": "Id Don Vi Ql",
-      "loaiDonVi": "Loai Don Vi",
       "ngayKhaiBao": "Ngay Khai Bao",
       "trangThai": "Trang Thai",
-      "idTinh": "Id Tinh",
-      "idHuyen": "Id Huyen",
-      "idPhuongXa": "Id Phuong Xa",
       "soNha": "So Nha",
       "maSoThue": "Ma So Thue",
-      "idCapQl": "Id Cap Ql",
-      "loaiNhiemVu": "Loai Nhiem Vu",
       "hoaDonDt": "Hoa Don Dt",
       "maDonViIgate": "Ma Don Vi Igate",
       "maCoQuanIgate": "Ma Co Quan Igate",
-      "capDonVi": "Cap Don Vi",
       "kySo": "Ky So",
       "qrScan": "Qr Scan",
       "verifyIdCard": "Verify Id Card",
@@ -47,7 +39,13 @@
       "apikeyFace": "Apikey Face",
       "verifyCodeCccd": "Verify Code Cccd",
       "usernameElastic": "Username Elastic",
-      "passwordElastic": "Password Elastic"
+      "passwordElastic": "Password Elastic",
+      "idNhiemVu": "Id Nhiem Vu",
+      "idLoaiDv": "Id Loai Dv",
+      "idCapQl": "Id Cap Ql",
+      "capQuanLy": "Cap Quan Ly",
+      "loaiDonVi": "Loai Don Vi",
+      "nhiemVu": "Nhiem Vu"
     }
   }
 }

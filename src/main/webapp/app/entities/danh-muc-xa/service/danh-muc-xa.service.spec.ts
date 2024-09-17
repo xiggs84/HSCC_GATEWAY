@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { IDanhMucXa } from '../danh-muc-xa.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../danh-muc-xa.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../danh-muc-xa.test-samples';
 
 import { DanhMucXaService } from './danh-muc-xa.service';
 
@@ -30,7 +30,7 @@ describe('DanhMucXa Service', () => {
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -89,7 +89,7 @@ describe('DanhMucXa Service', () => {
     it('should delete a DanhMucXa', () => {
       const expected = true;
 
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -165,7 +165,7 @@ describe('DanhMucXa Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { maXa: 'ABC' };
         const entity2 = null;
 
         const compareResult1 = service.compareDanhMucXa(entity1, entity2);
@@ -176,8 +176,8 @@ describe('DanhMucXa Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { maXa: 'ABC' };
+        const entity2 = { maXa: 'CBA' };
 
         const compareResult1 = service.compareDanhMucXa(entity1, entity2);
         const compareResult2 = service.compareDanhMucXa(entity2, entity1);
@@ -187,8 +187,8 @@ describe('DanhMucXa Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { maXa: 'ABC' };
+        const entity2 = { maXa: 'ABC' };
 
         const compareResult1 = service.compareDanhMucXa(entity1, entity2);
         const compareResult2 = service.compareDanhMucXa(entity2, entity1);

@@ -30,7 +30,7 @@ export class DanhMucDonViService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-don-vis', 'canbodonvi');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-don-vis','canbodonvi');
 
   create(danhMucDonVi: NewDanhMucDonVi): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(danhMucDonVi);
@@ -59,12 +59,12 @@ export class DanhMucDonViService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
-      const options = createRequestOption(req);
-      return this.http
-        .get<RestDanhMucDonVi[]>(this.resourceUrl, { params: options, observe: 'response' })
-        .pipe(map(res => this.convertResponseArrayFromServer(res)));
-    }
+  query(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<RestDanhMucDonVi[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+  }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
@@ -129,7 +129,7 @@ export class DanhMucDonViService {
   searchByTenDonVi(tenDonVi: string): Observable<EntityArrayResponseType> {
     const options = createRequestOption({ tenDonVi });
     return this.http
-      .get<RestDanhMucDonVi[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' })
+      .get<RestDanhMucDonVi[]>(`${this.resourceUrl}/by-ten`, { params: options, observe: 'response' })
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 }

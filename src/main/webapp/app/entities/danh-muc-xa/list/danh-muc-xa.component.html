@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="maXa">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucXa.maXa">Ma Xa</span>
@@ -63,34 +56,25 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="trangThai">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucXa.trangThai">Trang Thai</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (danhMucXa of danhMucXas; track trackId) {
+          @for (danhMucXa of danhMucXas; track trackMaXa) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-xa', danhMucXa.id, 'view']">{{ danhMucXa.id }}</a>
+                <a [routerLink]="['/danh-muc-xa', danhMucXa.maXa, 'view']">{{ danhMucXa.maXa }}</a>
               </td>
-              <td>{{ danhMucXa.maXa }}</td>
               <td>{{ danhMucXa.tenXa }}</td>
               <td>{{ danhMucXa.maHuyen }}</td>
-              <td>{{ danhMucXa.trangThai }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/danh-muc-xa', danhMucXa.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a [routerLink]="['/danh-muc-xa', danhMucXa.maXa, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/danh-muc-xa', danhMucXa.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a [routerLink]="['/danh-muc-xa', danhMucXa.maXa, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

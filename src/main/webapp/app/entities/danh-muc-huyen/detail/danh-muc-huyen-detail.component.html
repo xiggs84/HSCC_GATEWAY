@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhMucHuyen()) {
+    @if (danhMucHuyen(); as danhMucHuyenRef) {
       <div>
         <h2 data-cy="danhMucHuyenDetailsHeading"><span jhiTranslate="gatewayApp.danhMucHuyen.detail.title">Danh Muc Huyen</span></h2>
 
@@ -11,25 +11,17 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhMucHuyen()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucHuyen.maHuyen">Ma Huyen</span></dt>
           <dd>
-            <span>{{ danhMucHuyen()!.maHuyen }}</span>
+            <span>{{ danhMucHuyenRef.maHuyen }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucHuyen.tenHuyen">Ten Huyen</span></dt>
           <dd>
-            <span>{{ danhMucHuyen()!.tenHuyen }}</span>
+            <span>{{ danhMucHuyenRef.tenHuyen }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucHuyen.maTinh">Ma Tinh</span></dt>
           <dd>
-            <span>{{ danhMucHuyen()!.maTinh }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.danhMucHuyen.trangThai">Trang Thai</span></dt>
-          <dd>
-            <span>{{ danhMucHuyen()!.trangThai }}</span>
+            <span>{{ danhMucHuyenRef.maTinh }}</span>
           </dd>
         </dl>
 
@@ -37,7 +29,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/danh-muc-huyen', danhMucHuyen()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/danh-muc-huyen', danhMucHuyenRef.maHuyen, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

@@ -5,6 +5,9 @@ import {DonviFormComponent} from "../../form/donvi-form/donvi-form.component";
 import {IDanhMucDonVi} from "../../entities/danh-muc-don-vi/danh-muc-don-vi.model";
 import FormatMediumDatePipe from "../../shared/date/format-medium-date.pipe";
 import FormatMediumDatetimePipe from "../../shared/date/format-medium-datetime.pipe";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import dayjs from "dayjs/esm";
 @Component({
   selector: 'jhi-donvi',
   standalone: true,
@@ -17,13 +20,16 @@ export class DonviComponent {
   searchTerm: string = '';
   listOfCurrentPageData: readonly IDanhMucDonVi[] = [];
   selectedItem: IDanhMucDonVi | null = null;
+  originalData: any[] = [];
 
   pageIndex: number = 1;
   pageSize: number = 10;
 
   @ViewChild(DonviFormComponent) donviFormComponent!: DonviFormComponent;
 
-  constructor(protected danhMucDonViService: DanhMucDonViService) {}
+  constructor(protected danhMucDonViService: DanhMucDonViService,
+              private modalService: NzModalService,
+              private notification: NzNotificationService) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -32,8 +38,8 @@ export class DonviComponent {
   loadData(): void {
     this.danhMucDonViService.query().subscribe({
       next: (res) => {
-        this.listOfData = res.body || [];
-        this.updateCurrentPageData();
+        this.originalData = res.body || []; // Lưu trữ dữ liệu gốc
+        this.listOfData = [...this.originalData]; // Cập nhật listOfData với dữ liệu gốc
       },
       error: (err) => console.error('Error fetching data', err),
     });
@@ -57,15 +63,18 @@ export class DonviComponent {
   }
 
   onSearch(searchTerm: string): void {
-    this.searchTerm = searchTerm; // Cập nhật giá trị tìm kiếm
+    this.searchTerm = searchTerm;
 
     if (this.searchTerm) {
-      this.listOfData = this.listOfData.filter(item =>
-        item.tenDonVi?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false
+      this.listOfData = this.originalData.filter(item =>
+        (item.tenDonVi?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
+        (item.diaChi?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
+        (item.nguoiDaiDien?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
+        (item.soDienThoai?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
+        (item.ngayKhaiBao ? dayjs(item.ngayKhaiBao).format('DD/MM/YYYY').includes(this.searchTerm) : false)
       );
     } else {
-      // Reload original data
-      this.loadData();
+      this.listOfData = [...this.originalData];
     }
   }
 
@@ -82,13 +91,31 @@ export class DonviComponent {
   }
 
   deleteItem(item: IDanhMucDonVi): void {
-    this.danhMucDonViService.delete(item.idDonVi).subscribe({
-      next: () => {
-        this.loadData();
+    this.modalService.confirm({
+      nzTitle: 'Xác nhận xóa',
+      nzContent: 'Bạn có chắc chắn muốn xóa đơn vị này?',
+      nzOkText: 'Có',
+      nzOkType: 'primary',
+      nzCancelText: 'Không',
+      nzMaskClosable: true,
+      nzOnOk: () => {
+        this.danhMucDonViService.delete(item.idDonVi).subscribe({
+          next: () => {
+            this.loadData(); // Refresh data after successful deletion
+            this.notification.success('Xóa thành công', 'Đơn vị đã được xóa thành công!'); // Show success notification
+          },
+          error: (err) => {
+            console.error('Error deleting data', err);
+            this.notification.error('Lỗi xóa dữ liệu', 'Có lỗi xảy ra khi xóa đơn vị.');
+          }
+        });
       },
-      error: (err) => console.error('Error deleting data', err),
+      nzOnCancel: () => {
+        console.log('Hủy xóa'); // Optional: Log or handle cancel action
+      }
     });
   }
+
 
   onFormDataUpdated(): void {
     this.loadData();

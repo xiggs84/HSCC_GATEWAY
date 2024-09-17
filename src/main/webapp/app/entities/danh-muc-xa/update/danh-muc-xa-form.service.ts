@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDanhMucXa, NewDanhMucXa } from '../danh-muc-xa.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { maXa: unknown }> = Partial<Omit<T, 'maXa'>> & { maXa: T['maXa'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,37 +14,33 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DanhMucXaFormGroupInput = IDanhMucXa | PartialWithRequiredKeyOf<NewDanhMucXa>;
 
-type DanhMucXaFormDefaults = Pick<NewDanhMucXa, 'id'>;
+type DanhMucXaFormDefaults = Pick<NewDanhMucXa, 'maXa'>;
 
 type DanhMucXaFormGroupContent = {
-  id: FormControl<IDanhMucXa['id'] | NewDanhMucXa['id']>;
-  maXa: FormControl<IDanhMucXa['maXa']>;
+  maXa: FormControl<IDanhMucXa['maXa'] | NewDanhMucXa['maXa']>;
   tenXa: FormControl<IDanhMucXa['tenXa']>;
   maHuyen: FormControl<IDanhMucXa['maHuyen']>;
-  trangThai: FormControl<IDanhMucXa['trangThai']>;
 };
 
 export type DanhMucXaFormGroup = FormGroup<DanhMucXaFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DanhMucXaFormService {
-  createDanhMucXaFormGroup(danhMucXa: DanhMucXaFormGroupInput = { id: null }): DanhMucXaFormGroup {
+  createDanhMucXaFormGroup(danhMucXa: DanhMucXaFormGroupInput = { maXa: null }): DanhMucXaFormGroup {
     const danhMucXaRawValue = {
       ...this.getFormDefaults(),
       ...danhMucXa,
     };
     return new FormGroup<DanhMucXaFormGroupContent>({
-      id: new FormControl(
-        { value: danhMucXaRawValue.id, disabled: true },
+      maXa: new FormControl(
+        { value: danhMucXaRawValue.maXa, disabled: danhMucXaRawValue.maXa !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      maXa: new FormControl(danhMucXaRawValue.maXa),
       tenXa: new FormControl(danhMucXaRawValue.tenXa),
       maHuyen: new FormControl(danhMucXaRawValue.maHuyen),
-      trangThai: new FormControl(danhMucXaRawValue.trangThai),
     });
   }
 
@@ -57,14 +53,14 @@ export class DanhMucXaFormService {
     form.reset(
       {
         ...danhMucXaRawValue,
-        id: { value: danhMucXaRawValue.id, disabled: true },
+        maXa: { value: danhMucXaRawValue.maXa, disabled: danhMucXaRawValue.maXa !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DanhMucXaFormDefaults {
     return {
-      id: null,
+      maXa: null,
     };
   }
 }

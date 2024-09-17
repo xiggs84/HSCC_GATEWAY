@@ -2,12 +2,15 @@
   "annotations": {
     "changelogDate": "20240820091357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
   "fields": [
     {
       "fieldName": "maXa",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "tenXa",
@@ -15,11 +18,7 @@
     },
     {
       "fieldName": "maHuyen",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "String"
     }
   ],
   "name": "DanhMucXa",

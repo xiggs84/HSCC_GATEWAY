@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { sampleWithRequiredData } from '../danh-muc-tinh.test-samples';
@@ -25,13 +25,13 @@ describe('DanhMucTinh Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'maTinh,asc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'maTinh,desc',
               }),
             ),
             snapshot: {
@@ -39,7 +39,7 @@ describe('DanhMucTinh Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'maTinh,desc',
               }),
             },
           },
@@ -59,7 +59,7 @@ describe('DanhMucTinh Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ maTinh: 'ABC' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +69,7 @@ describe('DanhMucTinh Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ maTinh: 'CBA' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -84,16 +84,16 @@ describe('DanhMucTinh Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.danhMucTinhs?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.danhMucTinhs?.[0]).toEqual(expect.objectContaining({ maTinh: 'ABC' }));
   });
 
-  describe('trackId', () => {
+  describe('trackMaTinh', () => {
     it('Should forward to danhMucTinhService', () => {
-      const entity = { id: 123 };
+      const entity = { maTinh: 'ABC' };
       jest.spyOn(service, 'getDanhMucTinhIdentifier');
-      const id = comp.trackId(0, entity);
+      const maTinh = comp.trackMaTinh(0, entity);
       expect(service.getDanhMucTinhIdentifier).toHaveBeenCalledWith(entity);
-      expect(id).toBe(entity.id);
+      expect(maTinh).toBe(entity.maTinh);
     });
   });
 
@@ -117,7 +117,7 @@ describe('DanhMucTinh Management Component', () => {
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['maTinh,desc'] }));
   });
 
   describe('delete', () => {

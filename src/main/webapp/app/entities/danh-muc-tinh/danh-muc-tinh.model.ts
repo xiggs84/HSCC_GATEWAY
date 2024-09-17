@@ -1,8 +1,6 @@
 export interface IDanhMucTinh {
-  id: number;
-  maTinh?: number | null;
+  maTinh: string;
   tenTinh?: string | null;
-  trangThai?: number | null;
 }
 
-export type NewDanhMucTinh = Omit<IDanhMucTinh, 'id'> & { id: null };
+export type NewDanhMucTinh = Omit<IDanhMucTinh, 'maTinh'> & { maTinh: null };

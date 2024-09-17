@@ -12,7 +12,10 @@ import {DanhMucHuyenService} from "../../entities/danh-muc-huyen/service/danh-mu
 import {DanhMucXaService} from "../../entities/danh-muc-xa/service/danh-muc-xa.service";
 import {DanhMucDonViService} from "../../entities/danh-muc-don-vi/service/danh-muc-don-vi.service";
 import dayjs from 'dayjs/esm';
-import {DATE_FORMAT} from "../../config/input.constants";
+import {CapQuanLyService} from "../../entities/cap-quan-ly/service/cap-quan-ly.service";
+import {LoaiDonViService} from "../../entities/loai-don-vi/service/loai-don-vi.service";
+import {NhiemVuService} from "../../entities/nhiem-vu/service/nhiem-vu.service";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 @Component({
   selector: 'jhi-donvi-form',
   standalone: true,
@@ -29,10 +32,14 @@ export class DonviFormComponent {
   tinhs: IDanhMucTinh[] = [];
   huyens: IDanhMucHuyen[] = [];
   xas: IDanhMucXa[] = [];
+  loaiDonViOptions: any[] = [];
+  nhiemVuOptions: any[] = [];
+  capQuanLyOptions: any[] = [];
+  donViQuanLyOptions: any[] = [];
 
-  selectedtinhId: number | null = null;
-  selectedhuyenId: number | null = null;
-  selectedxaId: number | null = null;
+  selectedtinhId: string | null = null;
+  selectedhuyenId: string | null = null;
+  selectedxaId: string | null = null;
 
   soNha: string | null = null;
   xaPhuong: string | null = null;
@@ -42,7 +49,7 @@ export class DonviFormComponent {
     idDonVi: 0,
     tenDonVi: '',
     loaiDonVi: null,
-    loaiNhiemVu: null,
+    nhiemVu: null,
     maSoThue: '',
     soDienThoai: '',
     capQuanLy: null,
@@ -58,11 +65,19 @@ export class DonviFormComponent {
     protected danhMucDonViService: DanhMucDonViService,
     protected danhMucTinhService: DanhMucTinhService,
     protected danhMucHuyenService: DanhMucHuyenService,
-    protected danhMucXaService: DanhMucXaService
+    protected danhMucXaService: DanhMucXaService,
+    private nhiemVuService: NhiemVuService,
+    private loaiDonViService: LoaiDonViService,
+    private capQuanLyService: CapQuanLyService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
     this.loadtinhs();
+    this.loadNhiemVus();
+    this.loadLoaiDonVis();
+    this.loadCapQuanLys();
+    this.loadDonViQuanLys();
   }
 
   showModal(): void {
@@ -78,24 +93,21 @@ export class DonviFormComponent {
     this.selectedtinhId = this.tinhs.find(t => t.tenTinh === this.tinhThanhPho)?.maTinh || null;
 
     if (this.selectedtinhId) {
-      this.ontinhChange(this.selectedtinhId);
-
-      // Đợi một chút sau khi tỉnh đã thay đổi để có thể load huyện và xã
-      setTimeout(() => {
-        this.selectedhuyenId = this.huyens.find(h => h.tenHuyen === this.quanHuyen)?.maHuyen || null;
-
-        if (this.selectedhuyenId) {
-          this.onhuyenChange(this.selectedhuyenId);
-
-          // Đợi thêm một chút sau khi huyện đã thay đổi để load xã
-          setTimeout(() => {
-            this.selectedxaId = this.xas.find(x => x.tenXa === this.xaPhuong)?.maXa || null;
-            this.isLoading = false;
-          }, 300); // Thời gian chờ để dữ liệu huyện load xong
-        } else {
-          this.isLoading = false; // Nếu không có huyện, vẫn đặt isLoading thành false
-        }
-      }, 300); // Thời gian chờ để dữ liệu tỉnh load xong
+      this.ontinhChange(this.selectedtinhId)
+        .then(() => {
+          this.selectedhuyenId = this.huyens.find(h => h.tenHuyen === this.quanHuyen)?.maHuyen || null;
+          if (this.selectedhuyenId) {
+            return this.onhuyenChange(this.selectedhuyenId);  // RETURN promise here
+          }
+          return Promise.resolve(); // Trả về Promise.resolve() nếu không có selectedhuyenId
+        })
+        .then(() => {
+          this.selectedxaId = this.xas.find(x => x.tenXa === this.xaPhuong)?.maXa || null;
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.isLoading = false; // Handle any error in the chain
+        });
     } else {
       this.isLoading = false; // Nếu không có tỉnh, đặt isLoading thành false
     }
@@ -104,10 +116,17 @@ export class DonviFormComponent {
   private extractAddressParts(): void {
     if (this.newItem.diaChi) {
       const addressParts = this.newItem.diaChi.split(',').map(part => part.trim());
-      this.soNha = addressParts.length > 0 ? addressParts[0] : null;
-      this.xaPhuong = addressParts.length > 1 ? addressParts[1] : null;
-      this.quanHuyen = addressParts.length > 2 ? addressParts[2] : null;
-      this.tinhThanhPho = addressParts.length > 3 ? addressParts[3] : null;
+      if (addressParts.length === 4) {
+        this.soNha = addressParts[0];
+        this.xaPhuong = addressParts[1];
+        this.quanHuyen = addressParts[2];
+        this.tinhThanhPho = addressParts[3];
+      } else if (addressParts.length === 3) {
+        this.soNha = null;
+        this.xaPhuong = addressParts[0];
+        this.quanHuyen = addressParts[1];
+        this.tinhThanhPho = addressParts[2];
+      }
     } else {
       this.soNha = null;
       this.xaPhuong = null;
@@ -130,7 +149,7 @@ export class DonviFormComponent {
       idDonVi: 0,
       tenDonVi: '',
       loaiDonVi: null,
-      loaiNhiemVu: null,
+      nhiemVu: null,
       maSoThue: '',
       soDienThoai: '',
       capQuanLy: null,
@@ -173,11 +192,12 @@ export class DonviFormComponent {
           this.newItem.idDonVi = existingDonVi.idDonVi;
           this.danhMucDonViService.update(this.newItem).subscribe({
             next: () => {
-              console.log('Đơn vị đã được cập nhật thành công!');
+              this.notification.success('Cập nhật thành công', 'Đơn vị đã được cập nhật thành công!');
               this.handleCancel();
               this.dataUpdated.emit();
             },
             error: (err) => {
+              this.notification.error('Lỗi cập nhật', 'Có lỗi xảy ra khi cập nhật đơn vị.');
               console.error('Lỗi khi cập nhật đơn vị:', err);
             }
           });
@@ -187,37 +207,59 @@ export class DonviFormComponent {
 
           this.danhMucDonViService.create(newDonVi).subscribe({
             next: () => {
-              alert('Đơn vị đã được thêm mới thành công!');
+              this.notification.success('Thêm mới thành công', 'Đơn vị đã được thêm mới thành công!');
               this.handleCancel();
               this.dataUpdated.emit();
             },
             error: (err) => {
-              alert('Lỗi!');
+              this.notification.error('Lỗi thêm mới', 'Có lỗi xảy ra khi thêm mới đơn vị.');
               console.error('Lỗi khi thêm mới đơn vị:', err);
             }
           });
         }
       },
       error: (err) => {
+        this.notification.error('Lỗi kiểm tra', 'Có lỗi xảy ra khi kiểm tra đơn vị.');
         console.error('Lỗi khi kiểm tra đơn vị:', err);
       }
     });
   }
 
-  loaiDonViOptions = Object.keys(LoaiDonVi).map(key => ({
-    label: LoaiDonVi[key as keyof typeof LoaiDonVi],
-    value: key
-  }));
+  private loadNhiemVus(): void {
+    this.nhiemVuService.query().subscribe({
+      next: (res) => {
+        this.nhiemVuOptions = res.body?.map(nhiemVu => ({
+          label: nhiemVu.tenNhiemVu || '',
+          value: nhiemVu.idNhiemVu
+        })) || [];
+      },
+      error: (err) => console.error('Error fetching nhiem vus', err)
+    });
+  }
 
-  nhiemVuOptions = Object.keys(NhiemVu).map(key => ({
-    label: NhiemVu[key as keyof typeof NhiemVu],
-    value: key
-  }));
+  private loadLoaiDonVis(): void {
+    this.loaiDonViService.query().subscribe({
+      next: (res) => {
+        this.loaiDonViOptions = res.body?.map(loaiDonVi => ({
+          label: loaiDonVi.tenLoaiDv || '',
+          value: loaiDonVi.idLoaiDv
+        })) || [];
+      },
+      error: (err) => console.error('Error fetching loai don vis', err)
+    });
+  }
 
-  capQuanLyOptions = Object.keys(CapQuanLy).map(key => ({
-    label: CapQuanLy[key as keyof typeof CapQuanLy],
-    value: key
-  }));
+  private loadCapQuanLys(): void {
+    this.capQuanLyService.query().subscribe({
+      next: (res) => {
+        this.capQuanLyOptions = res.body?.map(capQuanLy => ({
+          label: capQuanLy.tenCapQl || '',
+          value: capQuanLy.idCapQl
+        })) || [];
+      },
+      error: (err) => console.error('Error fetching cap quan lys', err)
+    });
+  }
 
   loadtinhs(): void {
     this.danhMucTinhService.query().subscribe({
@@ -232,40 +274,49 @@ export class DonviFormComponent {
     return option.nzLabel.toLowerCase().indexOf(input.toLowerCase()) > -1;
   }
 
-  ontinhChange(maTinh: number): void {
-    if (maTinh == null || isNaN(maTinh)) {
-      console.error('Invalid tinh ID:', maTinh);
-      return;
-    }
-
-    this.huyens = [];
-    this.xas = [];
-
-    // this.selectedhuyenId = null;
-    // this.selectedxaId = null;
-
-    this.danhMucHuyenService.getQuanHuyenByTinh(maTinh).subscribe({
-      next: (res) => {
-        this.huyens = res.body || [];
-      },
-      error: (err: any) => console.error('Error fetching huyens', err),
+  ontinhChange(maTinh: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.danhMucHuyenService.getQuanHuyenByTinh(maTinh).subscribe({
+        next: (res) => {
+          this.huyens = res.body || [];
+          this.xas = []; // Reset xã khi tỉnh thay đổi
+          this.selectedhuyenId = null; // Reset ID huyện khi tỉnh thay đổi
+          this.selectedxaId = null; // Reset ID xã khi tỉnh thay đổi
+          resolve();
+        },
+        error: (err: any) => {
+          console.error('Error fetching huyens', err);
+          reject();
+        }
+      });
     });
   }
 
-  onhuyenChange(maHuyen: number): void {
-    if (maHuyen == null || isNaN(maHuyen)) {
-      console.error('Invalid huyen ID:', maHuyen);
-      return;
-    }
+  onhuyenChange(maHuyen: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.danhMucXaService.getXaPhuongByHuyen(maHuyen).subscribe({
+        next: (res) => {
+          this.xas = res.body || [];
+          this.selectedxaId = null; // Reset ID xã khi huyện thay đổi
+          resolve();
+        },
+        error: (err: any) => {
+          console.error('Error fetching xas', err);
+          reject();
+        }
+      });
+    });
+  }
 
-    this.xas = [];
-    // this.selectedxaId = null;
-
-    this.danhMucXaService.getXaPhuongByHuyen(maHuyen).subscribe({
+  private loadDonViQuanLys(): void {
+    this.danhMucDonViService.query().subscribe({
       next: (res) => {
-        this.xas = res.body || [];
+        this.donViQuanLyOptions = res.body?.map(donVi => ({
+          label: donVi.tenDonVi || '',
+          value: donVi.idDonVi
+        })) || [];
       },
-      error: (err: any) => console.error('Error fetching xas', err),
+      error: (err) => console.error('Error fetching don vi quan lys', err)
     });
   }
 }

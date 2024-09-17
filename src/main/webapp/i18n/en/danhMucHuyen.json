@@ -17,11 +17,9 @@
       "detail": {
         "title": "Danh Muc Huyen"
       },
-      "id": "ID",
       "maHuyen": "Ma Huyen",
       "tenHuyen": "Ten Huyen",
-      "maTinh": "Ma Tinh",
-      "trangThai": "Trang Thai"
+      "maTinh": "Ma Tinh"
     }
   }
 }

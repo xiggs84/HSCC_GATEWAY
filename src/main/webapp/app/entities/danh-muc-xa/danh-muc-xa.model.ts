@@ -1,9 +1,7 @@
 export interface IDanhMucXa {
-  id: number;
-  maXa?: number | null;
+  maXa: string;
   tenXa?: string | null;
-  maHuyen?: number | null;
-  trangThai?: number | null;
+  maHuyen?: string | null;
 }
 
-export type NewDanhMucXa = Omit<IDanhMucXa, 'id'> & { id: null };
+export type NewDanhMucXa = Omit<IDanhMucXa, 'maXa'> & { maXa: null };

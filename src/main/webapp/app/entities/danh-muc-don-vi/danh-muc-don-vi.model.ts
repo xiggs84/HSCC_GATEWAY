@@ -1,7 +1,7 @@
 import dayjs from 'dayjs/esm';
-import { CapQuanLy } from 'app/entities/enumerations/cap-quan-ly.model';
-import { NhiemVu } from 'app/entities/enumerations/nhiem-vu.model';
-import { LoaiDonVi } from 'app/entities/enumerations/loai-don-vi.model';
+import { ICapQuanLy } from 'app/entities/cap-quan-ly/cap-quan-ly.model';
+import { ILoaiDonVi } from 'app/entities/loai-don-vi/loai-don-vi.model';
+import { INhiemVu } from 'app/entities/nhiem-vu/nhiem-vu.model';
 
 export interface IDanhMucDonVi {
   idDonVi: number;
@@ -14,12 +14,9 @@ export interface IDanhMucDonVi {
   trangThai?: number | null;
   soNha?: string | null;
   maSoThue?: string | null;
-  capQuanLy?: keyof typeof CapQuanLy | null;
-  loaiNhiemVu?: keyof typeof NhiemVu | null;
   hoaDonDt?: number | null;
   maDonViIgate?: string | null;
   maCoQuanIgate?: string | null;
-  loaiDonVi?: keyof typeof LoaiDonVi | null;
   kySo?: number | null;
   qrScan?: number | null;
   verifyIdCard?: number | null;
@@ -30,6 +27,12 @@ export interface IDanhMucDonVi {
   verifyCodeCccd?: string | null;
   usernameElastic?: string | null;
   passwordElastic?: string | null;
+  idNhiemVu?: string | null;
+  idLoaiDv?: string | null;
+  idCapQl?: string | null;
+  capQuanLy?: ICapQuanLy | null;
+  loaiDonVi?: ILoaiDonVi | null;
+  nhiemVu?: INhiemVu | null;
 }
 
 export type NewDanhMucDonVi = Omit<IDanhMucDonVi, 'idDonVi'> & { idDonVi: null };

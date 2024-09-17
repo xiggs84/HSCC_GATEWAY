@@ -27,12 +27,9 @@ type DanhMucDonViFormGroupContent = {
   trangThai: FormControl<IDanhMucDonVi['trangThai']>;
   soNha: FormControl<IDanhMucDonVi['soNha']>;
   maSoThue: FormControl<IDanhMucDonVi['maSoThue']>;
-  capQuanLy: FormControl<IDanhMucDonVi['capQuanLy']>;
-  loaiNhiemVu: FormControl<IDanhMucDonVi['loaiNhiemVu']>;
   hoaDonDt: FormControl<IDanhMucDonVi['hoaDonDt']>;
   maDonViIgate: FormControl<IDanhMucDonVi['maDonViIgate']>;
   maCoQuanIgate: FormControl<IDanhMucDonVi['maCoQuanIgate']>;
-  loaiDonVi: FormControl<IDanhMucDonVi['loaiDonVi']>;
   kySo: FormControl<IDanhMucDonVi['kySo']>;
   qrScan: FormControl<IDanhMucDonVi['qrScan']>;
   verifyIdCard: FormControl<IDanhMucDonVi['verifyIdCard']>;
@@ -43,6 +40,12 @@ type DanhMucDonViFormGroupContent = {
   verifyCodeCccd: FormControl<IDanhMucDonVi['verifyCodeCccd']>;
   usernameElastic: FormControl<IDanhMucDonVi['usernameElastic']>;
   passwordElastic: FormControl<IDanhMucDonVi['passwordElastic']>;
+  idNhiemVu: FormControl<IDanhMucDonVi['idNhiemVu']>;
+  idLoaiDv: FormControl<IDanhMucDonVi['idLoaiDv']>;
+  idCapQl: FormControl<IDanhMucDonVi['idCapQl']>;
+  capQuanLy: FormControl<IDanhMucDonVi['capQuanLy']>;
+  loaiDonVi: FormControl<IDanhMucDonVi['loaiDonVi']>;
+  nhiemVu: FormControl<IDanhMucDonVi['nhiemVu']>;
 };
 
 export type DanhMucDonViFormGroup = FormGroup<DanhMucDonViFormGroupContent>;
@@ -71,12 +74,9 @@ export class DanhMucDonViFormService {
       trangThai: new FormControl(danhMucDonViRawValue.trangThai),
       soNha: new FormControl(danhMucDonViRawValue.soNha),
       maSoThue: new FormControl(danhMucDonViRawValue.maSoThue),
-      capQuanLy: new FormControl(danhMucDonViRawValue.capQuanLy),
-      loaiNhiemVu: new FormControl(danhMucDonViRawValue.loaiNhiemVu),
       hoaDonDt: new FormControl(danhMucDonViRawValue.hoaDonDt),
       maDonViIgate: new FormControl(danhMucDonViRawValue.maDonViIgate),
       maCoQuanIgate: new FormControl(danhMucDonViRawValue.maCoQuanIgate),
-      loaiDonVi: new FormControl(danhMucDonViRawValue.loaiDonVi),
       kySo: new FormControl(danhMucDonViRawValue.kySo),
       qrScan: new FormControl(danhMucDonViRawValue.qrScan),
       verifyIdCard: new FormControl(danhMucDonViRawValue.verifyIdCard),
@@ -87,6 +87,12 @@ export class DanhMucDonViFormService {
       verifyCodeCccd: new FormControl(danhMucDonViRawValue.verifyCodeCccd),
       usernameElastic: new FormControl(danhMucDonViRawValue.usernameElastic),
       passwordElastic: new FormControl(danhMucDonViRawValue.passwordElastic),
+      idNhiemVu: new FormControl(danhMucDonViRawValue.idNhiemVu),
+      idLoaiDv: new FormControl(danhMucDonViRawValue.idLoaiDv),
+      idCapQl: new FormControl(danhMucDonViRawValue.idCapQl),
+      capQuanLy: new FormControl(danhMucDonViRawValue.capQuanLy),
+      loaiDonVi: new FormControl(danhMucDonViRawValue.loaiDonVi),
+      nhiemVu: new FormControl(danhMucDonViRawValue.nhiemVu),
     });
   }
 
