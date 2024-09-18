@@ -39,7 +39,6 @@ export class DuongsuFormComponent implements OnInit {
   selectedtinhId: string | null = null;
   selectedhuyenId: string | null = null;
   selectedxaId: string | null = null;
-  gioiTinh: any;
 
   // Dữ liệu của form
   newItem: IDuongSu = {
@@ -66,98 +65,94 @@ export class DuongsuFormComponent implements OnInit {
     loaiGiayTo: null
   };
 
-  secondPerson = {
+  secondPerson: IDuongSu = {
+    idDuongSu: 0,
     tenDuongSu: '',
-    ngaySinh: null,
-    giayToTuyThan: null,
-    tenGiayTo: '',
-    soGiayTo: '',
-    ngayCap: null,
-    noiCap: '',
-    tinhThanhpho: '',
-    quanHuyen: '',
-    phuongXa: '',
-    hoKhau: '',
-    soNhaDuong: '',
-    noiCuTruKhac: '',
-    diaChiCuTruTamTru: '',
-    sdt: '',
+    diaChi: '',
+    soDienThoai: '',
     email: '',
     fax: '',
     website: '',
-    quocTich: '',
-    ttDuongSu: '',
-    giayChungNhanKetHon: {
-      so: '',
+    trangThai: null,
+    thongTinDs: '',
+    ngayThaoTac: null,
+    nguoiThaoTac: null,
+    idDsGoc: null,
+    idMaster: '',
+    idDonVi: null,
+    strSearch: '',
+    soGiayTo: '',
+    ghiChu: '',
+    idLoaiNganChan: null,
+    syncStatus: null,
+    loaiDuongSu: null,
+    loaiGiayTo: null
+  };
+
+  giayChungNhanKetHon = {
+    soGiayCNKH: '',
+    ngayCap: null,
+    noiCap: ''
+  }
+
+  thongTinKhacCaNhanA = {
+    gioiTinh: '',
+    ngaySinh: null,
+    giayToTuyThan: {
+      tenGiayTo: '',
       ngayCap: null,
       noiCap: ''
-    }
-  };
-  ngaySinh: any;
-  giayToTuyThan: any;
-  tenGiayTo: any;
-  ngayCap: any;
-  noiCap: any;
-  hoKhau: any;
-  soNhaDuong: any;
-  noiCuTruKhac: any;
-  diaChiCuTruTamTru: any;
-  quocTich: any;
-  ttDuongSu: any;
-  ghiChu: any;
-  tenDuongSu1: any;
-  ngaySinh1: any;
-  giayToTuyThan1: any;
-  tenGiayTo1: any;
-  soGiayTo1: any;
-  ngayCap1: any;
-  noiCap1: any;
-  tinhThanhpho1: any;
-  quanHuyen1: any;
-  phuongXa1: any;
-  hoKhau1: any;
-  soNhaDuong1: any;
-  noiCuTruKhac1: any;
-  diaChiCuTruTamTru1: any;
-  sdt1: any;
-  email1: any;
-  fax1: any;
-  website1: any;
-  quocTich1: any;
-  ttDuongSu1: any;
-  soGiayCNKH: any;
-  ngayCapNCKH: any;
-  noiCapNCKH: any;
-  tenCongTy: any;
-  tenPhieu: any;
-  tinhThanhpho: any;
-  quanHuyen: any;
-  phuongXa: any;
-  truSo: any;
-  dienThoai: any;
-  fax: any;
-  email: any;
-  website: any;
-  giayPhepThanhLap: any;
-  dangKyKinhDoanh: any;
-  noiCapGiayPhep: any;
-  xungHoNguoiDaiDien: any;
-  hoTenNguoiDaiDien: any;
-  chucVuNguoiDaiDien: any;
-  ngaySinhNguoiDaiDien: any;
-  giayToNguoiDaiDien: any;
-  tenGiayToNguoiDaiDien: any;
-  soGiayToNguoiDaiDien: any;
-  coQuanCapGiayToNguoiDaiDien: any;
-  ngayCapGiayToNguoiDaiDien: any;
-  hoKhauNguoiDaiDien: any;
-  noiCuTruNguoiDaiDien: any;
-  diaChiNguoiDaiDien: any;
-  quocTichNguoiDaiDien: any;
-  tinhTrangHoatDong: any;
+    },
+    hoKhau: '',
+    soNha: '',
+    noiCuTruKhac: '',
+    diaChiCuTruTamTru: '',
+    quocTich: '',
+    tinhTrangDuongSu: '',
+    tinhTrangHonNhan: 'ChuaKetHon'
+  }
+
+  thongTinKhacCaNhanB = {
+    gioiTinh: '',
+    ngaySinh: null,
+    giayToTuyThan: {
+      tenGiayTo: '',
+      ngayCap: null,
+      noiCap: ''
+    },
+    hoKhau: '',
+    soNha: '',
+    noiCuTruKhac: '',
+    diaChiCuTruTamTru: '',
+    quocTich: '',
+    tinhTrangDuongSu: '',
+    tinhTrangHonNhan: ''
+  }
+
+  thongTinKhacToChuc = {
+    tenPhieu: '',
+    truSo: '',
+    giayPhepThanhLap: '',
+    dangKyKinhDoanh: '',
+    noiCapGiayPhep: '',
+    xungHoNguoiDaiDien: '',
+    hoTenNguoiDaiDien: '',
+    chucVuNguoiDaiDien: '',
+    ngaySinhNguoiDaiDien: null,
+    giayToTuyThan: {
+      tenGiayTo: '',
+      ngayCap: null,
+      noiCap: ''
+    },
+    hoKhauNguoiDaiDien: '',
+    noiCuTruNguoiDaiDien: '',
+    diaChiNguoiDaiDien: '',
+    quocTichNguoiDaiDien: '',
+    tinhTrangHoatDong: ''
+  }
 
   constructor(
-    private duongSuFormService: DuongSuService,
+    private duongSuService: DuongSuService,
     private loaiDuongSuService: LoaiDuongSuService,
     protected danhMucTinhService: DanhMucTinhService,
     protected danhMucHuyenService: DanhMucHuyenService,
@@ -169,22 +164,26 @@ export class DuongsuFormComponent implements OnInit {
     this.loadTins();
   }
 
-  onLoaiDuongSuChange(value: string) {
-    console.log('Selected value:', value);
+  onLoaiGiayToChange(value: string, target: string): void {
+    if (target === 'caNhan') {
+      this.isGiayToKhacVisible = (value === 'K');
+    } else if (target === 'spouse') {
+      this.isGiayToKhacSpouseVisible = (value === 'K');
+    } else if (target === 'nguoiDaiDien') {
+      this.isGiayToKhacNguoiDaiDienVisible = (value === 'K');
+    }
+  }
 
-    // Tìm đối tượng tương ứng từ danh sách các tùy chọn
+  onLoaiDuongSuChange(value: string) {
     const selectedLoaiDuongSu = this.loaiDuongSuOptions.find(option => option.value === value);
-    console.log('Selected Loai Duong Su:', selectedLoaiDuongSu);
 
     if (selectedLoaiDuongSu) {
       this.newItem.loaiDuongSu = {
         idLoaiDuongSu: selectedLoaiDuongSu.value,
         tenLoaiDuongSu: selectedLoaiDuongSu.label
       } as ILoaiDuongSu;
-      console.log('Updated newItem.loaiDuongSu:', this.newItem.loaiDuongSu);
     } else {
       this.newItem.loaiDuongSu = null;
-      console.log('No matching Loai Duong Su found. Set newItem.loaiDuongSu to null.');
     }
   }
 
@@ -241,8 +240,6 @@ export class DuongsuFormComponent implements OnInit {
   }
 
   handleOk(): void {
-    const formData = this.mapFormDataToApiFormat();
-    this.submitForm(formData);
   }
 
   handleCancel(): void {
@@ -255,7 +252,6 @@ export class DuongsuFormComponent implements OnInit {
     this.selectedhuyenId = null;
     this.selectedxaId = null;
 
-    // Khởi tạo đối tượng newItem
     this.newItem = {
       idDuongSu: 0, // Nếu cần
       tenDuongSu: '',
@@ -279,26 +275,91 @@ export class DuongsuFormComponent implements OnInit {
       loaiDuongSu: null, // Nếu cần khởi tạo mặc định khác
       loaiGiayTo: null
     };
-  }
 
-  private submitForm(formData: any): void {
-    this.duongSuFormService.create(formData).pipe(
-      tap(response => this.onSubmitSuccess(response)),
-      catchError(error => this.onSubmitError(error))
-    ).subscribe();
-  }
+    this.secondPerson = {
+      idDuongSu: 0, // Nếu cần
+      tenDuongSu: '',
+      diaChi: '',
+      soDienThoai: '',
+      email: '',
+      fax: '',
+      website: '',
+      trangThai: null,
+      thongTinDs: '',
+      ngayThaoTac: null,
+      nguoiThaoTac: null,
+      idDsGoc: null,
+      idMaster: '',
+      idDonVi: null,
+      strSearch: '',
+      soGiayTo: '',
+      ghiChu: '',
+      idLoaiNganChan: null,
+      syncStatus: null,
+      loaiDuongSu: null, // Nếu cần khởi tạo mặc định khác
+      loaiGiayTo: null
+    }
 
-  private onSubmitSuccess(response: any): void {
-    console.log('Data successfully posted:', response);
-    this.isVisible = false;
-  }
+    this.giayChungNhanKetHon = {
+      soGiayCNKH: '',
+      ngayCap: null,
+      noiCap: ''
+    }
 
-  private onSubmitError(error: any): Observable<never> {
-    console.error('Error posting data:', error);
-    return throwError(() => new Error('Error posting data'));
-  }
+    this.thongTinKhacCaNhanA = {
+      gioiTinh: '',
+      ngaySinh: null,
+      giayToTuyThan: {
+        tenGiayTo: '',
+        ngayCap: null,
+        noiCap: ''
+      },
+      hoKhau: '',
+      soNha: '',
+      noiCuTruKhac: '',
+      diaChiCuTruTamTru: '',
+      quocTich: '',
+      tinhTrangDuongSu: '',
+      tinhTrangHonNhan: ''
+    }
 
-  private mapFormDataToApiFormat(): any {
-    return this.newItem;
+    this.thongTinKhacCaNhanB = {
+      gioiTinh: '',
+      ngaySinh: null,
+      giayToTuyThan: {
+        tenGiayTo: '',
+        ngayCap: null,
+        noiCap: ''
+      },
+      hoKhau: '',
+      soNha: '',
+      noiCuTruKhac: '',
+      diaChiCuTruTamTru: '',
+      quocTich: '',
+      tinhTrangDuongSu: '',
+      tinhTrangHonNhan: ''
+    }
+
+    this.thongTinKhacToChuc = {
+      tenPhieu: '',
+      truSo: '',
+      giayPhepThanhLap: '',
+      dangKyKinhDoanh: '',
+      noiCapGiayPhep: '',
+      xungHoNguoiDaiDien: '',
+      hoTenNguoiDaiDien: '',
+      chucVuNguoiDaiDien: '',
+      ngaySinhNguoiDaiDien: null,
+      giayToTuyThan: {
+        tenGiayTo: '',
+        ngayCap: null,
+        noiCap: ''
+      },
+      hoKhauNguoiDaiDien: '',
+      noiCuTruNguoiDaiDien: '',
+      diaChiNguoiDaiDien: '',
+      quocTichNguoiDaiDien: '',
+      tinhTrangHoatDong: ''
+    }
   }
 }
