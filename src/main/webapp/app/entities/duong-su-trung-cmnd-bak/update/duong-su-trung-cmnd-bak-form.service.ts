@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDuongSuTrungCmndBak, NewDuongSuTrungCmndBak } from '../duong-su-trung-cmnd-bak.model';
 
@@ -18,20 +18,18 @@ type DuongSuTrungCmndBakFormDefaults = Pick<NewDuongSuTrungCmndBak, 'id'>;
 
 type DuongSuTrungCmndBakFormGroupContent = {
   id: FormControl<IDuongSuTrungCmndBak['id'] | NewDuongSuTrungCmndBak['id']>;
-  idDuongSu: FormControl<IDuongSuTrungCmndBak['idDuongSu']>;
   tenDuongSu: FormControl<IDuongSuTrungCmndBak['tenDuongSu']>;
-  idLoaiDs: FormControl<IDuongSuTrungCmndBak['idLoaiDs']>;
   diaChi: FormControl<IDuongSuTrungCmndBak['diaChi']>;
   trangThai: FormControl<IDuongSuTrungCmndBak['trangThai']>;
   thongTinDs: FormControl<IDuongSuTrungCmndBak['thongTinDs']>;
   ngayThaoTac: FormControl<IDuongSuTrungCmndBak['ngayThaoTac']>;
   nguoiThaoTac: FormControl<IDuongSuTrungCmndBak['nguoiThaoTac']>;
   idDsGoc: FormControl<IDuongSuTrungCmndBak['idDsGoc']>;
-  idTinhTrang: FormControl<IDuongSuTrungCmndBak['idTinhTrang']>;
   idMaster: FormControl<IDuongSuTrungCmndBak['idMaster']>;
   idDonVi: FormControl<IDuongSuTrungCmndBak['idDonVi']>;
   strSearch: FormControl<IDuongSuTrungCmndBak['strSearch']>;
   soGiayTo: FormControl<IDuongSuTrungCmndBak['soGiayTo']>;
+  duongSu: FormControl<IDuongSuTrungCmndBak['duongSu']>;
 };
 
 export type DuongSuTrungCmndBakFormGroup = FormGroup<DuongSuTrungCmndBakFormGroupContent>;
@@ -51,20 +49,20 @@ export class DuongSuTrungCmndBakFormService {
           validators: [Validators.required],
         },
       ),
-      idDuongSu: new FormControl(duongSuTrungCmndBakRawValue.idDuongSu),
       tenDuongSu: new FormControl(duongSuTrungCmndBakRawValue.tenDuongSu),
-      idLoaiDs: new FormControl(duongSuTrungCmndBakRawValue.idLoaiDs),
       diaChi: new FormControl(duongSuTrungCmndBakRawValue.diaChi),
-      trangThai: new FormControl(duongSuTrungCmndBakRawValue.trangThai),
+      trangThai: new FormControl(duongSuTrungCmndBakRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
       thongTinDs: new FormControl(duongSuTrungCmndBakRawValue.thongTinDs),
       ngayThaoTac: new FormControl(duongSuTrungCmndBakRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(duongSuTrungCmndBakRawValue.nguoiThaoTac),
       idDsGoc: new FormControl(duongSuTrungCmndBakRawValue.idDsGoc),
-      idTinhTrang: new FormControl(duongSuTrungCmndBakRawValue.idTinhTrang),
       idMaster: new FormControl(duongSuTrungCmndBakRawValue.idMaster),
       idDonVi: new FormControl(duongSuTrungCmndBakRawValue.idDonVi),
       strSearch: new FormControl(duongSuTrungCmndBakRawValue.strSearch),
       soGiayTo: new FormControl(duongSuTrungCmndBakRawValue.soGiayTo),
+      duongSu: new FormControl(duongSuTrungCmndBakRawValue.duongSu),
     });
   }
 

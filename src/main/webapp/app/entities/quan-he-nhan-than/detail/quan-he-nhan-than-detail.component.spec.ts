@@ -17,8 +17,8 @@ describe('QuanHeNhanThan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: QuanHeNhanThanDetailComponent,
-              resolve: { quanHeNhanThan: () => of({ id: 123 }) },
+              loadComponent: () => import('./quan-he-nhan-than-detail.component').then(m => m.QuanHeNhanThanDetailComponent),
+              resolve: { quanHeNhanThan: () => of({ idQuanHe: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('QuanHeNhanThan Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', QuanHeNhanThanDetailComponent);
 
       // THEN
-      expect(instance.quanHeNhanThan()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.quanHeNhanThan()).toEqual(expect.objectContaining({ idQuanHe: 123 }));
     });
   });
 

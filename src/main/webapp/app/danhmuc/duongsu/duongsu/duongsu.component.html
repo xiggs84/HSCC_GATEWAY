@@ -5,9 +5,7 @@
       <nz-form-control>
         <nz-select [(ngModel)]="selectedUnit" (ngModelChange)="onUnitChange()" nzPlaceHolder="Chọn loại đương sự">
           <nz-option [nzValue]="null" nzLabel="Tất cả"></nz-option>
-          <nz-option [nzValue]="LoaiDuongSu.CaNhan" nzLabel="Cá nhân"></nz-option>
-          <nz-option [nzValue]="LoaiDuongSu.ToChuc" nzLabel="Tổ chức"></nz-option>
-          <nz-option [nzValue]="LoaiDuongSu.ToChucTinDung" nzLabel="Tổ chức tín dụng"></nz-option>
+          <nz-option *ngFor="let option of loaiDuongSuOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -39,32 +37,39 @@
 </nz-row>
 <jhi-duongsu-form #duongSuForm></jhi-duongsu-form>
 
-<nz-table [nzData]="listOfDs" nzBordered nzSize="small" nzShowPagination class="custom-table">
+<nz-table [nzData]="listOfData"
+          [nzPageSize]="pageSize"
+          [nzPageIndex]="pageIndex"
+          (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger>
   <thead>
   <tr>
-    <th nzWidth="10px">#</th>
+    <th nzWidth="50px">Stt</th>
     <th>Mã đương sự</th>
     <th>Tên đương sự</th>
     <th>Loại đương sự</th>
     <th>Tình trạng đương sự</th>
     <th>Địa chỉ</th>
     <th>Đơn vị</th>
-    <th>Thao tác</th>
+    <th nzWidth="100px">Thao tác</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let Ds of filteredListOfDs; let index = index">
-    <td>{{ index + 1 }}</td>
-    <td>{{ Ds.soGiayTo }}</td>
-    <td>{{ Ds.tenDuongSu }}</td>
-    <td>{{ Ds.loaiDuongSu }}</td>
-    <td>{{ Ds.tinhTrangDuongSu }}</td>
-    <td>{{ Ds.diaChi }}</td>
-    <td>{{ Ds.donVi }}</td>
+  <tr *ngFor="let item of listOfCurrentPageData; let i = index">
+    <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+    <td>{{ item.soGiayTo ?? 'N/A' }}</td>
+    <td>{{ item.tenDuongSu ?? 'N/A' }}</td>
+    <td>{{ item.loaiDuongSu?.tenLoaiDuongSu ?? 'N/A' }}</td>
+    <td>{{ extractTinhTrangDuongSu(item.thongTinDs ?? null)}}</td>
+    <td>{{ item.diaChi ?? 'N/A' }}</td>
+    <td>{{ item.idDonVi ?? 'N/A' }}</td>
     <td>
       <div class="action-icons">
         <ng-container *ngFor="let action of dsActions">
-          <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip" (click)="onActionClick(action.type, Ds)"></i>
+          <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip" (click)="onActionClick(action.type, item)"></i>
         </ng-container>
       </div>
     </td>

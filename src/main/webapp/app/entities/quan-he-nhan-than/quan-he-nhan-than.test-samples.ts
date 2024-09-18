@@ -1,25 +1,22 @@
 import { IQuanHeNhanThan, NewQuanHeNhanThan } from './quan-he-nhan-than.model';
 
 export const sampleWithRequiredData: IQuanHeNhanThan = {
-  id: 25380,
+  idQuanHe: 16488,
 };
 
 export const sampleWithPartialData: IQuanHeNhanThan = {
-  id: 20000,
-  dienGiai: 'coin posture',
-  idGioiTinh: 25892,
+  idQuanHe: 18492,
+  idQuanHeDoiUng: 30661,
 };
 
 export const sampleWithFullData: IQuanHeNhanThan = {
-  id: 25985,
-  idQuanHe: 29846,
-  dienGiai: 'flippant instead sans',
-  idQuanHeDoiUng: 13668,
-  idGioiTinh: 510,
+  idQuanHe: 22763,
+  dienGiai: 'er bah',
+  idQuanHeDoiUng: 19650,
 };
 
 export const sampleWithNewData: NewQuanHeNhanThan = {
-  id: null,
+  idQuanHe: null,
 };
 
 Object.freeze(sampleWithNewData);

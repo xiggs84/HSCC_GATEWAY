@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { IDuongSuTrungCmndBak } from '../duong-su-trung-cmnd-bak.model';
 import { DuongSuTrungCmndBakService } from '../service/duong-su-trung-cmnd-bak.service';
 
 const duongSuTrungCmndBakResolve = (route: ActivatedRouteSnapshot): Observable<null | IDuongSuTrungCmndBak> => {
-  const id = route.params['id'];
+  const id = route.params.id;
   if (id) {
     return inject(DuongSuTrungCmndBakService)
       .find(id)
@@ -16,10 +16,9 @@ const duongSuTrungCmndBakResolve = (route: ActivatedRouteSnapshot): Observable<n
         mergeMap((duongSuTrungCmndBak: HttpResponse<IDuongSuTrungCmndBak>) => {
           if (duongSuTrungCmndBak.body) {
             return of(duongSuTrungCmndBak.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

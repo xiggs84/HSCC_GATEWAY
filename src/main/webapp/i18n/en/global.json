@@ -8,13 +8,19 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "danhMucDonVi": "Danh Muc Don Vi",
-        "danhMucTinh": "Danh Muc Tinh",
-        "danhMucHuyen": "Danh Muc Huyen",
-        "danhMucXa": "Danh Muc Xa",
-        "capQuanLy": "Cap Quan Ly",
-        "loaiDonVi": "Loai Don Vi",
-        "nhiemVu": "Nhiem Vu"
+        "duongSu": "Duong Su",
+        "cauHinhThongTinDuongSu": "Cau Hinh Thong Tin Duong Su",
+        "quanHeDuongSu": "Quan He Duong Su",
+        "duongSuTrungCmnd": "Duong Su Trung Cmnd",
+        "duongSuTrungCmndBak": "Duong Su Trung Cmnd Bak",
+        "danhSachDuongSu": "Danh Sach Duong Su",
+        "dmDuongSu": "Dm Duong Su",
+        "quanHeNhanThan": "Quan He Nhan Than",
+        "quanHeMaster": "Quan He Master",
+        "taiSanDuongSu": "Tai San Duong Su",
+        "chiTietNganChan": "Chi Tiet Ngan Chan",
+        "loaiDuongSu": "Loai Duong Su",
+        "loaiGiayTo": "Loai Giay To"
       },
       "account": {
         "main": "Account",

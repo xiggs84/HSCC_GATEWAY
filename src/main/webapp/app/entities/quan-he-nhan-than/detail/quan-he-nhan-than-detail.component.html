@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (quanHeNhanThan()) {
+    @if (quanHeNhanThan(); as quanHeNhanThanRef) {
       <div>
         <h2 data-cy="quanHeNhanThanDetailsHeading"><span jhiTranslate="gatewayApp.quanHeNhanThan.detail.title">Quan He Nhan Than</span></h2>
 
@@ -11,25 +11,17 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ quanHeNhanThan()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeNhanThan.idQuanHe">Id Quan He</span></dt>
           <dd>
-            <span>{{ quanHeNhanThan()!.idQuanHe }}</span>
+            <span>{{ quanHeNhanThanRef.idQuanHe }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeNhanThan.dienGiai">Dien Giai</span></dt>
           <dd>
-            <span>{{ quanHeNhanThan()!.dienGiai }}</span>
+            <span>{{ quanHeNhanThanRef.dienGiai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeNhanThan.idQuanHeDoiUng">Id Quan He Doi Ung</span></dt>
           <dd>
-            <span>{{ quanHeNhanThan()!.idQuanHeDoiUng }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.quanHeNhanThan.idGioiTinh">Id Gioi Tinh</span></dt>
-          <dd>
-            <span>{{ quanHeNhanThan()!.idGioiTinh }}</span>
+            <span>{{ quanHeNhanThanRef.idQuanHeDoiUng }}</span>
           </dd>
         </dl>
 
@@ -37,7 +29,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/quan-he-nhan-than', quanHeNhanThan()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/quan-he-nhan-than', quanHeNhanThanRef.idQuanHe, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

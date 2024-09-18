@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { QuanHeMasterComponent } from './list/quan-he-master.component';
-import { QuanHeMasterDetailComponent } from './detail/quan-he-master-detail.component';
-import { QuanHeMasterUpdateComponent } from './update/quan-he-master-update.component';
 import QuanHeMasterResolve from './route/quan-he-master-routing-resolve.service';
 
 const quanHeMasterRoute: Routes = [
   {
     path: '',
-    component: QuanHeMasterComponent,
+    loadComponent: () => import('./list/quan-he-master.component').then(m => m.QuanHeMasterComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: QuanHeMasterDetailComponent,
+    loadComponent: () => import('./detail/quan-he-master-detail.component').then(m => m.QuanHeMasterDetailComponent),
     resolve: {
       quanHeMaster: QuanHeMasterResolve,
     },
@@ -26,7 +23,7 @@ const quanHeMasterRoute: Routes = [
   },
   {
     path: 'new',
-    component: QuanHeMasterUpdateComponent,
+    loadComponent: () => import('./update/quan-he-master-update.component').then(m => m.QuanHeMasterUpdateComponent),
     resolve: {
       quanHeMaster: QuanHeMasterResolve,
     },
@@ -34,7 +31,7 @@ const quanHeMasterRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: QuanHeMasterUpdateComponent,
+    loadComponent: () => import('./update/quan-he-master-update.component').then(m => m.QuanHeMasterUpdateComponent),
     resolve: {
       quanHeMaster: QuanHeMasterResolve,
     },

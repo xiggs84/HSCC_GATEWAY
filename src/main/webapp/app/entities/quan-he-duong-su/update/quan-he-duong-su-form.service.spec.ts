@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../quan-he-duong-su.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../quan-he-duong-su.test-samples';
 
 import { QuanHeDuongSuFormService } from './quan-he-duong-su-form.service';
 
@@ -19,12 +19,11 @@ describe('QuanHeDuongSu Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
-            idDuongSu: expect.any(Object),
-            idDuongSuQh: expect.any(Object),
             idQuanHe: expect.any(Object),
+            idDuongSuQh: expect.any(Object),
             thongTinQuanHe: expect.any(Object),
             trangThai: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });
@@ -34,12 +33,11 @@ describe('QuanHeDuongSu Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
-            idDuongSu: expect.any(Object),
-            idDuongSuQh: expect.any(Object),
             idQuanHe: expect.any(Object),
+            idDuongSuQh: expect.any(Object),
             thongTinQuanHe: expect.any(Object),
             trangThai: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });
@@ -72,22 +70,22 @@ describe('QuanHeDuongSu Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IQuanHeDuongSu should not enable id FormControl', () => {
+      it('passing IQuanHeDuongSu should not enable idQuanHe FormControl', () => {
         const formGroup = service.createQuanHeDuongSuFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
       });
 
-      it('passing NewQuanHeDuongSu should disable id FormControl', () => {
+      it('passing NewQuanHeDuongSu should disable idQuanHe FormControl', () => {
         const formGroup = service.createQuanHeDuongSuFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idQuanHe: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
       });
     });
   });

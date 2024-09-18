@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { QuanHeDuongSuComponent } from './list/quan-he-duong-su.component';
-import { QuanHeDuongSuDetailComponent } from './detail/quan-he-duong-su-detail.component';
-import { QuanHeDuongSuUpdateComponent } from './update/quan-he-duong-su-update.component';
 import QuanHeDuongSuResolve from './route/quan-he-duong-su-routing-resolve.service';
 
 const quanHeDuongSuRoute: Routes = [
   {
     path: '',
-    component: QuanHeDuongSuComponent,
+    loadComponent: () => import('./list/quan-he-duong-su.component').then(m => m.QuanHeDuongSuComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idQuanHe,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: QuanHeDuongSuDetailComponent,
+    path: ':idQuanHe/view',
+    loadComponent: () => import('./detail/quan-he-duong-su-detail.component').then(m => m.QuanHeDuongSuDetailComponent),
     resolve: {
       quanHeDuongSu: QuanHeDuongSuResolve,
     },
@@ -26,15 +23,15 @@ const quanHeDuongSuRoute: Routes = [
   },
   {
     path: 'new',
-    component: QuanHeDuongSuUpdateComponent,
+    loadComponent: () => import('./update/quan-he-duong-su-update.component').then(m => m.QuanHeDuongSuUpdateComponent),
     resolve: {
       quanHeDuongSu: QuanHeDuongSuResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: QuanHeDuongSuUpdateComponent,
+    path: ':idQuanHe/edit',
+    loadComponent: () => import('./update/quan-he-duong-su-update.component').then(m => m.QuanHeDuongSuUpdateComponent),
     resolve: {
       quanHeDuongSu: QuanHeDuongSuResolve,
     },

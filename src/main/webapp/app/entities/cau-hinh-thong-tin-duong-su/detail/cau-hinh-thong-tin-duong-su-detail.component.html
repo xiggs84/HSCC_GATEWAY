@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (cauHinhThongTinDuongSu()) {
+    @if (cauHinhThongTinDuongSu(); as cauHinhThongTinDuongSuRef) {
       <div>
         <h2 data-cy="cauHinhThongTinDuongSuDetailsHeading">
           <span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.detail.title">Cau Hinh Thong Tin Duong Su</span>
@@ -13,37 +13,33 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.idCauHinh">Id Cau Hinh</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.idCauHinh }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.idCauHinh }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.noiDung">Noi Dung</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.noiDung }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.noiDung }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.javascript">Javascript</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.javascript }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.javascript }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.css">Css</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.css }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.css }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.idLoaiDs">Id Loai Ds</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.idLoaiDs }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.idLoaiDs }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.idDonVi }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ cauHinhThongTinDuongSu()!.trangThai }}</span>
+            <span>{{ cauHinhThongTinDuongSuRef.trangThai }}</span>
           </dd>
         </dl>
 
@@ -51,7 +47,11 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu()!.id, 'edit']" class="btn btn-primary">
+        <button
+          type="button"
+          [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSuRef.idCauHinh, 'edit']"
+          class="btn btn-primary"
+        >
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import SharedModule from "../../../shared/shared.module";
 import {DuongSuService} from "../../../entities/duong-su/service/duong-su.service";
 import {LoaiDuongSu} from "../../../entities/enumerations/loai-duong-su.model";
-import { catchError, tap } from "rxjs/operators";
-import { throwError } from "rxjs";
+import {IDuongSu} from "../../../entities/duong-su/duong-su.model";
 import { DuongsuFormComponent } from "../../../form/duongsu-form/duongsu-form.component";
 import {LichsucapnhatComponent} from "../../../thaotac/lichsucapnhat/lichsucapnhat.component";
 import {LichsugiaodichduongsuComponent} from "../../../thaotac/lichsugiaodichduongsu/lichsugiaodichduongsu.component";
@@ -12,6 +11,7 @@ import {ThemthongtinnganchanComponent} from "../../../thaotac/themthongtinnganch
 import {ThongtinvochongComponent} from "../../../thaotac/thongtinvochong/thongtinvochong.component";
 import {ThemthongtinvochongComponent} from "../../../thaotac/themthongtinvochong/themthongtinvochong.component";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {LoaiDuongSuService} from "../../../entities/loai-duong-su/service/loai-duong-su.service";
 
 @Component({
   selector: 'jhi-duongsu',
@@ -20,13 +20,14 @@ import {NzModalService} from "ng-zorro-antd/modal";
   templateUrl: './duongsu.component.html',
   styleUrl: './duongsu.component.scss'
 })
-export class DuongsuComponent {
-  selectedUnit: string = '';
+export class DuongsuComponent implements OnInit {
+  listOfData: readonly IDuongSu[] = []; // Thay đổi thành kiểu readonly
   searchValue: string = '';
-  listOfDs: any[] = [];
-  filteredListOfDs: any[] = [];
-  selectedDuongSuData: any;
-  @ViewChild(DuongsuFormComponent) duongSuFormComponent!: DuongsuFormComponent;
+  listOfCurrentPageData: readonly IDuongSu[] = []; // Thay đổi thành kiểu readonly
+  selectedUnit: string = '';
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  originalData: readonly IDuongSu[] = []; // Thay đổi thành kiểu readonly
 
   dsActions = [
     { icon: 'history', tooltip: 'Lịch sử cập nhật', type: 'history' },
@@ -48,71 +49,158 @@ export class DuongsuComponent {
   modalColumns: string[] = [];
   modalData: any[] = [];
 
-  onActionClick(actionType: string, data: any): void {
-    if (actionType === 'history') {
-      this.showHistoryModal(data);
-    } else if (actionType === 'historytrade') {
-      this.showHistoryTradeModal();
-    } else if (actionType === 'containmentstatus') {
-      this.showContainmentStatusModal();
-    } else if (actionType === 'addcontainmentstatus') {
-      this.showAddContainmentStatusModal();
-    } else if (actionType === 'spouseinformation') {
-      this.showSpouseInformationModal();
-    } else if (actionType === 'addspouseinformation') {
-      this.showAddSpouseInformationModal();
-    } else if (actionType === 'delete') {
-      this.showDeleteConfirm();
-    } else if (actionType === 'editinformation') {
-      this.editDuongSu(data);
-    }
-    // Handle other actions...
+  @ViewChild('duongSuForm') duongSuFormComponent: any; // Update the type based on the actual component type
+  loaiDuongSuOptions: { label: string; value: string }[] = [];
+
+  constructor(private duongsuService: DuongSuService,
+              private modal: NzModalService,
+              private loaiDuongSuService: LoaiDuongSuService) {}
+
+  ngOnInit(): void {
+    this.loadDuongsuData();
+    this.loadLoaiDuongSus();
   }
 
-  editDuongSu(data: any): void {
-    this.duongsuService.findBySoGiayTo(data.soGiayTo).subscribe({
+  loadDuongsuData(): void {
+    this.duongsuService.query().subscribe({
       next: (response) => {
-        this.selectedDuongSuData = response.body;
-        if (this.duongSuFormComponent) {
-          this.duongSuFormComponent.populateForm(this.selectedDuongSuData, true); // Truyền dữ liệu vào form
-          this.duongSuFormComponent.showModal(); // Hiển thị form
-        } else {
-          console.error('duongSuFormComponent chưa sẵn sàng');
-        }
+        this.originalData = response.body || [];
+        this.listOfData = [...this.originalData];
       },
-      error: (error) => {
-        // Handle error
-      },
-      complete: () => {
-        // Handle complete
-      }
+      error: (error) => console.error('Error fetching data:', error)
     });
   }
 
+  loadLoaiDuongSus(): void {
+    this.loaiDuongSuService.query().subscribe({
+      next: (res) => {
+        this.loaiDuongSuOptions = res.body?.map(loaiDuongSu => ({
+          label: loaiDuongSu.tenLoaiDuongSu || '',
+          value: loaiDuongSu.idLoaiDuongSu
+        })) || [];
+      },
+      error: (err) => console.error('Error fetching loai duong sus', err)
+    });
+  }
 
-  showHistoryModal(data: any): void {
+  extractTinhTrangDuongSu(thongTinDs: string | null): string {
+    if (!thongTinDs) {
+      return 'Khác';
+    }
+
+    if (thongTinDs.includes('Sống')) {
+      return 'Sống';
+    }
+
+    if (thongTinDs.includes('Đã chết')) {
+      return 'Đã chết';
+    }
+
+    if (thongTinDs.includes('Bị ngăn chặn')) {
+      return 'Bị ngăn chặn';
+    }
+
+    return 'Khác';
+  }
+
+
+  getLoaiDuongSuLabel(loaiDuongSuKey: keyof typeof LoaiDuongSu): string {
+    return LoaiDuongSu[loaiDuongSuKey] || '';
+  }
+
+  onUnitChange(): void {
+  }
+
+  onSearchChange(): void {
+  }
+
+  onCurrentPageDataChange(listOfCurrentPageData: readonly IDuongSu[]): void { // Cập nhật kiểu dữ liệu tham số
+    this.listOfCurrentPageData = listOfCurrentPageData;
+  }
+
+  onPageIndexChange(index: number): void {
+    this.pageIndex = index;
+    this.updateCurrentPageData(); // Cập nhật dữ liệu trang hiện tại
+  }
+
+  onPageSizeChange(size: number): void {
+    this.pageSize = size;
+    this.pageIndex = 1; // Reset to first page when page size changes
+    this.updateCurrentPageData(); // Cập nhật dữ liệu trang hiện tại
+  }
+
+  updateCurrentPageData(): void {
+    const startIndex = (this.pageIndex - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.listOfCurrentPageData = this.listOfData.slice(startIndex, endIndex);
+  }
+
+  resetData(): void {
+    this.loadDuongsuData();
+  }
+
+  scan(): void {
+    console.log('Scan action');
+  }
+
+  onActionClick(actionType: string, data: IDuongSu): void {
+    switch (actionType) {
+      case 'history':
+        this.showHistoryModal(data);
+        break;
+      case 'historytrade':
+        this.showHistoryTradeModal();
+        break;
+      case 'containmentstatus':
+        this.showContainmentStatusModal();
+        break;
+      case 'addcontainmentstatus':
+        this.showAddContainmentStatusModal();
+        break;
+      case 'spouseinformation':
+        this.showSpouseInformationModal();
+        break;
+      case 'addspouseinformation':
+        this.showAddSpouseInformationModal();
+        break;
+      case 'delete':
+        this.showDeleteConfirm();
+        break;
+      case 'editinformation':
+        this.editDuongSu(data);
+        break;
+      default:
+        console.error('Unknown action type:', actionType);
+    }
+  }
+
+  editDuongSu(data: IDuongSu): void {
+    // Chỉnh sửa đương sự
+  }
+
+  showHistoryModal(data: IDuongSu): void {
     this.modalColumns = ['Tên đương sự', 'Loại đương sự', 'Số giấy tờ', 'Thông tin đương sự', 'Ngày cập nhật'];
     this.modalData = this.getHistoryDataFor(data);
     this.isHistoryModalVisible = true;
   }
 
-  showHistoryTradeModal() {
+  showHistoryTradeModal(): void {
     this.isHistoryTradeModalVisible = true;
   }
 
-  showContainmentStatusModal() {
+  showContainmentStatusModal(): void {
     this.isContainmentStatusModalVisible = true;
   }
 
-  showAddContainmentStatusModal() {
+  showAddContainmentStatusModal(): void {
     this.isAddContainmentStatusModalVisible = true;
   }
 
-  showSpouseInformationModal() {
+  showSpouseInformationModal(): void {
     this.isSpouseInformationModalVisible = true;
   }
 
-  showAddSpouseInformationModal() {
+  showAddSpouseInformationModal(): void {
     this.isAddSpouseInformationModalVisible = true;
   }
 
@@ -124,26 +212,23 @@ export class DuongsuComponent {
       nzOkType: 'primary',
       nzCancelText: 'Hủy',
       nzOnOk: () => {
-        // Thực hiện hành động xóa ở đây
         console.log('Xóa thành công');
       }
     });
   }
 
-  getHistoryDataFor(data: any): any[] {
-    // Fetch or generate history data based on the provided data
+  getHistoryDataFor(data: IDuongSu): any[] {
     return [
-      // Example data
       {
-        'Tên đương sự': 'Nguyen Van A',
-        'Loại đương sự': 'Cá nhân',
-        'Số giấy tờ': '123456789',
-        'Thông tin đương sự': 'Thông tin chi tiết',
+        'Tên đương sự': data.tenDuongSu || 'Nguyen Van A',
+        'Loại đương sự': data.loaiDuongSu,
+        'Số giấy tờ': data.soGiayTo || '123456789',
+        'Thông tin đương sự': data.thongTinDs || 'Thông tin chi tiết',
         'Ngày cập nhật': new Date()
       }
-      // More data...
     ];
   }
+
   handleCancelModal(): void {
     this.isHistoryModalVisible = false;
     this.isHistoryTradeModalVisible = false;
@@ -152,79 +237,5 @@ export class DuongsuComponent {
     this.isSpouseInformationModalVisible = false;
     this.isAddSpouseInformationModalVisible = false;
   }
-
-  constructor(private duongsuService: DuongSuService,
-              private modal: NzModalService) {}
-
-  ngOnInit(): void {
-    this.loadDuongsuData();
-  }
-
-  loadDuongsuData(): void {
-    this.duongsuService.query().pipe(
-      tap(response => {
-        this.listOfDs = this.mapData(response.body || []); // Use response.body to get the actual data
-        this.filterDataByType();
-      }),
-      catchError(error => {
-        console.error('Error fetching data:', error);
-        return throwError(() => new Error('Error fetching data'));
-      })
-    ).subscribe();
-  }
-
-  mapData(data: any[]): any[] {
-    return data.map(item => ({
-      idDuongSu: item.idDuongSu,
-      soGiayTo: item.soGiayTo || '',
-      tenDuongSu: item.tenDuongSu || '',
-      loaiDuongSu: item.loaiDuongSu ? this.getLoaiDuongSuLabel(item.loaiDuongSu) : '',
-      tinhTrangDuongSu: this.extractTinhTrangDuongSu(item.thongTinDs) || '', // Chuyển đổi nếu cần
-      diaChi: item.diaChi || '',
-      donVi: item.donVi || ''
-    }));
-  }
-
-  getLoaiDuongSuLabel(loaiDuongSuKey: keyof typeof LoaiDuongSu): string {
-    return LoaiDuongSu[loaiDuongSuKey] || '';
-  }
-
-  extractTinhTrangDuongSu(thongTinDs: string): string {
-    // Thay đổi theo cách bạn muốn trích xuất tình trạng đương sự từ `thongTinDs`
-    // Ví dụ:
-    return thongTinDs.includes('ChuaKetHon') ? 'ChuaKetHon' : 'Khac';
-  }
-
-  resetData() {
-    this.loadDuongsuData();
-  }
-
-  scan() {
-    console.log('Scan action');
-  }
-
-  filterDataByType(): void {
-    let filteredByType = this.selectedUnit === 'all' || !this.selectedUnit
-      ? this.listOfDs
-      : this.listOfDs.filter(ds => ds.loaiDuongSu === this.selectedUnit);
-
-    if (this.searchValue) {
-      this.filteredListOfDs = filteredByType.filter(ds =>
-        ds.tenDuongSu.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-        ds.soGiayTo.toLowerCase().includes(this.searchValue.toLowerCase())
-      );
-    } else {
-      this.filteredListOfDs = filteredByType;
-    }
-  }
-
-  onUnitChange(): void {
-    this.filterDataByType();
-  }
-
-  onSearchChange(): void {
-    this.filterDataByType();
-  }
-
-  protected readonly LoaiDuongSu = LoaiDuongSu;
 }
+

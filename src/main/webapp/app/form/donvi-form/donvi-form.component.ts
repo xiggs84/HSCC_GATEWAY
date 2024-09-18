@@ -1,9 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import SharedModule from "../../shared/shared.module";
 import {IDanhMucDonVi, NewDanhMucDonVi} from "../../entities/danh-muc-don-vi/danh-muc-don-vi.model";
-import {LoaiDonVi} from "../../entities/enumerations/loai-don-vi.model";
-import {NhiemVu} from "../../entities/enumerations/nhiem-vu.model";
-import {CapQuanLy} from "../../entities/enumerations/cap-quan-ly.model";
 import {DanhMucTinhService} from "../../entities/danh-muc-tinh/service/danh-muc-tinh.service"
 import {IDanhMucTinh} from "../../entities/danh-muc-tinh/danh-muc-tinh.model";
 import {IDanhMucHuyen} from "../../entities/danh-muc-huyen/danh-muc-huyen.model";

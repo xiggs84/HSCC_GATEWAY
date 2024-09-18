@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IQuanHeDuongSu, NewQuanHeDuongSu } from '../quan-he-duong-su.model';
 
-export type PartialUpdateQuanHeDuongSu = Partial<IQuanHeDuongSu> & Pick<IQuanHeDuongSu, 'id'>;
+export type PartialUpdateQuanHeDuongSu = Partial<IQuanHeDuongSu> & Pick<IQuanHeDuongSu, 'idQuanHe'>;
 
 export type EntityResponseType = HttpResponse<IQuanHeDuongSu>;
 export type EntityArrayResponseType = HttpResponse<IQuanHeDuongSu[]>;
@@ -48,15 +48,15 @@ export class QuanHeDuongSuService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getQuanHeDuongSuIdentifier(quanHeDuongSu: Pick<IQuanHeDuongSu, 'id'>): number {
-    return quanHeDuongSu.id;
+  getQuanHeDuongSuIdentifier(quanHeDuongSu: Pick<IQuanHeDuongSu, 'idQuanHe'>): number {
+    return quanHeDuongSu.idQuanHe;
   }
 
-  compareQuanHeDuongSu(o1: Pick<IQuanHeDuongSu, 'id'> | null, o2: Pick<IQuanHeDuongSu, 'id'> | null): boolean {
+  compareQuanHeDuongSu(o1: Pick<IQuanHeDuongSu, 'idQuanHe'> | null, o2: Pick<IQuanHeDuongSu, 'idQuanHe'> | null): boolean {
     return o1 && o2 ? this.getQuanHeDuongSuIdentifier(o1) === this.getQuanHeDuongSuIdentifier(o2) : o1 === o2;
   }
 
-  addQuanHeDuongSuToCollectionIfMissing<Type extends Pick<IQuanHeDuongSu, 'id'>>(
+  addQuanHeDuongSuToCollectionIfMissing<Type extends Pick<IQuanHeDuongSu, 'idQuanHe'>>(
     quanHeDuongSuCollection: Type[],
     ...quanHeDuongSusToCheck: (Type | null | undefined)[]
   ): Type[] {

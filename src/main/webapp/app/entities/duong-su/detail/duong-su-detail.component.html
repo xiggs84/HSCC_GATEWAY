@@ -19,12 +19,6 @@
           <dd>
             <span>{{ duongSuRef.tenDuongSu }}</span>
           </dd>
-          <dt><span jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</span></dt>
-          <dd>
-            <span [jhiTranslate]="'gatewayApp.LoaiDuongSu.' + (duongSuRef.loaiDuongSu ?? 'null')">{{
-              { null: '', CaNhan: 'Cá nhân', ToChuc: 'Tổ chức', ToChucTinDung: 'Tổ chức tín dụng' }[duongSuRef.loaiDuongSu ?? 'null']
-            }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.duongSu.diaChi">Dia Chi</span></dt>
           <dd>
             <span>{{ duongSuRef.diaChi }}</span>
@@ -77,19 +71,6 @@
           <dd>
             <span>{{ duongSuRef.strSearch }}</span>
           </dd>
-          <dt><span jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</span></dt>
-          <dd>
-            <span [jhiTranslate]="'gatewayApp.LoaiGiayTo.' + (duongSuRef.loaiGiayTo ?? 'null')">{{
-              {
-                null: '',
-                Cmnd: 'Chứng minh nhân dân',
-                Cccd: 'Căn cước công dân',
-                Cc: 'Căn cước',
-                Hc: 'Hộ chiếu',
-                K: 'Giấy tờ hợp lệ khác',
-              }[duongSuRef.loaiGiayTo ?? 'null']
-            }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.duongSu.soGiayTo">So Giay To</span></dt>
           <dd>
             <span>{{ duongSuRef.soGiayTo }}</span>
@@ -105,6 +86,26 @@
           <dt><span jhiTranslate="gatewayApp.duongSu.syncStatus">Sync Status</span></dt>
           <dd>
             <span>{{ duongSuRef.syncStatus }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</span></dt>
+          <dd>
+            @if (duongSu()!.loaiDuongSu) {
+              <div>
+                <a [routerLink]="['/loai-duong-su', duongSu()!.loaiDuongSu?.idLoaiDuongSu, 'view']">{{
+                  duongSuRef.loaiDuongSu?.idLoaiDuongSu
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</span></dt>
+          <dd>
+            @if (duongSu()!.loaiGiayTo) {
+              <div>
+                <a [routerLink]="['/loai-giay-to', duongSu()!.loaiGiayTo?.idLoaiGiayTo, 'view']">{{
+                  duongSuRef.loaiGiayTo?.idLoaiGiayTo
+                }}</a>
+              </div>
+            }
           </dd>
         </dl>
 

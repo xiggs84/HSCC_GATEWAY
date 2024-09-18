@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../dm-duong-su.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../dm-duong-su.test-samples';
 
 import { DmDuongSuFormService } from './dm-duong-su-form.service';
 
@@ -19,17 +19,14 @@ describe('DmDuongSu Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            idLoaiDs: expect.any(Object),
             diaChi: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinDs: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDsGoc: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
@@ -44,17 +41,14 @@ describe('DmDuongSu Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            idLoaiDs: expect.any(Object),
             diaChi: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinDs: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDsGoc: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
@@ -92,22 +86,22 @@ describe('DmDuongSu Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IDmDuongSu should not enable id FormControl', () => {
+      it('passing IDmDuongSu should not enable idDuongSu FormControl', () => {
         const formGroup = service.createDmDuongSuFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDuongSu.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDuongSu.disabled).toBe(true);
       });
 
-      it('passing NewDmDuongSu should disable id FormControl', () => {
+      it('passing NewDmDuongSu should disable idDuongSu FormControl', () => {
         const formGroup = service.createDmDuongSuFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDuongSu.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idDuongSu: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idDuongSu.disabled).toBe(true);
       });
     });
   });

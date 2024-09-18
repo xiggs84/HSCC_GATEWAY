@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../quan-he-nhan-than.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../quan-he-nhan-than.test-samples';
 
 import { QuanHeNhanThanFormService } from './quan-he-nhan-than-form.service';
 
@@ -19,11 +19,9 @@ describe('QuanHeNhanThan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idQuanHe: expect.any(Object),
             dienGiai: expect.any(Object),
             idQuanHeDoiUng: expect.any(Object),
-            idGioiTinh: expect.any(Object),
           }),
         );
       });
@@ -33,11 +31,9 @@ describe('QuanHeNhanThan Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idQuanHe: expect.any(Object),
             dienGiai: expect.any(Object),
             idQuanHeDoiUng: expect.any(Object),
-            idGioiTinh: expect.any(Object),
           }),
         );
       });
@@ -70,22 +66,22 @@ describe('QuanHeNhanThan Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IQuanHeNhanThan should not enable id FormControl', () => {
+      it('passing IQuanHeNhanThan should not enable idQuanHe FormControl', () => {
         const formGroup = service.createQuanHeNhanThanFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
       });
 
-      it('passing NewQuanHeNhanThan should disable id FormControl', () => {
+      it('passing NewQuanHeNhanThan should disable idQuanHe FormControl', () => {
         const formGroup = service.createQuanHeNhanThanFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idQuanHe: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idQuanHe.disabled).toBe(true);
       });
     });
   });

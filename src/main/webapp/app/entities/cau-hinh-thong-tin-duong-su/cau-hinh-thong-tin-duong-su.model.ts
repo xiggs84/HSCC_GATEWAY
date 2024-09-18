@@ -1,6 +1,5 @@
 export interface ICauHinhThongTinDuongSu {
-  id: number;
-  idCauHinh?: number | null;
+  idCauHinh: number;
   noiDung?: string | null;
   javascript?: string | null;
   css?: string | null;
@@ -9,4 +8,4 @@ export interface ICauHinhThongTinDuongSu {
   trangThai?: number | null;
 }
 
-export type NewCauHinhThongTinDuongSu = Omit<ICauHinhThongTinDuongSu, 'id'> & { id: null };
+export type NewCauHinhThongTinDuongSu = Omit<ICauHinhThongTinDuongSu, 'idCauHinh'> & { idCauHinh: null };

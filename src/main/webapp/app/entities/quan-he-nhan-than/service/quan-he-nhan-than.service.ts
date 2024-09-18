@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IQuanHeNhanThan, NewQuanHeNhanThan } from '../quan-he-nhan-than.model';
 
-export type PartialUpdateQuanHeNhanThan = Partial<IQuanHeNhanThan> & Pick<IQuanHeNhanThan, 'id'>;
+export type PartialUpdateQuanHeNhanThan = Partial<IQuanHeNhanThan> & Pick<IQuanHeNhanThan, 'idQuanHe'>;
 
 export type EntityResponseType = HttpResponse<IQuanHeNhanThan>;
 export type EntityArrayResponseType = HttpResponse<IQuanHeNhanThan[]>;
@@ -48,15 +48,15 @@ export class QuanHeNhanThanService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getQuanHeNhanThanIdentifier(quanHeNhanThan: Pick<IQuanHeNhanThan, 'id'>): number {
-    return quanHeNhanThan.id;
+  getQuanHeNhanThanIdentifier(quanHeNhanThan: Pick<IQuanHeNhanThan, 'idQuanHe'>): number {
+    return quanHeNhanThan.idQuanHe;
   }
 
-  compareQuanHeNhanThan(o1: Pick<IQuanHeNhanThan, 'id'> | null, o2: Pick<IQuanHeNhanThan, 'id'> | null): boolean {
+  compareQuanHeNhanThan(o1: Pick<IQuanHeNhanThan, 'idQuanHe'> | null, o2: Pick<IQuanHeNhanThan, 'idQuanHe'> | null): boolean {
     return o1 && o2 ? this.getQuanHeNhanThanIdentifier(o1) === this.getQuanHeNhanThanIdentifier(o2) : o1 === o2;
   }
 
-  addQuanHeNhanThanToCollectionIfMissing<Type extends Pick<IQuanHeNhanThan, 'id'>>(
+  addQuanHeNhanThanToCollectionIfMissing<Type extends Pick<IQuanHeNhanThan, 'idQuanHe'>>(
     quanHeNhanThanCollection: Type[],
     ...quanHeNhanThansToCheck: (Type | null | undefined)[]
   ): Type[] {

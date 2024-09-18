@@ -1,29 +1,27 @@
 import { ICauHinhThongTinDuongSu, NewCauHinhThongTinDuongSu } from './cau-hinh-thong-tin-duong-su.model';
 
 export const sampleWithRequiredData: ICauHinhThongTinDuongSu = {
-  id: 8967,
+  idCauHinh: 711,
 };
 
 export const sampleWithPartialData: ICauHinhThongTinDuongSu = {
-  id: 20143,
-  idCauHinh: 16122,
-  idLoaiDs: 15170,
-  trangThai: 25349,
+  idCauHinh: 15250,
+  javascript: 'across mmm',
+  idDonVi: 15395,
 };
 
 export const sampleWithFullData: ICauHinhThongTinDuongSu = {
-  id: 13408,
-  idCauHinh: 24395,
-  noiDung: 'strobe inlay',
-  javascript: 'astride unsightly tummy',
-  css: 'nearly',
-  idLoaiDs: 9602,
-  idDonVi: 26823,
-  trangThai: 27087,
+  idCauHinh: 25125,
+  noiDung: 'cereal',
+  javascript: 'beyond along transport',
+  css: 'however thoroughly',
+  idLoaiDs: 4125,
+  idDonVi: 7116,
+  trangThai: 0,
 };
 
 export const sampleWithNewData: NewCauHinhThongTinDuongSu = {
-  id: null,
+  idCauHinh: null,
 };
 
 Object.freeze(sampleWithNewData);

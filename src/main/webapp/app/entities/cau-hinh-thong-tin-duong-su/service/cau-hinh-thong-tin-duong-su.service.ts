@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { ICauHinhThongTinDuongSu, NewCauHinhThongTinDuongSu } from '../cau-hinh-thong-tin-duong-su.model';
 
-export type PartialUpdateCauHinhThongTinDuongSu = Partial<ICauHinhThongTinDuongSu> & Pick<ICauHinhThongTinDuongSu, 'id'>;
+export type PartialUpdateCauHinhThongTinDuongSu = Partial<ICauHinhThongTinDuongSu> & Pick<ICauHinhThongTinDuongSu, 'idCauHinh'>;
 
 export type EntityResponseType = HttpResponse<ICauHinhThongTinDuongSu>;
 export type EntityArrayResponseType = HttpResponse<ICauHinhThongTinDuongSu[]>;
@@ -52,15 +52,18 @@ export class CauHinhThongTinDuongSuService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getCauHinhThongTinDuongSuIdentifier(cauHinhThongTinDuongSu: Pick<ICauHinhThongTinDuongSu, 'id'>): number {
-    return cauHinhThongTinDuongSu.id;
+  getCauHinhThongTinDuongSuIdentifier(cauHinhThongTinDuongSu: Pick<ICauHinhThongTinDuongSu, 'idCauHinh'>): number {
+    return cauHinhThongTinDuongSu.idCauHinh;
   }
 
-  compareCauHinhThongTinDuongSu(o1: Pick<ICauHinhThongTinDuongSu, 'id'> | null, o2: Pick<ICauHinhThongTinDuongSu, 'id'> | null): boolean {
+  compareCauHinhThongTinDuongSu(
+    o1: Pick<ICauHinhThongTinDuongSu, 'idCauHinh'> | null,
+    o2: Pick<ICauHinhThongTinDuongSu, 'idCauHinh'> | null,
+  ): boolean {
     return o1 && o2 ? this.getCauHinhThongTinDuongSuIdentifier(o1) === this.getCauHinhThongTinDuongSuIdentifier(o2) : o1 === o2;
   }
 
-  addCauHinhThongTinDuongSuToCollectionIfMissing<Type extends Pick<ICauHinhThongTinDuongSu, 'id'>>(
+  addCauHinhThongTinDuongSuToCollectionIfMissing<Type extends Pick<ICauHinhThongTinDuongSu, 'idCauHinh'>>(
     cauHinhThongTinDuongSuCollection: Type[],
     ...cauHinhThongTinDuongSusToCheck: (Type | null | undefined)[]
   ): Type[] {

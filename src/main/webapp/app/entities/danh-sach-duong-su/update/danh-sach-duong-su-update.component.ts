@@ -1,15 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
+import { DuongSuService } from 'app/entities/duong-su/service/duong-su.service';
 import { IDanhSachDuongSu } from '../danh-sach-duong-su.model';
 import { DanhSachDuongSuService } from '../service/danh-sach-duong-su.service';
-import { DanhSachDuongSuFormService, DanhSachDuongSuFormGroup } from './danh-sach-duong-su-form.service';
+import { DanhSachDuongSuFormGroup, DanhSachDuongSuFormService } from './danh-sach-duong-su-form.service';
 
 @Component({
   standalone: true,
@@ -21,12 +23,17 @@ export class DanhSachDuongSuUpdateComponent implements OnInit {
   isSaving = false;
   danhSachDuongSu: IDanhSachDuongSu | null = null;
 
+  duongSusSharedCollection: IDuongSu[] = [];
+
   protected danhSachDuongSuService = inject(DanhSachDuongSuService);
   protected danhSachDuongSuFormService = inject(DanhSachDuongSuFormService);
+  protected duongSuService = inject(DuongSuService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: DanhSachDuongSuFormGroup = this.danhSachDuongSuFormService.createDanhSachDuongSuFormGroup();
+
+  compareDuongSu = (o1: IDuongSu | null, o2: IDuongSu | null): boolean => this.duongSuService.compareDuongSu(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ danhSachDuongSu }) => {
@@ -34,6 +41,8 @@ export class DanhSachDuongSuUpdateComponent implements OnInit {
       if (danhSachDuongSu) {
         this.updateForm(danhSachDuongSu);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -73,5 +82,22 @@ export class DanhSachDuongSuUpdateComponent implements OnInit {
   protected updateForm(danhSachDuongSu: IDanhSachDuongSu): void {
     this.danhSachDuongSu = danhSachDuongSu;
     this.danhSachDuongSuFormService.resetForm(this.editForm, danhSachDuongSu);
+
+    this.duongSusSharedCollection = this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(
+      this.duongSusSharedCollection,
+      danhSachDuongSu.duongSu,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.duongSuService
+      .query()
+      .pipe(map((res: HttpResponse<IDuongSu[]>) => res.body ?? []))
+      .pipe(
+        map((duongSus: IDuongSu[]) =>
+          this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(duongSus, this.danhSachDuongSu?.duongSu),
+        ),
+      )
+      .subscribe((duongSus: IDuongSu[]) => (this.duongSusSharedCollection = duongSus));
   }
 }

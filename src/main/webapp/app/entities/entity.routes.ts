@@ -381,6 +381,21 @@ const routes: Routes = [
     data: { pageTitle: 'gatewayApp.nhiemVu.home.title' },
     loadChildren: () => import('./nhiem-vu/nhiem-vu.routes'),
   },
+  {
+    path: 'chi-tiet-ngan-chan',
+    data: { pageTitle: 'gatewayApp.chiTietNganChan.home.title' },
+    loadChildren: () => import('./chi-tiet-ngan-chan/chi-tiet-ngan-chan.routes'),
+  },
+  {
+    path: 'loai-duong-su',
+    data: { pageTitle: 'gatewayApp.loaiDuongSu.home.title' },
+    loadChildren: () => import('./loai-duong-su/loai-duong-su.routes'),
+  },
+  {
+    path: 'loai-giay-to',
+    data: { pageTitle: 'gatewayApp.loaiGiayTo.home.title' },
+    loadChildren: () => import('./loai-giay-to/loai-giay-to.routes'),
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 

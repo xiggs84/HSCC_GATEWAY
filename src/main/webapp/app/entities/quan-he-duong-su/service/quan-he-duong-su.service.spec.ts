@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { IQuanHeDuongSu } from '../quan-he-duong-su.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../quan-he-duong-su.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../quan-he-duong-su.test-samples';
 
 import { QuanHeDuongSuService } from './quan-he-duong-su.service';
 
@@ -165,7 +165,7 @@ describe('QuanHeDuongSu Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idQuanHe: 123 };
         const entity2 = null;
 
         const compareResult1 = service.compareQuanHeDuongSu(entity1, entity2);
@@ -176,8 +176,8 @@ describe('QuanHeDuongSu Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idQuanHe: 123 };
+        const entity2 = { idQuanHe: 456 };
 
         const compareResult1 = service.compareQuanHeDuongSu(entity1, entity2);
         const compareResult2 = service.compareQuanHeDuongSu(entity2, entity1);
@@ -187,8 +187,8 @@ describe('QuanHeDuongSu Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idQuanHe: 123 };
+        const entity2 = { idQuanHe: 123 };
 
         const compareResult1 = service.compareQuanHeDuongSu(entity1, entity2);
         const compareResult2 = service.compareQuanHeDuongSu(entity2, entity1);

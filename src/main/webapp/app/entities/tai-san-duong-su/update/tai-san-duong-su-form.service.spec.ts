@@ -20,12 +20,13 @@ describe('TaiSanDuongSu Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idDuongSu: expect.any(Object),
+            idTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             idHopDong: expect.any(Object),
             idLoaiHopDong: expect.any(Object),
             idChungThuc: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });
@@ -36,12 +37,13 @@ describe('TaiSanDuongSu Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idDuongSu: expect.any(Object),
+            idTaiSan: expect.any(Object),
             trangThai: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             idHopDong: expect.any(Object),
             idLoaiHopDong: expect.any(Object),
             idChungThuc: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });

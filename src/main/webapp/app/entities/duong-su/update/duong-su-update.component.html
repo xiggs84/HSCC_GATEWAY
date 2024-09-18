@@ -36,16 +36,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_loaiDuongSu" jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</label>
-          <select class="form-control" name="loaiDuongSu" formControlName="loaiDuongSu" id="field_loaiDuongSu" data-cy="loaiDuongSu">
-            <option [ngValue]="null">{{ 'gatewayApp.LoaiDuongSu.null' | translate }}</option>
-            @for (loaiDuongSu of loaiDuongSuValues; track $index) {
-              <option [value]="loaiDuongSu">{{ 'gatewayApp.LoaiDuongSu.' + loaiDuongSu | translate }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_diaChi" jhiTranslate="gatewayApp.duongSu.diaChi">Dia Chi</label>
           <input type="text" class="form-control" name="diaChi" id="field_diaChi" data-cy="diaChi" formControlName="diaChi" />
         </div>
@@ -166,16 +156,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_loaiGiayTo" jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</label>
-          <select class="form-control" name="loaiGiayTo" formControlName="loaiGiayTo" id="field_loaiGiayTo" data-cy="loaiGiayTo">
-            <option [ngValue]="null">{{ 'gatewayApp.LoaiGiayTo.null' | translate }}</option>
-            @for (loaiGiayTo of loaiGiayToValues; track $index) {
-              <option [value]="loaiGiayTo">{{ 'gatewayApp.LoaiGiayTo.' + loaiGiayTo | translate }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_soGiayTo" jhiTranslate="gatewayApp.duongSu.soGiayTo">So Giay To</label>
           <input type="text" class="form-control" name="soGiayTo" id="field_soGiayTo" data-cy="soGiayTo" formControlName="soGiayTo" />
         </div>
@@ -228,6 +208,40 @@
               >
             </div>
           }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_loaiDuongSu" jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</label>
+          <select
+            class="form-control"
+            id="field_loaiDuongSu"
+            data-cy="loaiDuongSu"
+            name="loaiDuongSu"
+            formControlName="loaiDuongSu"
+            [compareWith]="compareLoaiDuongSu"
+          >
+            <option [ngValue]="null"></option>
+            @for (loaiDuongSuOption of loaiDuongSusSharedCollection; track $index) {
+              <option [ngValue]="loaiDuongSuOption">{{ loaiDuongSuOption.idLoaiDuongSu }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_loaiGiayTo" jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</label>
+          <select
+            class="form-control"
+            id="field_loaiGiayTo"
+            data-cy="loaiGiayTo"
+            name="loaiGiayTo"
+            formControlName="loaiGiayTo"
+            [compareWith]="compareLoaiGiayTo"
+          >
+            <option [ngValue]="null"></option>
+            @for (loaiGiayToOption of loaiGiayTosSharedCollection; track $index) {
+              <option [ngValue]="loaiGiayToOption">{{ loaiGiayToOption.idLoaiGiayTo }}</option>
+            }
+          </select>
         </div>
       </div>
 

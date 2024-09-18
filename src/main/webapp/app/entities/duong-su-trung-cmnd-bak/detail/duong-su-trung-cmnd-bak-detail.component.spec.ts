@@ -17,7 +17,7 @@ describe('DuongSuTrungCmndBak Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DuongSuTrungCmndBakDetailComponent,
+              loadComponent: () => import('./duong-su-trung-cmnd-bak-detail.component').then(m => m.DuongSuTrungCmndBakDetailComponent),
               resolve: { duongSuTrungCmndBak: () => of({ id: 123 }) },
             },
           ],

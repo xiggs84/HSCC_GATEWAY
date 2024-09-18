@@ -18,20 +18,18 @@
         "title": "Danh Sach Duong Su"
       },
       "id": "ID",
-      "idDuongSu": "Id Duong Su",
       "tenDuongSu": "Ten Duong Su",
-      "idLoaiDs": "Id Loai Ds",
       "diaChi": "Dia Chi",
       "trangThai": "Trang Thai",
       "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "idDsGoc": "Id Ds Goc",
-      "idTinhTrang": "Id Tinh Trang",
       "idMaster": "Id Master",
       "idDonVi": "Id Don Vi",
       "strSearch": "Str Search",
       "soGiayTo": "So Giay To",
-      "idLoaiNganChan": "Id Loai Ngan Chan"
+      "idLoaiNganChan": "Id Loai Ngan Chan",
+      "duongSu": "Duong Su"
     }
   }
 }

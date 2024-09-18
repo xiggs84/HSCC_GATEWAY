@@ -1,15 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
+import { DuongSuService } from 'app/entities/duong-su/service/duong-su.service';
 import { IDuongSuTrungCmnd } from '../duong-su-trung-cmnd.model';
 import { DuongSuTrungCmndService } from '../service/duong-su-trung-cmnd.service';
-import { DuongSuTrungCmndFormService, DuongSuTrungCmndFormGroup } from './duong-su-trung-cmnd-form.service';
+import { DuongSuTrungCmndFormGroup, DuongSuTrungCmndFormService } from './duong-su-trung-cmnd-form.service';
 
 @Component({
   standalone: true,
@@ -21,12 +23,17 @@ export class DuongSuTrungCmndUpdateComponent implements OnInit {
   isSaving = false;
   duongSuTrungCmnd: IDuongSuTrungCmnd | null = null;
 
+  duongSusSharedCollection: IDuongSu[] = [];
+
   protected duongSuTrungCmndService = inject(DuongSuTrungCmndService);
   protected duongSuTrungCmndFormService = inject(DuongSuTrungCmndFormService);
+  protected duongSuService = inject(DuongSuService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: DuongSuTrungCmndFormGroup = this.duongSuTrungCmndFormService.createDuongSuTrungCmndFormGroup();
+
+  compareDuongSu = (o1: IDuongSu | null, o2: IDuongSu | null): boolean => this.duongSuService.compareDuongSu(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ duongSuTrungCmnd }) => {
@@ -34,6 +41,8 @@ export class DuongSuTrungCmndUpdateComponent implements OnInit {
       if (duongSuTrungCmnd) {
         this.updateForm(duongSuTrungCmnd);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -73,5 +82,22 @@ export class DuongSuTrungCmndUpdateComponent implements OnInit {
   protected updateForm(duongSuTrungCmnd: IDuongSuTrungCmnd): void {
     this.duongSuTrungCmnd = duongSuTrungCmnd;
     this.duongSuTrungCmndFormService.resetForm(this.editForm, duongSuTrungCmnd);
+
+    this.duongSusSharedCollection = this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(
+      this.duongSusSharedCollection,
+      duongSuTrungCmnd.duongSu,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.duongSuService
+      .query()
+      .pipe(map((res: HttpResponse<IDuongSu[]>) => res.body ?? []))
+      .pipe(
+        map((duongSus: IDuongSu[]) =>
+          this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(duongSus, this.duongSuTrungCmnd?.duongSu),
+        ),
+      )
+      .subscribe((duongSus: IDuongSu[]) => (this.duongSusSharedCollection = duongSus));
   }
 }

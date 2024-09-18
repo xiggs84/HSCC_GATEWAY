@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IQuanHeDuongSu, NewQuanHeDuongSu } from '../quan-he-duong-su.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idQuanHe: unknown }> = Partial<Omit<T, 'idQuanHe'>> & { idQuanHe: T['idQuanHe'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,39 +14,39 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type QuanHeDuongSuFormGroupInput = IQuanHeDuongSu | PartialWithRequiredKeyOf<NewQuanHeDuongSu>;
 
-type QuanHeDuongSuFormDefaults = Pick<NewQuanHeDuongSu, 'id'>;
+type QuanHeDuongSuFormDefaults = Pick<NewQuanHeDuongSu, 'idQuanHe'>;
 
 type QuanHeDuongSuFormGroupContent = {
-  id: FormControl<IQuanHeDuongSu['id'] | NewQuanHeDuongSu['id']>;
-  idDuongSu: FormControl<IQuanHeDuongSu['idDuongSu']>;
+  idQuanHe: FormControl<IQuanHeDuongSu['idQuanHe'] | NewQuanHeDuongSu['idQuanHe']>;
   idDuongSuQh: FormControl<IQuanHeDuongSu['idDuongSuQh']>;
-  idQuanHe: FormControl<IQuanHeDuongSu['idQuanHe']>;
   thongTinQuanHe: FormControl<IQuanHeDuongSu['thongTinQuanHe']>;
   trangThai: FormControl<IQuanHeDuongSu['trangThai']>;
+  duongSu: FormControl<IQuanHeDuongSu['duongSu']>;
 };
 
 export type QuanHeDuongSuFormGroup = FormGroup<QuanHeDuongSuFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class QuanHeDuongSuFormService {
-  createQuanHeDuongSuFormGroup(quanHeDuongSu: QuanHeDuongSuFormGroupInput = { id: null }): QuanHeDuongSuFormGroup {
+  createQuanHeDuongSuFormGroup(quanHeDuongSu: QuanHeDuongSuFormGroupInput = { idQuanHe: null }): QuanHeDuongSuFormGroup {
     const quanHeDuongSuRawValue = {
       ...this.getFormDefaults(),
       ...quanHeDuongSu,
     };
     return new FormGroup<QuanHeDuongSuFormGroupContent>({
-      id: new FormControl(
-        { value: quanHeDuongSuRawValue.id, disabled: true },
+      idQuanHe: new FormControl(
+        { value: quanHeDuongSuRawValue.idQuanHe, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idDuongSu: new FormControl(quanHeDuongSuRawValue.idDuongSu),
       idDuongSuQh: new FormControl(quanHeDuongSuRawValue.idDuongSuQh),
-      idQuanHe: new FormControl(quanHeDuongSuRawValue.idQuanHe),
       thongTinQuanHe: new FormControl(quanHeDuongSuRawValue.thongTinQuanHe),
-      trangThai: new FormControl(quanHeDuongSuRawValue.trangThai),
+      trangThai: new FormControl(quanHeDuongSuRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
+      duongSu: new FormControl(quanHeDuongSuRawValue.duongSu),
     });
   }
 
@@ -59,14 +59,14 @@ export class QuanHeDuongSuFormService {
     form.reset(
       {
         ...quanHeDuongSuRawValue,
-        id: { value: quanHeDuongSuRawValue.id, disabled: true },
+        idQuanHe: { value: quanHeDuongSuRawValue.idQuanHe, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): QuanHeDuongSuFormDefaults {
     return {
-      id: null,
+      idQuanHe: null,
     };
   }
 }

@@ -17,7 +17,7 @@ describe('QuanHeMaster Management Detail Component', () => {
           [
             {
               path: '**',
-              component: QuanHeMasterDetailComponent,
+              loadComponent: () => import('./quan-he-master-detail.component').then(m => m.QuanHeMasterDetailComponent),
               resolve: { quanHeMaster: () => of({ id: 123 }) },
             },
           ],

@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDmDuongSu, NewDmDuongSu } from '../dm-duong-su.model';
 
-export type PartialUpdateDmDuongSu = Partial<IDmDuongSu> & Pick<IDmDuongSu, 'id'>;
+export type PartialUpdateDmDuongSu = Partial<IDmDuongSu> & Pick<IDmDuongSu, 'idDuongSu'>;
 
 type RestOf<T extends IDmDuongSu | NewDmDuongSu> = Omit<T, 'ngayThaoTac'> & {
   ngayThaoTac?: string | null;
@@ -70,15 +70,15 @@ export class DmDuongSuService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDmDuongSuIdentifier(dmDuongSu: Pick<IDmDuongSu, 'id'>): number {
-    return dmDuongSu.id;
+  getDmDuongSuIdentifier(dmDuongSu: Pick<IDmDuongSu, 'idDuongSu'>): number {
+    return dmDuongSu.idDuongSu;
   }
 
-  compareDmDuongSu(o1: Pick<IDmDuongSu, 'id'> | null, o2: Pick<IDmDuongSu, 'id'> | null): boolean {
+  compareDmDuongSu(o1: Pick<IDmDuongSu, 'idDuongSu'> | null, o2: Pick<IDmDuongSu, 'idDuongSu'> | null): boolean {
     return o1 && o2 ? this.getDmDuongSuIdentifier(o1) === this.getDmDuongSuIdentifier(o2) : o1 === o2;
   }
 
-  addDmDuongSuToCollectionIfMissing<Type extends Pick<IDmDuongSu, 'id'>>(
+  addDmDuongSuToCollectionIfMissing<Type extends Pick<IDmDuongSu, 'idDuongSu'>>(
     dmDuongSuCollection: Type[],
     ...dmDuongSusToCheck: (Type | null | undefined)[]
   ): Type[] {

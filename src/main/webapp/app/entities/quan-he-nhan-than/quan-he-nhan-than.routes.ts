@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { QuanHeNhanThanComponent } from './list/quan-he-nhan-than.component';
-import { QuanHeNhanThanDetailComponent } from './detail/quan-he-nhan-than-detail.component';
-import { QuanHeNhanThanUpdateComponent } from './update/quan-he-nhan-than-update.component';
 import QuanHeNhanThanResolve from './route/quan-he-nhan-than-routing-resolve.service';
 
 const quanHeNhanThanRoute: Routes = [
   {
     path: '',
-    component: QuanHeNhanThanComponent,
+    loadComponent: () => import('./list/quan-he-nhan-than.component').then(m => m.QuanHeNhanThanComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idQuanHe,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: QuanHeNhanThanDetailComponent,
+    path: ':idQuanHe/view',
+    loadComponent: () => import('./detail/quan-he-nhan-than-detail.component').then(m => m.QuanHeNhanThanDetailComponent),
     resolve: {
       quanHeNhanThan: QuanHeNhanThanResolve,
     },
@@ -26,15 +23,15 @@ const quanHeNhanThanRoute: Routes = [
   },
   {
     path: 'new',
-    component: QuanHeNhanThanUpdateComponent,
+    loadComponent: () => import('./update/quan-he-nhan-than-update.component').then(m => m.QuanHeNhanThanUpdateComponent),
     resolve: {
       quanHeNhanThan: QuanHeNhanThanResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: QuanHeNhanThanUpdateComponent,
+    path: ':idQuanHe/edit',
+    loadComponent: () => import('./update/quan-he-nhan-than-update.component').then(m => m.QuanHeNhanThanUpdateComponent),
     resolve: {
       quanHeNhanThan: QuanHeNhanThanResolve,
     },

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../duong-su-trung-cmnd-bak.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../duong-su-trung-cmnd-bak.test-samples';
 
 import { DuongSuTrungCmndBakFormService } from './duong-su-trung-cmnd-bak-form.service';
 
@@ -20,20 +20,18 @@ describe('DuongSuTrungCmndBak Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            idLoaiDs: expect.any(Object),
             diaChi: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinDs: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDsGoc: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
             soGiayTo: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });
@@ -44,20 +42,18 @@ describe('DuongSuTrungCmndBak Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            idLoaiDs: expect.any(Object),
             diaChi: expect.any(Object),
             trangThai: expect.any(Object),
             thongTinDs: expect.any(Object),
             ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             idDsGoc: expect.any(Object),
-            idTinhTrang: expect.any(Object),
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
             soGiayTo: expect.any(Object),
+            duongSu: expect.any(Object),
           }),
         );
       });

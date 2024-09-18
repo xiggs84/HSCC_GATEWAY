@@ -19,7 +19,6 @@ type DuongSuFormDefaults = Pick<NewDuongSu, 'idDuongSu'>;
 type DuongSuFormGroupContent = {
   idDuongSu: FormControl<IDuongSu['idDuongSu'] | NewDuongSu['idDuongSu']>;
   tenDuongSu: FormControl<IDuongSu['tenDuongSu']>;
-  loaiDuongSu: FormControl<IDuongSu['loaiDuongSu']>;
   diaChi: FormControl<IDuongSu['diaChi']>;
   soDienThoai: FormControl<IDuongSu['soDienThoai']>;
   email: FormControl<IDuongSu['email']>;
@@ -33,11 +32,12 @@ type DuongSuFormGroupContent = {
   idMaster: FormControl<IDuongSu['idMaster']>;
   idDonVi: FormControl<IDuongSu['idDonVi']>;
   strSearch: FormControl<IDuongSu['strSearch']>;
-  loaiGiayTo: FormControl<IDuongSu['loaiGiayTo']>;
   soGiayTo: FormControl<IDuongSu['soGiayTo']>;
   ghiChu: FormControl<IDuongSu['ghiChu']>;
   idLoaiNganChan: FormControl<IDuongSu['idLoaiNganChan']>;
   syncStatus: FormControl<IDuongSu['syncStatus']>;
+  loaiDuongSu: FormControl<IDuongSu['loaiDuongSu']>;
+  loaiGiayTo: FormControl<IDuongSu['loaiGiayTo']>;
 };
 
 export type DuongSuFormGroup = FormGroup<DuongSuFormGroupContent>;
@@ -58,7 +58,6 @@ export class DuongSuFormService {
         },
       ),
       tenDuongSu: new FormControl(duongSuRawValue.tenDuongSu),
-      loaiDuongSu: new FormControl(duongSuRawValue.loaiDuongSu),
       diaChi: new FormControl(duongSuRawValue.diaChi),
       soDienThoai: new FormControl(duongSuRawValue.soDienThoai),
       email: new FormControl(duongSuRawValue.email),
@@ -74,13 +73,14 @@ export class DuongSuFormService {
       idMaster: new FormControl(duongSuRawValue.idMaster),
       idDonVi: new FormControl(duongSuRawValue.idDonVi),
       strSearch: new FormControl(duongSuRawValue.strSearch),
-      loaiGiayTo: new FormControl(duongSuRawValue.loaiGiayTo),
       soGiayTo: new FormControl(duongSuRawValue.soGiayTo),
       ghiChu: new FormControl(duongSuRawValue.ghiChu),
       idLoaiNganChan: new FormControl(duongSuRawValue.idLoaiNganChan),
       syncStatus: new FormControl(duongSuRawValue.syncStatus, {
         validators: [Validators.min(0), Validators.max(1)],
       }),
+      loaiDuongSu: new FormControl(duongSuRawValue.loaiDuongSu),
+      loaiGiayTo: new FormControl(duongSuRawValue.loaiGiayTo),
     });
   }
 

@@ -3,35 +3,31 @@ import dayjs from 'dayjs/esm';
 import { IDuongSuTrungCmndBak, NewDuongSuTrungCmndBak } from './duong-su-trung-cmnd-bak.model';
 
 export const sampleWithRequiredData: IDuongSuTrungCmndBak = {
-  id: 13736,
+  id: 2394,
 };
 
 export const sampleWithPartialData: IDuongSuTrungCmndBak = {
-  id: 18462,
-  idLoaiDs: 8571,
-  diaChi: 'quiche distend',
-  thongTinDs: 'after proposition',
+  id: 30933,
+  tenDuongSu: 'because before',
+  diaChi: 'as yuck',
   ngayThaoTac: dayjs('2024-08-19'),
-  idDonVi: 7865,
-  soGiayTo: 'hmph scholarly',
+  idMaster: 'quibble upsell high-rise',
+  strSearch: 'peppery wildly',
 };
 
 export const sampleWithFullData: IDuongSuTrungCmndBak = {
-  id: 26329,
-  idDuongSu: 29404,
-  tenDuongSu: 'virtual',
-  idLoaiDs: 16887,
-  diaChi: 'whoever boastfully',
-  trangThai: 4729,
-  thongTinDs: 'carport stepdaughter',
-  ngayThaoTac: dayjs('2024-08-20'),
-  nguoiThaoTac: 26514,
-  idDsGoc: 28725,
-  idTinhTrang: 12474,
-  idMaster: 'regularly',
-  idDonVi: 23554,
-  strSearch: 'above extraneous',
-  soGiayTo: 'regarding imaginary',
+  id: 359,
+  tenDuongSu: 'oh ick',
+  diaChi: 'ah',
+  trangThai: 1,
+  thongTinDs: 'unite',
+  ngayThaoTac: dayjs('2024-08-19'),
+  nguoiThaoTac: 22281,
+  idDsGoc: 21886,
+  idMaster: 'bayonet whenever',
+  idDonVi: 2482,
+  strSearch: 'between befit sturdy',
+  soGiayTo: 'prod thirsty',
 };
 
 export const sampleWithNewData: NewDuongSuTrungCmndBak = {

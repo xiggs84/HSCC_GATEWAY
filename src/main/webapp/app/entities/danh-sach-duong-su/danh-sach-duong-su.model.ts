@@ -1,21 +1,20 @@
 import dayjs from 'dayjs/esm';
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
 
 export interface IDanhSachDuongSu {
   id: number;
-  idDuongSu?: number | null;
   tenDuongSu?: string | null;
-  idLoaiDs?: number | null;
   diaChi?: string | null;
   trangThai?: number | null;
   ngayThaoTac?: dayjs.Dayjs | null;
   nguoiThaoTac?: number | null;
   idDsGoc?: number | null;
-  idTinhTrang?: number | null;
   idMaster?: string | null;
   idDonVi?: number | null;
   strSearch?: string | null;
   soGiayTo?: string | null;
   idLoaiNganChan?: number | null;
+  duongSu?: IDuongSu | null;
 }
 
 export type NewDanhSachDuongSu = Omit<IDanhSachDuongSu, 'id'> & { id: null };

@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idDuongSu">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmDuongSu.idDuongSu">Id Duong Su</span>
@@ -52,13 +45,6 @@
             <th scope="col" jhiSortBy="tenDuongSu">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmDuongSu.tenDuongSu">Ten Duong Su</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiDs">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.dmDuongSu.idLoaiDs">Id Loai Ds</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -105,13 +91,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idTinhTrang">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.dmDuongSu.idTinhTrang">Id Tinh Trang</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idMaster">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.dmDuongSu.idMaster">Id Master</span>
@@ -151,21 +130,18 @@
           </tr>
         </thead>
         <tbody>
-          @for (dmDuongSu of dmDuongSus; track trackId) {
+          @for (dmDuongSu of dmDuongSus; track trackIdDuongSu) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/dm-duong-su', dmDuongSu.id, 'view']">{{ dmDuongSu.id }}</a>
+                <a [routerLink]="['/dm-duong-su', dmDuongSu.idDuongSu, 'view']">{{ dmDuongSu.idDuongSu }}</a>
               </td>
-              <td>{{ dmDuongSu.idDuongSu }}</td>
               <td>{{ dmDuongSu.tenDuongSu }}</td>
-              <td>{{ dmDuongSu.idLoaiDs }}</td>
               <td>{{ dmDuongSu.diaChi }}</td>
               <td>{{ dmDuongSu.trangThai }}</td>
               <td>{{ dmDuongSu.thongTinDs }}</td>
               <td>{{ dmDuongSu.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ dmDuongSu.nguoiThaoTac }}</td>
               <td>{{ dmDuongSu.idDsGoc }}</td>
-              <td>{{ dmDuongSu.idTinhTrang }}</td>
               <td>{{ dmDuongSu.idMaster }}</td>
               <td>{{ dmDuongSu.idDonVi }}</td>
               <td>{{ dmDuongSu.strSearch }}</td>
@@ -173,12 +149,12 @@
               <td>{{ dmDuongSu.idLoaiNganChan }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/dm-duong-su', dmDuongSu.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a [routerLink]="['/dm-duong-su', dmDuongSu.idDuongSu, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/dm-duong-su', dmDuongSu.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a [routerLink]="['/dm-duong-su', dmDuongSu.idDuongSu, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>

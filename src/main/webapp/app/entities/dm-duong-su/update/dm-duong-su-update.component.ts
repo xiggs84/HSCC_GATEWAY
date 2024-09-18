@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IDmDuongSu } from '../dm-duong-su.model';
 import { DmDuongSuService } from '../service/dm-duong-su.service';
-import { DmDuongSuFormService, DmDuongSuFormGroup } from './dm-duong-su-form.service';
+import { DmDuongSuFormGroup, DmDuongSuFormService } from './dm-duong-su-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class DmDuongSuUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const dmDuongSu = this.dmDuongSuFormService.getDmDuongSu(this.editForm);
-    if (dmDuongSu.id !== null) {
+    if (dmDuongSu.idDuongSu !== null) {
       this.subscribeToSaveResponse(this.dmDuongSuService.update(dmDuongSu));
     } else {
       this.subscribeToSaveResponse(this.dmDuongSuService.create(dmDuongSu));

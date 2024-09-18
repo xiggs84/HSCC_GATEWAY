@@ -15,9 +15,9 @@
           <dd>
             <span>{{ taiSanDuongSuRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idDuongSu">Id Duong Su</span></dt>
+          <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idTaiSan">Id Tai San</span></dt>
           <dd>
-            <span>{{ taiSanDuongSuRef.idDuongSu }}</span>
+            <span>{{ taiSanDuongSuRef.idTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.trangThai">Trang Thai</span></dt>
           <dd>
@@ -38,6 +38,14 @@
           <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.idChungThuc">Id Chung Thuc</span></dt>
           <dd>
             <span>{{ taiSanDuongSuRef.idChungThuc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.duongSu">Duong Su</span></dt>
+          <dd>
+            @if (taiSanDuongSu()!.duongSu) {
+              <div>
+                <a [routerLink]="['/duong-su', taiSanDuongSu()!.duongSu?.idDuongSu, 'view']">{{ taiSanDuongSuRef.duongSu?.idDuongSu }}</a>
+              </div>
+            }
           </dd>
         </dl>
 

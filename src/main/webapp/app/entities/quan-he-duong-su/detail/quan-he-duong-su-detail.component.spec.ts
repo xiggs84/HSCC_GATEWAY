@@ -17,8 +17,8 @@ describe('QuanHeDuongSu Management Detail Component', () => {
           [
             {
               path: '**',
-              component: QuanHeDuongSuDetailComponent,
-              resolve: { quanHeDuongSu: () => of({ id: 123 }) },
+              loadComponent: () => import('./quan-he-duong-su-detail.component').then(m => m.QuanHeDuongSuDetailComponent),
+              resolve: { quanHeDuongSu: () => of({ idQuanHe: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('QuanHeDuongSu Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', QuanHeDuongSuDetailComponent);
 
       // THEN
-      expect(instance.quanHeDuongSu()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.quanHeDuongSu()).toEqual(expect.objectContaining({ idQuanHe: 123 }));
     });
   });
 

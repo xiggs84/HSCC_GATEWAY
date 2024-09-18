@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (duongSuTrungCmnd()) {
+    @if (duongSuTrungCmnd(); as duongSuTrungCmndRef) {
       <div>
         <h2 data-cy="duongSuTrungCmndDetailsHeading">
           <span jhiTranslate="gatewayApp.duongSuTrungCmnd.detail.title">Duong Su Trung Cmnd</span>
@@ -15,79 +15,77 @@
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.id }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idDuongSu">Id Duong Su</span></dt>
-          <dd>
-            <span>{{ duongSuTrungCmnd()!.idDuongSu }}</span>
+            <span>{{ duongSuTrungCmndRef.id }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.tenDuongSu">Ten Duong Su</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.tenDuongSu }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idLoaiDs">Id Loai Ds</span></dt>
-          <dd>
-            <span>{{ duongSuTrungCmnd()!.idLoaiDs }}</span>
+            <span>{{ duongSuTrungCmndRef.tenDuongSu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.diaChi">Dia Chi</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.diaChi }}</span>
+            <span>{{ duongSuTrungCmndRef.diaChi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.trangThai }}</span>
+            <span>{{ duongSuTrungCmndRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.thongTinDs">Thong Tin Ds</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.thongTinDs }}</span>
+            <span>{{ duongSuTrungCmndRef.thongTinDs }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ duongSuTrungCmndRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.nguoiThaoTac">Nguoi Thao Tac</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.nguoiThaoTac }}</span>
+            <span>{{ duongSuTrungCmndRef.nguoiThaoTac }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idDsGoc">Id Ds Goc</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idDsGoc }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idTinhTrang">Id Tinh Trang</span></dt>
-          <dd>
-            <span>{{ duongSuTrungCmnd()!.idTinhTrang }}</span>
+            <span>{{ duongSuTrungCmndRef.idDsGoc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idMaster }}</span>
+            <span>{{ duongSuTrungCmndRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idDonVi }}</span>
+            <span>{{ duongSuTrungCmndRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.strSearch">Str Search</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.strSearch }}</span>
+            <span>{{ duongSuTrungCmndRef.strSearch }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.soGiayTo">So Giay To</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.soGiayTo }}</span>
+            <span>{{ duongSuTrungCmndRef.soGiayTo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idDuongSuMin">Id Duong Su Min</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idDuongSuMin }}</span>
+            <span>{{ duongSuTrungCmndRef.idDuongSuMin }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idMasterMin">Id Master Min</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idMasterMin }}</span>
+            <span>{{ duongSuTrungCmndRef.idMasterMin }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idDuongSuMax">Id Duong Su Max</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idDuongSuMax }}</span>
+            <span>{{ duongSuTrungCmndRef.idDuongSuMax }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.idMasterMax">Id Master Max</span></dt>
           <dd>
-            <span>{{ duongSuTrungCmnd()!.idMasterMax }}</span>
+            <span>{{ duongSuTrungCmndRef.idMasterMax }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.duongSuTrungCmnd.duongSu">Duong Su</span></dt>
+          <dd>
+            @if (duongSuTrungCmnd()!.duongSu) {
+              <div>
+                <a [routerLink]="['/duong-su', duongSuTrungCmnd()!.duongSu?.idDuongSu, 'view']">{{
+                  duongSuTrungCmndRef.duongSu?.idDuongSu
+                }}</a>
+              </div>
+            }
           </dd>
         </dl>
 
@@ -95,7 +93,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/duong-su-trung-cmnd', duongSuTrungCmnd()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/duong-su-trung-cmnd', duongSuTrungCmndRef.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { CauHinhThongTinDuongSuComponent } from './list/cau-hinh-thong-tin-duong-su.component';
-import { CauHinhThongTinDuongSuDetailComponent } from './detail/cau-hinh-thong-tin-duong-su-detail.component';
-import { CauHinhThongTinDuongSuUpdateComponent } from './update/cau-hinh-thong-tin-duong-su-update.component';
 import CauHinhThongTinDuongSuResolve from './route/cau-hinh-thong-tin-duong-su-routing-resolve.service';
 
 const cauHinhThongTinDuongSuRoute: Routes = [
   {
     path: '',
-    component: CauHinhThongTinDuongSuComponent,
+    loadComponent: () => import('./list/cau-hinh-thong-tin-duong-su.component').then(m => m.CauHinhThongTinDuongSuComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idCauHinh,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: CauHinhThongTinDuongSuDetailComponent,
+    path: ':idCauHinh/view',
+    loadComponent: () => import('./detail/cau-hinh-thong-tin-duong-su-detail.component').then(m => m.CauHinhThongTinDuongSuDetailComponent),
     resolve: {
       cauHinhThongTinDuongSu: CauHinhThongTinDuongSuResolve,
     },
@@ -26,15 +23,15 @@ const cauHinhThongTinDuongSuRoute: Routes = [
   },
   {
     path: 'new',
-    component: CauHinhThongTinDuongSuUpdateComponent,
+    loadComponent: () => import('./update/cau-hinh-thong-tin-duong-su-update.component').then(m => m.CauHinhThongTinDuongSuUpdateComponent),
     resolve: {
       cauHinhThongTinDuongSu: CauHinhThongTinDuongSuResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: CauHinhThongTinDuongSuUpdateComponent,
+    path: ':idCauHinh/edit',
+    loadComponent: () => import('./update/cau-hinh-thong-tin-duong-su-update.component').then(m => m.CauHinhThongTinDuongSuUpdateComponent),
     resolve: {
       cauHinhThongTinDuongSu: CauHinhThongTinDuongSuResolve,
     },

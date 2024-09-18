@@ -17,8 +17,9 @@ describe('CauHinhThongTinDuongSu Management Detail Component', () => {
           [
             {
               path: '**',
-              component: CauHinhThongTinDuongSuDetailComponent,
-              resolve: { cauHinhThongTinDuongSu: () => of({ id: 123 }) },
+              loadComponent: () =>
+                import('./cau-hinh-thong-tin-duong-su-detail.component').then(m => m.CauHinhThongTinDuongSuDetailComponent),
+              resolve: { cauHinhThongTinDuongSu: () => of({ idCauHinh: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +41,7 @@ describe('CauHinhThongTinDuongSu Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', CauHinhThongTinDuongSuDetailComponent);
 
       // THEN
-      expect(instance.cauHinhThongTinDuongSu()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.cauHinhThongTinDuongSu()).toEqual(expect.objectContaining({ idCauHinh: 123 }));
     });
   });
 

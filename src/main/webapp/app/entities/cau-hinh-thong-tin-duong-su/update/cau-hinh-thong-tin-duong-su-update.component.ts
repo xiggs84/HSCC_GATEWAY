@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ICauHinhThongTinDuongSu } from '../cau-hinh-thong-tin-duong-su.model';
 import { CauHinhThongTinDuongSuService } from '../service/cau-hinh-thong-tin-duong-su.service';
-import { CauHinhThongTinDuongSuFormService, CauHinhThongTinDuongSuFormGroup } from './cau-hinh-thong-tin-duong-su-form.service';
+import { CauHinhThongTinDuongSuFormGroup, CauHinhThongTinDuongSuFormService } from './cau-hinh-thong-tin-duong-su-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class CauHinhThongTinDuongSuUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const cauHinhThongTinDuongSu = this.cauHinhThongTinDuongSuFormService.getCauHinhThongTinDuongSu(this.editForm);
-    if (cauHinhThongTinDuongSu.id !== null) {
+    if (cauHinhThongTinDuongSu.idCauHinh !== null) {
       this.subscribeToSaveResponse(this.cauHinhThongTinDuongSuService.update(cauHinhThongTinDuongSu));
     } else {
       this.subscribeToSaveResponse(this.cauHinhThongTinDuongSuService.create(cauHinhThongTinDuongSu));

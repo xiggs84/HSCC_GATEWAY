@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { DanhSachDuongSuComponent } from './list/danh-sach-duong-su.component';
-import { DanhSachDuongSuDetailComponent } from './detail/danh-sach-duong-su-detail.component';
-import { DanhSachDuongSuUpdateComponent } from './update/danh-sach-duong-su-update.component';
 import DanhSachDuongSuResolve from './route/danh-sach-duong-su-routing-resolve.service';
 
 const danhSachDuongSuRoute: Routes = [
   {
     path: '',
-    component: DanhSachDuongSuComponent,
+    loadComponent: () => import('./list/danh-sach-duong-su.component').then(m => m.DanhSachDuongSuComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: DanhSachDuongSuDetailComponent,
+    loadComponent: () => import('./detail/danh-sach-duong-su-detail.component').then(m => m.DanhSachDuongSuDetailComponent),
     resolve: {
       danhSachDuongSu: DanhSachDuongSuResolve,
     },
@@ -26,7 +23,7 @@ const danhSachDuongSuRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhSachDuongSuUpdateComponent,
+    loadComponent: () => import('./update/danh-sach-duong-su-update.component').then(m => m.DanhSachDuongSuUpdateComponent),
     resolve: {
       danhSachDuongSu: DanhSachDuongSuResolve,
     },
@@ -34,7 +31,7 @@ const danhSachDuongSuRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: DanhSachDuongSuUpdateComponent,
+    loadComponent: () => import('./update/danh-sach-duong-su-update.component').then(m => m.DanhSachDuongSuUpdateComponent),
     resolve: {
       danhSachDuongSu: DanhSachDuongSuResolve,
     },

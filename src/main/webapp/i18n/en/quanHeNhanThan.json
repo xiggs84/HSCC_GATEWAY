@@ -17,11 +17,9 @@
       "detail": {
         "title": "Quan He Nhan Than"
       },
-      "id": "ID",
       "idQuanHe": "Id Quan He",
       "dienGiai": "Dien Giai",
-      "idQuanHeDoiUng": "Id Quan He Doi Ung",
-      "idGioiTinh": "Id Gioi Tinh"
+      "idQuanHeDoiUng": "Id Quan He Doi Ung"
     }
   }
 }

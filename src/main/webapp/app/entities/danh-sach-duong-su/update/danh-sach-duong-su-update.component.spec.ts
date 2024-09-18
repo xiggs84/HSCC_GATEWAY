@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
+import { DuongSuService } from 'app/entities/duong-su/service/duong-su.service';
 import { DanhSachDuongSuService } from '../service/danh-sach-duong-su.service';
 import { IDanhSachDuongSu } from '../danh-sach-duong-su.model';
 import { DanhSachDuongSuFormService } from './danh-sach-duong-su-form.service';
@@ -16,6 +18,7 @@ describe('DanhSachDuongSu Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let danhSachDuongSuFormService: DanhSachDuongSuFormService;
   let danhSachDuongSuService: DanhSachDuongSuService;
+  let duongSuService: DuongSuService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,17 +41,43 @@ describe('DanhSachDuongSu Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     danhSachDuongSuFormService = TestBed.inject(DanhSachDuongSuFormService);
     danhSachDuongSuService = TestBed.inject(DanhSachDuongSuService);
+    duongSuService = TestBed.inject(DuongSuService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
+    it('Should call DuongSu query and add missing value', () => {
       const danhSachDuongSu: IDanhSachDuongSu = { id: 456 };
+      const duongSu: IDuongSu = { idDuongSu: 16676 };
+      danhSachDuongSu.duongSu = duongSu;
+
+      const duongSuCollection: IDuongSu[] = [{ idDuongSu: 5385 }];
+      jest.spyOn(duongSuService, 'query').mockReturnValue(of(new HttpResponse({ body: duongSuCollection })));
+      const additionalDuongSus = [duongSu];
+      const expectedCollection: IDuongSu[] = [...additionalDuongSus, ...duongSuCollection];
+      jest.spyOn(duongSuService, 'addDuongSuToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ danhSachDuongSu });
       comp.ngOnInit();
 
+      expect(duongSuService.query).toHaveBeenCalled();
+      expect(duongSuService.addDuongSuToCollectionIfMissing).toHaveBeenCalledWith(
+        duongSuCollection,
+        ...additionalDuongSus.map(expect.objectContaining),
+      );
+      expect(comp.duongSusSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should update editForm', () => {
+      const danhSachDuongSu: IDanhSachDuongSu = { id: 456 };
+      const duongSu: IDuongSu = { idDuongSu: 110 };
+      danhSachDuongSu.duongSu = duongSu;
+
+      activatedRoute.data = of({ danhSachDuongSu });
+      comp.ngOnInit();
+
+      expect(comp.duongSusSharedCollection).toContain(duongSu);
       expect(comp.danhSachDuongSu).toEqual(danhSachDuongSu);
     });
   });
@@ -118,6 +147,18 @@ describe('DanhSachDuongSu Management Update Component', () => {
       expect(danhSachDuongSuService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Compare relationships', () => {
+    describe('compareDuongSu', () => {
+      it('Should forward to duongSuService', () => {
+        const entity = { idDuongSu: 123 };
+        const entity2 = { idDuongSu: 456 };
+        jest.spyOn(duongSuService, 'compareDuongSu');
+        comp.compareDuongSu(entity, entity2);
+        expect(duongSuService.compareDuongSu).toHaveBeenCalledWith(entity, entity2);
+      });
     });
   });
 });

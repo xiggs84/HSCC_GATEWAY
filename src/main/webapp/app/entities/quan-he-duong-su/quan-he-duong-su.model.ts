@@ -1,10 +1,11 @@
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
+
 export interface IQuanHeDuongSu {
-  id: number;
-  idDuongSu?: number | null;
+  idQuanHe: number;
   idDuongSuQh?: number | null;
-  idQuanHe?: number | null;
   thongTinQuanHe?: string | null;
   trangThai?: number | null;
+  duongSu?: IDuongSu | null;
 }
 
-export type NewQuanHeDuongSu = Omit<IQuanHeDuongSu, 'id'> & { id: null };
+export type NewQuanHeDuongSu = Omit<IQuanHeDuongSu, 'idQuanHe'> & { idQuanHe: null };

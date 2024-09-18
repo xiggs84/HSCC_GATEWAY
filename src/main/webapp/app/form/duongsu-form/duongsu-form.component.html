@@ -5,29 +5,28 @@
   (nzOnOk)="handleOk()"
   [nzWidth]="'800px'"
 >
-  <form [formGroup]="duongSuForm" nz-form *nzModalContent class="custom-modal">
+  <form nz-form *nzModalContent class="custom-modal">
     <nz-form-item>
       <nz-form-label [nzSpan]="8" class="custom-label">Loại đương sự</nz-form-label>
       <nz-form-control [nzSpan]="15">
-        <nz-select formControlName="loaiDuongSu" [attr.disabled]="isLoaiDuongSuReadonly ? true : null">
-          <nz-option nzValue="CaNhan" nzLabel="Cá nhân"></nz-option>
-          <nz-option nzValue="ToChuc" nzLabel="Tổ chức"></nz-option>
-          <nz-option nzValue="ToChucTinDung" nzLabel="Tổ chức tín dụng"></nz-option>
+        <nz-select name="loaiDuongSu" [(ngModel)]="selectedLoaiDuongSu" (ngModelChange)="onLoaiDuongSuChange($event)" nzPlaceHolder="Chọn loại đương sự">
+          <nz-option *ngFor="let option of loaiDuongSuOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <ng-container *ngIf="duongSuForm.get('loaiDuongSu')?.value === 'CaNhan'">
+
+    <ng-container *ngIf="selectedLoaiDuongSu === 'ca_nhan'">
       <nz-form-item>
         <nz-form-label [nzSpan]="8" nzRequired class="custom-label">Họ tên</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="tenDuongSu" placeholder="Nhập họ tên" />
+          <input nz-input [(ngModel)]="newItem.tenDuongSu" name="tenDuongSu" placeholder="Nhập họ tên" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Giới tính</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="gioiTinh" nzPlaceHolder="Chọn giới tính">
+          <nz-select [(ngModel)]="gioiTinh" name="gioiTinh" nzPlaceHolder="Chọn giới tính">
             <nz-option nzValue="Nam" nzLabel="Nam"></nz-option>
             <nz-option nzValue="Nu" nzLabel="Nữ"></nz-option>
           </nz-select>
@@ -37,14 +36,14 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ngày sinh</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-date-picker formControlName="ngaySinh" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày" style="width: 100%;"></nz-date-picker>
+          <nz-date-picker [(ngModel)]="ngaySinh" name="ngaySinh" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày" style="width: 100%;"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Giấy tờ tuỳ thân</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="giayToTuyThan" nzPlaceHolder="Chọn loại giấy tờ">
+          <nz-select [(ngModel)]="giayToTuyThan" name="giayToTuyThan" nzPlaceHolder="Chọn loại giấy tờ">
             <nz-option nzValue="Cmnd" nzLabel="Chứng minh nhân dân"></nz-option>
             <nz-option nzValue="Hc" nzLabel="Hộ chiếu"></nz-option>
             <nz-option nzValue="Cc" nzLabel="Căn cước"></nz-option>
@@ -57,36 +56,44 @@
       <nz-form-item *ngIf="isGiayToKhacVisible">
         <nz-form-label [nzSpan]="8" class="custom-label">Tên giấy tờ khác</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="tenGiayTo" placeholder="Nhập tên giấy tờ" />
+          <input nz-input [(ngModel)]="tenGiayTo" name="tenGiayTo" placeholder="Nhập tên giấy tờ" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Số giấy tờ</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="soGiayTo" placeholder="Nhập số giấy tờ" />
+          <input nz-input [(ngModel)]="newItem.soGiayTo" name="soGiayTo" placeholder="Nhập số giấy tờ" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ngày cấp</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-date-picker formControlName="ngayCap" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày" style="width: 100%;"></nz-date-picker>
+          <nz-date-picker [(ngModel)]="ngayCap" name="ngayCap" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày" style="width: 100%;"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Nơi cấp</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="noiCap" placeholder="Nhập nơi cấp" value="Công an tỉnh Tiền Giang" />
+          <input nz-input [(ngModel)]="noiCap" name="noiCap" placeholder="Nhập nơi cấp" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Tỉnh, thành phố</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="tinhThanhpho" nzPlaceHolder="Chọn tỉnh, thành phố">
-            <nz-option nzValue="tienGiang" nzLabel="Tiền Giang"></nz-option>
+          <nz-select
+            id="tinh-thanh-pho"
+            nzPlaceHolder="Chọn tỉnh/thành phố"
+            [(ngModel)]="selectedtinhId"
+            (ngModelChange)="ontinhChange($event)"
+            name="tinhThanhPho"
+            nzShowSearch
+            [nzFilterOption]="filterOption"
+          >
+            <nz-option *ngFor="let tinh of tinhs" [nzLabel]="tinh.tenTinh!" [nzValue]="tinh.maTinh"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -94,8 +101,16 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Quận, huyện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="quanHuyen" nzPlaceHolder="Chọn quận, huyện">
-            <nz-option nzValue="myTho" nzLabel="Thành phố Mỹ Tho"></nz-option>
+          <nz-select
+            id="quan-huyen"
+            nzPlaceHolder="Chọn quận/huyện"
+            [(ngModel)]="selectedhuyenId"
+            (ngModelChange)="onhuyenChange($event)"
+            nzShowSearch
+            [nzFilterOption]="filterOption"
+            name="quanHuyen"
+          >
+            <nz-option *ngFor="let huyen of huyens" [nzLabel]="huyen.tenHuyen!" [nzValue]="huyen.maHuyen"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -103,8 +118,13 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Phường, xã</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="phuongXa" nzPlaceHolder="Chọn phường, xã">
-            <nz-option nzValue="phuong1" nzLabel="Phường 1"></nz-option>
+          <nz-select
+            id="xa-phuong"
+            nzPlaceHolder="Chọn xã/phường/thị trấn"
+            [(ngModel)]="selectedxaId"
+            name="xaPhuong"
+          >
+            <nz-option *ngFor="let xa of xas" [nzLabel]="xa.tenXa!" [nzValue]="xa.maXa"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -112,63 +132,63 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Hộ khẩu</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="hoKhau" placeholder="Nhập hộ khẩu" />
+          <input nz-input [(ngModel)]="hoKhau" name="hoKhau" placeholder="Nhập hộ khẩu" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Số nhà, đường</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="soNhaDuong" placeholder="Nhập số nhà, đường" />
+          <input nz-input [(ngModel)]="soNhaDuong" name="soNhaDuong" placeholder="Nhập số nhà, đường" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Nơi cư trú khác</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="noiCuTruKhac" placeholder="Nhập nơi cư trú" />
+          <input nz-input [(ngModel)]="noiCuTruKhac" name="noiCuTruKhac" placeholder="Nhập nơi cư trú" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Địa chỉ cư trú/tạm trú</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="diaChiCuTruTamTru" placeholder="Nhập địa chỉ cư trú/tạm trú" />
+          <input nz-input [(ngModel)]="diaChiCuTruTamTru" name="diaChiCuTruTamTru" placeholder="Nhập địa chỉ cư trú/tạm trú" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Số điện thoại</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="sdt" placeholder="Nhập số điện thoại" />
+          <input nz-input [(ngModel)]="newItem.soDienThoai" name="soDienThoai" placeholder="Nhập số điện thoại" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Email</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="email" placeholder="Nhập email" />
+          <input nz-input [(ngModel)]="newItem.email" name="email" placeholder="Nhập email" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Fax</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="fax" placeholder="Nhập fax" />
+          <input nz-input [(ngModel)]="newItem.fax" name="fax" placeholder="Nhập fax" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Website</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="website" placeholder="Nhập website" />
+          <input nz-input [(ngModel)]="newItem.website" name="website" placeholder="Nhập website" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Quốc tịch</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="quocTich" nzPlaceHolder="Chọn quốc tịch">
+          <nz-select [(ngModel)]="quocTich" name="quocTich" nzPlaceHolder="Chọn quốc tịch">
             <nz-option nzValue="vietnam" nzLabel="Việt Nam"></nz-option>
           </nz-select>
         </nz-form-control>
@@ -177,7 +197,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Tình trạng đương sự</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="ttDuongSu" nzPlaceHolder="Chọn tình trạng đương sự">
+          <nz-select [(ngModel)]="ttDuongSu" name="ttDuongSu" nzPlaceHolder="Chọn tình trạng đương sự">
             <nz-option nzValue="Song" nzLabel="Sống"></nz-option>
             <nz-option nzValue="Chet" nzLabel="Đã chết"></nz-option>
             <nz-option nzValue="NganChan" nzLabel="Bị ngăn chặn"></nz-option>
@@ -188,7 +208,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Tình trạng hôn nhân</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="ttHonNhan" nzPlaceHolder="Chọn tình trạng hôn nhân">
+          <nz-select [(ngModel)]="ttHonNhan" name="ttHonNhan" nzPlaceHolder="Chọn tình trạng hôn nhân">
             <nz-option nzValue="ChuaKetHon" nzLabel="Chưa kết hôn"></nz-option>
             <nz-option nzValue="KetHon" nzLabel="Kết hôn"></nz-option>
             <nz-option nzValue="LyHon" nzLabel="Ly hôn"></nz-option>
@@ -201,29 +221,29 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ghi chú</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="ghiChu" placeholder="Ghi chú" />
+          <input nz-input [(ngModel)]="ghiChu" name="ghiChu" placeholder="Ghi chú" />
         </nz-form-control>
       </nz-form-item>
 
-      <div formGroupName="secondPerson" *ngIf="duongSuForm.get('ttHonNhan')?.value === 'KetHon'">
+      <div formGroupName="secondPerson" *ngIf="ttHonNhan === 'KetHon'">
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Họ tên</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="tenDuongSu" placeholder="Nhập họ tên người thứ 2" />
+            <input nz-input [(ngModel)]="tenDuongSu1" name="tenDuongSu1" placeholder="Nhập họ tên người thứ 2" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Ngày sinh</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-date-picker formControlName="ngaySinh" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày sinh" style="width: 100%;"></nz-date-picker>
+            <nz-date-picker [(ngModel)]="ngaySinh1" name="ngaySinh1" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày sinh" style="width: 100%;"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Giấy tờ tuỳ thân</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="giayToTuyThan" nzPlaceHolder="Chọn loại giấy tờ">
+            <nz-select [(ngModel)]="giayToTuyThan1" name="giayToTuyThan1" nzPlaceHolder="Chọn loại giấy tờ">
               <nz-option nzValue="Cmnd" nzLabel="Chứng minh nhân dân"></nz-option>
               <nz-option nzValue="Hc" nzLabel="Hộ chiếu"></nz-option>
               <nz-option nzValue="Cc" nzLabel="Căn cước"></nz-option>
@@ -236,35 +256,35 @@
         <nz-form-item *ngIf="isGiayToKhacSpouseVisible">
           <nz-form-label [nzSpan]="8" class="custom-label">Tên giấy tờ khác</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="tenGiayTo" placeholder="Nhập tên giấy tờ" />
+            <input nz-input [(ngModel)]="tenGiayTo1" name="tenGiayTo1" placeholder="Nhập tên giấy tờ" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Số giấy tờ</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="soGiayTo" placeholder="Nhập số giấy tờ" />
+            <input nz-input [(ngModel)]="soGiayTo1" name="soGiayTo1" placeholder="Nhập số giấy tờ" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Ngày cấp</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-date-picker formControlName="ngayCap" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày cấp" style="width: 100%;"></nz-date-picker>
+            <nz-date-picker [(ngModel)]="ngayCap1" name="ngayCap1" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày cấp" style="width: 100%;"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Nơi cấp</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="noiCap" placeholder="Nhập nơi cấp" />
+            <input nz-input [(ngModel)]="noiCap1" name="noiCap1" placeholder="Nhập nơi cấp" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Tỉnh, thành phố</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="tinhThanhpho" nzPlaceHolder="Chọn tỉnh, thành phố">
+            <nz-select [(ngModel)]="tinhThanhpho1" name="tinhThanhpho1" nzPlaceHolder="Chọn tỉnh, thành phố">
               <nz-option nzValue="tienGiang" nzLabel="Tiền Giang"></nz-option>
             </nz-select>
           </nz-form-control>
@@ -273,7 +293,7 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Quận, huyện</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="quanHuyen" nzPlaceHolder="Chọn quận, huyện">
+            <nz-select [(ngModel)]="quanHuyen1" name="quanHuyen1" nzPlaceHolder="Chọn quận, huyện">
               <nz-option nzValue="myTho" nzLabel="Thành phố Mỹ Tho"></nz-option>
             </nz-select>
           </nz-form-control>
@@ -282,7 +302,7 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Phường, xã</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="phuongXa" nzPlaceHolder="Chọn phường, xã">
+            <nz-select [(ngModel)]="phuongXa1" name="phuongXa1" nzPlaceHolder="Chọn phường, xã">
               <nz-option nzValue="phuong1" nzLabel="Phường 1"></nz-option>
             </nz-select>
           </nz-form-control>
@@ -291,63 +311,63 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Hộ khẩu</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="hoKhau" placeholder="Nhập hộ khẩu" />
+            <input nz-input [(ngModel)]="hoKhau1" name="hoKhau1" placeholder="Nhập hộ khẩu" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Số nhà, đường</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="soNhaDuong" placeholder="Nhập số nhà, đường" />
+            <input nz-input [(ngModel)]="soNhaDuong1" name="soNhaDuong1" placeholder="Nhập số nhà, đường" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Nơi cư trú khác</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="noiCuTruKhac" placeholder="Nhập nơi cư trú" />
+            <input nz-input [(ngModel)]="noiCuTruKhac1" name="noiCuTruKhac1" placeholder="Nhập nơi cư trú" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Địa chỉ cư trú/tạm trú</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="diaChiCuTruTamTru" placeholder="Nhập địa chỉ cư trú/tạm trú" />
+            <input nz-input [(ngModel)]="diaChiCuTruTamTru1" name="diaChiCuTruTamTru1" placeholder="Nhập địa chỉ cư trú/tạm trú" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Số điện thoại</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="sdt" placeholder="Nhập số điện thoại" />
+            <input nz-input [(ngModel)]="sdt1" name="sdt1" placeholder="Nhập số điện thoại" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Email</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="email" placeholder="Nhập email" />
+            <input nz-input [(ngModel)]="email1" name="email1" placeholder="Nhập email" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Fax</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="fax" placeholder="Nhập fax" />
+            <input nz-input [(ngModel)]="fax1" name="fax1" placeholder="Nhập fax" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Website</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <input nz-input formControlName="website" placeholder="Nhập website" />
+            <input nz-input [(ngModel)]="website1" name="website1" placeholder="Nhập website" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Quốc tịch</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="quocTich" nzPlaceHolder="Chọn quốc tịch">
+            <nz-select [(ngModel)]="quocTich1" name="quocTich1" nzPlaceHolder="Chọn quốc tịch">
               <nz-option nzValue="vietnam" nzLabel="Việt Nam"></nz-option>
             </nz-select>
           </nz-form-control>
@@ -356,7 +376,7 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="8" class="custom-label">Tình trạng đương sự</nz-form-label>
           <nz-form-control [nzSpan]="15">
-            <nz-select formControlName="ttDuongSu" nzPlaceHolder="Chọn tình trạng đương sự">
+            <nz-select [(ngModel)]="ttDuongSu1" name="ttDuongSu1" nzPlaceHolder="Chọn tình trạng đương sự">
               <nz-option nzValue="Song" nzLabel="Sống"></nz-option>
               <nz-option nzValue="Chet" nzLabel="Đã chết"></nz-option>
               <nz-option nzValue="NganChan" nzLabel="Bị ngăn chặn"></nz-option>
@@ -369,46 +389,54 @@
           <nz-form-item>
             <nz-form-label [nzSpan]="8" class="custom-label">Giấy chứng nhận kết hôn số</nz-form-label>
             <nz-form-control [nzSpan]="15">
-              <input nz-input formControlName="so" placeholder="Nhập số giấy chứng nhận kết hôn" />
+              <input nz-input [(ngModel)]="soGiayCNKH" name="soGiayCNKH" placeholder="Nhập số giấy chứng nhận kết hôn" />
             </nz-form-control>
           </nz-form-item>
 
           <nz-form-item>
             <nz-form-label [nzSpan]="8" class="custom-label">Ngày cấp</nz-form-label>
             <nz-form-control [nzSpan]="15">
-              <nz-date-picker formControlName="ngayCap" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày cấp" style="width: 100%;"></nz-date-picker>
+              <nz-date-picker [(ngModel)]="ngayCapNCKH" name="ngayCapNCKH" nzFormat="dd/MM/yyyy" nzPlaceHolder="Chọn ngày cấp" style="width: 100%;"></nz-date-picker>
             </nz-form-control>
           </nz-form-item>
 
           <nz-form-item>
             <nz-form-label [nzSpan]="8" class="custom-label">Nơi cấp</nz-form-label>
             <nz-form-control [nzSpan]="15">
-              <input nz-input formControlName="noiCap" placeholder="Nhập nơi cấp giấy chứng nhận kết hôn" />
+              <input nz-input [(ngModel)]="noiCapNCKH" name="noiCapNCKH" placeholder="Nhập nơi cấp giấy chứng nhận kết hôn" />
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="duongSuForm.get('loaiDuongSu')?.value === 'ToChuc' || duongSuForm.get('loaiDuongSu')?.value === 'ToChucTinDung'">
+    <ng-container *ngIf="selectedLoaiDuongSu === 'to_chuc' || selectedLoaiDuongSu === 'to_chuc_tin_dung'">
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label" nzRequired>Tên công ty</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="tenCongTy" />
+          <input nz-input [(ngModel)]="tenCongTy" name="tenCongTy" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label" nzRequired>Tên phiếu</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="tenPhieu" />
+          <input nz-input [(ngModel)]="tenPhieu" name="tenPhieu" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Tỉnh, thành phố</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="tinhThanhpho" nzPlaceHolder="Chọn tỉnh, thành phố">
-            <nz-option nzValue="tienGiang" nzLabel="Tiền Giang"></nz-option>
+          <nz-select
+            id="tinh-thanh-pho-to-chuc"
+            nzPlaceHolder="Chọn tỉnh/thành phố"
+            [(ngModel)]="selectedtinhId"
+            (ngModelChange)="ontinhChange($event)"
+            name="tinhThanhPho"
+            nzShowSearch
+            [nzFilterOption]="filterOption"
+          >
+            <nz-option *ngFor="let tinh of tinhs" [nzLabel]="tinh.tenTinh!" [nzValue]="tinh.maTinh"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -416,8 +444,16 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Quận, huyện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="quanHuyen" nzPlaceHolder="Chọn quận, huyện">
-            <nz-option nzValue="myTho" nzLabel="Thành phố Mỹ Tho"></nz-option>
+          <nz-select
+            id="quan-huyen-to-chuc"
+            nzPlaceHolder="Chọn quận/huyện"
+            [(ngModel)]="selectedhuyenId"
+            (ngModelChange)="onhuyenChange($event)"
+            nzShowSearch
+            [nzFilterOption]="filterOption"
+            name="quanHuyen"
+          >
+            <nz-option *ngFor="let huyen of huyens" [nzLabel]="huyen.tenHuyen!" [nzValue]="huyen.maHuyen"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -425,8 +461,13 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Phường, xã</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="phuongXa" nzPlaceHolder="Chọn phường, xã">
-            <nz-option nzValue="phuong1" nzLabel="Phường 1"></nz-option>
+          <nz-select
+            id="xa-phuong-to-chuc"
+            nzPlaceHolder="Chọn xã/phường/thị trấn"
+            [(ngModel)]="selectedxaId"
+            name="xaPhuong"
+          >
+            <nz-option *ngFor="let xa of xas" [nzLabel]="xa.tenXa!" [nzValue]="xa.maXa"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -434,91 +475,91 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Trụ sở</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="truSo" />
+          <input nz-input [(ngModel)]="truSo" name="truSo" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Điện thoại</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="dienThoai" />
+          <input nz-input [(ngModel)]="dienThoai" name="dienThoai" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Fax</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="fax" />
+          <input nz-input [(ngModel)]="fax" name="fax" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Email</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="email" />
+          <input nz-input [(ngModel)]="email" name="email" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Website</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="website" />
+          <input nz-input [(ngModel)]="website" name="website" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Giấy phép thành lập/đầu tư</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="giayPhepThanhLap" />
+          <input nz-input [(ngModel)]="giayPhepThanhLap" name="giayPhepThanhLap" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Đăng ký kinh doanh</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="dangKyKinhDoanh" />
+          <input nz-input [(ngModel)]="dangKyKinhDoanh" name="dangKyKinhDoanh" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Nơi cấp giấy phép</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="noiCapGiayPhep" />
+          <input nz-input [(ngModel)]="noiCapGiayPhep" name="noiCapGiayPhep" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Xưng hô người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="xungHoNguoiDaiDien" />
+          <input nz-input [(ngModel)]="xungHoNguoiDaiDien" name="xungHoNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Họ tên người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="hoTenNguoiDaiDien" />
+          <input nz-input [(ngModel)]="hoTenNguoiDaiDien" name="hoTenNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Chức vụ người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="chucVuNguoiDaiDien" />
+          <input nz-input [(ngModel)]="chucVuNguoiDaiDien" name="chucVuNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ngày sinh người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-date-picker formControlName="ngaySinhNguoiDaiDien" style="width: 100%;"></nz-date-picker>
+          <nz-date-picker [(ngModel)]="ngaySinhNguoiDaiDien" name="ngaySinhNguoiDaiDien" style="width: 100%;"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Giấy tờ tùy thân người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="giayToNguoiDaiDien" nzPlaceHolder="Chọn giấy tờ tùy thân">
+          <nz-select [(ngModel)]="giayToNguoiDaiDien" name="giayToNguoiDaiDien" nzPlaceHolder="Chọn giấy tờ tùy thân">
             <nz-option nzValue="Cmnd" nzLabel="Chứng minh nhân dân"></nz-option>
             <nz-option nzValue="Hc" nzLabel="Hộ chiếu"></nz-option>
             <nz-option nzValue="Cc" nzLabel="Căn cước"></nz-option>
@@ -531,63 +572,63 @@
       <nz-form-item *ngIf="isGiayToKhacNguoiDaiDienVisible">
         <nz-form-label [nzSpan]="8" class="custom-label">Tên giấy tờ khác</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="tenGiayToNguoiDaiDien" placeholder="Nhập tên giấy tờ" />
+          <input nz-input [(ngModel)]="tenGiayToNguoiDaiDien" name="tenGiayToNguoiDaiDien" placeholder="Nhập tên giấy tờ" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Số GT tùy thân người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="soGiayToNguoiDaiDien" />
+          <input nz-input [(ngModel)]="soGiayToNguoiDaiDien" name="soGiayToNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Cơ quan cấp giấy tờ tùy thân</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="coQuanCapGiayToNguoiDaiDien" />
+          <input nz-input [(ngModel)]="coQuanCapGiayToNguoiDaiDien" name="coQuanCapGiayToNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ngày cấp giấy tờ tùy thân người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-date-picker formControlName="ngayCapGiayToNguoiDaiDien" style="width: 100%;"></nz-date-picker>
+          <nz-date-picker [(ngModel)]="ngayCapGiayToNguoiDaiDien" name="ngayCapGiayToNguoiDaiDien" style="width: 100%;"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Hộ khẩu thường trú người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="hoKhauNguoiDaiDien" />
+          <input nz-input [(ngModel)]="hoKhauNguoiDaiDien" name="hoKhauNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Nơi cư trú người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="noiCuTruNguoiDaiDien" />
+          <input nz-input [(ngModel)]="noiCuTruNguoiDaiDien" name="noiCuTruNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Địa chỉ cư trú/tạm trú người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input formControlName="diaChiNguoiDaiDien" />
+          <input nz-input [(ngModel)]="diaChiNguoiDaiDien" name="diaChiNguoiDaiDien" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Ghi chú</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <textarea nz-input formControlName="ghiChu"></textarea>
+          <textarea nz-input [(ngModel)]="ghiChu" name="ghiChu"></textarea>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Quốc tịch người đại diện</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="quocTichNguoiDaiDien" nzPlaceHolder="Chọn quốc tịch">
+          <nz-select [(ngModel)]="quocTichNguoiDaiDien" name="quocTichNguoiDaiDien" nzPlaceHolder="Chọn quốc tịch">
             <nz-option nzValue="vietNam" nzLabel="Việt Nam"></nz-option>
             <nz-option nzValue="khac" nzLabel="Khác"></nz-option>
           </nz-select>
@@ -597,7 +638,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="8" class="custom-label">Tình trạng hoạt động</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <nz-select formControlName="tinhTrangHoatDong" nzPlaceHolder="Chọn tình trạng hoạt động">
+          <nz-select [(ngModel)]="tinhTrangHoatDong" name="tinhTrangHoatDong" nzPlaceHolder="Chọn tình trạng hoạt động">
             <nz-option nzValue="1" nzLabel="Đang hoạt động"></nz-option>
             <nz-option nzValue="0" nzLabel="Ngừng hoạt động"></nz-option>
           </nz-select>

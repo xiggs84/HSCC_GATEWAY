@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDuongSuTrungCmnd, NewDuongSuTrungCmnd } from '../duong-su-trung-cmnd.model';
 
@@ -18,16 +18,13 @@ type DuongSuTrungCmndFormDefaults = Pick<NewDuongSuTrungCmnd, 'id'>;
 
 type DuongSuTrungCmndFormGroupContent = {
   id: FormControl<IDuongSuTrungCmnd['id'] | NewDuongSuTrungCmnd['id']>;
-  idDuongSu: FormControl<IDuongSuTrungCmnd['idDuongSu']>;
   tenDuongSu: FormControl<IDuongSuTrungCmnd['tenDuongSu']>;
-  idLoaiDs: FormControl<IDuongSuTrungCmnd['idLoaiDs']>;
   diaChi: FormControl<IDuongSuTrungCmnd['diaChi']>;
   trangThai: FormControl<IDuongSuTrungCmnd['trangThai']>;
   thongTinDs: FormControl<IDuongSuTrungCmnd['thongTinDs']>;
   ngayThaoTac: FormControl<IDuongSuTrungCmnd['ngayThaoTac']>;
   nguoiThaoTac: FormControl<IDuongSuTrungCmnd['nguoiThaoTac']>;
   idDsGoc: FormControl<IDuongSuTrungCmnd['idDsGoc']>;
-  idTinhTrang: FormControl<IDuongSuTrungCmnd['idTinhTrang']>;
   idMaster: FormControl<IDuongSuTrungCmnd['idMaster']>;
   idDonVi: FormControl<IDuongSuTrungCmnd['idDonVi']>;
   strSearch: FormControl<IDuongSuTrungCmnd['strSearch']>;
@@ -36,6 +33,7 @@ type DuongSuTrungCmndFormGroupContent = {
   idMasterMin: FormControl<IDuongSuTrungCmnd['idMasterMin']>;
   idDuongSuMax: FormControl<IDuongSuTrungCmnd['idDuongSuMax']>;
   idMasterMax: FormControl<IDuongSuTrungCmnd['idMasterMax']>;
+  duongSu: FormControl<IDuongSuTrungCmnd['duongSu']>;
 };
 
 export type DuongSuTrungCmndFormGroup = FormGroup<DuongSuTrungCmndFormGroupContent>;
@@ -55,16 +53,15 @@ export class DuongSuTrungCmndFormService {
           validators: [Validators.required],
         },
       ),
-      idDuongSu: new FormControl(duongSuTrungCmndRawValue.idDuongSu),
       tenDuongSu: new FormControl(duongSuTrungCmndRawValue.tenDuongSu),
-      idLoaiDs: new FormControl(duongSuTrungCmndRawValue.idLoaiDs),
       diaChi: new FormControl(duongSuTrungCmndRawValue.diaChi),
-      trangThai: new FormControl(duongSuTrungCmndRawValue.trangThai),
+      trangThai: new FormControl(duongSuTrungCmndRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
       thongTinDs: new FormControl(duongSuTrungCmndRawValue.thongTinDs),
       ngayThaoTac: new FormControl(duongSuTrungCmndRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(duongSuTrungCmndRawValue.nguoiThaoTac),
       idDsGoc: new FormControl(duongSuTrungCmndRawValue.idDsGoc),
-      idTinhTrang: new FormControl(duongSuTrungCmndRawValue.idTinhTrang),
       idMaster: new FormControl(duongSuTrungCmndRawValue.idMaster),
       idDonVi: new FormControl(duongSuTrungCmndRawValue.idDonVi),
       strSearch: new FormControl(duongSuTrungCmndRawValue.strSearch),
@@ -73,6 +70,7 @@ export class DuongSuTrungCmndFormService {
       idMasterMin: new FormControl(duongSuTrungCmndRawValue.idMasterMin),
       idDuongSuMax: new FormControl(duongSuTrungCmndRawValue.idDuongSuMax),
       idMasterMax: new FormControl(duongSuTrungCmndRawValue.idMasterMax),
+      duongSu: new FormControl(duongSuTrungCmndRawValue.duongSu),
     });
   }
 

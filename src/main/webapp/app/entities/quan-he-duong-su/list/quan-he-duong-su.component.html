@@ -35,16 +35,9 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
+            <th scope="col" jhiSortBy="idQuanHe">
               <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idDuongSu">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSu">Id Duong Su</span>
+                <span jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -52,13 +45,6 @@
             <th scope="col" jhiSortBy="idDuongSuQh">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSuQh">Id Duong Su Qh</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idQuanHe">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -77,24 +63,35 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="duongSu.idDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.quanHeDuongSu.duongSu">Duong Su</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (quanHeDuongSu of quanHeDuongSus; track trackId) {
+          @for (quanHeDuongSu of quanHeDuongSus; track trackIdQuanHe) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/quan-he-duong-su', quanHeDuongSu.id, 'view']">{{ quanHeDuongSu.id }}</a>
+                <a [routerLink]="['/quan-he-duong-su', quanHeDuongSu.idQuanHe, 'view']">{{ quanHeDuongSu.idQuanHe }}</a>
               </td>
-              <td>{{ quanHeDuongSu.idDuongSu }}</td>
               <td>{{ quanHeDuongSu.idDuongSuQh }}</td>
-              <td>{{ quanHeDuongSu.idQuanHe }}</td>
               <td>{{ quanHeDuongSu.thongTinQuanHe }}</td>
               <td>{{ quanHeDuongSu.trangThai }}</td>
+              <td>
+                @if (quanHeDuongSu.duongSu) {
+                  <div>
+                    <a [routerLink]="['/duong-su', quanHeDuongSu.duongSu.idDuongSu, 'view']">{{ quanHeDuongSu.duongSu.idDuongSu }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    [routerLink]="['/quan-he-duong-su', quanHeDuongSu.id, 'view']"
+                    [routerLink]="['/quan-he-duong-su', quanHeDuongSu.idQuanHe, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -103,7 +100,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/quan-he-duong-su', quanHeDuongSu.id, 'edit']"
+                    [routerLink]="['/quan-he-duong-su', quanHeDuongSu.idQuanHe, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >

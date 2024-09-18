@@ -49,13 +49,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="loaiDuongSu">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="diaChi">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.diaChi">Dia Chi</span>
@@ -147,13 +140,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="loaiGiayTo">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="soGiayTo">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSu.soGiayTo">So Giay To</span>
@@ -182,6 +168,18 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="loaiDuongSu.idLoaiDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.loaiDuongSu">Loai Duong Su</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="loaiGiayTo.idLoaiGiayTo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSu.loaiGiayTo">Loai Giay To</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -192,9 +190,6 @@
                 <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'view']">{{ duongSu.idDuongSu }}</a>
               </td>
               <td>{{ duongSu.tenDuongSu }}</td>
-              <td [jhiTranslate]="'gatewayApp.LoaiDuongSu.' + (duongSu.loaiDuongSu ?? 'null')">
-                {{ { null: '', CaNhan: 'Cá nhân', ToChuc: 'Tổ chức', ToChucTinDung: 'Tổ chức tín dụng' }[duongSu.loaiDuongSu ?? 'null'] }}
-              </td>
               <td>{{ duongSu.diaChi }}</td>
               <td>{{ duongSu.soDienThoai }}</td>
               <td>{{ duongSu.email }}</td>
@@ -208,22 +203,26 @@
               <td>{{ duongSu.idMaster }}</td>
               <td>{{ duongSu.idDonVi }}</td>
               <td>{{ duongSu.strSearch }}</td>
-              <td [jhiTranslate]="'gatewayApp.LoaiGiayTo.' + (duongSu.loaiGiayTo ?? 'null')">
-                {{
-                  {
-                    null: '',
-                    Cmnd: 'Chứng minh nhân dân',
-                    Cccd: 'Căn cước công dân',
-                    Cc: 'Căn cước',
-                    Hc: 'Hộ chiếu',
-                    K: 'Giấy tờ hợp lệ khác',
-                  }[duongSu.loaiGiayTo ?? 'null']
-                }}
-              </td>
               <td>{{ duongSu.soGiayTo }}</td>
               <td>{{ duongSu.ghiChu }}</td>
               <td>{{ duongSu.idLoaiNganChan }}</td>
               <td>{{ duongSu.syncStatus }}</td>
+              <td>
+                @if (duongSu.loaiDuongSu) {
+                  <div>
+                    <a [routerLink]="['/loai-duong-su', duongSu.loaiDuongSu.idLoaiDuongSu, 'view']">{{
+                      duongSu.loaiDuongSu.idLoaiDuongSu
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (duongSu.loaiGiayTo) {
+                  <div>
+                    <a [routerLink]="['/loai-giay-to', duongSu.loaiGiayTo.idLoaiGiayTo, 'view']">{{ duongSu.loaiGiayTo.idLoaiGiayTo }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

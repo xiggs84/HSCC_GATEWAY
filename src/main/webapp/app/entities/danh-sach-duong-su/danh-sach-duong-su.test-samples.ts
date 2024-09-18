@@ -3,36 +3,32 @@ import dayjs from 'dayjs/esm';
 import { IDanhSachDuongSu, NewDanhSachDuongSu } from './danh-sach-duong-su.model';
 
 export const sampleWithRequiredData: IDanhSachDuongSu = {
-  id: 1211,
+  id: 23191,
 };
 
 export const sampleWithPartialData: IDanhSachDuongSu = {
-  id: 30409,
-  tenDuongSu: 'age configuration briskly',
-  idLoaiDs: 1048,
-  diaChi: 'incarcerate what rampage',
-  trangThai: 7309,
-  idTinhTrang: 21502,
-  idMaster: 'yieldingly apostrophize',
-  idDonVi: 27987,
+  id: 25578,
+  tenDuongSu: 'pace',
+  ngayThaoTac: dayjs('2024-08-19'),
+  nguoiThaoTac: 12548,
+  idDonVi: 22882,
+  soGiayTo: 'where',
+  idLoaiNganChan: 25704,
 };
 
 export const sampleWithFullData: IDanhSachDuongSu = {
-  id: 23449,
-  idDuongSu: 11810,
-  tenDuongSu: 'signify mmm gratefully',
-  idLoaiDs: 24503,
-  diaChi: 'gah cautiously traumatize',
-  trangThai: 30217,
+  id: 19190,
+  tenDuongSu: 'stupendous privacy sleepy',
+  diaChi: 'homeschool',
+  trangThai: 0,
   ngayThaoTac: dayjs('2024-08-19'),
-  nguoiThaoTac: 25527,
-  idDsGoc: 22463,
-  idTinhTrang: 30606,
-  idMaster: 'ornery deter',
-  idDonVi: 1943,
-  strSearch: 'fooey ouch',
-  soGiayTo: 'consequently dialect afterwards',
-  idLoaiNganChan: 20014,
+  nguoiThaoTac: 16155,
+  idDsGoc: 26527,
+  idMaster: 'off ack',
+  idDonVi: 19014,
+  strSearch: 'although pish',
+  soGiayTo: 'around jodhpurs around',
+  idLoaiNganChan: 28456,
 };
 
 export const sampleWithNewData: NewDanhSachDuongSu = {

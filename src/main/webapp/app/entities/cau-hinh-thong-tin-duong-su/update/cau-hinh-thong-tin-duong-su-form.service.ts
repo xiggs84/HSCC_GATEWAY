@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ICauHinhThongTinDuongSu, NewCauHinhThongTinDuongSu } from '../cau-hinh-thong-tin-duong-su.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idCauHinh: unknown }> = Partial<Omit<T, 'idCauHinh'>> & { idCauHinh: T['idCauHinh'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,11 +14,10 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type CauHinhThongTinDuongSuFormGroupInput = ICauHinhThongTinDuongSu | PartialWithRequiredKeyOf<NewCauHinhThongTinDuongSu>;
 
-type CauHinhThongTinDuongSuFormDefaults = Pick<NewCauHinhThongTinDuongSu, 'id'>;
+type CauHinhThongTinDuongSuFormDefaults = Pick<NewCauHinhThongTinDuongSu, 'idCauHinh'>;
 
 type CauHinhThongTinDuongSuFormGroupContent = {
-  id: FormControl<ICauHinhThongTinDuongSu['id'] | NewCauHinhThongTinDuongSu['id']>;
-  idCauHinh: FormControl<ICauHinhThongTinDuongSu['idCauHinh']>;
+  idCauHinh: FormControl<ICauHinhThongTinDuongSu['idCauHinh'] | NewCauHinhThongTinDuongSu['idCauHinh']>;
   noiDung: FormControl<ICauHinhThongTinDuongSu['noiDung']>;
   javascript: FormControl<ICauHinhThongTinDuongSu['javascript']>;
   css: FormControl<ICauHinhThongTinDuongSu['css']>;
@@ -32,27 +31,28 @@ export type CauHinhThongTinDuongSuFormGroup = FormGroup<CauHinhThongTinDuongSuFo
 @Injectable({ providedIn: 'root' })
 export class CauHinhThongTinDuongSuFormService {
   createCauHinhThongTinDuongSuFormGroup(
-    cauHinhThongTinDuongSu: CauHinhThongTinDuongSuFormGroupInput = { id: null },
+    cauHinhThongTinDuongSu: CauHinhThongTinDuongSuFormGroupInput = { idCauHinh: null },
   ): CauHinhThongTinDuongSuFormGroup {
     const cauHinhThongTinDuongSuRawValue = {
       ...this.getFormDefaults(),
       ...cauHinhThongTinDuongSu,
     };
     return new FormGroup<CauHinhThongTinDuongSuFormGroupContent>({
-      id: new FormControl(
-        { value: cauHinhThongTinDuongSuRawValue.id, disabled: true },
+      idCauHinh: new FormControl(
+        { value: cauHinhThongTinDuongSuRawValue.idCauHinh, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idCauHinh: new FormControl(cauHinhThongTinDuongSuRawValue.idCauHinh),
       noiDung: new FormControl(cauHinhThongTinDuongSuRawValue.noiDung),
       javascript: new FormControl(cauHinhThongTinDuongSuRawValue.javascript),
       css: new FormControl(cauHinhThongTinDuongSuRawValue.css),
       idLoaiDs: new FormControl(cauHinhThongTinDuongSuRawValue.idLoaiDs),
       idDonVi: new FormControl(cauHinhThongTinDuongSuRawValue.idDonVi),
-      trangThai: new FormControl(cauHinhThongTinDuongSuRawValue.trangThai),
+      trangThai: new FormControl(cauHinhThongTinDuongSuRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
     });
   }
 
@@ -65,14 +65,14 @@ export class CauHinhThongTinDuongSuFormService {
     form.reset(
       {
         ...cauHinhThongTinDuongSuRawValue,
-        id: { value: cauHinhThongTinDuongSuRawValue.id, disabled: true },
+        idCauHinh: { value: cauHinhThongTinDuongSuRawValue.idCauHinh, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): CauHinhThongTinDuongSuFormDefaults {
     return {
-      id: null,
+      idCauHinh: null,
     };
   }
 }

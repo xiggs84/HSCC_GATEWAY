@@ -1,11 +1,10 @@
 import dayjs from 'dayjs/esm';
-import { LoaiDuongSu } from 'app/entities/enumerations/loai-duong-su.model';
-import { LoaiGiayTo } from 'app/entities/enumerations/loai-giay-to.model';
+import { ILoaiDuongSu } from 'app/entities/loai-duong-su/loai-duong-su.model';
+import { ILoaiGiayTo } from 'app/entities/loai-giay-to/loai-giay-to.model';
 
 export interface IDuongSu {
   idDuongSu: number;
   tenDuongSu?: string | null;
-  loaiDuongSu?: keyof typeof LoaiDuongSu | null;
   diaChi?: string | null;
   soDienThoai?: string | null;
   email?: string | null;
@@ -19,11 +18,12 @@ export interface IDuongSu {
   idMaster?: string | null;
   idDonVi?: number | null;
   strSearch?: string | null;
-  loaiGiayTo?: keyof typeof LoaiGiayTo | null;
   soGiayTo?: string | null;
   ghiChu?: string | null;
   idLoaiNganChan?: number | null;
   syncStatus?: number | null;
+  loaiDuongSu?: ILoaiDuongSu | null;
+  loaiGiayTo?: ILoaiGiayTo | null;
 }
 
 export type NewDuongSu = Omit<IDuongSu, 'idDuongSu'> & { idDuongSu: null };

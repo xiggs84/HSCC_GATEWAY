@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idCauHinh">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.cauHinhThongTinDuongSu.idCauHinh">Id Cau Hinh</span>
@@ -95,12 +88,13 @@
           </tr>
         </thead>
         <tbody>
-          @for (cauHinhThongTinDuongSu of cauHinhThongTinDuongSus; track trackId) {
+          @for (cauHinhThongTinDuongSu of cauHinhThongTinDuongSus; track trackIdCauHinh) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.id, 'view']">{{ cauHinhThongTinDuongSu.id }}</a>
+                <a [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.idCauHinh, 'view']">{{
+                  cauHinhThongTinDuongSu.idCauHinh
+                }}</a>
               </td>
-              <td>{{ cauHinhThongTinDuongSu.idCauHinh }}</td>
               <td>{{ cauHinhThongTinDuongSu.noiDung }}</td>
               <td>{{ cauHinhThongTinDuongSu.javascript }}</td>
               <td>{{ cauHinhThongTinDuongSu.css }}</td>
@@ -110,7 +104,7 @@
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.id, 'view']"
+                    [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.idCauHinh, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -119,7 +113,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.id, 'edit']"
+                    [routerLink]="['/cau-hinh-thong-tin-duong-su', cauHinhThongTinDuongSu.idCauHinh, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >

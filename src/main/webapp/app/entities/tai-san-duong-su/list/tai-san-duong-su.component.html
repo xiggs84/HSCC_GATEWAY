@@ -42,9 +42,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idDuongSu">
+            <th scope="col" jhiSortBy="idTaiSan">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.taiSanDuongSu.idDuongSu">Id Duong Su</span>
+                <span jhiTranslate="gatewayApp.taiSanDuongSu.idTaiSan">Id Tai San</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -84,6 +84,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="duongSu.idDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSanDuongSu.duongSu">Duong Su</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -93,12 +99,19 @@
               <td>
                 <a [routerLink]="['/tai-san-duong-su', taiSanDuongSu.id, 'view']">{{ taiSanDuongSu.id }}</a>
               </td>
-              <td>{{ taiSanDuongSu.idDuongSu }}</td>
+              <td>{{ taiSanDuongSu.idTaiSan }}</td>
               <td>{{ taiSanDuongSu.trangThai }}</td>
               <td>{{ taiSanDuongSu.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ taiSanDuongSu.idHopDong }}</td>
               <td>{{ taiSanDuongSu.idLoaiHopDong }}</td>
               <td>{{ taiSanDuongSu.idChungThuc }}</td>
+              <td>
+                @if (taiSanDuongSu.duongSu) {
+                  <div>
+                    <a [routerLink]="['/duong-su', taiSanDuongSu.duongSu.idDuongSu, 'view']">{{ taiSanDuongSu.duongSu.idDuongSu }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a

@@ -18,12 +18,13 @@ type TaiSanDuongSuFormDefaults = Pick<NewTaiSanDuongSu, 'id'>;
 
 type TaiSanDuongSuFormGroupContent = {
   id: FormControl<ITaiSanDuongSu['id'] | NewTaiSanDuongSu['id']>;
-  idDuongSu: FormControl<ITaiSanDuongSu['idDuongSu']>;
+  idTaiSan: FormControl<ITaiSanDuongSu['idTaiSan']>;
   trangThai: FormControl<ITaiSanDuongSu['trangThai']>;
   ngayThaoTac: FormControl<ITaiSanDuongSu['ngayThaoTac']>;
   idHopDong: FormControl<ITaiSanDuongSu['idHopDong']>;
   idLoaiHopDong: FormControl<ITaiSanDuongSu['idLoaiHopDong']>;
   idChungThuc: FormControl<ITaiSanDuongSu['idChungThuc']>;
+  duongSu: FormControl<ITaiSanDuongSu['duongSu']>;
 };
 
 export type TaiSanDuongSuFormGroup = FormGroup<TaiSanDuongSuFormGroupContent>;
@@ -43,12 +44,15 @@ export class TaiSanDuongSuFormService {
           validators: [Validators.required],
         },
       ),
-      idDuongSu: new FormControl(taiSanDuongSuRawValue.idDuongSu),
-      trangThai: new FormControl(taiSanDuongSuRawValue.trangThai),
+      idTaiSan: new FormControl(taiSanDuongSuRawValue.idTaiSan),
+      trangThai: new FormControl(taiSanDuongSuRawValue.trangThai, {
+        validators: [Validators.min(0), Validators.max(1)],
+      }),
       ngayThaoTac: new FormControl(taiSanDuongSuRawValue.ngayThaoTac),
       idHopDong: new FormControl(taiSanDuongSuRawValue.idHopDong),
       idLoaiHopDong: new FormControl(taiSanDuongSuRawValue.idLoaiHopDong),
       idChungThuc: new FormControl(taiSanDuongSuRawValue.idChungThuc),
+      duongSu: new FormControl(taiSanDuongSuRawValue.duongSu),
     });
   }
 

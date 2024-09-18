@@ -1,9 +1,7 @@
 export interface IQuanHeNhanThan {
-  id: number;
-  idQuanHe?: number | null;
+  idQuanHe: number;
   dienGiai?: string | null;
   idQuanHeDoiUng?: number | null;
-  idGioiTinh?: number | null;
 }
 
-export type NewQuanHeNhanThan = Omit<IQuanHeNhanThan, 'id'> & { id: null };
+export type NewQuanHeNhanThan = Omit<IQuanHeNhanThan, 'idQuanHe'> & { idQuanHe: null };

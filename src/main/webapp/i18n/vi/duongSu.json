@@ -17,23 +17,32 @@
       "detail": {
         "title": "Duong Su"
       },
-      "id": "ID",
       "idDuongSu": "Id Duong Su",
       "tenDuongSu": "Ten Duong Su",
-      "idLoaiDs": "Id Loai Ds",
       "diaChi": "Dia Chi",
+      "soDienThoai": "So Dien Thoai",
+      "email": "Email",
+      "fax": "Fax",
+      "website": "Website",
       "trangThai": "Trang Thai",
       "thongTinDs": "Thong Tin Ds",
       "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "idDsGoc": "Id Ds Goc",
-      "idTinhTrang": "Id Tinh Trang",
       "idMaster": "Id Master",
       "idDonVi": "Id Don Vi",
       "strSearch": "Str Search",
       "soGiayTo": "So Giay To",
+      "ghiChu": "Ghi Chu",
       "idLoaiNganChan": "Id Loai Ngan Chan",
-      "syncStatus": "Sync Status"
+      "syncStatus": "Sync Status",
+      "taiSanDuongSu": "Tai San Duong Su",
+      "quanHeDuongSu": "Quan He Duong Su",
+      "danhSachDuongSu": "Danh Sach Duong Su",
+      "duongSuTrungCmnd": "Duong Su Trung Cmnd",
+      "duongSuTrungCmndBak": "Duong Su Trung Cmnd Bak",
+      "loaiDuongSu": "Loai Duong Su",
+      "loaiGiayTo": "Loai Giay To"
     }
   }
 }

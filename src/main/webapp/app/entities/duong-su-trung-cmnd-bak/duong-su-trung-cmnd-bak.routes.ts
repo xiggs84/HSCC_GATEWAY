@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { DuongSuTrungCmndBakComponent } from './list/duong-su-trung-cmnd-bak.component';
-import { DuongSuTrungCmndBakDetailComponent } from './detail/duong-su-trung-cmnd-bak-detail.component';
-import { DuongSuTrungCmndBakUpdateComponent } from './update/duong-su-trung-cmnd-bak-update.component';
 import DuongSuTrungCmndBakResolve from './route/duong-su-trung-cmnd-bak-routing-resolve.service';
 
 const duongSuTrungCmndBakRoute: Routes = [
   {
     path: '',
-    component: DuongSuTrungCmndBakComponent,
+    loadComponent: () => import('./list/duong-su-trung-cmnd-bak.component').then(m => m.DuongSuTrungCmndBakComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: DuongSuTrungCmndBakDetailComponent,
+    loadComponent: () => import('./detail/duong-su-trung-cmnd-bak-detail.component').then(m => m.DuongSuTrungCmndBakDetailComponent),
     resolve: {
       duongSuTrungCmndBak: DuongSuTrungCmndBakResolve,
     },
@@ -26,7 +23,7 @@ const duongSuTrungCmndBakRoute: Routes = [
   },
   {
     path: 'new',
-    component: DuongSuTrungCmndBakUpdateComponent,
+    loadComponent: () => import('./update/duong-su-trung-cmnd-bak-update.component').then(m => m.DuongSuTrungCmndBakUpdateComponent),
     resolve: {
       duongSuTrungCmndBak: DuongSuTrungCmndBakResolve,
     },
@@ -34,7 +31,7 @@ const duongSuTrungCmndBakRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: DuongSuTrungCmndBakUpdateComponent,
+    loadComponent: () => import('./update/duong-su-trung-cmnd-bak-update.component').then(m => m.DuongSuTrungCmndBakUpdateComponent),
     resolve: {
       duongSuTrungCmndBak: DuongSuTrungCmndBakResolve,
     },

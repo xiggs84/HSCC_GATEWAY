@@ -17,12 +17,11 @@
       "detail": {
         "title": "Quan He Duong Su"
       },
-      "id": "ID",
-      "idDuongSu": "Id Duong Su",
-      "idDuongSuQh": "Id Duong Su Qh",
       "idQuanHe": "Id Quan He",
+      "idDuongSuQh": "Id Duong Su Qh",
       "thongTinQuanHe": "Thong Tin Quan He",
-      "trangThai": "Trang Thai"
+      "trangThai": "Trang Thai",
+      "duongSu": "Duong Su"
     }
   }
 }

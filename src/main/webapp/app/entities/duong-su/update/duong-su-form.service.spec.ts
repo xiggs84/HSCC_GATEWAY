@@ -21,7 +21,6 @@ describe('DuongSu Form Service', () => {
           expect.objectContaining({
             idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            loaiDuongSu: expect.any(Object),
             diaChi: expect.any(Object),
             soDienThoai: expect.any(Object),
             email: expect.any(Object),
@@ -35,11 +34,12 @@ describe('DuongSu Form Service', () => {
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
-            loaiGiayTo: expect.any(Object),
             soGiayTo: expect.any(Object),
             ghiChu: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             syncStatus: expect.any(Object),
+            loaiDuongSu: expect.any(Object),
+            loaiGiayTo: expect.any(Object),
           }),
         );
       });
@@ -51,7 +51,6 @@ describe('DuongSu Form Service', () => {
           expect.objectContaining({
             idDuongSu: expect.any(Object),
             tenDuongSu: expect.any(Object),
-            loaiDuongSu: expect.any(Object),
             diaChi: expect.any(Object),
             soDienThoai: expect.any(Object),
             email: expect.any(Object),
@@ -65,11 +64,12 @@ describe('DuongSu Form Service', () => {
             idMaster: expect.any(Object),
             idDonVi: expect.any(Object),
             strSearch: expect.any(Object),
-            loaiGiayTo: expect.any(Object),
             soGiayTo: expect.any(Object),
             ghiChu: expect.any(Object),
             idLoaiNganChan: expect.any(Object),
             syncStatus: expect.any(Object),
+            loaiDuongSu: expect.any(Object),
+            loaiGiayTo: expect.any(Object),
           }),
         );
       });

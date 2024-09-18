@@ -1,19 +1,19 @@
 import { IQuanHeMaster, NewQuanHeMaster } from './quan-he-master.model';
 
 export const sampleWithRequiredData: IQuanHeMaster = {
-  id: 13245,
+  id: 29330,
 };
 
 export const sampleWithPartialData: IQuanHeMaster = {
-  id: 5719,
-  idDuongSu: 8805,
-  idDuongSuQh: 10169,
+  id: 7424,
+  idDuongSu: 12293,
+  idDuongSuQh: 2634,
 };
 
 export const sampleWithFullData: IQuanHeMaster = {
-  id: 15736,
-  idDuongSu: 20974,
-  idDuongSuQh: 23337,
+  id: 15117,
+  idDuongSu: 17981,
+  idDuongSuQh: 27184,
 };
 
 export const sampleWithNewData: NewQuanHeMaster = {

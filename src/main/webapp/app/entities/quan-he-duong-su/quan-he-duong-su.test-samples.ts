@@ -1,26 +1,24 @@
 import { IQuanHeDuongSu, NewQuanHeDuongSu } from './quan-he-duong-su.model';
 
 export const sampleWithRequiredData: IQuanHeDuongSu = {
-  id: 8166,
+  idQuanHe: 25416,
 };
 
 export const sampleWithPartialData: IQuanHeDuongSu = {
-  id: 6947,
-  idDuongSu: 11735,
-  trangThai: 10005,
+  idQuanHe: 23740,
+  idDuongSuQh: 1012,
+  trangThai: 1,
 };
 
 export const sampleWithFullData: IQuanHeDuongSu = {
-  id: 9776,
-  idDuongSu: 6680,
-  idDuongSuQh: 6370,
-  idQuanHe: 16794,
-  thongTinQuanHe: 'schmooze versus salesman',
-  trangThai: 29833,
+  idQuanHe: 2712,
+  idDuongSuQh: 24688,
+  thongTinQuanHe: 'properly pish',
+  trangThai: 1,
 };
 
 export const sampleWithNewData: NewQuanHeDuongSu = {
-  id: null,
+  idQuanHe: null,
 };
 
 Object.freeze(sampleWithNewData);

@@ -2,11 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
+import { DuongSuService } from 'app/entities/duong-su/service/duong-su.service';
 import { ITaiSanDuongSu } from '../tai-san-duong-su.model';
 import { TaiSanDuongSuService } from '../service/tai-san-duong-su.service';
 import { TaiSanDuongSuFormGroup, TaiSanDuongSuFormService } from './tai-san-duong-su-form.service';
@@ -21,12 +23,17 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
   isSaving = false;
   taiSanDuongSu: ITaiSanDuongSu | null = null;
 
+  duongSusSharedCollection: IDuongSu[] = [];
+
   protected taiSanDuongSuService = inject(TaiSanDuongSuService);
   protected taiSanDuongSuFormService = inject(TaiSanDuongSuFormService);
+  protected duongSuService = inject(DuongSuService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: TaiSanDuongSuFormGroup = this.taiSanDuongSuFormService.createTaiSanDuongSuFormGroup();
+
+  compareDuongSu = (o1: IDuongSu | null, o2: IDuongSu | null): boolean => this.duongSuService.compareDuongSu(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ taiSanDuongSu }) => {
@@ -34,6 +41,8 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
       if (taiSanDuongSu) {
         this.updateForm(taiSanDuongSu);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -73,5 +82,20 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
   protected updateForm(taiSanDuongSu: ITaiSanDuongSu): void {
     this.taiSanDuongSu = taiSanDuongSu;
     this.taiSanDuongSuFormService.resetForm(this.editForm, taiSanDuongSu);
+
+    this.duongSusSharedCollection = this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(
+      this.duongSusSharedCollection,
+      taiSanDuongSu.duongSu,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.duongSuService
+      .query()
+      .pipe(map((res: HttpResponse<IDuongSu[]>) => res.body ?? []))
+      .pipe(
+        map((duongSus: IDuongSu[]) => this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(duongSus, this.taiSanDuongSu?.duongSu)),
+      )
+      .subscribe((duongSus: IDuongSu[]) => (this.duongSusSharedCollection = duongSus));
   }
 }

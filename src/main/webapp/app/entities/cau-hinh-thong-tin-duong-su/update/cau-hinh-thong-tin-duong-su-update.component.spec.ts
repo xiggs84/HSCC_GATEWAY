@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
 import { CauHinhThongTinDuongSuService } from '../service/cau-hinh-thong-tin-duong-su.service';
 import { ICauHinhThongTinDuongSu } from '../cau-hinh-thong-tin-duong-su.model';
@@ -44,7 +44,7 @@ describe('CauHinhThongTinDuongSu Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const cauHinhThongTinDuongSu: ICauHinhThongTinDuongSu = { id: 456 };
+      const cauHinhThongTinDuongSu: ICauHinhThongTinDuongSu = { idCauHinh: 456 };
 
       activatedRoute.data = of({ cauHinhThongTinDuongSu });
       comp.ngOnInit();
@@ -57,7 +57,7 @@ describe('CauHinhThongTinDuongSu Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICauHinhThongTinDuongSu>>();
-      const cauHinhThongTinDuongSu = { id: 123 };
+      const cauHinhThongTinDuongSu = { idCauHinh: 123 };
       jest.spyOn(cauHinhThongTinDuongSuFormService, 'getCauHinhThongTinDuongSu').mockReturnValue(cauHinhThongTinDuongSu);
       jest.spyOn(cauHinhThongTinDuongSuService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -80,8 +80,8 @@ describe('CauHinhThongTinDuongSu Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICauHinhThongTinDuongSu>>();
-      const cauHinhThongTinDuongSu = { id: 123 };
-      jest.spyOn(cauHinhThongTinDuongSuFormService, 'getCauHinhThongTinDuongSu').mockReturnValue({ id: null });
+      const cauHinhThongTinDuongSu = { idCauHinh: 123 };
+      jest.spyOn(cauHinhThongTinDuongSuFormService, 'getCauHinhThongTinDuongSu').mockReturnValue({ idCauHinh: null });
       jest.spyOn(cauHinhThongTinDuongSuService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ cauHinhThongTinDuongSu: null });
@@ -103,7 +103,7 @@ describe('CauHinhThongTinDuongSu Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICauHinhThongTinDuongSu>>();
-      const cauHinhThongTinDuongSu = { id: 123 };
+      const cauHinhThongTinDuongSu = { idCauHinh: 123 };
       jest.spyOn(cauHinhThongTinDuongSuService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ cauHinhThongTinDuongSu });

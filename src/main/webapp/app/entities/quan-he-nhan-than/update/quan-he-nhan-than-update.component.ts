@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IQuanHeNhanThan } from '../quan-he-nhan-than.model';
 import { QuanHeNhanThanService } from '../service/quan-he-nhan-than.service';
-import { QuanHeNhanThanFormService, QuanHeNhanThanFormGroup } from './quan-he-nhan-than-form.service';
+import { QuanHeNhanThanFormGroup, QuanHeNhanThanFormService } from './quan-he-nhan-than-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class QuanHeNhanThanUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const quanHeNhanThan = this.quanHeNhanThanFormService.getQuanHeNhanThan(this.editForm);
-    if (quanHeNhanThan.id !== null) {
+    if (quanHeNhanThan.idQuanHe !== null) {
       this.subscribeToSaveResponse(this.quanHeNhanThanService.update(quanHeNhanThan));
     } else {
       this.subscribeToSaveResponse(this.quanHeNhanThanService.create(quanHeNhanThan));

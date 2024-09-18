@@ -19,12 +19,12 @@
       },
       "id": "ID",
       "idTaiSan": "Id Tai San",
-      "idDuongSu": "Id Duong Su",
       "trangThai": "Trang Thai",
       "ngayThaoTac": "Ngay Thao Tac",
       "idHopDong": "Id Hop Dong",
       "idLoaiHopDong": "Id Loai Hop Dong",
-      "idChungThuc": "Id Chung Thuc"
+      "idChungThuc": "Id Chung Thuc",
+      "duongSu": "Duong Su"
     }
   }
 }

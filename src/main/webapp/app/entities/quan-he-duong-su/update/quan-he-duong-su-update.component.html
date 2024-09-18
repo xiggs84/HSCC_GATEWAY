@@ -12,17 +12,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idQuanHe.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.quanHeDuongSu.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idQuanHe" jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idQuanHe"
+              id="field_idQuanHe"
+              data-cy="idQuanHe"
+              formControlName="idQuanHe"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idDuongSu" jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSu">Id Duong Su</label>
-          <input type="number" class="form-control" name="idDuongSu" id="field_idDuongSu" data-cy="idDuongSu" formControlName="idDuongSu" />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_idDuongSuQh" jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSuQh">Id Duong Su Qh</label>
@@ -34,11 +37,6 @@
             data-cy="idDuongSuQh"
             formControlName="idDuongSuQh"
           />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idQuanHe" jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</label>
-          <input type="number" class="form-control" name="idQuanHe" id="field_idQuanHe" data-cy="idQuanHe" formControlName="idQuanHe" />
         </div>
 
         <div class="mb-3">
@@ -55,9 +53,47 @@
           />
         </div>
 
+        @let trangThaiRef = editForm.get('trangThai')!;
         <div class="mb-3">
           <label class="form-label" for="field_trangThai" jhiTranslate="gatewayApp.quanHeDuongSu.trangThai">Trang Thai</label>
           <input type="number" class="form-control" name="trangThai" id="field_trangThai" data-cy="trangThai" formControlName="trangThai" />
+          @if (trangThaiRef.invalid && (trangThaiRef.dirty || trangThaiRef.touched)) {
+            <div>
+              @if (editForm.get('trangThai')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >Trường này phải lớn hơn 0.</small
+                >
+              }
+              @if (editForm.get('trangThai')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >Trường này phải nhỏ hơn 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('trangThai')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Trường này phải là một số.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duongSu" jhiTranslate="gatewayApp.quanHeDuongSu.duongSu">Duong Su</label>
+          <select
+            class="form-control"
+            id="field_duongSu"
+            data-cy="duongSu"
+            name="duongSu"
+            formControlName="duongSu"
+            [compareWith]="compareDuongSu"
+          >
+            <option [ngValue]="null"></option>
+            @for (duongSuOption of duongSusSharedCollection; track $index) {
+              <option [ngValue]="duongSuOption">{{ duongSuOption.idDuongSu }}</option>
+            }
+          </select>
         </div>
       </div>
 

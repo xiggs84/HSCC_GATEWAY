@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../quan-he-master.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../quan-he-master.test-samples';
 
 import { QuanHeMasterFormService } from './quan-he-master-form.service';
 

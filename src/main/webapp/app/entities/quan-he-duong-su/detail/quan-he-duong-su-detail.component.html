@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (quanHeDuongSu()) {
+    @if (quanHeDuongSu(); as quanHeDuongSuRef) {
       <div>
         <h2 data-cy="quanHeDuongSuDetailsHeading"><span jhiTranslate="gatewayApp.quanHeDuongSu.detail.title">Quan He Duong Su</span></h2>
 
@@ -11,29 +11,29 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</span></dt>
           <dd>
-            <span>{{ quanHeDuongSu()!.id }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSu">Id Duong Su</span></dt>
-          <dd>
-            <span>{{ quanHeDuongSu()!.idDuongSu }}</span>
+            <span>{{ quanHeDuongSuRef.idQuanHe }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.idDuongSuQh">Id Duong Su Qh</span></dt>
           <dd>
-            <span>{{ quanHeDuongSu()!.idDuongSuQh }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.idQuanHe">Id Quan He</span></dt>
-          <dd>
-            <span>{{ quanHeDuongSu()!.idQuanHe }}</span>
+            <span>{{ quanHeDuongSuRef.idDuongSuQh }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.thongTinQuanHe">Thong Tin Quan He</span></dt>
           <dd>
-            <span>{{ quanHeDuongSu()!.thongTinQuanHe }}</span>
+            <span>{{ quanHeDuongSuRef.thongTinQuanHe }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ quanHeDuongSu()!.trangThai }}</span>
+            <span>{{ quanHeDuongSuRef.trangThai }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.quanHeDuongSu.duongSu">Duong Su</span></dt>
+          <dd>
+            @if (quanHeDuongSu()!.duongSu) {
+              <div>
+                <a [routerLink]="['/duong-su', quanHeDuongSu()!.duongSu?.idDuongSu, 'view']">{{ quanHeDuongSuRef.duongSu?.idDuongSu }}</a>
+              </div>
+            }
           </dd>
         </dl>
 
@@ -41,7 +41,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/quan-he-duong-su', quanHeDuongSu()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/quan-he-duong-su', quanHeDuongSuRef.idQuanHe, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

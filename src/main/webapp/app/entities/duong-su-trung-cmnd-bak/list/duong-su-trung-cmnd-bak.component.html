@@ -42,23 +42,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idDuongSu">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idDuongSu">Id Duong Su</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="tenDuongSu">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.tenDuongSu">Ten Duong Su</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiDs">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idLoaiDs">Id Loai Ds</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -105,13 +91,6 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idTinhTrang">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idTinhTrang">Id Tinh Trang</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idMaster">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.idMaster">Id Master</span>
@@ -140,6 +119,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="duongSu.idDuongSu">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.duongSuTrungCmndBak.duongSu">Duong Su</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -149,20 +134,26 @@
               <td>
                 <a [routerLink]="['/duong-su-trung-cmnd-bak', duongSuTrungCmndBak.id, 'view']">{{ duongSuTrungCmndBak.id }}</a>
               </td>
-              <td>{{ duongSuTrungCmndBak.idDuongSu }}</td>
               <td>{{ duongSuTrungCmndBak.tenDuongSu }}</td>
-              <td>{{ duongSuTrungCmndBak.idLoaiDs }}</td>
               <td>{{ duongSuTrungCmndBak.diaChi }}</td>
               <td>{{ duongSuTrungCmndBak.trangThai }}</td>
               <td>{{ duongSuTrungCmndBak.thongTinDs }}</td>
               <td>{{ duongSuTrungCmndBak.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ duongSuTrungCmndBak.nguoiThaoTac }}</td>
               <td>{{ duongSuTrungCmndBak.idDsGoc }}</td>
-              <td>{{ duongSuTrungCmndBak.idTinhTrang }}</td>
               <td>{{ duongSuTrungCmndBak.idMaster }}</td>
               <td>{{ duongSuTrungCmndBak.idDonVi }}</td>
               <td>{{ duongSuTrungCmndBak.strSearch }}</td>
               <td>{{ duongSuTrungCmndBak.soGiayTo }}</td>
+              <td>
+                @if (duongSuTrungCmndBak.duongSu) {
+                  <div>
+                    <a [routerLink]="['/duong-su', duongSuTrungCmndBak.duongSu.idDuongSu, 'view']">{{
+                      duongSuTrungCmndBak.duongSu.idDuongSu
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a

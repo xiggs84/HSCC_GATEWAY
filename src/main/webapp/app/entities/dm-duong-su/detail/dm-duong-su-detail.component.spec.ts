@@ -17,8 +17,8 @@ describe('DmDuongSu Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DmDuongSuDetailComponent,
-              resolve: { dmDuongSu: () => of({ id: 123 }) },
+              loadComponent: () => import('./dm-duong-su-detail.component').then(m => m.DmDuongSuDetailComponent),
+              resolve: { dmDuongSu: () => of({ idDuongSu: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DmDuongSu Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DmDuongSuDetailComponent);
 
       // THEN
-      expect(instance.dmDuongSu()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.dmDuongSu()).toEqual(expect.objectContaining({ idDuongSu: 123 }));
     });
   });
 
