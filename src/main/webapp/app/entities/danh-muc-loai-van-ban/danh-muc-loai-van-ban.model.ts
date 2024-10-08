@@ -1,8 +1,10 @@
+import { IDanhSachHopDong } from 'app/entities/danh-sach-hop-dong/danh-sach-hop-dong.model';
+
 export interface IDanhMucLoaiVanBan {
-  id: number;
-  idLoaiVb?: number | null;
+  idLoaiVb: string;
   dienGiai?: string | null;
-  idLoaiHopDong?: number | null;
+  danhSachHopDong?: Pick<IDanhSachHopDong, 'idHopDong'> | null;
 }
 
-export type NewDanhMucLoaiVanBan = Omit<IDanhMucLoaiVanBan, 'id'> & { id: null };
+export type NewDanhMucLoaiVanBan = Omit<IDanhMucLoaiVanBan, 'idLoaiVb'> & { idLoaiVb: string | null };
+

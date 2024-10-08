@@ -18,17 +18,14 @@
         "title": "Danh Sach Tai San"
       },
       "id": "ID",
-      "idTaiSan": "Id Tai San",
       "tenTaiSan": "Ten Tai San",
       "trangThai": "Trang Thai",
-      "idLoaiTs": "Id Loai Ts",
       "ghiChu": "Ghi Chu",
       "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "idDuongSu": "Id Duong Su",
       "idTsGoc": "Id Ts Goc",
       "maTaiSan": "Ma Tai San",
-      "idTinhTrang": "Id Tinh Trang",
       "idLoaiNganChan": "Id Loai Ngan Chan",
       "ngayBdNganChan": "Ngay Bd Ngan Chan",
       "ngayKtNganChan": "Ngay Kt Ngan Chan",
@@ -40,7 +37,8 @@
       "soVaoSo": "So Vao So",
       "moTa": "Mo Ta",
       "loaiNganChan": "Loai Ngan Chan",
-      "maXa": "Ma Xa"
+      "maXa": "Ma Xa",
+      "danhMucLoaiTaiSan": "Danh Muc Loai Tai San"
     }
   }
 }

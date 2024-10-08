@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IHopDongCongChung } from '../hop-dong-cong-chung.model';
-import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../hop-dong-cong-chung.test-samples';
+import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../hop-dong-cong-chung.test-samples';
 
 import { HopDongCongChungService, RestHopDongCongChung } from './hop-dong-cong-chung.service';
 
@@ -37,7 +37,7 @@ describe('HopDongCongChung Service', () => {
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -96,7 +96,7 @@ describe('HopDongCongChung Service', () => {
     it('should delete a HopDongCongChung', () => {
       const expected = true;
 
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -172,7 +172,7 @@ describe('HopDongCongChung Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idHopDong: 'ABC' };
         const entity2 = null;
 
         const compareResult1 = service.compareHopDongCongChung(entity1, entity2);
@@ -183,8 +183,8 @@ describe('HopDongCongChung Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idHopDong: 'ABC' };
+        const entity2 = { idHopDong: 'CBA' };
 
         const compareResult1 = service.compareHopDongCongChung(entity1, entity2);
         const compareResult2 = service.compareHopDongCongChung(entity2, entity1);
@@ -194,8 +194,8 @@ describe('HopDongCongChung Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idHopDong: 'ABC' };
+        const entity2 = { idHopDong: 'ABC' };
 
         const compareResult1 = service.compareHopDongCongChung(entity1, entity2);
         const compareResult2 = service.compareHopDongCongChung(entity2, entity1);

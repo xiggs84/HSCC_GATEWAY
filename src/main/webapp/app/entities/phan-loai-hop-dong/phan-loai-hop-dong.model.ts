@@ -1,7 +1,6 @@
 export interface IPhanLoaiHopDong {
-  id: number;
-  idPhanLoaiHopDong?: number | null;
+  idPhanLoaiHopDong: string;
   dienGiai?: string | null;
 }
 
-export type NewPhanLoaiHopDong = Omit<IPhanLoaiHopDong, 'id'> & { id: null };
+export type NewPhanLoaiHopDong = Omit<IPhanLoaiHopDong, 'idPhanLoaiHopDong'> & { idPhanLoaiHopDong: null };

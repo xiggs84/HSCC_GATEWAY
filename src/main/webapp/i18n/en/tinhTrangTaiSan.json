@@ -17,10 +17,12 @@
       "detail": {
         "title": "Tinh Trang Tai San"
       },
-      "id": "ID",
       "idTinhTrang": "Id Tinh Trang",
       "dienGiai": "Dien Giai",
-      "trangThai": "Trang Thai"
+      "trangThai": "Trang Thai",
+      "tinhTrang": "Tinh Trang",
+      "taiSanDgc": "Tai San Dgc",
+      "taiSanDatNha": "Tai San Dat Nha"
     }
   }
 }

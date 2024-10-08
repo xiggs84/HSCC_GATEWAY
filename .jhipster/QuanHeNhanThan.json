@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820093857"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idQuanHe",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
@@ -16,14 +20,13 @@
     {
       "fieldName": "idQuanHeDoiUng",
       "fieldType": "Long"
-    },
-    {
-      "fieldName": "idGioiTinh",
-      "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "QuanHeNhanThan",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -17,7 +17,6 @@
       "detail": {
         "title": "Chung Thuc"
       },
-      "id": "ID",
       "idChungThuc": "Id Chung Thuc",
       "idDonVi": "Id Don Vi",
       "nguoiYeuCau": "Nguoi Yeu Cau",
@@ -29,7 +28,6 @@
       "soBanSao": "So Ban Sao",
       "vanBan": "Van Ban",
       "trangThai": "Trang Thai",
-      "idLoaiGiayTo": "Id Loai Giay To",
       "quyenSo": "Quyen So",
       "duongSu": "Duong Su",
       "taiSan": "Tai San",
@@ -41,7 +39,8 @@
       "ngayText": "Ngay Text",
       "chucDanhCanBo": "Chuc Danh Can Bo",
       "ldPheDuyet": "Ld Phe Duyet",
-      "chucDanhLd": "Chuc Danh Ld"
+      "chucDanhLd": "Chuc Danh Ld",
+      "danhMucLoaiGiayToChungThuc": "Danh Muc Loai Giay To Chung Thuc"
     }
   }
 }

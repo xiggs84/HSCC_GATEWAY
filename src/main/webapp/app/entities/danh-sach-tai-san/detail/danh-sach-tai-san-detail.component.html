@@ -95,6 +95,16 @@
           <dd>
             <span>{{ danhSachTaiSanRef.maXa }}</span>
           </dd>
+          <dt><span jhiTranslate="gatewayApp.danhSachTaiSan.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span></dt>
+          <dd>
+            @if (danhSachTaiSan()!.danhMucLoaiTaiSan) {
+              <div>
+                <a [routerLink]="['/danh-muc-loai-tai-san', danhSachTaiSan()!.danhMucLoaiTaiSan?.idLoaiTs, 'view']">{{
+                  danhSachTaiSanRef.danhMucLoaiTaiSan?.idLoaiTs
+                }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

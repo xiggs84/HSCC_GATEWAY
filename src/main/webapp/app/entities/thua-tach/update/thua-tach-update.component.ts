@@ -2,11 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ITaiSan } from 'app/entities/tai-san/tai-san.model';
+import { TaiSanService } from 'app/entities/tai-san/service/tai-san.service';
 import { IThuaTach } from '../thua-tach.model';
 import { ThuaTachService } from '../service/thua-tach.service';
 import { ThuaTachFormGroup, ThuaTachFormService } from './thua-tach-form.service';
@@ -21,12 +23,17 @@ export class ThuaTachUpdateComponent implements OnInit {
   isSaving = false;
   thuaTach: IThuaTach | null = null;
 
+  taiSansSharedCollection: ITaiSan[] = [];
+
   protected thuaTachService = inject(ThuaTachService);
   protected thuaTachFormService = inject(ThuaTachFormService);
+  protected taiSanService = inject(TaiSanService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ThuaTachFormGroup = this.thuaTachFormService.createThuaTachFormGroup();
+
+  compareTaiSan = (o1: ITaiSan | null, o2: ITaiSan | null): boolean => this.taiSanService.compareTaiSan(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ thuaTach }) => {
@@ -34,6 +41,8 @@ export class ThuaTachUpdateComponent implements OnInit {
       if (thuaTach) {
         this.updateForm(thuaTach);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -73,5 +82,18 @@ export class ThuaTachUpdateComponent implements OnInit {
   protected updateForm(thuaTach: IThuaTach): void {
     this.thuaTach = thuaTach;
     this.thuaTachFormService.resetForm(this.editForm, thuaTach);
+
+    this.taiSansSharedCollection = this.taiSanService.addTaiSanToCollectionIfMissing<ITaiSan>(
+      this.taiSansSharedCollection,
+      thuaTach.taiSan,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.taiSanService
+      .query()
+      .pipe(map((res: HttpResponse<ITaiSan[]>) => res.body ?? []))
+      .pipe(map((taiSans: ITaiSan[]) => this.taiSanService.addTaiSanToCollectionIfMissing<ITaiSan>(taiSans, this.thuaTach?.taiSan)))
+      .subscribe((taiSans: ITaiSan[]) => (this.taiSansSharedCollection = taiSans));
   }
 }

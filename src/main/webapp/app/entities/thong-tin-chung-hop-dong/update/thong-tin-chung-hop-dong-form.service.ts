@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IThongTinChungHopDong, NewThongTinChungHopDong } from '../thong-tin-chung-hop-dong.model';
 
@@ -23,7 +23,6 @@ type ThongTinChungHopDongFormGroupContent = {
   nguoiLapHd: FormControl<IThongTinChungHopDong['nguoiLapHd']>;
   thongTinVanBan: FormControl<IThongTinChungHopDong['thongTinVanBan']>;
   trangThai: FormControl<IThongTinChungHopDong['trangThai']>;
-  idLoaiHd: FormControl<IThongTinChungHopDong['idLoaiHd']>;
   dieuKhoanHd: FormControl<IThongTinChungHopDong['dieuKhoanHd']>;
   idDonVi: FormControl<IThongTinChungHopDong['idDonVi']>;
   ngayThaoTac: FormControl<IThongTinChungHopDong['ngayThaoTac']>;
@@ -32,8 +31,6 @@ type ThongTinChungHopDongFormGroupContent = {
   maHopDong: FormControl<IThongTinChungHopDong['maHopDong']>;
   srcHopDong: FormControl<IThongTinChungHopDong['srcHopDong']>;
   ngayHen: FormControl<IThongTinChungHopDong['ngayHen']>;
-  idSoCongChung: FormControl<IThongTinChungHopDong['idSoCongChung']>;
-  soCongChung: FormControl<IThongTinChungHopDong['soCongChung']>;
   congChungVien: FormControl<IThongTinChungHopDong['congChungVien']>;
   ngayKyHd: FormControl<IThongTinChungHopDong['ngayKyHd']>;
   nguoiRutTrich: FormControl<IThongTinChungHopDong['nguoiRutTrich']>;
@@ -50,6 +47,8 @@ type ThongTinChungHopDongFormGroupContent = {
   ngayText: FormControl<IThongTinChungHopDong['ngayText']>;
   thongTinChung: FormControl<IThongTinChungHopDong['thongTinChung']>;
   thongTinChungClob: FormControl<IThongTinChungHopDong['thongTinChungClob']>;
+  danhMucLoaiHopDong: FormControl<IThongTinChungHopDong['danhMucLoaiHopDong']>;
+  soCongChung: FormControl<IThongTinChungHopDong['soCongChung']>;
 };
 
 export type ThongTinChungHopDongFormGroup = FormGroup<ThongTinChungHopDongFormGroupContent>;
@@ -76,7 +75,6 @@ export class ThongTinChungHopDongFormService {
       nguoiLapHd: new FormControl(thongTinChungHopDongRawValue.nguoiLapHd),
       thongTinVanBan: new FormControl(thongTinChungHopDongRawValue.thongTinVanBan),
       trangThai: new FormControl(thongTinChungHopDongRawValue.trangThai),
-      idLoaiHd: new FormControl(thongTinChungHopDongRawValue.idLoaiHd),
       dieuKhoanHd: new FormControl(thongTinChungHopDongRawValue.dieuKhoanHd),
       idDonVi: new FormControl(thongTinChungHopDongRawValue.idDonVi),
       ngayThaoTac: new FormControl(thongTinChungHopDongRawValue.ngayThaoTac),
@@ -85,8 +83,6 @@ export class ThongTinChungHopDongFormService {
       maHopDong: new FormControl(thongTinChungHopDongRawValue.maHopDong),
       srcHopDong: new FormControl(thongTinChungHopDongRawValue.srcHopDong),
       ngayHen: new FormControl(thongTinChungHopDongRawValue.ngayHen),
-      idSoCongChung: new FormControl(thongTinChungHopDongRawValue.idSoCongChung),
-      soCongChung: new FormControl(thongTinChungHopDongRawValue.soCongChung),
       congChungVien: new FormControl(thongTinChungHopDongRawValue.congChungVien),
       ngayKyHd: new FormControl(thongTinChungHopDongRawValue.ngayKyHd),
       nguoiRutTrich: new FormControl(thongTinChungHopDongRawValue.nguoiRutTrich),
@@ -103,6 +99,8 @@ export class ThongTinChungHopDongFormService {
       ngayText: new FormControl(thongTinChungHopDongRawValue.ngayText),
       thongTinChung: new FormControl(thongTinChungHopDongRawValue.thongTinChung),
       thongTinChungClob: new FormControl(thongTinChungHopDongRawValue.thongTinChungClob),
+      danhMucLoaiHopDong: new FormControl(thongTinChungHopDongRawValue.danhMucLoaiHopDong),
+      soCongChung: new FormControl(thongTinChungHopDongRawValue.soCongChung),
     });
   }
 

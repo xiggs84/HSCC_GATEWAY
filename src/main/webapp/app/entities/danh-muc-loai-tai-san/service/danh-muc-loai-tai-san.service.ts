@@ -17,7 +17,7 @@ export class DanhMucLoaiTaiSanService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-loai-tai-sans', 'taisan');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-loai-tai-sans');
 
   create(danhMucLoaiTaiSan: NewDanhMucLoaiTaiSan): Observable<EntityResponseType> {
     return this.http.post<IDanhMucLoaiTaiSan>(this.resourceUrl, danhMucLoaiTaiSan, { observe: 'response' });

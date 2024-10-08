@@ -17,8 +17,8 @@ describe('ChungThuc Management Detail Component', () => {
           [
             {
               path: '**',
-              component: ChungThucDetailComponent,
-              resolve: { chungThuc: () => of({ id: 123 }) },
+              loadComponent: () => import('./chung-thuc-detail.component').then(m => m.ChungThucDetailComponent),
+              resolve: { chungThuc: () => of({ idChungThuc: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('ChungThuc Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', ChungThucDetailComponent);
 
       // THEN
-      expect(instance.chungThuc()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.chungThuc()).toEqual(expect.objectContaining({ idChungThuc: 'ABC' }));
     });
   });
 

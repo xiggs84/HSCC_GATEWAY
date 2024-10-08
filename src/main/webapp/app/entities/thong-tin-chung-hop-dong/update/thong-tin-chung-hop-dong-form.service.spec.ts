@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../thong-tin-chung-hop-dong.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../thong-tin-chung-hop-dong.test-samples';
 
 import { ThongTinChungHopDongFormService } from './thong-tin-chung-hop-dong-form.service';
 
@@ -25,7 +25,6 @@ describe('ThongTinChungHopDong Form Service', () => {
             nguoiLapHd: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -34,8 +33,6 @@ describe('ThongTinChungHopDong Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -52,6 +49,8 @@ describe('ThongTinChungHopDong Form Service', () => {
             ngayText: expect.any(Object),
             thongTinChung: expect.any(Object),
             thongTinChungClob: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });
@@ -67,7 +66,6 @@ describe('ThongTinChungHopDong Form Service', () => {
             nguoiLapHd: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -76,8 +74,6 @@ describe('ThongTinChungHopDong Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -94,6 +90,8 @@ describe('ThongTinChungHopDong Form Service', () => {
             ngayText: expect.any(Object),
             thongTinChung: expect.any(Object),
             thongTinChungClob: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });

@@ -43,9 +43,6 @@ entity DanhMucDonVi {
     verifyCodeCccd String
     usernameElastic String
     passwordElastic String
-    idNhiemVu String
-    idLoaiDv String
-    idCapQl String
 }
 
 entity NhiemVu {

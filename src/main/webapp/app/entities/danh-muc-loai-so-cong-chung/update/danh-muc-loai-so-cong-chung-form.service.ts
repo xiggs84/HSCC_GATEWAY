@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDanhMucLoaiSoCongChung, NewDanhMucLoaiSoCongChung } from '../danh-muc-loai-so-cong-chung.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idLoai: unknown }> = Partial<Omit<T, 'idLoai'>> & { idLoai: T['idLoai'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,11 +14,10 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DanhMucLoaiSoCongChungFormGroupInput = IDanhMucLoaiSoCongChung | PartialWithRequiredKeyOf<NewDanhMucLoaiSoCongChung>;
 
-type DanhMucLoaiSoCongChungFormDefaults = Pick<NewDanhMucLoaiSoCongChung, 'id'>;
+type DanhMucLoaiSoCongChungFormDefaults = Pick<NewDanhMucLoaiSoCongChung, 'idLoai'>;
 
 type DanhMucLoaiSoCongChungFormGroupContent = {
-  id: FormControl<IDanhMucLoaiSoCongChung['id'] | NewDanhMucLoaiSoCongChung['id']>;
-  idLoai: FormControl<IDanhMucLoaiSoCongChung['idLoai']>;
+  idLoai: FormControl<IDanhMucLoaiSoCongChung['idLoai'] | NewDanhMucLoaiSoCongChung['idLoai']>;
   tenLoai: FormControl<IDanhMucLoaiSoCongChung['tenLoai']>;
   trangThai: FormControl<IDanhMucLoaiSoCongChung['trangThai']>;
 };
@@ -28,21 +27,20 @@ export type DanhMucLoaiSoCongChungFormGroup = FormGroup<DanhMucLoaiSoCongChungFo
 @Injectable({ providedIn: 'root' })
 export class DanhMucLoaiSoCongChungFormService {
   createDanhMucLoaiSoCongChungFormGroup(
-    danhMucLoaiSoCongChung: DanhMucLoaiSoCongChungFormGroupInput = { id: null },
+    danhMucLoaiSoCongChung: DanhMucLoaiSoCongChungFormGroupInput = { idLoai: null },
   ): DanhMucLoaiSoCongChungFormGroup {
     const danhMucLoaiSoCongChungRawValue = {
       ...this.getFormDefaults(),
       ...danhMucLoaiSoCongChung,
     };
     return new FormGroup<DanhMucLoaiSoCongChungFormGroupContent>({
-      id: new FormControl(
-        { value: danhMucLoaiSoCongChungRawValue.id, disabled: true },
+      idLoai: new FormControl(
+        { value: danhMucLoaiSoCongChungRawValue.idLoai, disabled: danhMucLoaiSoCongChungRawValue.idLoai !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idLoai: new FormControl(danhMucLoaiSoCongChungRawValue.idLoai),
       tenLoai: new FormControl(danhMucLoaiSoCongChungRawValue.tenLoai),
       trangThai: new FormControl(danhMucLoaiSoCongChungRawValue.trangThai),
     });
@@ -57,14 +55,14 @@ export class DanhMucLoaiSoCongChungFormService {
     form.reset(
       {
         ...danhMucLoaiSoCongChungRawValue,
-        id: { value: danhMucLoaiSoCongChungRawValue.id, disabled: true },
+        idLoai: { value: danhMucLoaiSoCongChungRawValue.idLoai, disabled: danhMucLoaiSoCongChungRawValue.idLoai !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DanhMucLoaiSoCongChungFormDefaults {
     return {
-      id: null,
+      idLoai: null,
     };
   }
 }

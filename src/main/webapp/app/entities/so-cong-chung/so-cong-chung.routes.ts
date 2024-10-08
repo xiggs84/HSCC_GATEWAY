@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { SoCongChungComponent } from './list/so-cong-chung.component';
-import { SoCongChungDetailComponent } from './detail/so-cong-chung-detail.component';
-import { SoCongChungUpdateComponent } from './update/so-cong-chung-update.component';
 import SoCongChungResolve from './route/so-cong-chung-routing-resolve.service';
 
 const soCongChungRoute: Routes = [
   {
     path: '',
-    component: SoCongChungComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/so-cong-chung.component').then(m => m.SoCongChungComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: SoCongChungDetailComponent,
+    path: ':idSo/view',
+    loadComponent: () => import('./detail/so-cong-chung-detail.component').then(m => m.SoCongChungDetailComponent),
     resolve: {
       soCongChung: SoCongChungResolve,
     },
@@ -26,15 +20,15 @@ const soCongChungRoute: Routes = [
   },
   {
     path: 'new',
-    component: SoCongChungUpdateComponent,
+    loadComponent: () => import('./update/so-cong-chung-update.component').then(m => m.SoCongChungUpdateComponent),
     resolve: {
       soCongChung: SoCongChungResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: SoCongChungUpdateComponent,
+    path: ':idSo/edit',
+    loadComponent: () => import('./update/so-cong-chung-update.component').then(m => m.SoCongChungUpdateComponent),
     resolve: {
       soCongChung: SoCongChungResolve,
     },

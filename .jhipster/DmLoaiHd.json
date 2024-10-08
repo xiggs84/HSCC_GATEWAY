@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820095357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idLoaiHd",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
@@ -52,10 +56,6 @@
     {
       "fieldName": "srcLoiChung",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idNhom",
-      "fieldType": "Long"
     },
     {
       "fieldName": "fileLoiChung",
@@ -106,8 +106,19 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DmLoaiHd",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucNhomHopDong",
+      "otherEntityRelationshipName": "dmLoaiHd",
+      "relationshipName": "danhMucNhomHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

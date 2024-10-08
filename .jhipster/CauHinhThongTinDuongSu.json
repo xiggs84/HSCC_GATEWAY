@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820093157"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idCauHinh",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "noiDung",
@@ -31,11 +35,17 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "CauHinhThongTinDuongSu",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

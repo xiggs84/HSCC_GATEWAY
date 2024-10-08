@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDmLoaiHd, NewDmLoaiHd } from '../dm-loai-hd.model';
 
-export type PartialUpdateDmLoaiHd = Partial<IDmLoaiHd> & Pick<IDmLoaiHd, 'id'>;
+export type PartialUpdateDmLoaiHd = Partial<IDmLoaiHd> & Pick<IDmLoaiHd, 'idLoaiHd'>;
 
 type RestOf<T extends IDmLoaiHd | NewDmLoaiHd> = Omit<T, 'ngayThaoTac'> & {
   ngayThaoTac?: string | null;
@@ -53,7 +53,7 @@ export class DmLoaiHdService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<RestDmLoaiHd>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -66,19 +66,19 @@ export class DmLoaiHdService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDmLoaiHdIdentifier(dmLoaiHd: Pick<IDmLoaiHd, 'id'>): number {
-    return dmLoaiHd.id;
+  getDmLoaiHdIdentifier(dmLoaiHd: Pick<IDmLoaiHd, 'idLoaiHd'>): string {
+    return dmLoaiHd.idLoaiHd;
   }
 
-  compareDmLoaiHd(o1: Pick<IDmLoaiHd, 'id'> | null, o2: Pick<IDmLoaiHd, 'id'> | null): boolean {
+  compareDmLoaiHd(o1: Pick<IDmLoaiHd, 'idLoaiHd'> | null, o2: Pick<IDmLoaiHd, 'idLoaiHd'> | null): boolean {
     return o1 && o2 ? this.getDmLoaiHdIdentifier(o1) === this.getDmLoaiHdIdentifier(o2) : o1 === o2;
   }
 
-  addDmLoaiHdToCollectionIfMissing<Type extends Pick<IDmLoaiHd, 'id'>>(
+  addDmLoaiHdToCollectionIfMissing<Type extends Pick<IDmLoaiHd, 'idLoaiHd'>>(
     dmLoaiHdCollection: Type[],
     ...dmLoaiHdsToCheck: (Type | null | undefined)[]
   ): Type[] {

@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820101057"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idTaiSan",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "thongTinTs",
@@ -17,5 +21,6 @@
   "name": "Taisannhadatid",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

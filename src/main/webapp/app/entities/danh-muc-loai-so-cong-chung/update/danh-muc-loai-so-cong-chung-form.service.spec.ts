@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../danh-muc-loai-so-cong-chung.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../danh-muc-loai-so-cong-chung.test-samples';
 
 import { DanhMucLoaiSoCongChungFormService } from './danh-muc-loai-so-cong-chung-form.service';
 
@@ -19,7 +19,6 @@ describe('DanhMucLoaiSoCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idLoai: expect.any(Object),
             tenLoai: expect.any(Object),
             trangThai: expect.any(Object),
@@ -32,7 +31,6 @@ describe('DanhMucLoaiSoCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idLoai: expect.any(Object),
             tenLoai: expect.any(Object),
             trangThai: expect.any(Object),
@@ -64,26 +62,6 @@ describe('DanhMucLoaiSoCongChung Form Service', () => {
         const danhMucLoaiSoCongChung = service.getDanhMucLoaiSoCongChung(formGroup) as any;
 
         expect(danhMucLoaiSoCongChung).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IDanhMucLoaiSoCongChung should not enable id FormControl', () => {
-        const formGroup = service.createDanhMucLoaiSoCongChungFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewDanhMucLoaiSoCongChung should disable id FormControl', () => {
-        const formGroup = service.createDanhMucLoaiSoCongChungFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

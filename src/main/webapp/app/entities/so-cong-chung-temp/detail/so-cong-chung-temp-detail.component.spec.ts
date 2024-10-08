@@ -17,7 +17,7 @@ describe('SoCongChungTemp Management Detail Component', () => {
           [
             {
               path: '**',
-              component: SoCongChungTempDetailComponent,
+              loadComponent: () => import('./so-cong-chung-temp-detail.component').then(m => m.SoCongChungTempDetailComponent),
               resolve: { soCongChungTemp: () => of({ id: 123 }) },
             },
           ],

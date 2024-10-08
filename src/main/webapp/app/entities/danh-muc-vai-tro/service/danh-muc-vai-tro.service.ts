@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDanhMucVaiTro, NewDanhMucVaiTro } from '../danh-muc-vai-tro.model';
 
-export type PartialUpdateDanhMucVaiTro = Partial<IDanhMucVaiTro> & Pick<IDanhMucVaiTro, 'id'>;
+export type PartialUpdateDanhMucVaiTro = Partial<IDanhMucVaiTro> & Pick<IDanhMucVaiTro, 'idVaiTro'>;
 
 export type EntityResponseType = HttpResponse<IDanhMucVaiTro>;
 export type EntityArrayResponseType = HttpResponse<IDanhMucVaiTro[]>;
@@ -17,7 +17,7 @@ export class DanhMucVaiTroService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-vai-tros');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-vai-tros', 'hopdong');
 
   create(danhMucVaiTro: NewDanhMucVaiTro): Observable<EntityResponseType> {
     return this.http.post<IDanhMucVaiTro>(this.resourceUrl, danhMucVaiTro, { observe: 'response' });
@@ -35,7 +35,7 @@ export class DanhMucVaiTroService {
     });
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http.get<IDanhMucVaiTro>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -44,19 +44,19 @@ export class DanhMucVaiTroService {
     return this.http.get<IDanhMucVaiTro[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDanhMucVaiTroIdentifier(danhMucVaiTro: Pick<IDanhMucVaiTro, 'id'>): number {
-    return danhMucVaiTro.id;
+  getDanhMucVaiTroIdentifier(danhMucVaiTro: Pick<IDanhMucVaiTro, 'idVaiTro'>): string {
+    return danhMucVaiTro.idVaiTro;
   }
 
-  compareDanhMucVaiTro(o1: Pick<IDanhMucVaiTro, 'id'> | null, o2: Pick<IDanhMucVaiTro, 'id'> | null): boolean {
+  compareDanhMucVaiTro(o1: Pick<IDanhMucVaiTro, 'idVaiTro'> | null, o2: Pick<IDanhMucVaiTro, 'idVaiTro'> | null): boolean {
     return o1 && o2 ? this.getDanhMucVaiTroIdentifier(o1) === this.getDanhMucVaiTroIdentifier(o2) : o1 === o2;
   }
 
-  addDanhMucVaiTroToCollectionIfMissing<Type extends Pick<IDanhMucVaiTro, 'id'>>(
+  addDanhMucVaiTroToCollectionIfMissing<Type extends Pick<IDanhMucVaiTro, 'idVaiTro'>>(
     danhMucVaiTroCollection: Type[],
     ...danhMucVaiTrosToCheck: (Type | null | undefined)[]
   ): Type[] {
@@ -76,5 +76,10 @@ export class DanhMucVaiTroService {
       return [...danhMucVaiTrosToAdd, ...danhMucVaiTroCollection];
     }
     return danhMucVaiTroCollection;
+  }
+
+  filterByDienGiai(dienGiai: string): Observable<EntityArrayResponseType> {
+    const options = createRequestOption({ dienGiai });
+    return this.http.get<IDanhMucVaiTro[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 }

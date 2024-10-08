@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IDanhMucLoaiSoCongChung } from '../danh-muc-loai-so-cong-chung.model';
 import { DanhMucLoaiSoCongChungService } from '../service/danh-muc-loai-so-cong-chung.service';
-import { DanhMucLoaiSoCongChungFormService, DanhMucLoaiSoCongChungFormGroup } from './danh-muc-loai-so-cong-chung-form.service';
+import { DanhMucLoaiSoCongChungFormGroup, DanhMucLoaiSoCongChungFormService } from './danh-muc-loai-so-cong-chung-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class DanhMucLoaiSoCongChungUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const danhMucLoaiSoCongChung = this.danhMucLoaiSoCongChungFormService.getDanhMucLoaiSoCongChung(this.editForm);
-    if (danhMucLoaiSoCongChung.id !== null) {
+    if (danhMucLoaiSoCongChung.idLoai !== null) {
       this.subscribeToSaveResponse(this.danhMucLoaiSoCongChungService.update(danhMucLoaiSoCongChung));
     } else {
       this.subscribeToSaveResponse(this.danhMucLoaiSoCongChungService.create(danhMucLoaiSoCongChung));

@@ -396,6 +396,26 @@ const routes: Routes = [
     data: { pageTitle: 'gatewayApp.loaiGiayTo.home.title' },
     loadChildren: () => import('./loai-giay-to/loai-giay-to.routes'),
   },
+  {
+    path: 'thong-tin-cap-nhat-duong-su',
+    data: { pageTitle: 'gatewayApp.thongTinCapNhatDuongSu.home.title' },
+    loadChildren: () => import('./thong-tin-cap-nhat-duong-su/thong-tin-cap-nhat-duong-su.routes'),
+  },
+  {
+    path: 'danh-muc-loai-tai-san',
+    data: { pageTitle: 'gatewayApp.danhMucLoaiTaiSan.home.title' },
+    loadChildren: () => import('./danh-muc-loai-tai-san/danh-muc-loai-tai-san.routes'),
+  },
+  {
+    path: 'thong-tin-cap-nhat-tai-san',
+    data: { pageTitle: 'gatewayApp.thongTinCapNhatTaiSan.home.title' },
+    loadChildren: () => import('./thong-tin-cap-nhat-tai-san/thong-tin-cap-nhat-tai-san.routes'),
+  },
+  {
+    path: 'chi-tiet-ngan-chan-tai-san',
+    data: { pageTitle: 'gatewayApp.chiTietNganChanTaiSan.home.title' },
+    loadChildren: () => import('./chi-tiet-ngan-chan-tai-san/chi-tiet-ngan-chan-tai-san.routes'),
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 

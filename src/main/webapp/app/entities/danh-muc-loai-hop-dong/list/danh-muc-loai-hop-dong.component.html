@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (danhMucLoaiHopDongs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.danhMucLoaiHopDong.home.notFound">No Danh Muc Loai Hop Dongs found</span>
@@ -35,13 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idLoaiHd">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucLoaiHopDong.idLoaiHd">Id Loai Hd</span>
@@ -122,13 +117,6 @@
             <th scope="col" jhiSortBy="srcLoiChung">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucLoaiHopDong.srcLoiChung">Src Loi Chung</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idNhom">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucLoaiHopDong.idNhom">Id Nhom</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -217,16 +205,21 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="danhMucNhomHopDong.idNhom">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucLoaiHopDong.danhMucNhomHopDong">Danh Muc Nhom Hop Dong</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (danhMucLoaiHopDong of danhMucLoaiHopDongs; track trackId) {
+          @for (danhMucLoaiHopDong of danhMucLoaiHopDongs; track trackIdLoaiHd) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.id, 'view']">{{ danhMucLoaiHopDong.id }}</a>
+                <a [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.idLoaiHd, 'view']">{{ danhMucLoaiHopDong.idLoaiHd }}</a>
               </td>
-              <td>{{ danhMucLoaiHopDong.idLoaiHd }}</td>
               <td>{{ danhMucLoaiHopDong.dienGiai }}</td>
               <td>{{ danhMucLoaiHopDong.idVaiTro1 }}</td>
               <td>{{ danhMucLoaiHopDong.idVaiTro2 }}</td>
@@ -238,7 +231,6 @@
               <td>{{ danhMucLoaiHopDong.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ danhMucLoaiHopDong.nguoiThaoTac }}</td>
               <td>{{ danhMucLoaiHopDong.srcLoiChung }}</td>
-              <td>{{ danhMucLoaiHopDong.idNhom }}</td>
               <td>{{ danhMucLoaiHopDong.fileLoiChung }}</td>
               <td>{{ danhMucLoaiHopDong.chuyenTaiSan }}</td>
               <td>{{ danhMucLoaiHopDong.loaiSuaDoi }}</td>
@@ -251,10 +243,94 @@
               <td>{{ danhMucLoaiHopDong.dgTen }}</td>
               <td>{{ danhMucLoaiHopDong.nhomTen }}</td>
               <td>{{ danhMucLoaiHopDong.idVaiTro3 }}</td>
+              <td>
+                @if (danhMucLoaiHopDong.danhMucNhomHopDong) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-nhom-hop-dong', danhMucLoaiHopDong.danhMucNhomHopDong.idNhom, 'view']">{{
+                      danhMucLoaiHopDong.danhMucNhomHopDong.idNhom
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/hop-dong-cong-chung']"
+                    [queryParams]="{ 'filter[danhMucLoaiHopDongId.in]': danhMucLoaiHopDong.idLoaiHd }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiHopDong.hopDongCongChung' | translate) }"
+                      >Show Hop Dong Cong Chung</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/thong-tin-chung-hop-dong']"
+                    [queryParams]="{ 'filter[danhMucLoaiHopDongId.in]': danhMucLoaiHopDong.idLoaiHd }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiHopDong.thongTinChungHopDong' | translate) }"
+                      >Show Thong Tin Chung Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/danh-sach-hop-dong']"
+                    [queryParams]="{ 'filter[danhMucLoaiHopDongId.in]': danhMucLoaiHopDong.idLoaiHd }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiHopDong.danhSachHopDong' | translate) }"
+                      >Show Danh Sach Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/dm-hop-dong']"
+                    [queryParams]="{ 'filter[danhMucLoaiHopDongId.in]': danhMucLoaiHopDong.idLoaiHd }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiHopDong.dmHopDong' | translate) }"
+                      >Show Dm Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/danh-muc-vai-tro']"
+                    [queryParams]="{ 'filter[danhMucLoaiHopDongId.in]': danhMucLoaiHopDong.idLoaiHd }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiHopDong.danhMucVaiTro' | translate) }"
+                      >Show Danh Muc Vai Tro</span
+                    >
+                  </button>
                   <a
-                    [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.id, 'view']"
+                    [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.idLoaiHd, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -263,7 +339,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.id, 'edit']"
+                    [routerLink]="['/danh-muc-loai-hop-dong', danhMucLoaiHopDong.idLoaiHd, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >
@@ -281,6 +357,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (danhMucLoaiHopDongs && danhMucLoaiHopDongs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

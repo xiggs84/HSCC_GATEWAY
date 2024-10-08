@@ -1,0 +1,142 @@
+<div>
+  <h2 id="page-heading" data-cy="ThongTinCapNhatTaiSanHeading">
+    <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.home.title">Thong Tin Cap Nhat Tai Sans</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-thong-tin-cap-nhat-tai-san"
+        [routerLink]="['/thong-tin-cap-nhat-tai-san/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.home.createLabel">Thêm mới một Thong Tin Cap Nhat Tai San</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (thongTinCapNhatTaiSans?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.home.notFound">No Thong Tin Cap Nhat Tai Sans found</span>
+    </div>
+  }
+
+  @if (thongTinCapNhatTaiSans && thongTinCapNhatTaiSans.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="idCapNhat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.idCapNhat">Id Cap Nhat</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tenTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.tenTaiSan">Ten Tai San</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thongTinTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.thongTinTaiSan">Thong Tin Tai San</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ngayCapNhat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.ngayCapNhat">Ngay Cap Nhat</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taiSan.idTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.taiSan">Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="danhMucLoaiTaiSan.idLoaiTs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (thongTinCapNhatTaiSan of thongTinCapNhatTaiSans; track trackIdCapNhat) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/thong-tin-cap-nhat-tai-san', thongTinCapNhatTaiSan.idCapNhat, 'view']">{{
+                  thongTinCapNhatTaiSan.idCapNhat
+                }}</a>
+              </td>
+              <td>{{ thongTinCapNhatTaiSan.tenTaiSan }}</td>
+              <td>{{ thongTinCapNhatTaiSan.thongTinTaiSan }}</td>
+              <td>{{ thongTinCapNhatTaiSan.ngayCapNhat | formatMediumDate }}</td>
+              <td>
+                @if (thongTinCapNhatTaiSan.taiSan) {
+                  <div>
+                    <a [routerLink]="['/tai-san', thongTinCapNhatTaiSan.taiSan.idTaiSan, 'view']">{{
+                      thongTinCapNhatTaiSan.taiSan.idTaiSan
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (thongTinCapNhatTaiSan.danhMucLoaiTaiSan) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-tai-san', thongTinCapNhatTaiSan.danhMucLoaiTaiSan.idLoaiTs, 'view']">{{
+                      thongTinCapNhatTaiSan.danhMucLoaiTaiSan.idLoaiTs
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/thong-tin-cap-nhat-tai-san', thongTinCapNhatTaiSan.idCapNhat, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/thong-tin-cap-nhat-tai-san', thongTinCapNhatTaiSan.idCapNhat, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(thongTinCapNhatTaiSan)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

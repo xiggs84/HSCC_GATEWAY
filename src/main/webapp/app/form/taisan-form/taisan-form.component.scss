@@ -4,9 +4,19 @@
 
 .custom-label {
   text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+nz-date-picker {
+  width: 100%;
 }
 
 .custom-modal{
   max-height: 550px;
-  overflow: auto;
+  overflow-x: hidden;
+}
+
+nz-form-control {
+  white-space: nowrap;
 }

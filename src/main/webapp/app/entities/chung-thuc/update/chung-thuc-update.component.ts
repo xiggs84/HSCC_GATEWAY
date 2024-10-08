@@ -1,15 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IDanhMucLoaiGiayToChungThuc } from 'app/entities/danh-muc-loai-giay-to-chung-thuc/danh-muc-loai-giay-to-chung-thuc.model';
+import { DanhMucLoaiGiayToChungThucService } from 'app/entities/danh-muc-loai-giay-to-chung-thuc/service/danh-muc-loai-giay-to-chung-thuc.service';
 import { IChungThuc } from '../chung-thuc.model';
 import { ChungThucService } from '../service/chung-thuc.service';
-import { ChungThucFormService, ChungThucFormGroup } from './chung-thuc-form.service';
+import { ChungThucFormGroup, ChungThucFormService } from './chung-thuc-form.service';
 
 @Component({
   standalone: true,
@@ -21,12 +23,18 @@ export class ChungThucUpdateComponent implements OnInit {
   isSaving = false;
   chungThuc: IChungThuc | null = null;
 
+  danhMucLoaiGiayToChungThucsSharedCollection: IDanhMucLoaiGiayToChungThuc[] = [];
+
   protected chungThucService = inject(ChungThucService);
   protected chungThucFormService = inject(ChungThucFormService);
+  protected danhMucLoaiGiayToChungThucService = inject(DanhMucLoaiGiayToChungThucService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ChungThucFormGroup = this.chungThucFormService.createChungThucFormGroup();
+
+  compareDanhMucLoaiGiayToChungThuc = (o1: IDanhMucLoaiGiayToChungThuc | null, o2: IDanhMucLoaiGiayToChungThuc | null): boolean =>
+    this.danhMucLoaiGiayToChungThucService.compareDanhMucLoaiGiayToChungThuc(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ chungThuc }) => {
@@ -34,6 +42,8 @@ export class ChungThucUpdateComponent implements OnInit {
       if (chungThuc) {
         this.updateForm(chungThuc);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -44,7 +54,7 @@ export class ChungThucUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const chungThuc = this.chungThucFormService.getChungThuc(this.editForm);
-    if (chungThuc.id !== null) {
+    if (chungThuc.idChungThuc !== null) {
       this.subscribeToSaveResponse(this.chungThucService.update(chungThuc));
     } else {
       this.subscribeToSaveResponse(this.chungThucService.create(chungThuc));
@@ -73,5 +83,29 @@ export class ChungThucUpdateComponent implements OnInit {
   protected updateForm(chungThuc: IChungThuc): void {
     this.chungThuc = chungThuc;
     this.chungThucFormService.resetForm(this.editForm, chungThuc);
+
+    this.danhMucLoaiGiayToChungThucsSharedCollection =
+      this.danhMucLoaiGiayToChungThucService.addDanhMucLoaiGiayToChungThucToCollectionIfMissing<IDanhMucLoaiGiayToChungThuc>(
+        this.danhMucLoaiGiayToChungThucsSharedCollection,
+        chungThuc.danhMucLoaiGiayToChungThuc,
+      );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.danhMucLoaiGiayToChungThucService
+      .query()
+      .pipe(map((res: HttpResponse<IDanhMucLoaiGiayToChungThuc[]>) => res.body ?? []))
+      .pipe(
+        map((danhMucLoaiGiayToChungThucs: IDanhMucLoaiGiayToChungThuc[]) =>
+          this.danhMucLoaiGiayToChungThucService.addDanhMucLoaiGiayToChungThucToCollectionIfMissing<IDanhMucLoaiGiayToChungThuc>(
+            danhMucLoaiGiayToChungThucs,
+            this.chungThuc?.danhMucLoaiGiayToChungThuc,
+          ),
+        ),
+      )
+      .subscribe(
+        (danhMucLoaiGiayToChungThucs: IDanhMucLoaiGiayToChungThuc[]) =>
+          (this.danhMucLoaiGiayToChungThucsSharedCollection = danhMucLoaiGiayToChungThucs),
+      );
   }
 }

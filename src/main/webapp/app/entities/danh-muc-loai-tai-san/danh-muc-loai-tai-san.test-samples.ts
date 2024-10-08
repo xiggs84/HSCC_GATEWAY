@@ -1,18 +1,19 @@
 import { IDanhMucLoaiTaiSan, NewDanhMucLoaiTaiSan } from './danh-muc-loai-tai-san.model';
 
 export const sampleWithRequiredData: IDanhMucLoaiTaiSan = {
-  idLoaiTs: 31252,
+  idLoaiTs: 14169,
 };
 
 export const sampleWithPartialData: IDanhMucLoaiTaiSan = {
-  idLoaiTs: 30082,
-  trangThai: 13482,
+  idLoaiTs: 11628,
+  dienGiai: 'cofactor badly psst',
+  trangThai: 9177,
 };
 
 export const sampleWithFullData: IDanhMucLoaiTaiSan = {
-  idLoaiTs: 12739,
-  dienGiai: 'evenly if',
-  trangThai: 20543,
+  idLoaiTs: 19447,
+  dienGiai: 'incidentally incidentally',
+  trangThai: 9636,
 };
 
 export const sampleWithNewData: NewDanhMucLoaiTaiSan = {

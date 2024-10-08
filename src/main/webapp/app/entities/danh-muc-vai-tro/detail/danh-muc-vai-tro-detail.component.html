@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhMucVaiTro()) {
+    @if (danhMucVaiTro(); as danhMucVaiTroRef) {
       <div>
         <h2 data-cy="danhMucVaiTroDetailsHeading"><span jhiTranslate="gatewayApp.danhMucVaiTro.detail.title">Danh Muc Vai Tro</span></h2>
 
@@ -11,25 +11,27 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhMucVaiTro()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucVaiTro.idVaiTro">Id Vai Tro</span></dt>
           <dd>
-            <span>{{ danhMucVaiTro()!.idVaiTro }}</span>
+            <span>{{ danhMucVaiTroRef.idVaiTro }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucVaiTro.dienGiai">Dien Giai</span></dt>
           <dd>
-            <span>{{ danhMucVaiTro()!.dienGiai }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.danhMucVaiTro.idLoaiHopDong">Id Loai Hop Dong</span></dt>
-          <dd>
-            <span>{{ danhMucVaiTro()!.idLoaiHopDong }}</span>
+            <span>{{ danhMucVaiTroRef.dienGiai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucVaiTro.idLoaiVaiTro">Id Loai Vai Tro</span></dt>
           <dd>
-            <span>{{ danhMucVaiTro()!.idLoaiVaiTro }}</span>
+            <span>{{ danhMucVaiTroRef.idLoaiVaiTro }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.danhMucVaiTro.danhMucLoaiHopDong">Danh Muc Loai Hop Dong</span></dt>
+          <dd>
+            @if (danhMucVaiTro()!.danhMucLoaiHopDong) {
+              <div>
+                <a [routerLink]="['/danh-muc-loai-hop-dong', danhMucVaiTro()!.danhMucLoaiHopDong?.idLoaiHd, 'view']">{{
+                  danhMucVaiTroRef.danhMucLoaiHopDong?.idLoaiHd
+                }}</a>
+              </div>
+            }
           </dd>
         </dl>
 
@@ -37,7 +39,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/danh-muc-vai-tro', danhMucVaiTro()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/danh-muc-vai-tro', danhMucVaiTroRef.idVaiTro, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

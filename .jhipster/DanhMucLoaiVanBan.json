@@ -2,24 +2,35 @@
   "annotations": {
     "changelogDate": "20240820101557"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idLoaiVb",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idLoaiHopDong",
-      "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucLoaiVanBan",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhSachHopDong",
+      "otherEntityRelationshipName": "danhMucLoaiVanBan",
+      "relationshipName": "danhSachHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

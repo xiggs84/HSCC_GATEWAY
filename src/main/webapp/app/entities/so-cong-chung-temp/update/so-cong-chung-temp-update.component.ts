@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ISoCongChungTemp } from '../so-cong-chung-temp.model';
 import { SoCongChungTempService } from '../service/so-cong-chung-temp.service';
-import { SoCongChungTempFormService, SoCongChungTempFormGroup } from './so-cong-chung-temp-form.service';
+import { SoCongChungTempFormGroup, SoCongChungTempFormService } from './so-cong-chung-temp-form.service';
 
 @Component({
   standalone: true,

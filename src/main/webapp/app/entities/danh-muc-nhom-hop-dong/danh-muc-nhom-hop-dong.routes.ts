@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { DanhMucNhomHopDongComponent } from './list/danh-muc-nhom-hop-dong.component';
-import { DanhMucNhomHopDongDetailComponent } from './detail/danh-muc-nhom-hop-dong-detail.component';
-import { DanhMucNhomHopDongUpdateComponent } from './update/danh-muc-nhom-hop-dong-update.component';
 import DanhMucNhomHopDongResolve from './route/danh-muc-nhom-hop-dong-routing-resolve.service';
 
 const danhMucNhomHopDongRoute: Routes = [
   {
     path: '',
-    component: DanhMucNhomHopDongComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/danh-muc-nhom-hop-dong.component').then(m => m.DanhMucNhomHopDongComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DanhMucNhomHopDongDetailComponent,
+    path: ':idNhom/view',
+    loadComponent: () => import('./detail/danh-muc-nhom-hop-dong-detail.component').then(m => m.DanhMucNhomHopDongDetailComponent),
     resolve: {
       danhMucNhomHopDong: DanhMucNhomHopDongResolve,
     },
@@ -26,15 +20,15 @@ const danhMucNhomHopDongRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhMucNhomHopDongUpdateComponent,
+    loadComponent: () => import('./update/danh-muc-nhom-hop-dong-update.component').then(m => m.DanhMucNhomHopDongUpdateComponent),
     resolve: {
       danhMucNhomHopDong: DanhMucNhomHopDongResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DanhMucNhomHopDongUpdateComponent,
+    path: ':idNhom/edit',
+    loadComponent: () => import('./update/danh-muc-nhom-hop-dong-update.component').then(m => m.DanhMucNhomHopDongUpdateComponent),
     resolve: {
       danhMucNhomHopDong: DanhMucNhomHopDongResolve,
     },

@@ -17,8 +17,8 @@ describe('SoCongChung Management Detail Component', () => {
           [
             {
               path: '**',
-              component: SoCongChungDetailComponent,
-              resolve: { soCongChung: () => of({ id: 123 }) },
+              loadComponent: () => import('./so-cong-chung-detail.component').then(m => m.SoCongChungDetailComponent),
+              resolve: { soCongChung: () => of({ idSo: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('SoCongChung Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', SoCongChungDetailComponent);
 
       // THEN
-      expect(instance.soCongChung()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.soCongChung()).toEqual(expect.objectContaining({ idSo: 'ABC' }));
     });
   });
 

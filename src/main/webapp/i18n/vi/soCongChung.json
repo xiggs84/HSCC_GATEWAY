@@ -17,15 +17,18 @@
       "detail": {
         "title": "So Cong Chung"
       },
-      "id": "ID",
-      "ngayThaoTac": "Ngay Thao Tac",
       "idSo": "Id So",
       "idDonVi": "Id Don Vi",
       "tenSo": "Ten So",
       "giaTri": "Gia Tri",
+      "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "trangThai": "Trang Thai",
-      "idLoaiSo": "Id Loai So"
+      "hopDongCongChung": "Hop Dong Cong Chung",
+      "thongTinChungHopDong": "Thong Tin Chung Hop Dong",
+      "danhSachHopDong": "Danh Sach Hop Dong",
+      "dmHopDong": "Dm Hop Dong",
+      "danhMucLoaiSoCongChung": "Danh Muc Loai So Cong Chung"
     }
   }
 }

@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (danhMucNhomHopDongs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.danhMucNhomHopDong.home.notFound">No Danh Muc Nhom Hop Dongs found</span>
@@ -35,13 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idNhom">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucNhomHopDong.idNhom">Id Nhom</span>
@@ -60,17 +55,46 @@
           </tr>
         </thead>
         <tbody>
-          @for (danhMucNhomHopDong of danhMucNhomHopDongs; track trackId) {
+          @for (danhMucNhomHopDong of danhMucNhomHopDongs; track trackIdNhom) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.id, 'view']">{{ danhMucNhomHopDong.id }}</a>
+                <a [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.idNhom, 'view']">{{ danhMucNhomHopDong.idNhom }}</a>
               </td>
-              <td>{{ danhMucNhomHopDong.idNhom }}</td>
               <td>{{ danhMucNhomHopDong.dienGiai }}</td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/danh-muc-loai-hop-dong']"
+                    [queryParams]="{ 'filter[danhMucNhomHopDongId.in]': danhMucNhomHopDong.idNhom }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucNhomHopDong.danhMucLoaiHopDong' | translate) }"
+                      >Show Danh Muc Loai Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/dm-loai-hd']"
+                    [queryParams]="{ 'filter[danhMucNhomHopDongId.in]': danhMucNhomHopDong.idNhom }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucNhomHopDong.dmLoaiHd' | translate) }"
+                      >Show Dm Loai Hd</span
+                    >
+                  </button>
                   <a
-                    [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.id, 'view']"
+                    [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.idNhom, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -79,7 +103,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.id, 'edit']"
+                    [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong.idNhom, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >
@@ -97,6 +121,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (danhMucNhomHopDongs && danhMucNhomHopDongs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

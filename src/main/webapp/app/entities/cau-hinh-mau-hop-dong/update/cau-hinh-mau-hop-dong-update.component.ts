@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ICauHinhMauHopDong } from '../cau-hinh-mau-hop-dong.model';
 import { CauHinhMauHopDongService } from '../service/cau-hinh-mau-hop-dong.service';
-import { CauHinhMauHopDongFormService, CauHinhMauHopDongFormGroup } from './cau-hinh-mau-hop-dong-form.service';
+import { CauHinhMauHopDongFormGroup, CauHinhMauHopDongFormService } from './cau-hinh-mau-hop-dong-form.service';
 
 @Component({
   standalone: true,

@@ -2,7 +2,7 @@ import dayjs from 'dayjs/esm';
 
 export interface ICauHinhMauHopDong {
   id: number;
-  idLoaiHd?: number | null;
+  idLoaiHd?: string | null;
   dienGiai?: string | null;
   idVaiTro1?: number | null;
   idVaiTro2?: number | null;

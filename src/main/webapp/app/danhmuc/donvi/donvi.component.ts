@@ -8,6 +8,7 @@ import FormatMediumDatetimePipe from "../../shared/date/format-medium-datetime.p
 import {NzModalService} from "ng-zorro-antd/modal";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import dayjs from "dayjs/esm";
+import {ITaiSan} from "../../entities/tai-san/tai-san.model";
 @Component({
   selector: 'jhi-donvi',
   standalone: true,
@@ -17,10 +18,11 @@ import dayjs from "dayjs/esm";
 })
 export class DonviComponent {
   listOfData: readonly IDanhMucDonVi[] = [];
-  searchTerm: string = '';
+  searchValue: string = '';
   listOfCurrentPageData: readonly IDanhMucDonVi[] = [];
   selectedItem: IDanhMucDonVi | null = null;
   originalData: any[] = [];
+  total: number = 1;
 
   pageIndex: number = 1;
   pageSize: number = 10;
@@ -36,46 +38,49 @@ export class DonviComponent {
   }
 
   loadData(): void {
-    this.danhMucDonViService.query().subscribe({
-      next: (res) => {
-        this.originalData = res.body || []; // Lưu trữ dữ liệu gốc
-        this.listOfData = [...this.originalData]; // Cập nhật listOfData với dữ liệu gốc
+    const queryParams = {
+      page: this.pageIndex - 1, // API thường bắt đầu từ 0
+      size: this.pageSize
+    };
+
+    this.danhMucDonViService.query(queryParams).subscribe({
+      next: (response) => {
+        this.total = parseInt(response.headers.get('X-Total-Count') || '0', 10);
+        this.listOfData = response.body || [];
       },
-      error: (err) => console.error('Error fetching data', err),
+      error: (error) => console.error('Error fetching data:', error)
     });
   }
 
-  updateCurrentPageData(): void {
-    const startIndex = (this.pageIndex - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.listOfCurrentPageData = this.listOfData.slice(startIndex, endIndex);
+  onCurrentPageDataChange(listOfCurrentPageData: readonly IDanhMucDonVi[]): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
-  onPageIndexChange(pageIndex: number): void {
-    this.pageIndex = pageIndex;
-    this.updateCurrentPageData();
+  onPageIndexChange(index: number): void {
+    this.pageIndex = index;
+    this.loadData();
   }
 
-  onPageSizeChange(pageSize: number): void {
-    this.pageSize = pageSize;
-    this.pageIndex = 1; // Reset to first page when page size changes
-    this.updateCurrentPageData();
+  onPageSizeChange(size: number): void {
+    this.pageSize = size;
+    this.pageIndex = 1;
+    this.loadData();
   }
 
-  onSearch(searchTerm: string): void {
-    this.searchTerm = searchTerm;
+  onSearchChange() {
+    const queryParams = {
+      'tenDonVi.contains': this.searchValue, // Thêm .equals để đúng định dạng
+      page: this.pageIndex - 1,
+      size: this.pageSize,
+    };
 
-    if (this.searchTerm) {
-      this.listOfData = this.originalData.filter(item =>
-        (item.tenDonVi?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
-        (item.diaChi?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
-        (item.nguoiDaiDien?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
-        (item.soDienThoai?.toLowerCase().includes(this.searchTerm.toLowerCase()) ?? false) ||
-        (item.ngayKhaiBao ? dayjs(item.ngayKhaiBao).format('DD/MM/YYYY').includes(this.searchTerm) : false)
-      );
-    } else {
-      this.listOfData = [...this.originalData];
-    }
+    this.danhMucDonViService.query(queryParams).subscribe({
+      next: (response) => {
+        this.total = parseInt(response.headers.get('X-Total-Count') || '0', 10);
+        this.listOfData = response.body || [];
+      },
+      error: (error) => console.error('Error fetching data:', error)
+    });
   }
 
   addNewItem(): void {
@@ -119,10 +124,6 @@ export class DonviComponent {
 
   onFormDataUpdated(): void {
     this.loadData();
-  }
-
-  onCurrentPageDataChange(listOfCurrentPageData: readonly IDanhMucDonVi[]) {
-    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 }
 

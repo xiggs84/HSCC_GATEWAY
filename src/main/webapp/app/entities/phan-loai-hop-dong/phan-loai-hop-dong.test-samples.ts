@@ -1,22 +1,21 @@
 import { IPhanLoaiHopDong, NewPhanLoaiHopDong } from './phan-loai-hop-dong.model';
 
 export const sampleWithRequiredData: IPhanLoaiHopDong = {
-  id: 4397,
+  idPhanLoaiHopDong: '40e8dd00-c6e5-4b7c-af26-985cffae5b84',
 };
 
 export const sampleWithPartialData: IPhanLoaiHopDong = {
-  id: 15392,
-  dienGiai: 'yowza hide whereas',
+  idPhanLoaiHopDong: '5786bbab-3d1a-4e28-8603-7a335a20ec7e',
+  dienGiai: 'hare',
 };
 
 export const sampleWithFullData: IPhanLoaiHopDong = {
-  id: 24158,
-  idPhanLoaiHopDong: 13762,
-  dienGiai: 'required filly',
+  idPhanLoaiHopDong: '51e25a26-449c-4713-ab35-0672d0f445a5',
+  dienGiai: 'flawless',
 };
 
 export const sampleWithNewData: NewPhanLoaiHopDong = {
-  id: null,
+  idPhanLoaiHopDong: null,
 };
 
 Object.freeze(sampleWithNewData);

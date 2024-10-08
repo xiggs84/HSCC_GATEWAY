@@ -1,8 +1,8 @@
 import dayjs from 'dayjs/esm';
+import { IDanhMucLoaiGiayToChungThuc } from 'app/entities/danh-muc-loai-giay-to-chung-thuc/danh-muc-loai-giay-to-chung-thuc.model';
 
 export interface IChungThuc {
-  id: number;
-  idChungThuc?: number | null;
+  idChungThuc: string;
   idDonVi?: number | null;
   nguoiYeuCau?: string | null;
   nguoiChungThuc?: number | null;
@@ -13,7 +13,6 @@ export interface IChungThuc {
   soBanSao?: number | null;
   vanBan?: string | null;
   trangThai?: number | null;
-  idLoaiGiayTo?: number | null;
   quyenSo?: number | null;
   duongSu?: string | null;
   taiSan?: string | null;
@@ -26,6 +25,7 @@ export interface IChungThuc {
   chucDanhCanBo?: string | null;
   ldPheDuyet?: number | null;
   chucDanhLd?: string | null;
+  danhMucLoaiGiayToChungThuc?: Pick<IDanhMucLoaiGiayToChungThuc, 'idLoaiGiayTo'> | null;
 }
 
-export type NewChungThuc = Omit<IChungThuc, 'id'> & { id: null };
+export type NewChungThuc = Omit<IChungThuc, 'idChungThuc'> & { idChungThuc: null };

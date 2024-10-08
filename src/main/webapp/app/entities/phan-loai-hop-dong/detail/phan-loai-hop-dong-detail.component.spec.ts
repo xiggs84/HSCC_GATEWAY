@@ -17,8 +17,8 @@ describe('PhanLoaiHopDong Management Detail Component', () => {
           [
             {
               path: '**',
-              component: PhanLoaiHopDongDetailComponent,
-              resolve: { phanLoaiHopDong: () => of({ id: 123 }) },
+              loadComponent: () => import('./phan-loai-hop-dong-detail.component').then(m => m.PhanLoaiHopDongDetailComponent),
+              resolve: { phanLoaiHopDong: () => of({ idPhanLoaiHopDong: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('PhanLoaiHopDong Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', PhanLoaiHopDongDetailComponent);
 
       // THEN
-      expect(instance.phanLoaiHopDong()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.phanLoaiHopDong()).toEqual(expect.objectContaining({ idPhanLoaiHopDong: 'ABC' }));
     });
   });
 

@@ -3,11 +3,14 @@
   nzTitle="Tình trạng ngăn chặn"
   (nzOnCancel)="handleCancel()"
   [nzWidth]="'1100px'">
+
   <nz-table [nzData]="data" *nzModalContent nzBordered nzSize="small">
     <thead>
     <tr>
       <th nzWidth="10px">#</th>
-      <th>Tên đương sự</th>
+      <th *ngIf="!taiSan">Tên đương sự</th>
+      <th *ngIf="taiSan">Tên tài sản</th>
+      <th *ngIf="taiSan">Loại ngăn chặn</th>
       <th>Thông tin ngăn chặn</th>
       <th>Thao tác</th>
     </tr>
@@ -15,12 +18,22 @@
     <tbody>
     <tr *ngFor="let item of data; let index = index">
       <td>{{ index + 1 }}</td>
-      <td>{{ item['Tên đương sự'] }}</td>
-      <td>{{ item['Thông tin ngăn chặn'] }}</td>
+      <td>{{ taiSan?.tenTaiSan || duongSu?.tenDuongSu || 'N/A' }}</td>
+      <td *ngIf="taiSan">{{ getLoaiNganChanThoiHan(item) }}</td>
+      <td>
+        <div [innerHTML]="formatContainmentInfo(item)"></div>
+      </td>
       <td>
         <div class="action-icons">
           <ng-container *ngFor="let action of actions">
-            <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip" (click)="onActionClick(action.type, item)"></i>
+            <i
+              nz-icon
+              [nzType]="action.icon"
+              nzTheme="outline"
+              nz-tooltip
+              [nzTooltipTitle]="action.tooltip"
+              (click)="onActionClick(action.type, item)">
+            </i>
           </ng-container>
         </div>
       </td>
@@ -32,3 +45,8 @@
     <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
   </ng-container>
 </nz-modal>
+
+<jhi-themthongtinnganchan
+  [(isVisible)]="isUpdateModalVisible"
+  [dataUpdate]="selectedItemForUpdate"
+  (nzOnCancel)="closeUpdateModal()"></jhi-themthongtinnganchan>

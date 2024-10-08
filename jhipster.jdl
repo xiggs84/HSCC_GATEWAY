@@ -11,892 +11,905 @@ application {
     languages [vi, en]
     nativeLanguage vi
   }
-  entities *
-  skipServer * except DanhMucCanBo
+}
+
+entity CanBo {
+    @id
+    idCanBo Long
+    tenCanBo String
+    diaChi String
+    namSinh LocalDate
+    email String
+    soDienThoai String
+    soGiayToTuyThan String
+    idDonVi Long
+}
+
+relationship OneToOne {
+    CanBo{internalUser(login)} to @OnDelete("CASCADE") @Id User with builtInEntity
 }
 
 
-
-entity DanhMucCanBo {
-  idCanBo Long
-  tenCanBo String
-  diaChi String
-  namSinh LocalDate
-  email String
-  soDienThoai String
-  soCmnd String
-  idDonVi Long
-  tenDangNhap String
-  matKhau String
-  trangThai Long
-  clientId String
-  clientSecret String
-  usernameKyso String
-  passwordKyso String
-}
-
-entity CanBoQuyen {
-  idCanBo Long
-  idQuyen Long
-  idDonVi Long
-}
-
-entity MenuQuyen {
-  idQuyen Long
-  idDonVi Long
-  listMenu String
-}
-
-entity Quyen {
-  idQuyen Long
-  tenQuyen String
-}
-entity DanhMucCapQuanLy {
-  idCapQl Long
-  dienGiai String
-}
-
-entity DanhMucDonVi {
-  idDonVi Long
-  tenDonVi String
-  diaChi String
-  nguoiDaiDien String
-  soDienThoai String
-  idDonViQl Long
-  loaiDonVi Long
-  ngayKhaiBao LocalDate
-  trangThai Long
-  idTinh Long
-  idHuyen Long
-  idPhuongXa Long
-  soNha String
-  maSoThue String
-  idCapQl Long
-  loaiNhiemVu Long
-  hoaDonDt Long
-  maDonViIgate String
-  maCoQuanIgate String
-  capDonVi Long
-  kySo Long
-  qrScan Long
-  verifyIdCard Long
-  isVerifyFace Long
-  isElastic Long
-  apikeyCccd String
-  apikeyFace String
-  verifyCodeCccd String
-  usernameElastic String
-  passwordElastic String
-}
-entity DanhMucLoaiDonVi {
-  idLoaiDv Long
-  dienGiai String
-}
-entity DanhMucTinh {
-  maTinh Long
-  tenTinh String
-  trangThai Long
-}
-entity DanhMucHuyen {
-  maHuyen Long
-  tenHuyen String
-  maTinh Long
-  trangThai Long
-}
-
-entity DanhMucXa {
-  maXa Long
-  tenXa String
-  maHuyen Long
-  trangThai Long
-}
-entity DanhMucDauSoCmnd {
-  idDauSo Long
-  dauSo String
-  tinhThanh String
-  idLoai Long
-}
-entity DonViScanQr {
-  idLuotQuet Long
-  idDonVi Long
-  idCongDan Long
-  ngayThaoTac LocalDate
-}
-entity DmTinhTmp {
-  maTinh Long
-  tenTinh String
-}
-
-entity DmHuyenTmp {
-  maHuyen Long
-  tenHuyen String
-  maTinh Long
-}
-
-entity DmXaTmp {
-  maXa Long
-  tenXa String
-  maHuyen Long
-}
-entity DanhMucQuocGia {
-  idQuocGia Long
-  tenQuocGia String
-  tenTiengAnh String
-}
-entity NoiCapGttt {
-  idNoiCap Long
-  dienGiai String
-  idDonVi Long
-  trangThai Long
-}
-entity DmNoiCapGpdkx {
-  idNoiCap Long
-  dienGiai String
-  idDonVi Long
-  trangThai Long
-}
-
-entity DanhMucLoaiGiayToChungThuc {
-  idLoaiGiayTo Long
-  dienGiai String
-}
-
-entity ChungThuc {
-  idChungThuc Long
-  idDonVi Long
-  nguoiYeuCau String
-  nguoiChungThuc Long
-  nguoiThaoTac Long
-  ngayChungThuc LocalDate
-  ngayThaoTac LocalDate
-  soTienThu Long
-  soBanSao Long
-  vanBan String
-  trangThai Long
-  idLoaiGiayTo Long
-  quyenSo Long
-  duongSu String
-  taiSan String
-  strSearch String
-  srcChungThuc String
-  thongTinChungThuc String
-  chuKyNgoaiTruSo Long
-  idCtGoc Long
-  ngayText String
-  chucDanhCanBo String
-  ldPheDuyet Long
-  chucDanhLd String
-}
-entity CauHinhMauChungThuc {
-  idLoai Long
-  dienGiai String
-  khungGia Long
-  hasBenB Long
-  hasTaiSan Long
-  trangThai Long
-  fileChungThuc String
-  srcChungThuc String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDonVi Long
-  idLoaiSo Long
-}
-
-entity DanhSachChungThuc {
-  idChungThuc Long
-  idDonVi Long
-  nguoiChungThuc Long
-  nguoiThaoTac Long
-  ngayChungThuc LocalDate
-  ngayThaoTac LocalDate
-  trangThai Long
-  idLoaiGiayTo Long
-  quyenSo Long
-  srcChungThuc String
-  chuKyNgoaiTruSo Long
-  ngayText String
-  strSearch String
-  soTienThu Long
-  ldPheDuyet Long
-}
-entity SoCongChung {
-  ngayThaoTac LocalDate
-  idSo Long
-  idDonVi Long
-  tenSo String
-  giaTri Long
-  nguoiThaoTac Long
-  trangThai Long
-  idLoaiSo Long
-}
-entity SoCongChungTemp {
-  idHopDong Long
-  idMaster Long
-  soCc String
-  ngayThaoTac LocalDate
-}
-entity DanhMucLoaiSoCongChung {
-  idLoai Long
-  tenLoai String
-  trangThai Long
-}
-entity TinhTrangDuongSu {
-  idTinhTrang Long
-  dienGiai String
-  idLoaiDs Long
-}
-entity DuongSu {
-  idDuongSu Long
-  tenDuongSu String
-  idLoaiDs Long
-  diaChi String
-  trangThai Long
-  thongTinDs String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDsGoc Long
-  idTinhTrang Long
-  idMaster String
-  idDonVi Long
-  strSearch String
-  soGiayTo String
-  idLoaiNganChan Long
-  syncStatus Long
-}
-entity CauHinhThongTinDuongSu {
-  idCauHinh Long
-  noiDung String
-  javascript String
-  css String
-  idLoaiDs Long
-  idDonVi Long
-  trangThai Long
-}
-entity DanhMucLoaiDuongSu {
-  idLoaiDs Long
-  dienGiai String
-  trangThai Long
-  strSearch String
-}
-entity QuanHeDuongSu {
-  idDuongSu Long
-  idDuongSuQh Long
-  idQuanHe Long
-  thongTinQuanHe String
-  trangThai Long
-}
-entity DuongSuTrungCmnd {
-  idDuongSu Long
-  tenDuongSu String
-  idLoaiDs Long
-  diaChi String
-  trangThai Long
-  thongTinDs String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDsGoc Long
-  idTinhTrang Long
-  idMaster String
-  idDonVi Long
-  strSearch String
-  soGiayTo String
-  idDuongSuMin Long
-  idMasterMin Long
-  idDuongSuMax Long
-  idMasterMax Long
-}
-entity DuongSuTrungCmndBak {
-  idDuongSu Long
-  tenDuongSu String
-  idLoaiDs Long
-  diaChi String
-  trangThai Long
-  thongTinDs String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDsGoc Long
-  idTinhTrang Long
-  idMaster String
-  idDonVi Long
-  strSearch String
-  soGiayTo String
-}
-entity DanhSachDuongSu {
-  idDuongSu Long
-  tenDuongSu String
-  idLoaiDs Long
-  diaChi String
-  trangThai Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDsGoc Long
-  idTinhTrang Long
-  idMaster String
-  idDonVi Long
-  strSearch String
-  soGiayTo String
-  idLoaiNganChan Long
-}
-entity DmDuongSu {
-  idDuongSu Long
-  tenDuongSu String
-  idLoaiDs Long
-  diaChi String
-  trangThai Long
-  thongTinDs String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDsGoc Long
-  idTinhTrang Long
-  idMaster String
-  idDonVi Long
-  strSearch String
-  soGiayTo String
-  idLoaiNganChan Long
-}
-entity QuanHeNhanThan {
-  idQuanHe Long
-  dienGiai String
-  idQuanHeDoiUng Long
-  idGioiTinh Long
-}
-entity DanhMucTinhTrangHonNhan {
-  idTinhTrang Long
-  dienGiai String
-  trangThai Long
-}
-entity QuanHeMaster {
-  idDuongSu Long
-  idDuongSuQh Long
-}
-entity CauHinhHoaDonDienTu {
-  idDonVi Long
-  apiUrl String
-  account String
-  accPass String
-  username String
-  password String
-  mauSo String
-  kyHieu String
-  nguoiThaoTac Long
-  ngayThaoTac LocalDate
-}
-entity LogHoaDonDienTu {
-  idDonVi Long
-  idHopDong Long
-  fKey String
-  ketQua String
-  trangThai Long
-  ngayPhatHanh LocalDate
-}
-entity CauHinhHopDong {
-  idLoaiHopDong Long
-  idDonVi Long
-  chieuDai Long
-  tienTo String
-  giaTri Long
-  hienThi String
-  trangThai Long
-}
-entity LoaiHopDongCongChung {
-  idLoaiHopDongCongChung Long
-  dienGiai String
-  giaTri Long
-  trangThai Long
-}
-entity HopDongCongChung {
-  idHopDong Long
-  ngayLapHd LocalDate
-  nguoiLapHd Long
-  thongTinDuongSu String
-  thongTinTaiSan String
-  thongTinVanBan String
-  trangThai Long
-  idLoaiHd Long
-  dieuKhoanHd String
-  idDonVi Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idHdGoc Long
-  thongTinChuyenNhuong String
-  maHopDong String
-  srcHopDong String
-  ngayHen LocalDate
-  idSoCongChung Long
-  soCongChung String
-  congChungVien Long
-  ngayKyHd LocalDate
-  nguoiRutTrich Long
-  soTienRutTrich Long
-  ngayRutTrich LocalDate
-  hdThuCong Long
-  trangThaiRutTrich Long
-  chuKyNgoaiTruSo Long
-  strSearch String
-  idMaster Long
-  idHdSdHb Long
-  srcDmMaster String
-  repRefUnique Long
-  ngayText String
-  ngayNum Long
-  ngayThaoTacRutTrich LocalDate
-  thuLaoCongChung Long
-  quyenLaiSt String
-  soLaiSt String
-  quyenLaiTl String
-  soLaiTl String
-  srcKySoPdf String
-  srcKySoPdfSigned String
-  syncStatus Long
-  ngayRutTrichText String
-}
-entity DanhMucLoaiHopDong {
-  idLoaiHd Long
-  dienGiai String
-  idVaiTro1 Long
-  idVaiTro2 Long
-  fileHopDong String
-  srcHopDong String
-  dieuKhoan String
-  idDonVi Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  srcLoiChung String
-  idNhom Long
-  fileLoiChung String
-  chuyenTaiSan Long
-  loaiSuaDoi Long
-  loaiHuyBo Long
-  trangThaiDuyet Long
-  idPhanLoaiHopDong Long
-  srcCv String
-  srcTb String
-  srcTtpc String
-  dgTen String
-  nhomTen Long
-  idVaiTro3 Long
-}
-entity DanhMucNhomHopDong {
-  idNhom Long
-  dienGiai String
-}
-entity PhanLoaiHopDong {
-  idPhanLoaiHopDong Long
-  dienGiai String
-}
-entity CauHinhMauHopDong {
-  idLoaiHd Long
-  dienGiai String
-  idVaiTro1 Long
-  idVaiTro2 Long
-  fileHopDong String
-  srcHopDong String
-  dieuKhoan String
-  idDonVi Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  srcLoiChung String
-  idNhom Long
-  fileLoiChung String
-  chuyenTaiSan Long
-  loaiSuaDoi Long
-  loaiHuyBo Long
-  trangThaiDuyet Long
-  idPhanLoaiHopDong Long
-  srcCv String
-  srcTb String
-  srcTtpc String
-  idVaiTro3 Long
-}
-entity ThongTinChungHopDong {
-  idHopDong Long
-  ngayLapHd LocalDate
-  nguoiLapHd Long
-  thongTinVanBan String
-  trangThai Long
-  idLoaiHd Long
-  dieuKhoanHd String
-  idDonVi Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idHdGoc Long
-  maHopDong String
-  srcHopDong String
-  ngayHen LocalDate
-  idSoCongChung Long
-  soCongChung Long
-  congChungVien Long
-  ngayKyHd LocalDate
-  nguoiRutTrich Long
-  soTienRutTrich Long
-  ngayRutTrich LocalDate
-  hdThuCong Long
-  trangThaiRutTrich Long
-  chuKyNgoaiTruSo Long
-  strSearch String
-  idMaster Long
-  idHdSdHb Long
-  srcDmMaster String
-  repRefUnique Long
-  ngayText String
-  thongTinChung String
-  thongTinChungClob String
-}
-entity DanhSachHopDong {
-  idHopDong Long
-  ngayLapHd LocalDate
-  nguoiLapHd Long
-  trangThai Long
-  idLoaiHd Long
-  idDonVi Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  srcHopDong String
-  idSoCongChung Long
-  soCongChung String
-  congChungVien Long
-  soTienRutTrich Long
-  hdThuCong Long
-  trangThaiRutTrich Long
-  chuKyNgoaiTruSo Long
-  strSearch String
-  ngayText String
-  ngayRutTrichText String
-  ngayThaoTacRutTrich LocalDate
-  thuLaoCongChung Long
-  quyenLaiSt String
-  soLaiSt String
-  quyenLaiTl String
-  soLaiTl String
-  srcKySoPdf String
-  srcKySoPdfSigned String
-}
-entity DmHopDong {
-  idHopDong Long
-  ngayLapHd LocalDate
-  nguoiLapHd Long
-  thongTinDuongSu String
-  thongTinTaiSan String
-  thongTinVanBan String
-  trangThai Long
-  idLoaiHd Long
-  dieuKhoanHd String
-  idDonVi Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idHdGoc Long
-  thongTinChuyenNhuong String
-  maHopDong String
-  srcHopDong String
-  ngayHen LocalDate
-  idSoCongChung Long
-  soCongChung String
-  congChungVien Long
-  ngayKyHd LocalDate
-  nguoiRutTrich Long
-  soTienRutTrich Long
-  ngayRutTrich LocalDate
-  hdThuCong Long
-  trangThaiRutTrich Long
-  chuKyNgoaiTruSo Long
-  strSearch String
-  idMaster Long
-  idHdSdHb Long
-  srcDmMaster String
-  repRefUnique Long
-  ngayText String
-  ngayNum Long
-  ngayThaoTacRutTrich LocalDate
-  thuLaoCongChung Long
-}
-entity DmLoaiHd {
-  idLoaiHd Long
-  dienGiai String
-  idVaiTro1 Long
-  idVaiTro2 Long
-  fileHopDong String
-  srcHopDong String
-  dieuKhoan String
-  idDonVi Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  srcLoiChung String
-  idNhom Long
-  fileLoiChung String
-  chuyenTaiSan Long
-  loaiSuaDoi Long
-  loaiHuyBo Long
-  trangThaiDuyet Long
-  idPhanLoaiHopDong Long
-  srcCv String
-  srcTb String
-  srcTtpc String
-  dgTen String
-  nhomTen Long
-  idVaiTro3 Long
-}
-
-entity DanhMucVaiTro {
-  idVaiTro Long
-  dienGiai String
-  idLoaiHopDong Long
-  idLoaiVaiTro Long
-}
-entity LogDangNhap {
-  ngayDangNhap LocalDate
-  ipAddress String
-  idCanBo Long
-  tenDangNhap String
-}
-
-entity LogThaoTac {
-  idLog Long
-  dienGiai String
-  tenBang String
-  idKhoa String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-}
-entity LogDownloadFileDrive {
-  idLog Long
-  noiDung String
-  ngayThaoTac LocalDate
-  key Long
-}
-entity LogSearchDsTs {
-  idLog Long
-  nguoiThaoTac Long
-  ngayThaoTac LocalDate
-  noiDung String
-  slKq Long
-  kqSearch String
-}
-entity LogLienThongMotCua {
-  idLog Long
-  idChungThuc Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  noiDung String
-}
-entity LichSuGiaoDich {
-  idTaiSan Long
-  idDuongSu Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  idHopDong Long
-  idLoaiHopDong Long
-  idChungThuc Long
-}
-entity DmTaiSan {
-  idTaiSan Long
-  tenTaiSan String
-  trangThai Long
-  thongTinTs String
-  idLoaiTs Long
-  ghiChu String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDuongSu Long
-  idTsGoc Long
-  maTaiSan String
-  idTinhTrang Long
-  idLoaiNganChan Long
-  ngayBdNganChan LocalDate
-  ngayKtNganChan LocalDate
-  idMaster Long
-  strSearch String
-  idDonVi Long
-  soHsCv Long
-  soCc Long
-  soVaoSo Long
-  moTa String
-  loaiNganChan Long
-}
-entity DanhSachTaiSan {
-  idTaiSan Long
-  tenTaiSan String
-  trangThai Long
-  idLoaiTs Long
-  ghiChu String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDuongSu Long
-  idTsGoc Long
-  maTaiSan String
-  idTinhTrang Long
-  idLoaiNganChan Long
-  ngayBdNganChan LocalDate
-  ngayKtNganChan LocalDate
-  idMaster Long
-  strSearch String
-  idDonVi Long
-  soHsCv Long
-  soCc Long
-  soVaoSo Long
-  moTa String
-  loaiNganChan Long
-  maXa String
-}
-entity TaiSanDatNha {
-  idTaiSan Long
-  tenTaiSan String
-  trangThai Long
-  thongTinTs String
-  idLoaiTs Long
-  ghiChu String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDuongSu Long
-  idTsGoc Long
-  maTaiSan String
-  idTinhTrang Long
-  idLoaiNganChan Long
-  ngayBdNganChan LocalDate
-  ngayKtNganChan LocalDate
-  idMaster Long
-  strSearch String
-  idDonVi Long
-  soHsCv Long
-  soCc Long
-  soVaoSo Long
-  moTa String
-  loaiNganChan Long
-}
-
-entity ThuaTach {
-  idThuaTach Long
-  idTaiSan Long
-  thongTinThuaTach String
-  trangThai Long
-}
-
-entity TaisanSaiDgc {
-  idMaster Long
-  thongTinTs String
-  thongTinTsDung String
-}
-
-entity TaiSanDgc {
-  idTaiSan Long
-  tenTaiSan String
-  trangThai Long
-  thongTinTs String
-  idLoaiTs Long
-  ghiChu String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDuongSu Long
-  idTsGoc Long
-  maTaiSan String
-  idTinhTrang Long
-  idLoaiNganChan Long
-  ngayBdNganChan LocalDate
-  ngayKtNganChan LocalDate
-  idMaster Long
-  strSearch String
-  idDonVi Long
-  soHsCv Long
-  soCc Long
-  soVaoSo Long
-  moTa String
-}
-
-entity CauHinhThongTinLoaiTaiSan {
-  idCauHinh Long
-  noiDung String
-  javascript String
-  css String
-  idLoaiTs Long
-  idDonVi Long
-  trangThai Long
-  xml String
-}
-
-entity DanhMucLoaiTaiSan {
-  idLoaiTs Long
-  dienGiai String
-  trangThai Long
-  searchStr String
-}
-
-entity TaiSan {
-  idTaiSan Long
-  tenTaiSan String
-  trangThai Long
-  thongTinTs String
-  idLoaiTs Long
-  ghiChu String
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDuongSu Long
-  idTsGoc Long
-  maTaiSan String
-  idTinhTrang Long
-  idLoaiNganChan Long
-  ngayBdNganChan LocalDate
-  ngayKtNganChan LocalDate
-  idMaster Long
-  strSearch String
-  idDonVi Long
-  soHsCv Long
-  soCc Long
-  soVaoSo Long
-  moTa String
-  loaiNganChan Long
-  syncStatus Long
-}
-
-entity Taisannhadatid {
-  idTaiSan Long
-  thongTinTs String
-}
-
-entity TaisanSaiQsddDgc {
-  idMaster Long
-  noiCapQsdd String
-}
-
-entity TaiSanDuongSu {
-  idTaiSan Long
-  idDuongSu Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  idHopDong Long
-  idLoaiHopDong Long
-  idChungThuc Long
-}
-
-entity TinhTrangTaiSan {
-  idTinhTrang Long
-  dienGiai String
-  trangThai Long
-}
-entity VanBan {
-  idVanBan Long
-  dienGiai String
-  tenFile String
-  srcFile String
-  idLoaiVb Long
-  trangThai Long
-  ngayThaoTac LocalDate
-  nguoiThaoTac Long
-  idDonVi Long
-  idVbGoc Long
-}
-entity DanhMucLoaiVanBan {
-  idLoaiVb Long
-  dienGiai String
-  idLoaiHopDong Long
-}
-entity DanhMucTuVietTat {
-  idVietTat Long
-  tuVietTat String
-  dienGiai String
-  idDonVi Long
-  nguoiThaoTac Long
-  ngayThaoTac Instant
-  trangThai Long
-}
+//entity DanhMucCanBo {
+//  idCanBo Long
+//  tenCanBo String
+//  diaChi String
+//  namSinh LocalDate
+//  email String
+//  soDienThoai String
+//  soCmnd String
+//  idDonVi Long
+//  tenDangNhap String
+//  matKhau String
+//  trangThai Long
+//  clientId String
+//  clientSecret String
+//  usernameKyso String
+//  passwordKyso String
+//}
+//
+//entity CanBoQuyen {
+//  idCanBo Long
+//  idQuyen Long
+//  idDonVi Long
+//}
+//
+//entity MenuQuyen {
+//  idQuyen Long
+//  idDonVi Long
+//  listMenu String
+//}
+//
+//entity Quyen {
+//  idQuyen Long
+//  tenQuyen String
+//}
+//entity DanhMucCapQuanLy {
+//  idCapQl Long
+//  dienGiai String
+//}
+//
+//entity DanhMucDonVi {
+//  idDonVi Long
+//  tenDonVi String
+//  diaChi String
+//  nguoiDaiDien String
+//  soDienThoai String
+//  idDonViQl Long
+//  loaiDonVi Long
+//  ngayKhaiBao LocalDate
+//  trangThai Long
+//  idTinh Long
+//  idHuyen Long
+//  idPhuongXa Long
+//  soNha String
+//  maSoThue String
+//  idCapQl Long
+//  loaiNhiemVu Long
+//  hoaDonDt Long
+//  maDonViIgate String
+//  maCoQuanIgate String
+//  capDonVi Long
+//  kySo Long
+//  qrScan Long
+//  verifyIdCard Long
+//  isVerifyFace Long
+//  isElastic Long
+//  apikeyCccd String
+//  apikeyFace String
+//  verifyCodeCccd String
+//  usernameElastic String
+//  passwordElastic String
+//}
+//entity DanhMucLoaiDonVi {
+//  idLoaiDv Long
+//  dienGiai String
+//}
+//entity DanhMucTinh {
+//  maTinh Long
+//  tenTinh String
+//  trangThai Long
+//}
+//entity DanhMucHuyen {
+//  maHuyen Long
+//  tenHuyen String
+//  maTinh Long
+//  trangThai Long
+//}
+//
+//entity DanhMucXa {
+//  maXa Long
+//  tenXa String
+//  maHuyen Long
+//  trangThai Long
+//}
+//entity DanhMucDauSoCmnd {
+//  idDauSo Long
+//  dauSo String
+//  tinhThanh String
+//  idLoai Long
+//}
+//entity DonViScanQr {
+//  idLuotQuet Long
+//  idDonVi Long
+//  idCongDan Long
+//  ngayThaoTac LocalDate
+//}
+//entity DmTinhTmp {
+//  maTinh Long
+//  tenTinh String
+//}
+//
+//entity DmHuyenTmp {
+//  maHuyen Long
+//  tenHuyen String
+//  maTinh Long
+//}
+//
+//entity DmXaTmp {
+//  maXa Long
+//  tenXa String
+//  maHuyen Long
+//}
+//entity DanhMucQuocGia {
+//  idQuocGia Long
+//  tenQuocGia String
+//  tenTiengAnh String
+//}
+//entity NoiCapGttt {
+//  idNoiCap Long
+//  dienGiai String
+//  idDonVi Long
+//  trangThai Long
+//}
+//entity DmNoiCapGpdkx {
+//  idNoiCap Long
+//  dienGiai String
+//  idDonVi Long
+//  trangThai Long
+//}
+//
+//entity DanhMucLoaiGiayToChungThuc {
+//  idLoaiGiayTo Long
+//  dienGiai String
+//}
+//
+//entity ChungThuc {
+//  idChungThuc Long
+//  idDonVi Long
+//  nguoiYeuCau String
+//  nguoiChungThuc Long
+//  nguoiThaoTac Long
+//  ngayChungThuc LocalDate
+//  ngayThaoTac LocalDate
+//  soTienThu Long
+//  soBanSao Long
+//  vanBan String
+//  trangThai Long
+//  idLoaiGiayTo Long
+//  quyenSo Long
+//  duongSu String
+//  taiSan String
+//  strSearch String
+//  srcChungThuc String
+//  thongTinChungThuc String
+//  chuKyNgoaiTruSo Long
+//  idCtGoc Long
+//  ngayText String
+//  chucDanhCanBo String
+//  ldPheDuyet Long
+//  chucDanhLd String
+//}
+//entity CauHinhMauChungThuc {
+//  idLoai Long
+//  dienGiai String
+//  khungGia Long
+//  hasBenB Long
+//  hasTaiSan Long
+//  trangThai Long
+//  fileChungThuc String
+//  srcChungThuc String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDonVi Long
+//  idLoaiSo Long
+//}
+//
+//entity DanhSachChungThuc {
+//  idChungThuc Long
+//  idDonVi Long
+//  nguoiChungThuc Long
+//  nguoiThaoTac Long
+//  ngayChungThuc LocalDate
+//  ngayThaoTac LocalDate
+//  trangThai Long
+//  idLoaiGiayTo Long
+//  quyenSo Long
+//  srcChungThuc String
+//  chuKyNgoaiTruSo Long
+//  ngayText String
+//  strSearch String
+//  soTienThu Long
+//  ldPheDuyet Long
+//}
+//entity SoCongChung {
+//  ngayThaoTac LocalDate
+//  idSo Long
+//  idDonVi Long
+//  tenSo String
+//  giaTri Long
+//  nguoiThaoTac Long
+//  trangThai Long
+//  idLoaiSo Long
+//}
+//entity SoCongChungTemp {
+//  idHopDong Long
+//  idMaster Long
+//  soCc String
+//  ngayThaoTac LocalDate
+//}
+//entity DanhMucLoaiSoCongChung {
+//  idLoai Long
+//  tenLoai String
+//  trangThai Long
+//}
+//entity TinhTrangDuongSu {
+//  idTinhTrang Long
+//  dienGiai String
+//  idLoaiDs Long
+//}
+//entity DuongSu {
+//  idDuongSu Long
+//  tenDuongSu String
+//  idLoaiDs Long
+//  diaChi String
+//  trangThai Long
+//  thongTinDs String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDsGoc Long
+//  idTinhTrang Long
+//  idMaster String
+//  idDonVi Long
+//  strSearch String
+//  soGiayTo String
+//  idLoaiNganChan Long
+//  syncStatus Long
+//}
+//entity CauHinhThongTinDuongSu {
+//  idCauHinh Long
+//  noiDung String
+//  javascript String
+//  css String
+//  idLoaiDs Long
+//  idDonVi Long
+//  trangThai Long
+//}
+//entity DanhMucLoaiDuongSu {
+//  idLoaiDs Long
+//  dienGiai String
+//  trangThai Long
+//  strSearch String
+//}
+//entity QuanHeDuongSu {
+//  idDuongSu Long
+//  idDuongSuQh Long
+//  idQuanHe Long
+//  thongTinQuanHe String
+//  trangThai Long
+//}
+//entity DuongSuTrungCmnd {
+//  idDuongSu Long
+//  tenDuongSu String
+//  idLoaiDs Long
+//  diaChi String
+//  trangThai Long
+//  thongTinDs String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDsGoc Long
+//  idTinhTrang Long
+//  idMaster String
+//  idDonVi Long
+//  strSearch String
+//  soGiayTo String
+//  idDuongSuMin Long
+//  idMasterMin Long
+//  idDuongSuMax Long
+//  idMasterMax Long
+//}
+//entity DuongSuTrungCmndBak {
+//  idDuongSu Long
+//  tenDuongSu String
+//  idLoaiDs Long
+//  diaChi String
+//  trangThai Long
+//  thongTinDs String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDsGoc Long
+//  idTinhTrang Long
+//  idMaster String
+//  idDonVi Long
+//  strSearch String
+//  soGiayTo String
+//}
+//entity DanhSachDuongSu {
+//  idDuongSu Long
+//  tenDuongSu String
+//  idLoaiDs Long
+//  diaChi String
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDsGoc Long
+//  idTinhTrang Long
+//  idMaster String
+//  idDonVi Long
+//  strSearch String
+//  soGiayTo String
+//  idLoaiNganChan Long
+//}
+//entity DmDuongSu {
+//  idDuongSu Long
+//  tenDuongSu String
+//  idLoaiDs Long
+//  diaChi String
+//  trangThai Long
+//  thongTinDs String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDsGoc Long
+//  idTinhTrang Long
+//  idMaster String
+//  idDonVi Long
+//  strSearch String
+//  soGiayTo String
+//  idLoaiNganChan Long
+//}
+//entity QuanHeNhanThan {
+//  idQuanHe Long
+//  dienGiai String
+//  idQuanHeDoiUng Long
+//  idGioiTinh Long
+//}
+//entity DanhMucTinhTrangHonNhan {
+//  idTinhTrang Long
+//  dienGiai String
+//  trangThai Long
+//}
+//entity QuanHeMaster {
+//  idDuongSu Long
+//  idDuongSuQh Long
+//}
+//entity CauHinhHoaDonDienTu {
+//  idDonVi Long
+//  apiUrl String
+//  account String
+//  accPass String
+//  username String
+//  password String
+//  mauSo String
+//  kyHieu String
+//  nguoiThaoTac Long
+//  ngayThaoTac LocalDate
+//}
+//entity LogHoaDonDienTu {
+//  idDonVi Long
+//  idHopDong Long
+//  fKey String
+//  ketQua String
+//  trangThai Long
+//  ngayPhatHanh LocalDate
+//}
+//entity CauHinhHopDong {
+//  idLoaiHopDong Long
+//  idDonVi Long
+//  chieuDai Long
+//  tienTo String
+//  giaTri Long
+//  hienThi String
+//  trangThai Long
+//}
+//entity LoaiHopDongCongChung {
+//  idLoaiHopDongCongChung Long
+//  dienGiai String
+//  giaTri Long
+//  trangThai Long
+//}
+//entity HopDongCongChung {
+//  idHopDong Long
+//  ngayLapHd LocalDate
+//  nguoiLapHd Long
+//  thongTinDuongSu String
+//  thongTinTaiSan String
+//  thongTinVanBan String
+//  trangThai Long
+//  idLoaiHd Long
+//  dieuKhoanHd String
+//  idDonVi Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idHdGoc Long
+//  thongTinChuyenNhuong String
+//  maHopDong String
+//  srcHopDong String
+//  ngayHen LocalDate
+//  idSoCongChung Long
+//  soCongChung String
+//  congChungVien Long
+//  ngayKyHd LocalDate
+//  nguoiRutTrich Long
+//  soTienRutTrich Long
+//  ngayRutTrich LocalDate
+//  hdThuCong Long
+//  trangThaiRutTrich Long
+//  chuKyNgoaiTruSo Long
+//  strSearch String
+//  idMaster Long
+//  idHdSdHb Long
+//  srcDmMaster String
+//  repRefUnique Long
+//  ngayText String
+//  ngayNum Long
+//  ngayThaoTacRutTrich LocalDate
+//  thuLaoCongChung Long
+//  quyenLaiSt String
+//  soLaiSt String
+//  quyenLaiTl String
+//  soLaiTl String
+//  srcKySoPdf String
+//  srcKySoPdfSigned String
+//  syncStatus Long
+//  ngayRutTrichText String
+//}
+//entity DanhMucLoaiHopDong {
+//  idLoaiHd Long
+//  dienGiai String
+//  idVaiTro1 Long
+//  idVaiTro2 Long
+//  fileHopDong String
+//  srcHopDong String
+//  dieuKhoan String
+//  idDonVi Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  srcLoiChung String
+//  idNhom Long
+//  fileLoiChung String
+//  chuyenTaiSan Long
+//  loaiSuaDoi Long
+//  loaiHuyBo Long
+//  trangThaiDuyet Long
+//  idPhanLoaiHopDong Long
+//  srcCv String
+//  srcTb String
+//  srcTtpc String
+//  dgTen String
+//  nhomTen Long
+//  idVaiTro3 Long
+//}
+//entity DanhMucNhomHopDong {
+//  idNhom Long
+//  dienGiai String
+//}
+//entity PhanLoaiHopDong {
+//  idPhanLoaiHopDong Long
+//  dienGiai String
+//}
+//entity CauHinhMauHopDong {
+//  idLoaiHd Long
+//  dienGiai String
+//  idVaiTro1 Long
+//  idVaiTro2 Long
+//  fileHopDong String
+//  srcHopDong String
+//  dieuKhoan String
+//  idDonVi Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  srcLoiChung String
+//  idNhom Long
+//  fileLoiChung String
+//  chuyenTaiSan Long
+//  loaiSuaDoi Long
+//  loaiHuyBo Long
+//  trangThaiDuyet Long
+//  idPhanLoaiHopDong Long
+//  srcCv String
+//  srcTb String
+//  srcTtpc String
+//  idVaiTro3 Long
+//}
+//entity ThongTinChungHopDong {
+//  idHopDong Long
+//  ngayLapHd LocalDate
+//  nguoiLapHd Long
+//  thongTinVanBan String
+//  trangThai Long
+//  idLoaiHd Long
+//  dieuKhoanHd String
+//  idDonVi Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idHdGoc Long
+//  maHopDong String
+//  srcHopDong String
+//  ngayHen LocalDate
+//  idSoCongChung Long
+//  soCongChung Long
+//  congChungVien Long
+//  ngayKyHd LocalDate
+//  nguoiRutTrich Long
+//  soTienRutTrich Long
+//  ngayRutTrich LocalDate
+//  hdThuCong Long
+//  trangThaiRutTrich Long
+//  chuKyNgoaiTruSo Long
+//  strSearch String
+//  idMaster Long
+//  idHdSdHb Long
+//  srcDmMaster String
+//  repRefUnique Long
+//  ngayText String
+//  thongTinChung String
+//  thongTinChungClob String
+//}
+//entity DanhSachHopDong {
+//  idHopDong Long
+//  ngayLapHd LocalDate
+//  nguoiLapHd Long
+//  trangThai Long
+//  idLoaiHd Long
+//  idDonVi Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  srcHopDong String
+//  idSoCongChung Long
+//  soCongChung String
+//  congChungVien Long
+//  soTienRutTrich Long
+//  hdThuCong Long
+//  trangThaiRutTrich Long
+//  chuKyNgoaiTruSo Long
+//  strSearch String
+//  ngayText String
+//  ngayRutTrichText String
+//  ngayThaoTacRutTrich LocalDate
+//  thuLaoCongChung Long
+//  quyenLaiSt String
+//  soLaiSt String
+//  quyenLaiTl String
+//  soLaiTl String
+//  srcKySoPdf String
+//  srcKySoPdfSigned String
+//}
+//entity DmHopDong {
+//  idHopDong Long
+//  ngayLapHd LocalDate
+//  nguoiLapHd Long
+//  thongTinDuongSu String
+//  thongTinTaiSan String
+//  thongTinVanBan String
+//  trangThai Long
+//  idLoaiHd Long
+//  dieuKhoanHd String
+//  idDonVi Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idHdGoc Long
+//  thongTinChuyenNhuong String
+//  maHopDong String
+//  srcHopDong String
+//  ngayHen LocalDate
+//  idSoCongChung Long
+//  soCongChung String
+//  congChungVien Long
+//  ngayKyHd LocalDate
+//  nguoiRutTrich Long
+//  soTienRutTrich Long
+//  ngayRutTrich LocalDate
+//  hdThuCong Long
+//  trangThaiRutTrich Long
+//  chuKyNgoaiTruSo Long
+//  strSearch String
+//  idMaster Long
+//  idHdSdHb Long
+//  srcDmMaster String
+//  repRefUnique Long
+//  ngayText String
+//  ngayNum Long
+//  ngayThaoTacRutTrich LocalDate
+//  thuLaoCongChung Long
+//}
+//entity DmLoaiHd {
+//  idLoaiHd Long
+//  dienGiai String
+//  idVaiTro1 Long
+//  idVaiTro2 Long
+//  fileHopDong String
+//  srcHopDong String
+//  dieuKhoan String
+//  idDonVi Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  srcLoiChung String
+//  idNhom Long
+//  fileLoiChung String
+//  chuyenTaiSan Long
+//  loaiSuaDoi Long
+//  loaiHuyBo Long
+//  trangThaiDuyet Long
+//  idPhanLoaiHopDong Long
+//  srcCv String
+//  srcTb String
+//  srcTtpc String
+//  dgTen String
+//  nhomTen Long
+//  idVaiTro3 Long
+//}
+//
+//entity DanhMucVaiTro {
+//  idVaiTro Long
+//  dienGiai String
+//  idLoaiHopDong Long
+//  idLoaiVaiTro Long
+//}
+//entity LogDangNhap {
+//  ngayDangNhap LocalDate
+//  ipAddress String
+//  idCanBo Long
+//  tenDangNhap String
+//}
+//
+//entity LogThaoTac {
+//  idLog Long
+//  dienGiai String
+//  tenBang String
+//  idKhoa String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//}
+//entity LogDownloadFileDrive {
+//  idLog Long
+//  noiDung String
+//  ngayThaoTac LocalDate
+//  key Long
+//}
+//entity LogSearchDsTs {
+//  idLog Long
+//  nguoiThaoTac Long
+//  ngayThaoTac LocalDate
+//  noiDung String
+//  slKq Long
+//  kqSearch String
+//}
+//entity LogLienThongMotCua {
+//  idLog Long
+//  idChungThuc Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  noiDung String
+//}
+//entity LichSuGiaoDich {
+//  idTaiSan Long
+//  idDuongSu Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  idHopDong Long
+//  idLoaiHopDong Long
+//  idChungThuc Long
+//}
+//entity DmTaiSan {
+//  idTaiSan Long
+//  tenTaiSan String
+//  trangThai Long
+//  thongTinTs String
+//  idLoaiTs Long
+//  ghiChu String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDuongSu Long
+//  idTsGoc Long
+//  maTaiSan String
+//  idTinhTrang Long
+//  idLoaiNganChan Long
+//  ngayBdNganChan LocalDate
+//  ngayKtNganChan LocalDate
+//  idMaster Long
+//  strSearch String
+//  idDonVi Long
+//  soHsCv Long
+//  soCc Long
+//  soVaoSo Long
+//  moTa String
+//  loaiNganChan Long
+//}
+//entity DanhSachTaiSan {
+//  idTaiSan Long
+//  tenTaiSan String
+//  trangThai Long
+//  idLoaiTs Long
+//  ghiChu String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDuongSu Long
+//  idTsGoc Long
+//  maTaiSan String
+//  idTinhTrang Long
+//  idLoaiNganChan Long
+//  ngayBdNganChan LocalDate
+//  ngayKtNganChan LocalDate
+//  idMaster Long
+//  strSearch String
+//  idDonVi Long
+//  soHsCv Long
+//  soCc Long
+//  soVaoSo Long
+//  moTa String
+//  loaiNganChan Long
+//  maXa String
+//}
+//entity TaiSanDatNha {
+//  idTaiSan Long
+//  tenTaiSan String
+//  trangThai Long
+//  thongTinTs String
+//  idLoaiTs Long
+//  ghiChu String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDuongSu Long
+//  idTsGoc Long
+//  maTaiSan String
+//  idTinhTrang Long
+//  idLoaiNganChan Long
+//  ngayBdNganChan LocalDate
+//  ngayKtNganChan LocalDate
+//  idMaster Long
+//  strSearch String
+//  idDonVi Long
+//  soHsCv Long
+//  soCc Long
+//  soVaoSo Long
+//  moTa String
+//  loaiNganChan Long
+//}
+//
+//entity ThuaTach {
+//  idThuaTach Long
+//  idTaiSan Long
+//  thongTinThuaTach String
+//  trangThai Long
+//}
+//
+//entity TaisanSaiDgc {
+//  idMaster Long
+//  thongTinTs String
+//  thongTinTsDung String
+//}
+//
+//entity TaiSanDgc {
+//  idTaiSan Long
+//  tenTaiSan String
+//  trangThai Long
+//  thongTinTs String
+//  idLoaiTs Long
+//  ghiChu String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDuongSu Long
+//  idTsGoc Long
+//  maTaiSan String
+//  idTinhTrang Long
+//  idLoaiNganChan Long
+//  ngayBdNganChan LocalDate
+//  ngayKtNganChan LocalDate
+//  idMaster Long
+//  strSearch String
+//  idDonVi Long
+//  soHsCv Long
+//  soCc Long
+//  soVaoSo Long
+//  moTa String
+//}
+//
+//entity CauHinhThongTinLoaiTaiSan {
+//  idCauHinh Long
+//  noiDung String
+//  javascript String
+//  css String
+//  idLoaiTs Long
+//  idDonVi Long
+//  trangThai Long
+//  xml String
+//}
+//
+//entity DanhMucLoaiTaiSan {
+//  idLoaiTs Long
+//  dienGiai String
+//  trangThai Long
+//  searchStr String
+//}
+//
+//entity TaiSan {
+//  idTaiSan Long
+//  tenTaiSan String
+//  trangThai Long
+//  thongTinTs String
+//  idLoaiTs Long
+//  ghiChu String
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDuongSu Long
+//  idTsGoc Long
+//  maTaiSan String
+//  idTinhTrang Long
+//  idLoaiNganChan Long
+//  ngayBdNganChan LocalDate
+//  ngayKtNganChan LocalDate
+//  idMaster Long
+//  strSearch String
+//  idDonVi Long
+//  soHsCv Long
+//  soCc Long
+//  soVaoSo Long
+//  moTa String
+//  loaiNganChan Long
+//  syncStatus Long
+//}
+//
+//entity Taisannhadatid {
+//  idTaiSan Long
+//  thongTinTs String
+//}
+//
+//entity TaisanSaiQsddDgc {
+//  idMaster Long
+//  noiCapQsdd String
+//}
+//
+//entity TaiSanDuongSu {
+//  idTaiSan Long
+//  idDuongSu Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  idHopDong Long
+//  idLoaiHopDong Long
+//  idChungThuc Long
+//}
+//
+//entity TinhTrangTaiSan {
+//  idTinhTrang Long
+//  dienGiai String
+//  trangThai Long
+//}
+//entity VanBan {
+//  idVanBan Long
+//  dienGiai String
+//  tenFile String
+//  srcFile String
+//  idLoaiVb Long
+//  trangThai Long
+//  ngayThaoTac LocalDate
+//  nguoiThaoTac Long
+//  idDonVi Long
+//  idVbGoc Long
+//}
+//entity DanhMucLoaiVanBan {
+//  idLoaiVb Long
+//  dienGiai String
+//  idLoaiHopDong Long
+//}
+//entity DanhMucTuVietTat {
+//  idVietTat Long
+//  tuVietTat String
+//  dienGiai String
+//  idDonVi Long
+//  nguoiThaoTac Long
+//  ngayThaoTac Instant
+//  trangThai Long
+//}

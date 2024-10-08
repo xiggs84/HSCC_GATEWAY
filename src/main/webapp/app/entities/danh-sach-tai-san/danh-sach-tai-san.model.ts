@@ -1,4 +1,5 @@
 import dayjs from 'dayjs/esm';
+import { IDanhMucLoaiTaiSan } from 'app/entities/danh-muc-loai-tai-san/danh-muc-loai-tai-san.model';
 
 export interface IDanhSachTaiSan {
   id: number;
@@ -22,6 +23,7 @@ export interface IDanhSachTaiSan {
   moTa?: string | null;
   loaiNganChan?: number | null;
   maXa?: string | null;
+  danhMucLoaiTaiSan?: Pick<IDanhMucLoaiTaiSan, 'idLoaiTs'> | null;
 }
 
 export type NewDanhSachTaiSan = Omit<IDanhSachTaiSan, 'id'> & { id: null };

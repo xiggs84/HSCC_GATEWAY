@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IDanhMucLoaiGiayToChungThuc } from '../danh-muc-loai-giay-to-chung-thuc.model';
 import { DanhMucLoaiGiayToChungThucService } from '../service/danh-muc-loai-giay-to-chung-thuc.service';
 import {
-  DanhMucLoaiGiayToChungThucFormService,
   DanhMucLoaiGiayToChungThucFormGroup,
+  DanhMucLoaiGiayToChungThucFormService,
 } from './danh-muc-loai-giay-to-chung-thuc-form.service';
 
 @Component({
@@ -47,7 +47,7 @@ export class DanhMucLoaiGiayToChungThucUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const danhMucLoaiGiayToChungThuc = this.danhMucLoaiGiayToChungThucFormService.getDanhMucLoaiGiayToChungThuc(this.editForm);
-    if (danhMucLoaiGiayToChungThuc.id !== null) {
+    if (danhMucLoaiGiayToChungThuc.idLoaiGiayTo !== null) {
       this.subscribeToSaveResponse(this.danhMucLoaiGiayToChungThucService.update(danhMucLoaiGiayToChungThuc));
     } else {
       this.subscribeToSaveResponse(this.danhMucLoaiGiayToChungThucService.create(danhMucLoaiGiayToChungThuc));

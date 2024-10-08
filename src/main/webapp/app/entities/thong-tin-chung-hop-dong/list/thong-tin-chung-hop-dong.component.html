@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (thongTinChungHopDongs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.thongTinChungHopDong.home.notFound">No Thong Tin Chung Hop Dongs found</span>
@@ -73,13 +75,6 @@
             <th scope="col" jhiSortBy="trangThai">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.thongTinChungHopDong.trangThai">Trang Thai</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiHd">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.thongTinChungHopDong.idLoaiHd">Id Loai Hd</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -136,20 +131,6 @@
             <th scope="col" jhiSortBy="ngayHen">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.thongTinChungHopDong.ngayHen">Ngay Hen</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idSoCongChung">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.thongTinChungHopDong.idSoCongChung">Id So Cong Chung</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="soCongChung">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.thongTinChungHopDong.soCongChung">So Cong Chung</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -266,6 +247,18 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="danhMucLoaiHopDong.idLoaiHd">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinChungHopDong.danhMucLoaiHopDong">Danh Muc Loai Hop Dong</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soCongChung.idSo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thongTinChungHopDong.soCongChung">So Cong Chung</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -280,7 +273,6 @@
               <td>{{ thongTinChungHopDong.nguoiLapHd }}</td>
               <td>{{ thongTinChungHopDong.thongTinVanBan }}</td>
               <td>{{ thongTinChungHopDong.trangThai }}</td>
-              <td>{{ thongTinChungHopDong.idLoaiHd }}</td>
               <td>{{ thongTinChungHopDong.dieuKhoanHd }}</td>
               <td>{{ thongTinChungHopDong.idDonVi }}</td>
               <td>{{ thongTinChungHopDong.ngayThaoTac | formatMediumDate }}</td>
@@ -289,8 +281,6 @@
               <td>{{ thongTinChungHopDong.maHopDong }}</td>
               <td>{{ thongTinChungHopDong.srcHopDong }}</td>
               <td>{{ thongTinChungHopDong.ngayHen | formatMediumDate }}</td>
-              <td>{{ thongTinChungHopDong.idSoCongChung }}</td>
-              <td>{{ thongTinChungHopDong.soCongChung }}</td>
               <td>{{ thongTinChungHopDong.congChungVien }}</td>
               <td>{{ thongTinChungHopDong.ngayKyHd | formatMediumDate }}</td>
               <td>{{ thongTinChungHopDong.nguoiRutTrich }}</td>
@@ -307,6 +297,24 @@
               <td>{{ thongTinChungHopDong.ngayText }}</td>
               <td>{{ thongTinChungHopDong.thongTinChung }}</td>
               <td>{{ thongTinChungHopDong.thongTinChungClob }}</td>
+              <td>
+                @if (thongTinChungHopDong.danhMucLoaiHopDong) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-hop-dong', thongTinChungHopDong.danhMucLoaiHopDong.idLoaiHd, 'view']">{{
+                      thongTinChungHopDong.danhMucLoaiHopDong.idLoaiHd
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (thongTinChungHopDong.soCongChung) {
+                  <div>
+                    <a [routerLink]="['/so-cong-chung', thongTinChungHopDong.soCongChung.idSo, 'view']">{{
+                      thongTinChungHopDong.soCongChung.idSo
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a
@@ -337,6 +345,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (thongTinChungHopDongs && thongTinChungHopDongs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

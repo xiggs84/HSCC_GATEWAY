@@ -20,6 +20,7 @@ type ThuaTachFormGroupContent = {
   idThuaTach: FormControl<IThuaTach['idThuaTach'] | NewThuaTach['idThuaTach']>;
   thongTinThuaTach: FormControl<IThuaTach['thongTinThuaTach']>;
   trangThai: FormControl<IThuaTach['trangThai']>;
+  taiSan: FormControl<IThuaTach['taiSan']>;
 };
 
 export type ThuaTachFormGroup = FormGroup<ThuaTachFormGroupContent>;
@@ -41,6 +42,7 @@ export class ThuaTachFormService {
       ),
       thongTinThuaTach: new FormControl(thuaTachRawValue.thongTinThuaTach),
       trangThai: new FormControl(thuaTachRawValue.trangThai),
+      taiSan: new FormControl(thuaTachRawValue.taiSan),
     });
   }
 

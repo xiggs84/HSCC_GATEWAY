@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820094657"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idLoaiHd",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
@@ -52,10 +56,6 @@
     {
       "fieldName": "srcLoiChung",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idNhom",
-      "fieldType": "Long"
     },
     {
       "fieldName": "fileLoiChung",
@@ -106,8 +106,54 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucLoaiHopDong",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "hopDongCongChung",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "hopDongCongChung",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "thongTinChungHopDong",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "thongTinChungHopDong",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhSachHopDong",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "danhSachHopDong",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dmHopDong",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "dmHopDong",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhMucVaiTro",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "danhMucVaiTro",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhMucNhomHopDong",
+      "otherEntityRelationshipName": "danhMucLoaiHopDong",
+      "relationshipName": "danhMucNhomHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

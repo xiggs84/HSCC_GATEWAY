@@ -2,20 +2,42 @@
   "annotations": {
     "changelogDate": "20240820094757"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idNhom",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
       "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucNhomHopDong",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiHopDong",
+      "otherEntityRelationshipName": "danhMucNhomHopDong",
+      "relationshipName": "danhMucLoaiHopDong",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dmLoaiHd",
+      "otherEntityRelationshipName": "danhMucNhomHopDong",
+      "relationshipName": "dmLoaiHd",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

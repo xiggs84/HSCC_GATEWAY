@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDanhSachChungThuc, NewDanhSachChungThuc } from '../danh-sach-chung-thuc.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idChungThuc: unknown }> = Partial<Omit<T, 'idChungThuc'>> & { idChungThuc: T['idChungThuc'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,18 +14,16 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DanhSachChungThucFormGroupInput = IDanhSachChungThuc | PartialWithRequiredKeyOf<NewDanhSachChungThuc>;
 
-type DanhSachChungThucFormDefaults = Pick<NewDanhSachChungThuc, 'id'>;
+type DanhSachChungThucFormDefaults = Pick<NewDanhSachChungThuc, 'idChungThuc'>;
 
 type DanhSachChungThucFormGroupContent = {
-  id: FormControl<IDanhSachChungThuc['id'] | NewDanhSachChungThuc['id']>;
-  idChungThuc: FormControl<IDanhSachChungThuc['idChungThuc']>;
+  idChungThuc: FormControl<IDanhSachChungThuc['idChungThuc'] | NewDanhSachChungThuc['idChungThuc']>;
   idDonVi: FormControl<IDanhSachChungThuc['idDonVi']>;
   nguoiChungThuc: FormControl<IDanhSachChungThuc['nguoiChungThuc']>;
   nguoiThaoTac: FormControl<IDanhSachChungThuc['nguoiThaoTac']>;
   ngayChungThuc: FormControl<IDanhSachChungThuc['ngayChungThuc']>;
   ngayThaoTac: FormControl<IDanhSachChungThuc['ngayThaoTac']>;
   trangThai: FormControl<IDanhSachChungThuc['trangThai']>;
-  idLoaiGiayTo: FormControl<IDanhSachChungThuc['idLoaiGiayTo']>;
   quyenSo: FormControl<IDanhSachChungThuc['quyenSo']>;
   srcChungThuc: FormControl<IDanhSachChungThuc['srcChungThuc']>;
   chuKyNgoaiTruSo: FormControl<IDanhSachChungThuc['chuKyNgoaiTruSo']>;
@@ -33,33 +31,32 @@ type DanhSachChungThucFormGroupContent = {
   strSearch: FormControl<IDanhSachChungThuc['strSearch']>;
   soTienThu: FormControl<IDanhSachChungThuc['soTienThu']>;
   ldPheDuyet: FormControl<IDanhSachChungThuc['ldPheDuyet']>;
+  danhMucLoaiGiayToChungThuc: FormControl<IDanhSachChungThuc['danhMucLoaiGiayToChungThuc']>;
 };
 
 export type DanhSachChungThucFormGroup = FormGroup<DanhSachChungThucFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DanhSachChungThucFormService {
-  createDanhSachChungThucFormGroup(danhSachChungThuc: DanhSachChungThucFormGroupInput = { id: null }): DanhSachChungThucFormGroup {
+  createDanhSachChungThucFormGroup(danhSachChungThuc: DanhSachChungThucFormGroupInput = { idChungThuc: null }): DanhSachChungThucFormGroup {
     const danhSachChungThucRawValue = {
       ...this.getFormDefaults(),
       ...danhSachChungThuc,
     };
     return new FormGroup<DanhSachChungThucFormGroupContent>({
-      id: new FormControl(
-        { value: danhSachChungThucRawValue.id, disabled: true },
+      idChungThuc: new FormControl(
+        { value: danhSachChungThucRawValue.idChungThuc, disabled: danhSachChungThucRawValue.idChungThuc !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idChungThuc: new FormControl(danhSachChungThucRawValue.idChungThuc),
       idDonVi: new FormControl(danhSachChungThucRawValue.idDonVi),
       nguoiChungThuc: new FormControl(danhSachChungThucRawValue.nguoiChungThuc),
       nguoiThaoTac: new FormControl(danhSachChungThucRawValue.nguoiThaoTac),
       ngayChungThuc: new FormControl(danhSachChungThucRawValue.ngayChungThuc),
       ngayThaoTac: new FormControl(danhSachChungThucRawValue.ngayThaoTac),
       trangThai: new FormControl(danhSachChungThucRawValue.trangThai),
-      idLoaiGiayTo: new FormControl(danhSachChungThucRawValue.idLoaiGiayTo),
       quyenSo: new FormControl(danhSachChungThucRawValue.quyenSo),
       srcChungThuc: new FormControl(danhSachChungThucRawValue.srcChungThuc),
       chuKyNgoaiTruSo: new FormControl(danhSachChungThucRawValue.chuKyNgoaiTruSo),
@@ -67,6 +64,7 @@ export class DanhSachChungThucFormService {
       strSearch: new FormControl(danhSachChungThucRawValue.strSearch),
       soTienThu: new FormControl(danhSachChungThucRawValue.soTienThu),
       ldPheDuyet: new FormControl(danhSachChungThucRawValue.ldPheDuyet),
+      danhMucLoaiGiayToChungThuc: new FormControl(danhSachChungThucRawValue.danhMucLoaiGiayToChungThuc),
     });
   }
 
@@ -79,14 +77,14 @@ export class DanhSachChungThucFormService {
     form.reset(
       {
         ...danhSachChungThucRawValue,
-        id: { value: danhSachChungThucRawValue.id, disabled: true },
+        idChungThuc: { value: danhSachChungThucRawValue.idChungThuc, disabled: danhSachChungThucRawValue.idChungThuc !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DanhSachChungThucFormDefaults {
     return {
-      id: null,
+      idChungThuc: null,
     };
   }
 }

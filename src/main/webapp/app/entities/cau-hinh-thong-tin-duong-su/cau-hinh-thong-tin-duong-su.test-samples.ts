@@ -1,22 +1,23 @@
 import { ICauHinhThongTinDuongSu, NewCauHinhThongTinDuongSu } from './cau-hinh-thong-tin-duong-su.model';
 
 export const sampleWithRequiredData: ICauHinhThongTinDuongSu = {
-  idCauHinh: 711,
+  idCauHinh: 3935,
 };
 
 export const sampleWithPartialData: ICauHinhThongTinDuongSu = {
-  idCauHinh: 15250,
-  javascript: 'across mmm',
-  idDonVi: 15395,
+  idCauHinh: 11902,
+  javascript: 'silently till',
+  idLoaiDs: 21646,
+  idDonVi: 9847,
 };
 
 export const sampleWithFullData: ICauHinhThongTinDuongSu = {
-  idCauHinh: 25125,
-  noiDung: 'cereal',
-  javascript: 'beyond along transport',
-  css: 'however thoroughly',
-  idLoaiDs: 4125,
-  idDonVi: 7116,
+  idCauHinh: 15329,
+  noiDung: 'towards',
+  javascript: 'forthright',
+  css: 'readmit',
+  idLoaiDs: 12451,
+  idDonVi: 5692,
   trangThai: 0,
 };
 

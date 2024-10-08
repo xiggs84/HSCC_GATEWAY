@@ -14,7 +14,7 @@ export interface IDuongSuTrungCmndBak {
   idDonVi?: number | null;
   strSearch?: string | null;
   soGiayTo?: string | null;
-  duongSu?: IDuongSu | null;
+  duongSu?: Pick<IDuongSu, 'idDuongSu'> | null;
 }
 
 export type NewDuongSuTrungCmndBak = Omit<IDuongSuTrungCmndBak, 'id'> & { id: null };

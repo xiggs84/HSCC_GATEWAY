@@ -3,21 +3,20 @@ import dayjs from 'dayjs/esm';
 import { ISoCongChungTemp, NewSoCongChungTemp } from './so-cong-chung-temp.model';
 
 export const sampleWithRequiredData: ISoCongChungTemp = {
-  id: 575,
+  id: 27216,
 };
 
 export const sampleWithPartialData: ISoCongChungTemp = {
-  id: 23541,
-  idHopDong: 7105,
-  soCc: 'drat',
-  ngayThaoTac: dayjs('2024-08-19'),
+  id: 6687,
+  idHopDong: 22853,
+  soCc: 'strictly ah',
 };
 
 export const sampleWithFullData: ISoCongChungTemp = {
-  id: 26999,
-  idHopDong: 29888,
-  idMaster: 3273,
-  soCc: 'up poison across',
+  id: 4676,
+  idHopDong: 28150,
+  idMaster: 15141,
+  soCc: 'indeed clavier vent',
   ngayThaoTac: dayjs('2024-08-20'),
 };
 

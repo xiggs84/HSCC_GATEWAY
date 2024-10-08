@@ -47,6 +47,14 @@
               </div>
             }
           </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDuongSu.taiSan">Tai San</span></dt>
+          <dd>
+            @if (taiSanDuongSu()!.taiSan) {
+              <div>
+                <a [routerLink]="['/tai-san', taiSanDuongSu()!.taiSan?.idTaiSan, 'view']">{{ taiSanDuongSuRef.taiSan?.idTaiSan }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

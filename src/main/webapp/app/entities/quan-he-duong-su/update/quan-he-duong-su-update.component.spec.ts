@@ -49,10 +49,10 @@ describe('QuanHeDuongSu Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call DuongSu query and add missing value', () => {
       const quanHeDuongSu: IQuanHeDuongSu = { idQuanHe: 456 };
-      const duongSu: IDuongSu = { idDuongSu: 26611 };
+      const duongSu: IDuongSu = { idDuongSu: 16937 };
       quanHeDuongSu.duongSu = duongSu;
 
-      const duongSuCollection: IDuongSu[] = [{ idDuongSu: 1991 }];
+      const duongSuCollection: IDuongSu[] = [{ idDuongSu: 4338 }];
       jest.spyOn(duongSuService, 'query').mockReturnValue(of(new HttpResponse({ body: duongSuCollection })));
       const additionalDuongSus = [duongSu];
       const expectedCollection: IDuongSu[] = [...additionalDuongSus, ...duongSuCollection];
@@ -71,7 +71,7 @@ describe('QuanHeDuongSu Management Update Component', () => {
 
     it('Should update editForm', () => {
       const quanHeDuongSu: IQuanHeDuongSu = { idQuanHe: 456 };
-      const duongSu: IDuongSu = { idDuongSu: 2705 };
+      const duongSu: IDuongSu = { idDuongSu: 12881 };
       quanHeDuongSu.duongSu = duongSu;
 
       activatedRoute.data = of({ quanHeDuongSu });

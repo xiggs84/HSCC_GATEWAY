@@ -22,8 +22,8 @@ export interface IDuongSu {
   ghiChu?: string | null;
   idLoaiNganChan?: number | null;
   syncStatus?: number | null;
-  loaiDuongSu?: ILoaiDuongSu | null;
-  loaiGiayTo?: ILoaiGiayTo | null;
+  loaiDuongSu?: Pick<ILoaiDuongSu, 'idLoaiDuongSu'> | null;
+  loaiGiayTo?: Pick<ILoaiGiayTo, 'idLoaiGiayTo'> | null;
 }
 
 export type NewDuongSu = Omit<IDuongSu, 'idDuongSu'> & { idDuongSu: null };

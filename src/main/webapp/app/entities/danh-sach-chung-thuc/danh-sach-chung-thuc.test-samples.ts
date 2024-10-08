@@ -3,39 +3,39 @@ import dayjs from 'dayjs/esm';
 import { IDanhSachChungThuc, NewDanhSachChungThuc } from './danh-sach-chung-thuc.model';
 
 export const sampleWithRequiredData: IDanhSachChungThuc = {
-  id: 32220,
+  idChungThuc: 'b70a171a-785d-4bd1-b8b3-8f11be2c0dd4',
 };
 
 export const sampleWithPartialData: IDanhSachChungThuc = {
-  id: 6349,
-  idChungThuc: 8664,
-  nguoiThaoTac: 23849,
+  idChungThuc: 'f029bc32-d723-4f72-aeb7-9fab289524fb',
+  nguoiChungThuc: 10434,
+  ngayChungThuc: dayjs('2024-08-19'),
   ngayThaoTac: dayjs('2024-08-19'),
-  quyenSo: 27822,
-  chuKyNgoaiTruSo: 15968,
+  trangThai: 8503,
+  chuKyNgoaiTruSo: 24471,
+  ngayText: 'decode',
+  soTienThu: 314,
 };
 
 export const sampleWithFullData: IDanhSachChungThuc = {
-  id: 6883,
-  idChungThuc: 17066,
-  idDonVi: 15437,
-  nguoiChungThuc: 11973,
-  nguoiThaoTac: 12321,
-  ngayChungThuc: dayjs('2024-08-19'),
+  idChungThuc: '443182ec-94ee-4e31-aa90-302e01fc79df',
+  idDonVi: 28093,
+  nguoiChungThuc: 28064,
+  nguoiThaoTac: 23298,
+  ngayChungThuc: dayjs('2024-08-20'),
   ngayThaoTac: dayjs('2024-08-19'),
-  trangThai: 19827,
-  idLoaiGiayTo: 10557,
-  quyenSo: 31680,
-  srcChungThuc: 'joshingly',
-  chuKyNgoaiTruSo: 21855,
-  ngayText: 'quarter',
-  strSearch: 'gadzooks front',
-  soTienThu: 3479,
-  ldPheDuyet: 29962,
+  trangThai: 32421,
+  quyenSo: 25700,
+  srcChungThuc: 'lest mysterious out',
+  chuKyNgoaiTruSo: 19925,
+  ngayText: 'aside',
+  strSearch: 'inside',
+  soTienThu: 8607,
+  ldPheDuyet: 5669,
 };
 
 export const sampleWithNewData: NewDanhSachChungThuc = {
-  id: null,
+  idChungThuc: null,
 };
 
 Object.freeze(sampleWithNewData);

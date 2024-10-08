@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPhanLoaiHopDong, NewPhanLoaiHopDong } from '../phan-loai-hop-dong.model';
 
-export type PartialUpdatePhanLoaiHopDong = Partial<IPhanLoaiHopDong> & Pick<IPhanLoaiHopDong, 'id'>;
+export type PartialUpdatePhanLoaiHopDong = Partial<IPhanLoaiHopDong> & Pick<IPhanLoaiHopDong, 'idPhanLoaiHopDong'>;
 
 export type EntityResponseType = HttpResponse<IPhanLoaiHopDong>;
 export type EntityArrayResponseType = HttpResponse<IPhanLoaiHopDong[]>;
@@ -35,7 +35,7 @@ export class PhanLoaiHopDongService {
     });
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http.get<IPhanLoaiHopDong>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -44,19 +44,22 @@ export class PhanLoaiHopDongService {
     return this.http.get<IPhanLoaiHopDong[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getPhanLoaiHopDongIdentifier(phanLoaiHopDong: Pick<IPhanLoaiHopDong, 'id'>): number {
-    return phanLoaiHopDong.id;
+  getPhanLoaiHopDongIdentifier(phanLoaiHopDong: Pick<IPhanLoaiHopDong, 'idPhanLoaiHopDong'>): string {
+    return phanLoaiHopDong.idPhanLoaiHopDong;
   }
 
-  comparePhanLoaiHopDong(o1: Pick<IPhanLoaiHopDong, 'id'> | null, o2: Pick<IPhanLoaiHopDong, 'id'> | null): boolean {
+  comparePhanLoaiHopDong(
+    o1: Pick<IPhanLoaiHopDong, 'idPhanLoaiHopDong'> | null,
+    o2: Pick<IPhanLoaiHopDong, 'idPhanLoaiHopDong'> | null,
+  ): boolean {
     return o1 && o2 ? this.getPhanLoaiHopDongIdentifier(o1) === this.getPhanLoaiHopDongIdentifier(o2) : o1 === o2;
   }
 
-  addPhanLoaiHopDongToCollectionIfMissing<Type extends Pick<IPhanLoaiHopDong, 'id'>>(
+  addPhanLoaiHopDongToCollectionIfMissing<Type extends Pick<IPhanLoaiHopDong, 'idPhanLoaiHopDong'>>(
     phanLoaiHopDongCollection: Type[],
     ...phanLoaiHopDongsToCheck: (Type | null | undefined)[]
   ): Type[] {

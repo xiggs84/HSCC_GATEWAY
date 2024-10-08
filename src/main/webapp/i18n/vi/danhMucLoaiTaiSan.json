@@ -17,11 +17,14 @@
       "detail": {
         "title": "Danh Muc Loai Tai San"
       },
-      "id": "ID",
       "idLoaiTs": "Id Loai Ts",
       "dienGiai": "Dien Giai",
       "trangThai": "Trang Thai",
-      "searchStr": "Search Str"
+      "loaiTaiSan": "Loai Tai San",
+      "danhSachTaiSan": "Danh Sach Tai San",
+      "taiSanDgc": "Tai San Dgc",
+      "taiSanDatNha": "Tai San Dat Nha",
+      "thongTinCapNhatTaiSan": "Thong Tin Cap Nhat Tai San"
     }
   }
 }

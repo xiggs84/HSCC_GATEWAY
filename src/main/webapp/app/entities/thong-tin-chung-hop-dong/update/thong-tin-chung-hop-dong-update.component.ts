@@ -1,15 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IThongTinChungHopDong } from '../thong-tin-chung-hop-dong.model';
+import { IDanhMucLoaiHopDong } from 'app/entities/danh-muc-loai-hop-dong/danh-muc-loai-hop-dong.model';
+import { DanhMucLoaiHopDongService } from 'app/entities/danh-muc-loai-hop-dong/service/danh-muc-loai-hop-dong.service';
+import { ISoCongChung } from 'app/entities/so-cong-chung/so-cong-chung.model';
+import { SoCongChungService } from 'app/entities/so-cong-chung/service/so-cong-chung.service';
 import { ThongTinChungHopDongService } from '../service/thong-tin-chung-hop-dong.service';
-import { ThongTinChungHopDongFormService, ThongTinChungHopDongFormGroup } from './thong-tin-chung-hop-dong-form.service';
+import { IThongTinChungHopDong } from '../thong-tin-chung-hop-dong.model';
+import { ThongTinChungHopDongFormGroup, ThongTinChungHopDongFormService } from './thong-tin-chung-hop-dong-form.service';
 
 @Component({
   standalone: true,
@@ -21,12 +25,22 @@ export class ThongTinChungHopDongUpdateComponent implements OnInit {
   isSaving = false;
   thongTinChungHopDong: IThongTinChungHopDong | null = null;
 
+  danhMucLoaiHopDongsSharedCollection: IDanhMucLoaiHopDong[] = [];
+  soCongChungsSharedCollection: ISoCongChung[] = [];
+
   protected thongTinChungHopDongService = inject(ThongTinChungHopDongService);
   protected thongTinChungHopDongFormService = inject(ThongTinChungHopDongFormService);
+  protected danhMucLoaiHopDongService = inject(DanhMucLoaiHopDongService);
+  protected soCongChungService = inject(SoCongChungService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ThongTinChungHopDongFormGroup = this.thongTinChungHopDongFormService.createThongTinChungHopDongFormGroup();
+
+  compareDanhMucLoaiHopDong = (o1: IDanhMucLoaiHopDong | null, o2: IDanhMucLoaiHopDong | null): boolean =>
+    this.danhMucLoaiHopDongService.compareDanhMucLoaiHopDong(o1, o2);
+
+  compareSoCongChung = (o1: ISoCongChung | null, o2: ISoCongChung | null): boolean => this.soCongChungService.compareSoCongChung(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ thongTinChungHopDong }) => {
@@ -34,6 +48,8 @@ export class ThongTinChungHopDongUpdateComponent implements OnInit {
       if (thongTinChungHopDong) {
         this.updateForm(thongTinChungHopDong);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -73,5 +89,40 @@ export class ThongTinChungHopDongUpdateComponent implements OnInit {
   protected updateForm(thongTinChungHopDong: IThongTinChungHopDong): void {
     this.thongTinChungHopDong = thongTinChungHopDong;
     this.thongTinChungHopDongFormService.resetForm(this.editForm, thongTinChungHopDong);
+
+    this.danhMucLoaiHopDongsSharedCollection =
+      this.danhMucLoaiHopDongService.addDanhMucLoaiHopDongToCollectionIfMissing<IDanhMucLoaiHopDong>(
+        this.danhMucLoaiHopDongsSharedCollection,
+        thongTinChungHopDong.danhMucLoaiHopDong,
+      );
+    this.soCongChungsSharedCollection = this.soCongChungService.addSoCongChungToCollectionIfMissing<ISoCongChung>(
+      this.soCongChungsSharedCollection,
+      thongTinChungHopDong.soCongChung,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.danhMucLoaiHopDongService
+      .query()
+      .pipe(map((res: HttpResponse<IDanhMucLoaiHopDong[]>) => res.body ?? []))
+      .pipe(
+        map((danhMucLoaiHopDongs: IDanhMucLoaiHopDong[]) =>
+          this.danhMucLoaiHopDongService.addDanhMucLoaiHopDongToCollectionIfMissing<IDanhMucLoaiHopDong>(
+            danhMucLoaiHopDongs,
+            this.thongTinChungHopDong?.danhMucLoaiHopDong,
+          ),
+        ),
+      )
+      .subscribe((danhMucLoaiHopDongs: IDanhMucLoaiHopDong[]) => (this.danhMucLoaiHopDongsSharedCollection = danhMucLoaiHopDongs));
+
+    this.soCongChungService
+      .query()
+      .pipe(map((res: HttpResponse<ISoCongChung[]>) => res.body ?? []))
+      .pipe(
+        map((soCongChungs: ISoCongChung[]) =>
+          this.soCongChungService.addSoCongChungToCollectionIfMissing<ISoCongChung>(soCongChungs, this.thongTinChungHopDong?.soCongChung),
+        ),
+      )
+      .subscribe((soCongChungs: ISoCongChung[]) => (this.soCongChungsSharedCollection = soCongChungs));
   }
 }

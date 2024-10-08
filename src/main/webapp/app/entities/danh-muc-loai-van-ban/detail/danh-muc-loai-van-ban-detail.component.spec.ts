@@ -17,8 +17,8 @@ describe('DanhMucLoaiVanBan Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DanhMucLoaiVanBanDetailComponent,
-              resolve: { danhMucLoaiVanBan: () => of({ id: 123 }) },
+              loadComponent: () => import('./danh-muc-loai-van-ban-detail.component').then(m => m.DanhMucLoaiVanBanDetailComponent),
+              resolve: { danhMucLoaiVanBan: () => of({ idLoaiVb: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DanhMucLoaiVanBan Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DanhMucLoaiVanBanDetailComponent);
 
       // THEN
-      expect(instance.danhMucLoaiVanBan()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.danhMucLoaiVanBan()).toEqual(expect.objectContaining({ idLoaiVb: 'ABC' }));
     });
   });
 

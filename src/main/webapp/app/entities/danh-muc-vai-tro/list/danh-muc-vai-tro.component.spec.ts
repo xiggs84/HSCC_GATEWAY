@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { sampleWithRequiredData } from '../danh-muc-vai-tro.test-samples';
@@ -25,13 +25,14 @@ describe('DanhMucVaiTro Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'idVaiTro,asc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idVaiTro,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             ),
             snapshot: {
@@ -39,7 +40,8 @@ describe('DanhMucVaiTro Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idVaiTro,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             },
           },
@@ -59,7 +61,7 @@ describe('DanhMucVaiTro Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ idVaiTro: 'ABC' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +71,7 @@ describe('DanhMucVaiTro Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ idVaiTro: 'CBA' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -84,16 +86,16 @@ describe('DanhMucVaiTro Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.danhMucVaiTros?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.danhMucVaiTros?.[0]).toEqual(expect.objectContaining({ idVaiTro: 'ABC' }));
   });
 
-  describe('trackId', () => {
+  describe('trackIdVaiTro', () => {
     it('Should forward to danhMucVaiTroService', () => {
-      const entity = { id: 123 };
+      const entity = { idVaiTro: 'ABC' };
       jest.spyOn(service, 'getDanhMucVaiTroIdentifier');
-      const id = comp.trackId(0, entity);
+      const idVaiTro = comp.trackIdVaiTro(0, entity);
       expect(service.getDanhMucVaiTroIdentifier).toHaveBeenCalledWith(entity);
-      expect(id).toBe(entity.id);
+      expect(idVaiTro).toBe(entity.idVaiTro);
     });
   });
 
@@ -112,12 +114,28 @@ describe('DanhMucVaiTro Management Component', () => {
     );
   });
 
+  it('should load a page', () => {
+    // WHEN
+    comp.navigateToPage(1);
+
+    // THEN
+    expect(routerNavigateSpy).toHaveBeenCalled();
+  });
+
   it('should calculate the sort attribute for an id', () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['idVaiTro,desc'] }));
+  });
+
+  it('should calculate the filter attribute', () => {
+    // WHEN
+    comp.ngOnInit();
+
+    // THEN
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ 'someId.in': ['dc4279ea-cfb9-11ec-9d64-0242ac120002'] }));
   });
 
   describe('delete', () => {

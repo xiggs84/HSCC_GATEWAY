@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../hop-dong-cong-chung.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../hop-dong-cong-chung.test-samples';
 
 import { HopDongCongChungFormService } from './hop-dong-cong-chung-form.service';
 
@@ -19,7 +19,6 @@ describe('HopDongCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idHopDong: expect.any(Object),
             ngayLapHd: expect.any(Object),
             nguoiLapHd: expect.any(Object),
@@ -27,7 +26,6 @@ describe('HopDongCongChung Form Service', () => {
             thongTinTaiSan: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -37,8 +35,6 @@ describe('HopDongCongChung Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -64,6 +60,8 @@ describe('HopDongCongChung Form Service', () => {
             srcKySoPdfSigned: expect.any(Object),
             syncStatus: expect.any(Object),
             ngayRutTrichText: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });
@@ -73,7 +71,6 @@ describe('HopDongCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idHopDong: expect.any(Object),
             ngayLapHd: expect.any(Object),
             nguoiLapHd: expect.any(Object),
@@ -81,7 +78,6 @@ describe('HopDongCongChung Form Service', () => {
             thongTinTaiSan: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -91,8 +87,6 @@ describe('HopDongCongChung Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -118,6 +112,8 @@ describe('HopDongCongChung Form Service', () => {
             srcKySoPdfSigned: expect.any(Object),
             syncStatus: expect.any(Object),
             ngayRutTrichText: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });
@@ -146,26 +142,6 @@ describe('HopDongCongChung Form Service', () => {
         const hopDongCongChung = service.getHopDongCongChung(formGroup) as any;
 
         expect(hopDongCongChung).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IHopDongCongChung should not enable id FormControl', () => {
-        const formGroup = service.createHopDongCongChungFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewHopDongCongChung should disable id FormControl', () => {
-        const formGroup = service.createHopDongCongChungFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

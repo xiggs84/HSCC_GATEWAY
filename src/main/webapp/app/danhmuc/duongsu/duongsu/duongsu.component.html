@@ -29,25 +29,27 @@
       <i nz-icon nzType="qrcode" nzTheme="outline"></i>
       <span>Quét CCCD</span>
     </button>
-    <button nz-button nzType="primary" (click)="duongSuForm.showModal()">
+    <button nz-button nzType="primary" (click)="addNewItem()">
       <i nz-icon nzType="plus" nzTheme="outline"></i>
       <span>Thêm mới</span>
     </button>
   </nz-col>
 </nz-row>
-<jhi-duongsu-form #duongSuForm></jhi-duongsu-form>
+<jhi-duongsu-form [isEditing]="isEditing" (dataUpdated)="onFormDataUpdated()" #duongSuForm></jhi-duongsu-form>
 
 <nz-table [nzData]="listOfData"
           [nzPageSize]="pageSize"
           [nzPageIndex]="pageIndex"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger
           (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
           (nzPageIndexChange)="onPageIndexChange($event)"
-          (nzPageSizeChange)="onPageSizeChange($event)"
-          class="custom-table"
-          nzShowPagination nzShowSizeChanger>
+          (nzPageSizeChange)="onPageSizeChange($event)">
   <thead>
   <tr>
-    <th nzWidth="50px">Stt</th>
+    <th nzWidth="50px">#</th>
     <th>Mã đương sự</th>
     <th>Tên đương sự</th>
     <th>Loại đương sự</th>
@@ -58,18 +60,20 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of listOfCurrentPageData; let i = index">
+  <tr *ngFor="let item of listOfData; let i = index">
     <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
     <td>{{ item.soGiayTo ?? 'N/A' }}</td>
     <td>{{ item.tenDuongSu ?? 'N/A' }}</td>
-    <td>{{ item.loaiDuongSu?.tenLoaiDuongSu ?? 'N/A' }}</td>
+    <td>{{ getTenLoaiDuongSu(item.loaiDuongSu?.idLoaiDuongSu ?? null) }}</td>
     <td>{{ extractTinhTrangDuongSu(item.thongTinDs ?? null)}}</td>
     <td>{{ item.diaChi ?? 'N/A' }}</td>
     <td>{{ item.idDonVi ?? 'N/A' }}</td>
     <td>
       <div class="action-icons">
         <ng-container *ngFor="let action of dsActions">
-          <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip" (click)="onActionClick(action.type, item)"></i>
+          <ng-container *ngIf="(action.type !== 'spouseinformation' && action.type !== 'addspouseinformation') || (item.loaiDuongSu?.idLoaiDuongSu === 'ca_nhan') || parseThongTinDs(item.thongTinDs || '').tinhTrangHonNhan === 'Chưa kết hôn'">
+            <i nz-icon [nzType]="action.icon" nzTheme="outline" nz-tooltip [nzTooltipTitle]="action.tooltip" (click)="onActionClick(action.type, item)"></i>
+          </ng-container>
         </ng-container>
       </div>
     </td>
@@ -89,10 +93,13 @@
   (nzOnCancel)="handleCancelModal()">
 ></jhi-lichsugiaodichduongsu>
 <jhi-tinhtrangnganchan
+  [data] = "containmentStatusData"
+  [duongSu] = "selectedItem"
   [isVisible]="isContainmentStatusModalVisible"
   (nzOnCancel)="handleCancelModal()">
   </jhi-tinhtrangnganchan>
 <jhi-themthongtinnganchan
+  [data] = "addContainmentStatusData"
   [isVisible]="isAddContainmentStatusModalVisible"
   (nzOnCancel)="handleCancelModal()">
 </jhi-themthongtinnganchan>
@@ -101,6 +108,7 @@
   (nzOnCancel)="handleCancelModal()">
 ></jhi-thongtinvochong>
 <jhi-themthongtinvochong
+  [data] = "addSpouseInformationData"
   [isVisible]="isAddSpouseInformationModalVisible"
   (nzOnCancel)="handleCancelModal()">
 ></jhi-themthongtinvochong>

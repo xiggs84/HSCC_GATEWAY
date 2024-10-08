@@ -17,18 +17,14 @@
       "detail": {
         "title": "Danh Sach Hop Dong"
       },
-      "id": "ID",
       "idHopDong": "Id Hop Dong",
       "ngayLapHd": "Ngay Lap Hd",
       "nguoiLapHd": "Nguoi Lap Hd",
       "trangThai": "Trang Thai",
-      "idLoaiHd": "Id Loai Hd",
       "idDonVi": "Id Don Vi",
       "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "srcHopDong": "Src Hop Dong",
-      "idSoCongChung": "Id So Cong Chung",
-      "soCongChung": "So Cong Chung",
       "congChungVien": "Cong Chung Vien",
       "soTienRutTrich": "So Tien Rut Trich",
       "hdThuCong": "Hd Thu Cong",
@@ -44,7 +40,10 @@
       "quyenLaiTl": "Quyen Lai Tl",
       "soLaiTl": "So Lai Tl",
       "srcKySoPdf": "Src Ky So Pdf",
-      "srcKySoPdfSigned": "Src Ky So Pdf Signed"
+      "srcKySoPdfSigned": "Src Ky So Pdf Signed",
+      "danhMucLoaiVanBan": "Danh Muc Loai Van Ban",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
+      "soCongChung": "So Cong Chung"
     }
   }
 }

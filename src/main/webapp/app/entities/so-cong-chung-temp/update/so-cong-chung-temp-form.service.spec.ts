@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../so-cong-chung-temp.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../so-cong-chung-temp.test-samples';
 
 import { SoCongChungTempFormService } from './so-cong-chung-temp-form.service';
 

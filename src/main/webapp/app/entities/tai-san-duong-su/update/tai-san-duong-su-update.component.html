@@ -114,6 +114,23 @@
             }
           </select>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_taiSan" jhiTranslate="gatewayApp.taiSanDuongSu.taiSan">Tai San</label>
+          <select
+            class="form-control"
+            id="field_taiSan"
+            data-cy="taiSan"
+            name="taiSan"
+            formControlName="taiSan"
+            [compareWith]="compareTaiSan"
+          >
+            <option [ngValue]="null"></option>
+            @for (taiSanOption of taiSansSharedCollection; track $index) {
+              <option [ngValue]="taiSanOption">{{ taiSanOption.idTaiSan }}</option>
+            }
+          </select>
+        </div>
       </div>
 
       <div>

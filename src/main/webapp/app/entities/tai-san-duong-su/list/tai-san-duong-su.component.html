@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (taiSanDuongSus?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.taiSanDuongSu.home.notFound">No Tai San Duong Sus found</span>
@@ -90,6 +92,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="taiSan.idTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSanDuongSu.taiSan">Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -109,6 +117,13 @@
                 @if (taiSanDuongSu.duongSu) {
                   <div>
                     <a [routerLink]="['/duong-su', taiSanDuongSu.duongSu.idDuongSu, 'view']">{{ taiSanDuongSu.duongSu.idDuongSu }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (taiSanDuongSu.taiSan) {
+                  <div>
+                    <a [routerLink]="['/tai-san', taiSanDuongSu.taiSan.idTaiSan, 'view']">{{ taiSanDuongSu.taiSan.idTaiSan }}</a>
                   </div>
                 }
               </td>
@@ -142,6 +157,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (taiSanDuongSus && taiSanDuongSus.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

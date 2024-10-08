@@ -1,18 +1,18 @@
 import { ITinhTrangTaiSan, NewTinhTrangTaiSan } from './tinh-trang-tai-san.model';
 
 export const sampleWithRequiredData: ITinhTrangTaiSan = {
-  idTinhTrang: 4960,
+  idTinhTrang: 26329,
 };
 
 export const sampleWithPartialData: ITinhTrangTaiSan = {
-  idTinhTrang: 3874,
-  trangThai: 26286,
+  idTinhTrang: 23843,
+  trangThai: 2169,
 };
 
 export const sampleWithFullData: ITinhTrangTaiSan = {
-  idTinhTrang: 17397,
-  dienGiai: 'confide along',
-  trangThai: 22779,
+  idTinhTrang: 29692,
+  dienGiai: 'courageously overtake e-reader',
+  trangThai: 12351,
 };
 
 export const sampleWithNewData: NewTinhTrangTaiSan = {

@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { CauHinhMauHopDongComponent } from './list/cau-hinh-mau-hop-dong.component';
-import { CauHinhMauHopDongDetailComponent } from './detail/cau-hinh-mau-hop-dong-detail.component';
-import { CauHinhMauHopDongUpdateComponent } from './update/cau-hinh-mau-hop-dong-update.component';
 import CauHinhMauHopDongResolve from './route/cau-hinh-mau-hop-dong-routing-resolve.service';
 
 const cauHinhMauHopDongRoute: Routes = [
   {
     path: '',
-    component: CauHinhMauHopDongComponent,
+    loadComponent: () => import('./list/cau-hinh-mau-hop-dong.component').then(m => m.CauHinhMauHopDongComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: CauHinhMauHopDongDetailComponent,
+    loadComponent: () => import('./detail/cau-hinh-mau-hop-dong-detail.component').then(m => m.CauHinhMauHopDongDetailComponent),
     resolve: {
       cauHinhMauHopDong: CauHinhMauHopDongResolve,
     },
@@ -26,7 +23,7 @@ const cauHinhMauHopDongRoute: Routes = [
   },
   {
     path: 'new',
-    component: CauHinhMauHopDongUpdateComponent,
+    loadComponent: () => import('./update/cau-hinh-mau-hop-dong-update.component').then(m => m.CauHinhMauHopDongUpdateComponent),
     resolve: {
       cauHinhMauHopDong: CauHinhMauHopDongResolve,
     },
@@ -34,7 +31,7 @@ const cauHinhMauHopDongRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: CauHinhMauHopDongUpdateComponent,
+    loadComponent: () => import('./update/cau-hinh-mau-hop-dong-update.component').then(m => m.CauHinhMauHopDongUpdateComponent),
     resolve: {
       cauHinhMauHopDong: CauHinhMauHopDongResolve,
     },

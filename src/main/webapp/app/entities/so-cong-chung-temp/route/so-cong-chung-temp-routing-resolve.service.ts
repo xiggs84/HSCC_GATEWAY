@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ISoCongChungTemp } from '../so-cong-chung-temp.model';
 import { SoCongChungTempService } from '../service/so-cong-chung-temp.service';
 
 const soCongChungTempResolve = (route: ActivatedRouteSnapshot): Observable<null | ISoCongChungTemp> => {
-  const id = route.params['id'];
+  const id = route.params.id;
   if (id) {
     return inject(SoCongChungTempService)
       .find(id)
@@ -16,10 +16,9 @@ const soCongChungTempResolve = (route: ActivatedRouteSnapshot): Observable<null 
         mergeMap((soCongChungTemp: HttpResponse<ISoCongChungTemp>) => {
           if (soCongChungTemp.body) {
             return of(soCongChungTemp.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

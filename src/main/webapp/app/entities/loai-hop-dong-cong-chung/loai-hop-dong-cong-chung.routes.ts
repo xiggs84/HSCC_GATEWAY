@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { LoaiHopDongCongChungComponent } from './list/loai-hop-dong-cong-chung.component';
-import { LoaiHopDongCongChungDetailComponent } from './detail/loai-hop-dong-cong-chung-detail.component';
-import { LoaiHopDongCongChungUpdateComponent } from './update/loai-hop-dong-cong-chung-update.component';
 import LoaiHopDongCongChungResolve from './route/loai-hop-dong-cong-chung-routing-resolve.service';
 
 const loaiHopDongCongChungRoute: Routes = [
   {
     path: '',
-    component: LoaiHopDongCongChungComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/loai-hop-dong-cong-chung.component').then(m => m.LoaiHopDongCongChungComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: LoaiHopDongCongChungDetailComponent,
+    path: ':idLoaiHopDongCongChung/view',
+    loadComponent: () => import('./detail/loai-hop-dong-cong-chung-detail.component').then(m => m.LoaiHopDongCongChungDetailComponent),
     resolve: {
       loaiHopDongCongChung: LoaiHopDongCongChungResolve,
     },
@@ -26,15 +20,15 @@ const loaiHopDongCongChungRoute: Routes = [
   },
   {
     path: 'new',
-    component: LoaiHopDongCongChungUpdateComponent,
+    loadComponent: () => import('./update/loai-hop-dong-cong-chung-update.component').then(m => m.LoaiHopDongCongChungUpdateComponent),
     resolve: {
       loaiHopDongCongChung: LoaiHopDongCongChungResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: LoaiHopDongCongChungUpdateComponent,
+    path: ':idLoaiHopDongCongChung/edit',
+    loadComponent: () => import('./update/loai-hop-dong-cong-chung-update.component').then(m => m.LoaiHopDongCongChungUpdateComponent),
     resolve: {
       loaiHopDongCongChung: LoaiHopDongCongChungResolve,
     },

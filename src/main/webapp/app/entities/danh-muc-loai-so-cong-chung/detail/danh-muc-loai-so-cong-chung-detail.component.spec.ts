@@ -17,8 +17,9 @@ describe('DanhMucLoaiSoCongChung Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DanhMucLoaiSoCongChungDetailComponent,
-              resolve: { danhMucLoaiSoCongChung: () => of({ id: 123 }) },
+              loadComponent: () =>
+                import('./danh-muc-loai-so-cong-chung-detail.component').then(m => m.DanhMucLoaiSoCongChungDetailComponent),
+              resolve: { danhMucLoaiSoCongChung: () => of({ idLoai: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +41,7 @@ describe('DanhMucLoaiSoCongChung Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DanhMucLoaiSoCongChungDetailComponent);
 
       // THEN
-      expect(instance.danhMucLoaiSoCongChung()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.danhMucLoaiSoCongChung()).toEqual(expect.objectContaining({ idLoai: 'ABC' }));
     });
   });
 

@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820095157"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idHopDong",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "ngayLapHd",
@@ -19,10 +23,6 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idLoaiHd",
       "fieldType": "Long"
     },
     {
@@ -39,14 +39,6 @@
     },
     {
       "fieldName": "srcHopDong",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idSoCongChung",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "soCongChung",
       "fieldType": "String"
     },
     {
@@ -114,8 +106,33 @@
       "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhSachHopDong",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiVanBan",
+      "otherEntityRelationshipName": "danhSachHopDong",
+      "relationshipName": "danhMucLoaiVanBan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhMucLoaiHopDong",
+      "otherEntityRelationshipName": "danhSachHopDong",
+      "relationshipName": "danhMucLoaiHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "soCongChung",
+      "otherEntityRelationshipName": "danhSachHopDong",
+      "relationshipName": "soCongChung",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

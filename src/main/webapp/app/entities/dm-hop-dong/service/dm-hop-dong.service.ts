@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDmHopDong, NewDmHopDong } from '../dm-hop-dong.model';
 
-export type PartialUpdateDmHopDong = Partial<IDmHopDong> & Pick<IDmHopDong, 'id'>;
+export type PartialUpdateDmHopDong = Partial<IDmHopDong> & Pick<IDmHopDong, 'idHopDong'>;
 
 type RestOf<T extends IDmHopDong | NewDmHopDong> = Omit<
   T,
@@ -61,7 +61,7 @@ export class DmHopDongService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<RestDmHopDong>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -74,19 +74,19 @@ export class DmHopDongService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDmHopDongIdentifier(dmHopDong: Pick<IDmHopDong, 'id'>): number {
-    return dmHopDong.id;
+  getDmHopDongIdentifier(dmHopDong: Pick<IDmHopDong, 'idHopDong'>): string {
+    return dmHopDong.idHopDong;
   }
 
-  compareDmHopDong(o1: Pick<IDmHopDong, 'id'> | null, o2: Pick<IDmHopDong, 'id'> | null): boolean {
+  compareDmHopDong(o1: Pick<IDmHopDong, 'idHopDong'> | null, o2: Pick<IDmHopDong, 'idHopDong'> | null): boolean {
     return o1 && o2 ? this.getDmHopDongIdentifier(o1) === this.getDmHopDongIdentifier(o2) : o1 === o2;
   }
 
-  addDmHopDongToCollectionIfMissing<Type extends Pick<IDmHopDong, 'id'>>(
+  addDmHopDongToCollectionIfMissing<Type extends Pick<IDmHopDong, 'idHopDong'>>(
     dmHopDongCollection: Type[],
     ...dmHopDongsToCheck: (Type | null | undefined)[]
   ): Type[] {

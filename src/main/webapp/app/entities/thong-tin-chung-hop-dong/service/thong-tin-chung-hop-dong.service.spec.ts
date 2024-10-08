@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IThongTinChungHopDong } from '../thong-tin-chung-hop-dong.model';
 import {
-  sampleWithRequiredData,
+  sampleWithFullData,
   sampleWithNewData,
   sampleWithPartialData,
-  sampleWithFullData,
+  sampleWithRequiredData,
 } from '../thong-tin-chung-hop-dong.test-samples';
 
-import { ThongTinChungHopDongService, RestThongTinChungHopDong } from './thong-tin-chung-hop-dong.service';
+import { RestThongTinChungHopDong, ThongTinChungHopDongService } from './thong-tin-chung-hop-dong.service';
 
 const requireRestSample: RestThongTinChungHopDong = {
   ...sampleWithRequiredData,

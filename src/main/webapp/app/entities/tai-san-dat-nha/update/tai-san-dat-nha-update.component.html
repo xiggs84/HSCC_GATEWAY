@@ -194,6 +194,44 @@
             formControlName="loaiNganChan"
           />
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_danhMucLoaiTaiSan" jhiTranslate="gatewayApp.taiSanDatNha.danhMucLoaiTaiSan"
+            >Danh Muc Loai Tai San</label
+          >
+          <select
+            class="form-control"
+            id="field_danhMucLoaiTaiSan"
+            data-cy="danhMucLoaiTaiSan"
+            name="danhMucLoaiTaiSan"
+            formControlName="danhMucLoaiTaiSan"
+            [compareWith]="compareDanhMucLoaiTaiSan"
+          >
+            <option [ngValue]="null"></option>
+            @for (danhMucLoaiTaiSanOption of danhMucLoaiTaiSansSharedCollection; track $index) {
+              <option [ngValue]="danhMucLoaiTaiSanOption">{{ danhMucLoaiTaiSanOption.idLoaiTs }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tinhTrangTaiSan" jhiTranslate="gatewayApp.taiSanDatNha.tinhTrangTaiSan"
+            >Tinh Trang Tai San</label
+          >
+          <select
+            class="form-control"
+            id="field_tinhTrangTaiSan"
+            data-cy="tinhTrangTaiSan"
+            name="tinhTrangTaiSan"
+            formControlName="tinhTrangTaiSan"
+            [compareWith]="compareTinhTrangTaiSan"
+          >
+            <option [ngValue]="null"></option>
+            @for (tinhTrangTaiSanOption of tinhTrangTaiSansSharedCollection; track $index) {
+              <option [ngValue]="tinhTrangTaiSanOption">{{ tinhTrangTaiSanOption.idTinhTrang }}</option>
+            }
+          </select>
+        </div>
       </div>
 
       <div>

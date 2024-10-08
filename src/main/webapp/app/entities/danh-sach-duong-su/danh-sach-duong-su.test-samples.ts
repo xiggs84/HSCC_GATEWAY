@@ -3,32 +3,30 @@ import dayjs from 'dayjs/esm';
 import { IDanhSachDuongSu, NewDanhSachDuongSu } from './danh-sach-duong-su.model';
 
 export const sampleWithRequiredData: IDanhSachDuongSu = {
-  id: 23191,
+  id: 27013,
 };
 
 export const sampleWithPartialData: IDanhSachDuongSu = {
-  id: 25578,
-  tenDuongSu: 'pace',
-  ngayThaoTac: dayjs('2024-08-19'),
-  nguoiThaoTac: 12548,
-  idDonVi: 22882,
-  soGiayTo: 'where',
-  idLoaiNganChan: 25704,
+  id: 17651,
+  tenDuongSu: 'linear far afore',
+  idDsGoc: 1692,
+  strSearch: 'want',
+  idLoaiNganChan: 3382,
 };
 
 export const sampleWithFullData: IDanhSachDuongSu = {
-  id: 19190,
-  tenDuongSu: 'stupendous privacy sleepy',
-  diaChi: 'homeschool',
-  trangThai: 0,
+  id: 7292,
+  tenDuongSu: 'muzzle quaintly',
+  diaChi: 'when amongst',
+  trangThai: 1,
   ngayThaoTac: dayjs('2024-08-19'),
-  nguoiThaoTac: 16155,
-  idDsGoc: 26527,
-  idMaster: 'off ack',
-  idDonVi: 19014,
-  strSearch: 'although pish',
-  soGiayTo: 'around jodhpurs around',
-  idLoaiNganChan: 28456,
+  nguoiThaoTac: 4165,
+  idDsGoc: 27958,
+  idMaster: 'daunt',
+  idDonVi: 9022,
+  strSearch: 'while',
+  soGiayTo: 'till connote',
+  idLoaiNganChan: 32527,
 };
 
 export const sampleWithNewData: NewDanhSachDuongSu = {

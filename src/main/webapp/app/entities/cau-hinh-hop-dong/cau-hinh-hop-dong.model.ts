@@ -1,6 +1,6 @@
 export interface ICauHinhHopDong {
   id: number;
-  idLoaiHopDong?: number | null;
+  idLoaiHopDong?: string | null;
   idDonVi?: number | null;
   chieuDai?: number | null;
   tienTo?: string | null;

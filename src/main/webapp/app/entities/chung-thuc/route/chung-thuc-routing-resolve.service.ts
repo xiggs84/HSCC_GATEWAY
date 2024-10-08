@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { IChungThuc } from '../chung-thuc.model';
 import { ChungThucService } from '../service/chung-thuc.service';
 
 const chungThucResolve = (route: ActivatedRouteSnapshot): Observable<null | IChungThuc> => {
-  const id = route.params['id'];
+  const id = route.params.idChungThuc;
   if (id) {
     return inject(ChungThucService)
       .find(id)
@@ -16,10 +16,9 @@ const chungThucResolve = (route: ActivatedRouteSnapshot): Observable<null | IChu
         mergeMap((chungThuc: HttpResponse<IChungThuc>) => {
           if (chungThuc.body) {
             return of(chungThuc.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

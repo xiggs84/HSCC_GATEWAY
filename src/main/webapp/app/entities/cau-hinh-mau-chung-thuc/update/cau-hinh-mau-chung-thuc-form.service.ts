@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ICauHinhMauChungThuc, NewCauHinhMauChungThuc } from '../cau-hinh-mau-chung-thuc.model';
 

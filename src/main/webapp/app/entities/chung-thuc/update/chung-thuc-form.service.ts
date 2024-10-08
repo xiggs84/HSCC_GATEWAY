@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IChungThuc, NewChungThuc } from '../chung-thuc.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idChungThuc: unknown }> = Partial<Omit<T, 'idChungThuc'>> & { idChungThuc: T['idChungThuc'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,11 +14,10 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ChungThucFormGroupInput = IChungThuc | PartialWithRequiredKeyOf<NewChungThuc>;
 
-type ChungThucFormDefaults = Pick<NewChungThuc, 'id'>;
+type ChungThucFormDefaults = Pick<NewChungThuc, 'idChungThuc'>;
 
 type ChungThucFormGroupContent = {
-  id: FormControl<IChungThuc['id'] | NewChungThuc['id']>;
-  idChungThuc: FormControl<IChungThuc['idChungThuc']>;
+  idChungThuc: FormControl<IChungThuc['idChungThuc'] | NewChungThuc['idChungThuc']>;
   idDonVi: FormControl<IChungThuc['idDonVi']>;
   nguoiYeuCau: FormControl<IChungThuc['nguoiYeuCau']>;
   nguoiChungThuc: FormControl<IChungThuc['nguoiChungThuc']>;
@@ -29,7 +28,6 @@ type ChungThucFormGroupContent = {
   soBanSao: FormControl<IChungThuc['soBanSao']>;
   vanBan: FormControl<IChungThuc['vanBan']>;
   trangThai: FormControl<IChungThuc['trangThai']>;
-  idLoaiGiayTo: FormControl<IChungThuc['idLoaiGiayTo']>;
   quyenSo: FormControl<IChungThuc['quyenSo']>;
   duongSu: FormControl<IChungThuc['duongSu']>;
   taiSan: FormControl<IChungThuc['taiSan']>;
@@ -42,26 +40,26 @@ type ChungThucFormGroupContent = {
   chucDanhCanBo: FormControl<IChungThuc['chucDanhCanBo']>;
   ldPheDuyet: FormControl<IChungThuc['ldPheDuyet']>;
   chucDanhLd: FormControl<IChungThuc['chucDanhLd']>;
+  danhMucLoaiGiayToChungThuc: FormControl<IChungThuc['danhMucLoaiGiayToChungThuc']>;
 };
 
 export type ChungThucFormGroup = FormGroup<ChungThucFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ChungThucFormService {
-  createChungThucFormGroup(chungThuc: ChungThucFormGroupInput = { id: null }): ChungThucFormGroup {
+  createChungThucFormGroup(chungThuc: ChungThucFormGroupInput = { idChungThuc: null }): ChungThucFormGroup {
     const chungThucRawValue = {
       ...this.getFormDefaults(),
       ...chungThuc,
     };
     return new FormGroup<ChungThucFormGroupContent>({
-      id: new FormControl(
-        { value: chungThucRawValue.id, disabled: true },
+      idChungThuc: new FormControl(
+        { value: chungThucRawValue.idChungThuc, disabled: chungThucRawValue.idChungThuc !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idChungThuc: new FormControl(chungThucRawValue.idChungThuc),
       idDonVi: new FormControl(chungThucRawValue.idDonVi),
       nguoiYeuCau: new FormControl(chungThucRawValue.nguoiYeuCau),
       nguoiChungThuc: new FormControl(chungThucRawValue.nguoiChungThuc),
@@ -72,7 +70,6 @@ export class ChungThucFormService {
       soBanSao: new FormControl(chungThucRawValue.soBanSao),
       vanBan: new FormControl(chungThucRawValue.vanBan),
       trangThai: new FormControl(chungThucRawValue.trangThai),
-      idLoaiGiayTo: new FormControl(chungThucRawValue.idLoaiGiayTo),
       quyenSo: new FormControl(chungThucRawValue.quyenSo),
       duongSu: new FormControl(chungThucRawValue.duongSu),
       taiSan: new FormControl(chungThucRawValue.taiSan),
@@ -85,6 +82,7 @@ export class ChungThucFormService {
       chucDanhCanBo: new FormControl(chungThucRawValue.chucDanhCanBo),
       ldPheDuyet: new FormControl(chungThucRawValue.ldPheDuyet),
       chucDanhLd: new FormControl(chungThucRawValue.chucDanhLd),
+      danhMucLoaiGiayToChungThuc: new FormControl(chungThucRawValue.danhMucLoaiGiayToChungThuc),
     });
   }
 
@@ -97,14 +95,14 @@ export class ChungThucFormService {
     form.reset(
       {
         ...chungThucRawValue,
-        id: { value: chungThucRawValue.id, disabled: true },
+        idChungThuc: { value: chungThucRawValue.idChungThuc, disabled: chungThucRawValue.idChungThuc !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): ChungThucFormDefaults {
     return {
-      id: null,
+      idChungThuc: null,
     };
   }
 }

@@ -17,10 +17,9 @@
       "detail": {
         "title": "Danh Muc Loai Van Ban"
       },
-      "id": "ID",
       "idLoaiVb": "Id Loai Vb",
       "dienGiai": "Dien Giai",
-      "idLoaiHopDong": "Id Loai Hop Dong"
+      "danhSachHopDong": "Danh Sach Hop Dong"
     }
   }
 }

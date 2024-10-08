@@ -17,9 +17,10 @@
       "detail": {
         "title": "Danh Muc Nhom Hop Dong"
       },
-      "id": "ID",
       "idNhom": "Id Nhom",
-      "dienGiai": "Dien Giai"
+      "dienGiai": "Dien Giai",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
+      "dmLoaiHd": "Dm Loai Hd"
     }
   }
 }

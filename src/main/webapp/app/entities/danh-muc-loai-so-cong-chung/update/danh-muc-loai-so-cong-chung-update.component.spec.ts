@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
 import { DanhMucLoaiSoCongChungService } from '../service/danh-muc-loai-so-cong-chung.service';
 import { IDanhMucLoaiSoCongChung } from '../danh-muc-loai-so-cong-chung.model';
@@ -44,7 +44,7 @@ describe('DanhMucLoaiSoCongChung Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const danhMucLoaiSoCongChung: IDanhMucLoaiSoCongChung = { id: 456 };
+      const danhMucLoaiSoCongChung: IDanhMucLoaiSoCongChung = { idLoai: 'CBA' };
 
       activatedRoute.data = of({ danhMucLoaiSoCongChung });
       comp.ngOnInit();
@@ -57,7 +57,7 @@ describe('DanhMucLoaiSoCongChung Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucLoaiSoCongChung>>();
-      const danhMucLoaiSoCongChung = { id: 123 };
+      const danhMucLoaiSoCongChung = { idLoai: 'ABC' };
       jest.spyOn(danhMucLoaiSoCongChungFormService, 'getDanhMucLoaiSoCongChung').mockReturnValue(danhMucLoaiSoCongChung);
       jest.spyOn(danhMucLoaiSoCongChungService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -80,8 +80,8 @@ describe('DanhMucLoaiSoCongChung Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucLoaiSoCongChung>>();
-      const danhMucLoaiSoCongChung = { id: 123 };
-      jest.spyOn(danhMucLoaiSoCongChungFormService, 'getDanhMucLoaiSoCongChung').mockReturnValue({ id: null });
+      const danhMucLoaiSoCongChung = { idLoai: 'ABC' };
+      jest.spyOn(danhMucLoaiSoCongChungFormService, 'getDanhMucLoaiSoCongChung').mockReturnValue({ idLoai: null });
       jest.spyOn(danhMucLoaiSoCongChungService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ danhMucLoaiSoCongChung: null });
@@ -103,7 +103,7 @@ describe('DanhMucLoaiSoCongChung Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucLoaiSoCongChung>>();
-      const danhMucLoaiSoCongChung = { id: 123 };
+      const danhMucLoaiSoCongChung = { idLoai: 'ABC' };
       jest.spyOn(danhMucLoaiSoCongChungService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ danhMucLoaiSoCongChung });

@@ -17,7 +17,6 @@
       "detail": {
         "title": "Danh Sach Chung Thuc"
       },
-      "id": "ID",
       "idChungThuc": "Id Chung Thuc",
       "idDonVi": "Id Don Vi",
       "nguoiChungThuc": "Nguoi Chung Thuc",
@@ -25,14 +24,14 @@
       "ngayChungThuc": "Ngay Chung Thuc",
       "ngayThaoTac": "Ngay Thao Tac",
       "trangThai": "Trang Thai",
-      "idLoaiGiayTo": "Id Loai Giay To",
       "quyenSo": "Quyen So",
       "srcChungThuc": "Src Chung Thuc",
       "chuKyNgoaiTruSo": "Chu Ky Ngoai Tru So",
       "ngayText": "Ngay Text",
       "strSearch": "Str Search",
       "soTienThu": "So Tien Thu",
-      "ldPheDuyet": "Ld Phe Duyet"
+      "ldPheDuyet": "Ld Phe Duyet",
+      "danhMucLoaiGiayToChungThuc": "Danh Muc Loai Giay To Chung Thuc"
     }
   }
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { IDanhMucLoaiGiayToChungThuc } from '../danh-muc-loai-giay-to-chung-thuc.model';
 import {
-  sampleWithRequiredData,
+  sampleWithFullData,
   sampleWithNewData,
   sampleWithPartialData,
-  sampleWithFullData,
+  sampleWithRequiredData,
 } from '../danh-muc-loai-giay-to-chung-thuc.test-samples';
 
 import { DanhMucLoaiGiayToChungThucService } from './danh-muc-loai-giay-to-chung-thuc.service';
@@ -35,7 +35,7 @@ describe('DanhMucLoaiGiayToChungThuc Service', () => {
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -94,7 +94,7 @@ describe('DanhMucLoaiGiayToChungThuc Service', () => {
     it('should delete a DanhMucLoaiGiayToChungThuc', () => {
       const expected = true;
 
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -187,7 +187,7 @@ describe('DanhMucLoaiGiayToChungThuc Service', () => {
       });
 
       it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+        const entity1 = { idLoaiGiayTo: 'ABC' };
         const entity2 = null;
 
         const compareResult1 = service.compareDanhMucLoaiGiayToChungThuc(entity1, entity2);
@@ -198,8 +198,8 @@ describe('DanhMucLoaiGiayToChungThuc Service', () => {
       });
 
       it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity1 = { idLoaiGiayTo: 'ABC' };
+        const entity2 = { idLoaiGiayTo: 'CBA' };
 
         const compareResult1 = service.compareDanhMucLoaiGiayToChungThuc(entity1, entity2);
         const compareResult2 = service.compareDanhMucLoaiGiayToChungThuc(entity2, entity1);
@@ -209,8 +209,8 @@ describe('DanhMucLoaiGiayToChungThuc Service', () => {
       });
 
       it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+        const entity1 = { idLoaiGiayTo: 'ABC' };
+        const entity2 = { idLoaiGiayTo: 'ABC' };
 
         const compareResult1 = service.compareDanhMucLoaiGiayToChungThuc(entity1, entity2);
         const compareResult2 = service.compareDanhMucLoaiGiayToChungThuc(entity2, entity1);

@@ -17,8 +17,8 @@ describe('DanhSachHopDong Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DanhSachHopDongDetailComponent,
-              resolve: { danhSachHopDong: () => of({ id: 123 }) },
+              loadComponent: () => import('./danh-sach-hop-dong-detail.component').then(m => m.DanhSachHopDongDetailComponent),
+              resolve: { danhSachHopDong: () => of({ idHopDong: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DanhSachHopDong Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DanhSachHopDongDetailComponent);
 
       // THEN
-      expect(instance.danhSachHopDong()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.danhSachHopDong()).toEqual(expect.objectContaining({ idHopDong: 'ABC' }));
     });
   });
 

@@ -17,7 +17,6 @@
       "detail": {
         "title": "Hop Dong Cong Chung"
       },
-      "id": "ID",
       "idHopDong": "Id Hop Dong",
       "ngayLapHd": "Ngay Lap Hd",
       "nguoiLapHd": "Nguoi Lap Hd",
@@ -25,7 +24,6 @@
       "thongTinTaiSan": "Thong Tin Tai San",
       "thongTinVanBan": "Thong Tin Van Ban",
       "trangThai": "Trang Thai",
-      "idLoaiHd": "Id Loai Hd",
       "dieuKhoanHd": "Dieu Khoan Hd",
       "idDonVi": "Id Don Vi",
       "ngayThaoTac": "Ngay Thao Tac",
@@ -35,8 +33,6 @@
       "maHopDong": "Ma Hop Dong",
       "srcHopDong": "Src Hop Dong",
       "ngayHen": "Ngay Hen",
-      "idSoCongChung": "Id So Cong Chung",
-      "soCongChung": "So Cong Chung",
       "congChungVien": "Cong Chung Vien",
       "ngayKyHd": "Ngay Ky Hd",
       "nguoiRutTrich": "Nguoi Rut Trich",
@@ -61,7 +57,9 @@
       "srcKySoPdf": "Src Ky So Pdf",
       "srcKySoPdfSigned": "Src Ky So Pdf Signed",
       "syncStatus": "Sync Status",
-      "ngayRutTrichText": "Ngay Rut Trich Text"
+      "ngayRutTrichText": "Ngay Rut Trich Text",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
+      "soCongChung": "So Cong Chung"
     }
   }
 }

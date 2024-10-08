@@ -1,19 +1,18 @@
 import { IQuanHeDuongSu, NewQuanHeDuongSu } from './quan-he-duong-su.model';
 
 export const sampleWithRequiredData: IQuanHeDuongSu = {
-  idQuanHe: 25416,
+  idQuanHe: 17213,
 };
 
 export const sampleWithPartialData: IQuanHeDuongSu = {
-  idQuanHe: 23740,
-  idDuongSuQh: 1012,
-  trangThai: 1,
+  idQuanHe: 17448,
+  idDuongSuQh: 24065,
 };
 
 export const sampleWithFullData: IQuanHeDuongSu = {
-  idQuanHe: 2712,
-  idDuongSuQh: 24688,
-  thongTinQuanHe: 'properly pish',
+  idQuanHe: 18316,
+  idDuongSuQh: 16861,
+  thongTinQuanHe: 'yum impassioned',
   trangThai: 1,
 };
 

@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820100957"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idTaiSan",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "tenTaiSan",
@@ -19,11 +23,8 @@
     },
     {
       "fieldName": "thongTinTs",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idLoaiTs",
-      "fieldType": "Long"
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "ghiChu",
@@ -48,10 +49,6 @@
     {
       "fieldName": "maTaiSan",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idTinhTrang",
-      "fieldType": "Long"
     },
     {
       "fieldName": "idLoaiNganChan",
@@ -102,8 +99,40 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "TaiSan",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "thuaTach",
+      "otherEntityRelationshipName": "taiSan",
+      "relationshipName": "thuaTach",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taiSanDuongSu",
+      "otherEntityRelationshipName": "taiSan",
+      "relationshipName": "taiSanDuongSu",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taiSanDgc",
+      "otherEntityRelationshipName": "taiSan",
+      "relationshipName": "taiSanDgc",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "thongTinCapNhatTaiSan",
+      "otherEntityRelationshipName": "taiSan",
+      "relationshipName": "thongTinCapNhatTaiSan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

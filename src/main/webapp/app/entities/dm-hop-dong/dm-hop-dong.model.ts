@@ -1,15 +1,15 @@
 import dayjs from 'dayjs/esm';
+import { IDanhMucLoaiHopDong } from 'app/entities/danh-muc-loai-hop-dong/danh-muc-loai-hop-dong.model';
+import { ISoCongChung } from 'app/entities/so-cong-chung/so-cong-chung.model';
 
 export interface IDmHopDong {
-  id: number;
-  idHopDong?: number | null;
+  idHopDong: string;
   ngayLapHd?: dayjs.Dayjs | null;
   nguoiLapHd?: number | null;
   thongTinDuongSu?: string | null;
   thongTinTaiSan?: string | null;
   thongTinVanBan?: string | null;
   trangThai?: number | null;
-  idLoaiHd?: number | null;
   dieuKhoanHd?: string | null;
   idDonVi?: number | null;
   ngayThaoTac?: dayjs.Dayjs | null;
@@ -19,8 +19,6 @@ export interface IDmHopDong {
   maHopDong?: string | null;
   srcHopDong?: string | null;
   ngayHen?: dayjs.Dayjs | null;
-  idSoCongChung?: number | null;
-  soCongChung?: string | null;
   congChungVien?: number | null;
   ngayKyHd?: dayjs.Dayjs | null;
   nguoiRutTrich?: number | null;
@@ -38,6 +36,8 @@ export interface IDmHopDong {
   ngayNum?: number | null;
   ngayThaoTacRutTrich?: dayjs.Dayjs | null;
   thuLaoCongChung?: number | null;
+  danhMucLoaiHopDong?: Pick<IDanhMucLoaiHopDong, 'idLoaiHd'> | null;
+  soCongChung?: Pick<ISoCongChung, 'idSo'> | null;
 }
 
-export type NewDmHopDong = Omit<IDmHopDong, 'id'> & { id: null };
+export type NewDmHopDong = Omit<IDmHopDong, 'idHopDong'> & { idHopDong: null };

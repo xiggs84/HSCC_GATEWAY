@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ICauHinhMauChungThuc } from '../cau-hinh-mau-chung-thuc.model';
 import {
-  sampleWithRequiredData,
+  sampleWithFullData,
   sampleWithNewData,
   sampleWithPartialData,
-  sampleWithFullData,
+  sampleWithRequiredData,
 } from '../cau-hinh-mau-chung-thuc.test-samples';
 
 import { CauHinhMauChungThucService, RestCauHinhMauChungThuc } from './cau-hinh-mau-chung-thuc.service';

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IPhanLoaiHopDong } from '../phan-loai-hop-dong.model';
 import { PhanLoaiHopDongService } from '../service/phan-loai-hop-dong.service';
-import { PhanLoaiHopDongFormService, PhanLoaiHopDongFormGroup } from './phan-loai-hop-dong-form.service';
+import { PhanLoaiHopDongFormGroup, PhanLoaiHopDongFormService } from './phan-loai-hop-dong-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class PhanLoaiHopDongUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const phanLoaiHopDong = this.phanLoaiHopDongFormService.getPhanLoaiHopDong(this.editForm);
-    if (phanLoaiHopDong.id !== null) {
+    if (phanLoaiHopDong.idPhanLoaiHopDong !== null) {
       this.subscribeToSaveResponse(this.phanLoaiHopDongService.update(phanLoaiHopDong));
     } else {
       this.subscribeToSaveResponse(this.phanLoaiHopDongService.create(phanLoaiHopDong));

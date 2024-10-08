@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import SharedModule from "../../shared/shared.module";
+import {DuongSuService} from "../../entities/duong-su/service/duong-su.service";
+import {QuanHeDuongSuService} from "../../entities/quan-he-duong-su/service/quan-he-duong-su.service";
+import {IDuongSu} from "../../entities/duong-su/duong-su.model";
 @Component({
   selector: 'jhi-themthongtinvochong',
   standalone: true,
@@ -12,23 +15,30 @@ export class ThemthongtinvochongComponent {
   @Input() isVisibleDetail!: boolean;
   @Output() nzOnCancel = new EventEmitter<void>();
   @Output() nzOnCancelDetail = new EventEmitter<void>();
+  @Input() data!: { idDuongSu: number; thongTinDs: string | null | undefined };
 
-  listOfData = [
-    // Mẫu dữ liệu, bạn có thể thay đổi theo dữ liệu thực tế
-    { name: 'Nguyễn Văn A', cmnd: '123456789', address: 'Hà Nội', gender: 'Nam', maritalStatus: 'Độc thân' },
-    // Thêm dữ liệu khác
-  ];
+  listOfData: IDuongSu[] = [];
+  searchValue: string = '';
 
-  handleSearch(): void {
-    // Xử lý logic tìm kiếm
+  constructor(private duongSuService: DuongSuService,
+              private quanHeDuongSuService: QuanHeDuongSuService) {
   }
 
-  handleSelect(data: any): void {
+  handleSearch(): void {
+    const parsedInfo = this.parseThongTinDs(this.data.thongTinDs || '');
+    this.duongSuService.searchDuongSus(this.searchValue, parsedInfo.gioiTinh).subscribe(response => {
+      this.listOfData = response.body || [];
+    });
+  }
+
+  handleSelect(data: IDuongSu): void {
     this.isVisibleDetail = true; // Mở modal chi tiết
   }
 
   handleCancel(): void {
     this.isVisible = false;
+    this.searchValue = '';
+    this.listOfData = [];
     this.nzOnCancel.emit();
   }
 
@@ -37,8 +47,17 @@ export class ThemthongtinvochongComponent {
     this.nzOnCancelDetail.emit();
   }
 
-  handleSave(): void {
-    // Xử lý logic lưu thông tin giấy chứng nhận kết hôn
-    this.handleCancelDetail();
+  parseThongTinDs(thongTinDs: string) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(thongTinDs, 'text/html');
+
+    const getValue = (label: string) => {
+      const element = Array.from(doc.querySelectorAll('b')).find(b => b.textContent?.includes(label));
+      return element ? element.nextSibling?.textContent?.trim() || '' : '';
+    };
+    return {
+      gioiTinh: getValue('Giới tính:'),
+      tinhTrangHonNhan: getValue('Tình trạng hôn nhân:')
+    };
   }
 }

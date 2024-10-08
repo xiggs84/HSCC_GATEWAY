@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../cau-hinh-hop-dong.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../cau-hinh-hop-dong.test-samples';
 
 import { CauHinhHopDongFormService } from './cau-hinh-hop-dong-form.service';
 

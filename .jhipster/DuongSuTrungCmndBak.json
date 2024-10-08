@@ -2,20 +2,13 @@
   "annotations": {
     "changelogDate": "20240820093557"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
-    {
-      "fieldName": "idDuongSu",
-      "fieldType": "Long"
-    },
     {
       "fieldName": "tenDuongSu",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idLoaiDs",
-      "fieldType": "Long"
     },
     {
       "fieldName": "diaChi",
@@ -23,7 +16,10 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     },
     {
       "fieldName": "thongTinDs",
@@ -39,10 +35,6 @@
     },
     {
       "fieldName": "idDsGoc",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idTinhTrang",
       "fieldType": "Long"
     },
     {
@@ -62,8 +54,19 @@
       "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DuongSuTrungCmndBak",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "duongSu",
+      "otherEntityRelationshipName": "duongSuTrungCmndBak",
+      "relationshipName": "duongSu",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

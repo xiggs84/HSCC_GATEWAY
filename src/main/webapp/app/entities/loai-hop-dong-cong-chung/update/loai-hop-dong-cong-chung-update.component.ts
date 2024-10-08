@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ILoaiHopDongCongChung } from '../loai-hop-dong-cong-chung.model';
 import { LoaiHopDongCongChungService } from '../service/loai-hop-dong-cong-chung.service';
-import { LoaiHopDongCongChungFormService, LoaiHopDongCongChungFormGroup } from './loai-hop-dong-cong-chung-form.service';
+import { LoaiHopDongCongChungFormGroup, LoaiHopDongCongChungFormService } from './loai-hop-dong-cong-chung-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class LoaiHopDongCongChungUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const loaiHopDongCongChung = this.loaiHopDongCongChungFormService.getLoaiHopDongCongChung(this.editForm);
-    if (loaiHopDongCongChung.id !== null) {
+    if (loaiHopDongCongChung.idLoaiHopDongCongChung !== null) {
       this.subscribeToSaveResponse(this.loaiHopDongCongChungService.update(loaiHopDongCongChung));
     } else {
       this.subscribeToSaveResponse(this.loaiHopDongCongChungService.create(loaiHopDongCongChung));

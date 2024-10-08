@@ -17,10 +17,10 @@
       "detail": {
         "title": "Danh Muc Loai So Cong Chung"
       },
-      "id": "ID",
       "idLoai": "Id Loai",
       "tenLoai": "Ten Loai",
-      "trangThai": "Trang Thai"
+      "trangThai": "Trang Thai",
+      "soCongChung": "So Cong Chung"
     }
   }
 }

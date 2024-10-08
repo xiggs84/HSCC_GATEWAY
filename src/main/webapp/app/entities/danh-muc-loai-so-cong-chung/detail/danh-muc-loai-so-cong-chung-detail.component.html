@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhMucLoaiSoCongChung()) {
+    @if (danhMucLoaiSoCongChung(); as danhMucLoaiSoCongChungRef) {
       <div>
         <h2 data-cy="danhMucLoaiSoCongChungDetailsHeading">
           <span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.detail.title">Danh Muc Loai So Cong Chung</span>
@@ -13,21 +13,17 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhMucLoaiSoCongChung()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.idLoai">Id Loai</span></dt>
           <dd>
-            <span>{{ danhMucLoaiSoCongChung()!.idLoai }}</span>
+            <span>{{ danhMucLoaiSoCongChungRef.idLoai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.tenLoai">Ten Loai</span></dt>
           <dd>
-            <span>{{ danhMucLoaiSoCongChung()!.tenLoai }}</span>
+            <span>{{ danhMucLoaiSoCongChungRef.tenLoai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ danhMucLoaiSoCongChung()!.trangThai }}</span>
+            <span>{{ danhMucLoaiSoCongChungRef.trangThai }}</span>
           </dd>
         </dl>
 
@@ -35,7 +31,11 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung()!.id, 'edit']" class="btn btn-primary">
+        <button
+          type="button"
+          [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChungRef.idLoai, 'edit']"
+          class="btn btn-primary"
+        >
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

@@ -2,28 +2,39 @@
   "annotations": {
     "changelogDate": "20240820095457"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idVaiTro",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
       "fieldType": "String"
     },
     {
-      "fieldName": "idLoaiHopDong",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "idLoaiVaiTro",
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucVaiTro",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiHopDong",
+      "otherEntityRelationshipName": "danhMucVaiTro",
+      "relationshipName": "danhMucLoaiHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

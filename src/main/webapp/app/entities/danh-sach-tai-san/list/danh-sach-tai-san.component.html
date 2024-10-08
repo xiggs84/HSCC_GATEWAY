@@ -182,6 +182,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="danhMucLoaiTaiSan.idLoaiTs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhSachTaiSan.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -211,6 +217,15 @@
               <td>{{ danhSachTaiSan.moTa }}</td>
               <td>{{ danhSachTaiSan.loaiNganChan }}</td>
               <td>{{ danhSachTaiSan.maXa }}</td>
+              <td>
+                @if (danhSachTaiSan.danhMucLoaiTaiSan) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-tai-san', danhSachTaiSan.danhMucLoaiTaiSan.idLoaiTs, 'view']">{{
+                      danhSachTaiSan.danhMucLoaiTaiSan.idLoaiTs
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a

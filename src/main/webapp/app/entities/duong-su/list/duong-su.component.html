@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (duongSus?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.duongSu.home.notFound">No Duong Sus found</span>
@@ -225,6 +227,96 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/thong-tin-cap-nhat-duong-su']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.thongTinCapNhat' | translate) }"
+                      >Show Thong Tin Cap Nhat</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/tai-san-duong-su']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.taiSanDuongSu' | translate) }"
+                      >Show Tai San Duong Su</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/quan-he-duong-su']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.quanHeDuongSu' | translate) }"
+                      >Show Quan He Duong Su</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/danh-sach-duong-su']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.danhSachDuongSu' | translate) }"
+                      >Show Danh Sach Duong Su</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/duong-su-trung-cmnd']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.duongSuTrungCmnd' | translate) }"
+                      >Show Duong Su Trung Cmnd</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/duong-su-trung-cmnd-bak']"
+                    [queryParams]="{ 'filter[duongSuId.in]': duongSu.idDuongSu }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.duongSu.duongSuTrungCmndBak' | translate) }"
+                      >Show Duong Su Trung Cmnd Bak</span
+                    >
+                  </button>
                   <a [routerLink]="['/duong-su', duongSu.idDuongSu, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
@@ -245,6 +337,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (duongSus && duongSus.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

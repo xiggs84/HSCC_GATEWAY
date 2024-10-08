@@ -3,34 +3,34 @@ import dayjs from 'dayjs/esm';
 import { IDmDuongSu, NewDmDuongSu } from './dm-duong-su.model';
 
 export const sampleWithRequiredData: IDmDuongSu = {
-  idDuongSu: 6951,
+  idDuongSu: 17546,
 };
 
 export const sampleWithPartialData: IDmDuongSu = {
-  idDuongSu: 1655,
-  tenDuongSu: 'below familiar',
-  diaChi: 'versus workplace since',
-  thongTinDs: 'kaleidoscopic',
-  ngayThaoTac: dayjs('2024-08-19'),
-  idDsGoc: 20666,
-  strSearch: 'pain',
-  soGiayTo: 'ah distance when',
+  idDuongSu: 29824,
+  tenDuongSu: 'neatly beside injustice',
+  diaChi: 'grateful',
+  trangThai: 0,
+  thongTinDs: 'whirlwind finally upside-down',
+  nguoiThaoTac: 27055,
+  idDsGoc: 27903,
+  strSearch: 'yippee',
 };
 
 export const sampleWithFullData: IDmDuongSu = {
-  idDuongSu: 4362,
-  tenDuongSu: 'following',
-  diaChi: 'atop',
+  idDuongSu: 1637,
+  tenDuongSu: 'qua turbulent',
+  diaChi: 'tick gosh',
   trangThai: 0,
-  thongTinDs: 'pfft besides',
+  thongTinDs: 'barring unto psst',
   ngayThaoTac: dayjs('2024-08-19'),
-  nguoiThaoTac: 23873,
-  idDsGoc: 15375,
-  idMaster: 'plain narrow',
-  idDonVi: 32438,
-  strSearch: 'consequently',
-  soGiayTo: 'squash slip',
-  idLoaiNganChan: 26149,
+  nguoiThaoTac: 15479,
+  idDsGoc: 7204,
+  idMaster: 'rotten',
+  idDonVi: 17102,
+  strSearch: 'lest',
+  soGiayTo: 'boo yowza',
+  idLoaiNganChan: 15447,
 };
 
 export const sampleWithNewData: NewDmDuongSu = {

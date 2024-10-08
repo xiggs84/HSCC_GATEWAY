@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDanhMucLoaiSoCongChung, NewDanhMucLoaiSoCongChung } from '../danh-muc-loai-so-cong-chung.model';
 
-export type PartialUpdateDanhMucLoaiSoCongChung = Partial<IDanhMucLoaiSoCongChung> & Pick<IDanhMucLoaiSoCongChung, 'id'>;
+export type PartialUpdateDanhMucLoaiSoCongChung = Partial<IDanhMucLoaiSoCongChung> & Pick<IDanhMucLoaiSoCongChung, 'idLoai'>;
 
 export type EntityResponseType = HttpResponse<IDanhMucLoaiSoCongChung>;
 export type EntityArrayResponseType = HttpResponse<IDanhMucLoaiSoCongChung[]>;
@@ -39,7 +39,7 @@ export class DanhMucLoaiSoCongChungService {
     );
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http.get<IDanhMucLoaiSoCongChung>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -48,19 +48,22 @@ export class DanhMucLoaiSoCongChungService {
     return this.http.get<IDanhMucLoaiSoCongChung[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDanhMucLoaiSoCongChungIdentifier(danhMucLoaiSoCongChung: Pick<IDanhMucLoaiSoCongChung, 'id'>): number {
-    return danhMucLoaiSoCongChung.id;
+  getDanhMucLoaiSoCongChungIdentifier(danhMucLoaiSoCongChung: Pick<IDanhMucLoaiSoCongChung, 'idLoai'>): string {
+    return danhMucLoaiSoCongChung.idLoai;
   }
 
-  compareDanhMucLoaiSoCongChung(o1: Pick<IDanhMucLoaiSoCongChung, 'id'> | null, o2: Pick<IDanhMucLoaiSoCongChung, 'id'> | null): boolean {
+  compareDanhMucLoaiSoCongChung(
+    o1: Pick<IDanhMucLoaiSoCongChung, 'idLoai'> | null,
+    o2: Pick<IDanhMucLoaiSoCongChung, 'idLoai'> | null,
+  ): boolean {
     return o1 && o2 ? this.getDanhMucLoaiSoCongChungIdentifier(o1) === this.getDanhMucLoaiSoCongChungIdentifier(o2) : o1 === o2;
   }
 
-  addDanhMucLoaiSoCongChungToCollectionIfMissing<Type extends Pick<IDanhMucLoaiSoCongChung, 'id'>>(
+  addDanhMucLoaiSoCongChungToCollectionIfMissing<Type extends Pick<IDanhMucLoaiSoCongChung, 'idLoai'>>(
     danhMucLoaiSoCongChungCollection: Type[],
     ...danhMucLoaiSoCongChungsToCheck: (Type | null | undefined)[]
   ): Type[] {

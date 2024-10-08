@@ -1,8 +1,8 @@
 import dayjs from 'dayjs/esm';
+import { IDanhMucNhomHopDong } from 'app/entities/danh-muc-nhom-hop-dong/danh-muc-nhom-hop-dong.model';
 
 export interface IDmLoaiHd {
-  id: number;
-  idLoaiHd?: number | null;
+  idLoaiHd: string;
   dienGiai?: string | null;
   idVaiTro1?: number | null;
   idVaiTro2?: number | null;
@@ -14,7 +14,6 @@ export interface IDmLoaiHd {
   ngayThaoTac?: dayjs.Dayjs | null;
   nguoiThaoTac?: number | null;
   srcLoiChung?: string | null;
-  idNhom?: number | null;
   fileLoiChung?: string | null;
   chuyenTaiSan?: number | null;
   loaiSuaDoi?: number | null;
@@ -27,6 +26,7 @@ export interface IDmLoaiHd {
   dgTen?: string | null;
   nhomTen?: number | null;
   idVaiTro3?: number | null;
+  danhMucNhomHopDong?: Pick<IDanhMucNhomHopDong, 'idNhom'> | null;
 }
 
-export type NewDmLoaiHd = Omit<IDmLoaiHd, 'id'> & { id: null };
+export type NewDmLoaiHd = Omit<IDmLoaiHd, 'idLoaiHd'> & { idLoaiHd: null };

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { sampleWithRequiredData } from '../phan-loai-hop-dong.test-samples';
@@ -25,13 +25,14 @@ describe('PhanLoaiHopDong Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'idPhanLoaiHopDong,asc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idPhanLoaiHopDong,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             ),
             snapshot: {
@@ -39,7 +40,8 @@ describe('PhanLoaiHopDong Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'idPhanLoaiHopDong,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             },
           },
@@ -59,7 +61,7 @@ describe('PhanLoaiHopDong Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ idPhanLoaiHopDong: 'ABC' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +71,7 @@ describe('PhanLoaiHopDong Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ idPhanLoaiHopDong: 'CBA' }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -84,16 +86,16 @@ describe('PhanLoaiHopDong Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.phanLoaiHopDongs?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.phanLoaiHopDongs?.[0]).toEqual(expect.objectContaining({ idPhanLoaiHopDong: 'ABC' }));
   });
 
-  describe('trackId', () => {
+  describe('trackIdPhanLoaiHopDong', () => {
     it('Should forward to phanLoaiHopDongService', () => {
-      const entity = { id: 123 };
+      const entity = { idPhanLoaiHopDong: 'ABC' };
       jest.spyOn(service, 'getPhanLoaiHopDongIdentifier');
-      const id = comp.trackId(0, entity);
+      const idPhanLoaiHopDong = comp.trackIdPhanLoaiHopDong(0, entity);
       expect(service.getPhanLoaiHopDongIdentifier).toHaveBeenCalledWith(entity);
-      expect(id).toBe(entity.id);
+      expect(idPhanLoaiHopDong).toBe(entity.idPhanLoaiHopDong);
     });
   });
 
@@ -112,12 +114,28 @@ describe('PhanLoaiHopDong Management Component', () => {
     );
   });
 
+  it('should load a page', () => {
+    // WHEN
+    comp.navigateToPage(1);
+
+    // THEN
+    expect(routerNavigateSpy).toHaveBeenCalled();
+  });
+
   it('should calculate the sort attribute for an id', () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['idPhanLoaiHopDong,desc'] }));
+  });
+
+  it('should calculate the filter attribute', () => {
+    // WHEN
+    comp.ngOnInit();
+
+    // THEN
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ 'someId.in': ['dc4279ea-cfb9-11ec-9d64-0242ac120002'] }));
   });
 
   describe('delete', () => {

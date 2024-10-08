@@ -3,35 +3,36 @@ import dayjs from 'dayjs/esm';
 import { IDuongSuTrungCmnd, NewDuongSuTrungCmnd } from './duong-su-trung-cmnd.model';
 
 export const sampleWithRequiredData: IDuongSuTrungCmnd = {
-  id: 4564,
+  id: 8616,
 };
 
 export const sampleWithPartialData: IDuongSuTrungCmnd = {
-  id: 23277,
-  tenDuongSu: 'vice',
-  thongTinDs: 'behest malinger finally',
-  nguoiThaoTac: 23740,
-  strSearch: 'inside',
-  idDuongSuMin: 32652,
+  id: 26899,
+  diaChi: 'gadzooks given',
+  trangThai: 1,
+  thongTinDs: 'kludge sugary sparerib',
+  idDuongSuMin: 17275,
+  idDuongSuMax: 11411,
+  idMasterMax: 10953,
 };
 
 export const sampleWithFullData: IDuongSuTrungCmnd = {
-  id: 18548,
-  tenDuongSu: 'the vaguely drat',
-  diaChi: 'party',
-  trangThai: 0,
-  thongTinDs: 'mill tightly upward',
-  ngayThaoTac: dayjs('2024-08-20'),
-  nguoiThaoTac: 24007,
-  idDsGoc: 18654,
-  idMaster: 'besides',
-  idDonVi: 23229,
-  strSearch: 'which',
-  soGiayTo: 'ridge viciously sweaty',
-  idDuongSuMin: 22034,
-  idMasterMin: 8977,
-  idDuongSuMax: 9211,
-  idMasterMax: 11979,
+  id: 18332,
+  tenDuongSu: 'over matter',
+  diaChi: 'plumb',
+  trangThai: 1,
+  thongTinDs: 'flustered',
+  ngayThaoTac: dayjs('2024-08-19'),
+  nguoiThaoTac: 18632,
+  idDsGoc: 6619,
+  idMaster: 'woeful plus off',
+  idDonVi: 13387,
+  strSearch: 'mmm immobilize',
+  soGiayTo: 'what assessment',
+  idDuongSuMin: 13533,
+  idMasterMin: 6015,
+  idDuongSuMax: 32434,
+  idMasterMax: 7951,
 };
 
 export const sampleWithNewData: NewDuongSuTrungCmnd = {

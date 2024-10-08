@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (hopDongCongChungs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.hopDongCongChung.home.notFound">No Hop Dong Cong Chungs found</span>
@@ -35,13 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idHopDong">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.hopDongCongChung.idHopDong">Id Hop Dong</span>
@@ -87,13 +82,6 @@
             <th scope="col" jhiSortBy="trangThai">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.hopDongCongChung.trangThai">Trang Thai</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idLoaiHd">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.hopDongCongChung.idLoaiHd">Id Loai Hd</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -157,20 +145,6 @@
             <th scope="col" jhiSortBy="ngayHen">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.hopDongCongChung.ngayHen">Ngay Hen</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="idSoCongChung">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.hopDongCongChung.idSoCongChung">Id So Cong Chung</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="soCongChung">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.hopDongCongChung.soCongChung">So Cong Chung</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -350,23 +324,33 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="danhMucLoaiHopDong.idLoaiHd">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.hopDongCongChung.danhMucLoaiHopDong">Danh Muc Loai Hop Dong</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soCongChung.idSo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.hopDongCongChung.soCongChung">So Cong Chung</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (hopDongCongChung of hopDongCongChungs; track trackId) {
+          @for (hopDongCongChung of hopDongCongChungs; track trackIdHopDong) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.id, 'view']">{{ hopDongCongChung.id }}</a>
+                <a [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.idHopDong, 'view']">{{ hopDongCongChung.idHopDong }}</a>
               </td>
-              <td>{{ hopDongCongChung.idHopDong }}</td>
               <td>{{ hopDongCongChung.ngayLapHd | formatMediumDate }}</td>
               <td>{{ hopDongCongChung.nguoiLapHd }}</td>
               <td>{{ hopDongCongChung.thongTinDuongSu }}</td>
               <td>{{ hopDongCongChung.thongTinTaiSan }}</td>
               <td>{{ hopDongCongChung.thongTinVanBan }}</td>
               <td>{{ hopDongCongChung.trangThai }}</td>
-              <td>{{ hopDongCongChung.idLoaiHd }}</td>
               <td>{{ hopDongCongChung.dieuKhoanHd }}</td>
               <td>{{ hopDongCongChung.idDonVi }}</td>
               <td>{{ hopDongCongChung.ngayThaoTac | formatMediumDate }}</td>
@@ -376,8 +360,6 @@
               <td>{{ hopDongCongChung.maHopDong }}</td>
               <td>{{ hopDongCongChung.srcHopDong }}</td>
               <td>{{ hopDongCongChung.ngayHen | formatMediumDate }}</td>
-              <td>{{ hopDongCongChung.idSoCongChung }}</td>
-              <td>{{ hopDongCongChung.soCongChung }}</td>
               <td>{{ hopDongCongChung.congChungVien }}</td>
               <td>{{ hopDongCongChung.ngayKyHd | formatMediumDate }}</td>
               <td>{{ hopDongCongChung.nguoiRutTrich }}</td>
@@ -403,10 +385,28 @@
               <td>{{ hopDongCongChung.srcKySoPdfSigned }}</td>
               <td>{{ hopDongCongChung.syncStatus }}</td>
               <td>{{ hopDongCongChung.ngayRutTrichText }}</td>
+              <td>
+                @if (hopDongCongChung.danhMucLoaiHopDong) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-hop-dong', hopDongCongChung.danhMucLoaiHopDong.idLoaiHd, 'view']">{{
+                      hopDongCongChung.danhMucLoaiHopDong.idLoaiHd
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (hopDongCongChung.soCongChung) {
+                  <div>
+                    <a [routerLink]="['/so-cong-chung', hopDongCongChung.soCongChung.idSo, 'view']">{{
+                      hopDongCongChung.soCongChung.idSo
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.id, 'view']"
+                    [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.idHopDong, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -415,7 +415,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.id, 'edit']"
+                    [routerLink]="['/hop-dong-cong-chung', hopDongCongChung.idHopDong, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >
@@ -433,6 +433,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (hopDongCongChungs && hopDongCongChungs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

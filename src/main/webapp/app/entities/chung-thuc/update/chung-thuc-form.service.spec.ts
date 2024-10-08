@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../chung-thuc.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../chung-thuc.test-samples';
 
 import { ChungThucFormService } from './chung-thuc-form.service';
 
@@ -19,7 +19,6 @@ describe('ChungThuc Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idChungThuc: expect.any(Object),
             idDonVi: expect.any(Object),
             nguoiYeuCau: expect.any(Object),
@@ -31,7 +30,6 @@ describe('ChungThuc Form Service', () => {
             soBanSao: expect.any(Object),
             vanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiGiayTo: expect.any(Object),
             quyenSo: expect.any(Object),
             duongSu: expect.any(Object),
             taiSan: expect.any(Object),
@@ -44,6 +42,7 @@ describe('ChungThuc Form Service', () => {
             chucDanhCanBo: expect.any(Object),
             ldPheDuyet: expect.any(Object),
             chucDanhLd: expect.any(Object),
+            danhMucLoaiGiayToChungThuc: expect.any(Object),
           }),
         );
       });
@@ -53,7 +52,6 @@ describe('ChungThuc Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idChungThuc: expect.any(Object),
             idDonVi: expect.any(Object),
             nguoiYeuCau: expect.any(Object),
@@ -65,7 +63,6 @@ describe('ChungThuc Form Service', () => {
             soBanSao: expect.any(Object),
             vanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiGiayTo: expect.any(Object),
             quyenSo: expect.any(Object),
             duongSu: expect.any(Object),
             taiSan: expect.any(Object),
@@ -78,6 +75,7 @@ describe('ChungThuc Form Service', () => {
             chucDanhCanBo: expect.any(Object),
             ldPheDuyet: expect.any(Object),
             chucDanhLd: expect.any(Object),
+            danhMucLoaiGiayToChungThuc: expect.any(Object),
           }),
         );
       });
@@ -106,26 +104,6 @@ describe('ChungThuc Form Service', () => {
         const chungThuc = service.getChungThuc(formGroup) as any;
 
         expect(chungThuc).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IChungThuc should not enable id FormControl', () => {
-        const formGroup = service.createChungThucFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewChungThuc should disable id FormControl', () => {
-        const formGroup = service.createChungThucFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

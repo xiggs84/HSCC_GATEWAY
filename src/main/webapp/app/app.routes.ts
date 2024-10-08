@@ -17,6 +17,10 @@ import {MuabanchuyennhuongComponent} from './pages/loaihopdong/muabanchuyennhuon
 import {LoaitaisanComponent} from './danhmuc/loaitaisan/loaitaisan.component'
 import {DuongsuComponent} from "./danhmuc/duongsu/duongsu/duongsu.component";
 import {DonviComponent} from "./danhmuc/donvi/donvi.component";
+import {TaisanComponent} from "./danhmuc/taisan/taisan.component";
+import {VaitroComponent} from "./danhmuc/vaitro/vaitro.component";
+import {LoaivanbanComponent} from "./danhmuc/loaivanban/loaivanban.component";
+import {CanboComponent} from "./danhmuc/canbo/canbo.component";
 const routes: Routes = [
   {
     path: '',
@@ -54,9 +58,29 @@ const routes: Routes = [
     title: 'loaitaisan',
   },
   {
+    path: 'loaivanban',
+    component: LoaivanbanComponent,
+    title: 'loaivanban',
+  },
+  {
     path: 'duongsu',
     component: DuongsuComponent,
     title: 'duongsu',
+  },
+  {
+    path: 'canbo',
+    component: CanboComponent,
+    title: 'canbo',
+  },
+  {
+    path: 'taisan',
+    component: TaisanComponent,
+    title: 'taisan',
+  },
+  {
+    path: 'vaitro',
+    component: VaitroComponent,
+    title: 'vaitro',
   },
   {
     path: 'donvi',

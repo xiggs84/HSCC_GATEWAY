@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (dmHopDong()) {
+    @if (dmHopDong(); as dmHopDongRef) {
       <div>
         <h2 data-cy="dmHopDongDetailsHeading"><span jhiTranslate="gatewayApp.dmHopDong.detail.title">Dm Hop Dong</span></h2>
 
@@ -11,153 +11,155 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ dmHopDong()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.idHopDong">Id Hop Dong</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.idHopDong }}</span>
+            <span>{{ dmHopDongRef.idHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayLapHd">Ngay Lap Hd</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayLapHd | formatMediumDate }}</span>
+            <span>{{ dmHopDongRef.ngayLapHd | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.nguoiLapHd">Nguoi Lap Hd</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.nguoiLapHd }}</span>
+            <span>{{ dmHopDongRef.nguoiLapHd }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.thongTinDuongSu">Thong Tin Duong Su</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.thongTinDuongSu }}</span>
+            <span>{{ dmHopDongRef.thongTinDuongSu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.thongTinTaiSan">Thong Tin Tai San</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.thongTinTaiSan }}</span>
+            <span>{{ dmHopDongRef.thongTinTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.thongTinVanBan">Thong Tin Van Ban</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.thongTinVanBan }}</span>
+            <span>{{ dmHopDongRef.thongTinVanBan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.trangThai }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.dmHopDong.idLoaiHd">Id Loai Hd</span></dt>
-          <dd>
-            <span>{{ dmHopDong()!.idLoaiHd }}</span>
+            <span>{{ dmHopDongRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.dieuKhoanHd">Dieu Khoan Hd</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.dieuKhoanHd }}</span>
+            <span>{{ dmHopDongRef.dieuKhoanHd }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.idDonVi }}</span>
+            <span>{{ dmHopDongRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ dmHopDongRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.nguoiThaoTac">Nguoi Thao Tac</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.nguoiThaoTac }}</span>
+            <span>{{ dmHopDongRef.nguoiThaoTac }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.idHdGoc">Id Hd Goc</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.idHdGoc }}</span>
+            <span>{{ dmHopDongRef.idHdGoc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.thongTinChuyenNhuong">Thong Tin Chuyen Nhuong</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.thongTinChuyenNhuong }}</span>
+            <span>{{ dmHopDongRef.thongTinChuyenNhuong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.maHopDong">Ma Hop Dong</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.maHopDong }}</span>
+            <span>{{ dmHopDongRef.maHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.srcHopDong">Src Hop Dong</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.srcHopDong }}</span>
+            <span>{{ dmHopDongRef.srcHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayHen">Ngay Hen</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayHen | formatMediumDate }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.dmHopDong.idSoCongChung">Id So Cong Chung</span></dt>
-          <dd>
-            <span>{{ dmHopDong()!.idSoCongChung }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.dmHopDong.soCongChung">So Cong Chung</span></dt>
-          <dd>
-            <span>{{ dmHopDong()!.soCongChung }}</span>
+            <span>{{ dmHopDongRef.ngayHen | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.congChungVien">Cong Chung Vien</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.congChungVien }}</span>
+            <span>{{ dmHopDongRef.congChungVien }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayKyHd">Ngay Ky Hd</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayKyHd | formatMediumDate }}</span>
+            <span>{{ dmHopDongRef.ngayKyHd | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.nguoiRutTrich">Nguoi Rut Trich</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.nguoiRutTrich }}</span>
+            <span>{{ dmHopDongRef.nguoiRutTrich }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.soTienRutTrich">So Tien Rut Trich</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.soTienRutTrich }}</span>
+            <span>{{ dmHopDongRef.soTienRutTrich }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayRutTrich">Ngay Rut Trich</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayRutTrich | formatMediumDate }}</span>
+            <span>{{ dmHopDongRef.ngayRutTrich | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.hdThuCong">Hd Thu Cong</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.hdThuCong }}</span>
+            <span>{{ dmHopDongRef.hdThuCong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.trangThaiRutTrich">Trang Thai Rut Trich</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.trangThaiRutTrich }}</span>
+            <span>{{ dmHopDongRef.trangThaiRutTrich }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.chuKyNgoaiTruSo">Chu Ky Ngoai Tru So</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.chuKyNgoaiTruSo }}</span>
+            <span>{{ dmHopDongRef.chuKyNgoaiTruSo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.strSearch">Str Search</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.strSearch }}</span>
+            <span>{{ dmHopDongRef.strSearch }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.idMaster }}</span>
+            <span>{{ dmHopDongRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.idHdSdHb">Id Hd Sd Hb</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.idHdSdHb }}</span>
+            <span>{{ dmHopDongRef.idHdSdHb }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.srcDmMaster">Src Dm Master</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.srcDmMaster }}</span>
+            <span>{{ dmHopDongRef.srcDmMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.repRefUnique">Rep Ref Unique</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.repRefUnique }}</span>
+            <span>{{ dmHopDongRef.repRefUnique }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayText">Ngay Text</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayText }}</span>
+            <span>{{ dmHopDongRef.ngayText }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayNum">Ngay Num</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayNum }}</span>
+            <span>{{ dmHopDongRef.ngayNum }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.ngayThaoTacRutTrich">Ngay Thao Tac Rut Trich</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.ngayThaoTacRutTrich | formatMediumDate }}</span>
+            <span>{{ dmHopDongRef.ngayThaoTacRutTrich | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmHopDong.thuLaoCongChung">Thu Lao Cong Chung</span></dt>
           <dd>
-            <span>{{ dmHopDong()!.thuLaoCongChung }}</span>
+            <span>{{ dmHopDongRef.thuLaoCongChung }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmHopDong.danhMucLoaiHopDong">Danh Muc Loai Hop Dong</span></dt>
+          <dd>
+            @if (dmHopDong()!.danhMucLoaiHopDong) {
+              <div>
+                <a [routerLink]="['/danh-muc-loai-hop-dong', dmHopDong()!.danhMucLoaiHopDong?.idLoaiHd, 'view']">{{
+                  dmHopDongRef.danhMucLoaiHopDong?.idLoaiHd
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmHopDong.soCongChung">So Cong Chung</span></dt>
+          <dd>
+            @if (dmHopDong()!.soCongChung) {
+              <div>
+                <a [routerLink]="['/so-cong-chung', dmHopDong()!.soCongChung?.idSo, 'view']">{{ dmHopDongRef.soCongChung?.idSo }}</a>
+              </div>
+            }
           </dd>
         </dl>
 
@@ -165,7 +167,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/dm-hop-dong', dmHopDong()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/dm-hop-dong', dmHopDongRef.idHopDong, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

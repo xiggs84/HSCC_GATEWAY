@@ -17,7 +17,7 @@ describe('CauHinhMauChungThuc Management Detail Component', () => {
           [
             {
               path: '**',
-              component: CauHinhMauChungThucDetailComponent,
+              loadComponent: () => import('./cau-hinh-mau-chung-thuc-detail.component').then(m => m.CauHinhMauChungThucDetailComponent),
               resolve: { cauHinhMauChungThuc: () => of({ id: 123 }) },
             },
           ],

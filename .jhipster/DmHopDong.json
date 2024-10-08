@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820095257"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idHopDong",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "ngayLapHd",
@@ -31,10 +35,6 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idLoaiHd",
       "fieldType": "Long"
     },
     {
@@ -72,14 +72,6 @@
     {
       "fieldName": "ngayHen",
       "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "idSoCongChung",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "soCongChung",
-      "fieldType": "String"
     },
     {
       "fieldName": "congChungVien",
@@ -150,8 +142,26 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DmHopDong",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiHopDong",
+      "otherEntityRelationshipName": "dmHopDong",
+      "relationshipName": "danhMucLoaiHopDong",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "soCongChung",
+      "otherEntityRelationshipName": "dmHopDong",
+      "relationshipName": "soCongChung",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -41,6 +41,8 @@ describe('TaiSan Form Service', () => {
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
             syncStatus: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });
@@ -72,6 +74,8 @@ describe('TaiSan Form Service', () => {
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
             syncStatus: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });

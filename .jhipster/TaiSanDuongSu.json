@@ -2,20 +2,20 @@
   "annotations": {
     "changelogDate": "20240820101257"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idTaiSan",
       "fieldType": "Long"
     },
     {
-      "fieldName": "idDuongSu",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     },
     {
       "fieldName": "ngayThaoTac",
@@ -34,8 +34,19 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "TaiSanDuongSu",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "duongSu",
+      "otherEntityRelationshipName": "taiSanDuongSu",
+      "relationshipName": "duongSu",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -17,7 +17,6 @@
       "detail": {
         "title": "Dm Hop Dong"
       },
-      "id": "ID",
       "idHopDong": "Id Hop Dong",
       "ngayLapHd": "Ngay Lap Hd",
       "nguoiLapHd": "Nguoi Lap Hd",
@@ -25,7 +24,6 @@
       "thongTinTaiSan": "Thong Tin Tai San",
       "thongTinVanBan": "Thong Tin Van Ban",
       "trangThai": "Trang Thai",
-      "idLoaiHd": "Id Loai Hd",
       "dieuKhoanHd": "Dieu Khoan Hd",
       "idDonVi": "Id Don Vi",
       "ngayThaoTac": "Ngay Thao Tac",
@@ -35,8 +33,6 @@
       "maHopDong": "Ma Hop Dong",
       "srcHopDong": "Src Hop Dong",
       "ngayHen": "Ngay Hen",
-      "idSoCongChung": "Id So Cong Chung",
-      "soCongChung": "So Cong Chung",
       "congChungVien": "Cong Chung Vien",
       "ngayKyHd": "Ngay Ky Hd",
       "nguoiRutTrich": "Nguoi Rut Trich",
@@ -53,7 +49,9 @@
       "ngayText": "Ngay Text",
       "ngayNum": "Ngay Num",
       "ngayThaoTacRutTrich": "Ngay Thao Tac Rut Trich",
-      "thuLaoCongChung": "Thu Lao Cong Chung"
+      "thuLaoCongChung": "Thu Lao Cong Chung",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
+      "soCongChung": "So Cong Chung"
     }
   }
 }

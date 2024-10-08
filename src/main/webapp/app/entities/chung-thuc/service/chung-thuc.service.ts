@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IChungThuc, NewChungThuc } from '../chung-thuc.model';
 
-export type PartialUpdateChungThuc = Partial<IChungThuc> & Pick<IChungThuc, 'id'>;
+export type PartialUpdateChungThuc = Partial<IChungThuc> & Pick<IChungThuc, 'idChungThuc'>;
 
 type RestOf<T extends IChungThuc | NewChungThuc> = Omit<T, 'ngayChungThuc' | 'ngayThaoTac'> & {
   ngayChungThuc?: string | null;
@@ -54,7 +54,7 @@ export class ChungThucService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<RestChungThuc>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -67,19 +67,19 @@ export class ChungThucService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getChungThucIdentifier(chungThuc: Pick<IChungThuc, 'id'>): number {
-    return chungThuc.id;
+  getChungThucIdentifier(chungThuc: Pick<IChungThuc, 'idChungThuc'>): string {
+    return chungThuc.idChungThuc;
   }
 
-  compareChungThuc(o1: Pick<IChungThuc, 'id'> | null, o2: Pick<IChungThuc, 'id'> | null): boolean {
+  compareChungThuc(o1: Pick<IChungThuc, 'idChungThuc'> | null, o2: Pick<IChungThuc, 'idChungThuc'> | null): boolean {
     return o1 && o2 ? this.getChungThucIdentifier(o1) === this.getChungThucIdentifier(o2) : o1 === o2;
   }
 
-  addChungThucToCollectionIfMissing<Type extends Pick<IChungThuc, 'id'>>(
+  addChungThucToCollectionIfMissing<Type extends Pick<IChungThuc, 'idChungThuc'>>(
     chungThucCollection: Type[],
     ...chungThucsToCheck: (Type | null | undefined)[]
   ): Type[] {

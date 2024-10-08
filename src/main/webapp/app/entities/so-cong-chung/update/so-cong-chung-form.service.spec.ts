@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../so-cong-chung.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../so-cong-chung.test-samples';
 
 import { SoCongChungFormService } from './so-cong-chung-form.service';
 
@@ -19,15 +19,14 @@ describe('SoCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
-            ngayThaoTac: expect.any(Object),
             idSo: expect.any(Object),
             idDonVi: expect.any(Object),
             tenSo: expect.any(Object),
             giaTri: expect.any(Object),
+            ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiSo: expect.any(Object),
+            danhMucLoaiSoCongChung: expect.any(Object),
           }),
         );
       });
@@ -37,15 +36,14 @@ describe('SoCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
-            ngayThaoTac: expect.any(Object),
             idSo: expect.any(Object),
             idDonVi: expect.any(Object),
             tenSo: expect.any(Object),
             giaTri: expect.any(Object),
+            ngayThaoTac: expect.any(Object),
             nguoiThaoTac: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiSo: expect.any(Object),
+            danhMucLoaiSoCongChung: expect.any(Object),
           }),
         );
       });
@@ -74,26 +72,6 @@ describe('SoCongChung Form Service', () => {
         const soCongChung = service.getSoCongChung(formGroup) as any;
 
         expect(soCongChung).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing ISoCongChung should not enable id FormControl', () => {
-        const formGroup = service.createSoCongChungFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewSoCongChung should disable id FormControl', () => {
-        const formGroup = service.createSoCongChungFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

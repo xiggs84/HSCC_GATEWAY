@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
+import { IDanhMucLoaiGiayToChungThuc } from 'app/entities/danh-muc-loai-giay-to-chung-thuc/danh-muc-loai-giay-to-chung-thuc.model';
+import { DanhMucLoaiGiayToChungThucService } from 'app/entities/danh-muc-loai-giay-to-chung-thuc/service/danh-muc-loai-giay-to-chung-thuc.service';
 import { ChungThucService } from '../service/chung-thuc.service';
 import { IChungThuc } from '../chung-thuc.model';
 import { ChungThucFormService } from './chung-thuc-form.service';
@@ -16,6 +18,7 @@ describe('ChungThuc Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let chungThucFormService: ChungThucFormService;
   let chungThucService: ChungThucService;
+  let danhMucLoaiGiayToChungThucService: DanhMucLoaiGiayToChungThucService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,17 +41,52 @@ describe('ChungThuc Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     chungThucFormService = TestBed.inject(ChungThucFormService);
     chungThucService = TestBed.inject(ChungThucService);
+    danhMucLoaiGiayToChungThucService = TestBed.inject(DanhMucLoaiGiayToChungThucService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
-      const chungThuc: IChungThuc = { id: 456 };
+    it('Should call DanhMucLoaiGiayToChungThuc query and add missing value', () => {
+      const chungThuc: IChungThuc = { idChungThuc: 'CBA' };
+      const danhMucLoaiGiayToChungThuc: IDanhMucLoaiGiayToChungThuc = { idLoaiGiayTo: 'c4961851-1964-429c-978c-77c506439596' };
+      chungThuc.danhMucLoaiGiayToChungThuc = danhMucLoaiGiayToChungThuc;
+
+      const danhMucLoaiGiayToChungThucCollection: IDanhMucLoaiGiayToChungThuc[] = [
+        { idLoaiGiayTo: '7b398342-04d9-4bf7-80e3-4bd90990deaa' },
+      ];
+      jest
+        .spyOn(danhMucLoaiGiayToChungThucService, 'query')
+        .mockReturnValue(of(new HttpResponse({ body: danhMucLoaiGiayToChungThucCollection })));
+      const additionalDanhMucLoaiGiayToChungThucs = [danhMucLoaiGiayToChungThuc];
+      const expectedCollection: IDanhMucLoaiGiayToChungThuc[] = [
+        ...additionalDanhMucLoaiGiayToChungThucs,
+        ...danhMucLoaiGiayToChungThucCollection,
+      ];
+      jest
+        .spyOn(danhMucLoaiGiayToChungThucService, 'addDanhMucLoaiGiayToChungThucToCollectionIfMissing')
+        .mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ chungThuc });
       comp.ngOnInit();
 
+      expect(danhMucLoaiGiayToChungThucService.query).toHaveBeenCalled();
+      expect(danhMucLoaiGiayToChungThucService.addDanhMucLoaiGiayToChungThucToCollectionIfMissing).toHaveBeenCalledWith(
+        danhMucLoaiGiayToChungThucCollection,
+        ...additionalDanhMucLoaiGiayToChungThucs.map(expect.objectContaining),
+      );
+      expect(comp.danhMucLoaiGiayToChungThucsSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should update editForm', () => {
+      const chungThuc: IChungThuc = { idChungThuc: 'CBA' };
+      const danhMucLoaiGiayToChungThuc: IDanhMucLoaiGiayToChungThuc = { idLoaiGiayTo: '98f8549c-869f-47b6-96c3-274120592ad7' };
+      chungThuc.danhMucLoaiGiayToChungThuc = danhMucLoaiGiayToChungThuc;
+
+      activatedRoute.data = of({ chungThuc });
+      comp.ngOnInit();
+
+      expect(comp.danhMucLoaiGiayToChungThucsSharedCollection).toContain(danhMucLoaiGiayToChungThuc);
       expect(comp.chungThuc).toEqual(chungThuc);
     });
   });
@@ -57,7 +95,7 @@ describe('ChungThuc Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChungThuc>>();
-      const chungThuc = { id: 123 };
+      const chungThuc = { idChungThuc: 'ABC' };
       jest.spyOn(chungThucFormService, 'getChungThuc').mockReturnValue(chungThuc);
       jest.spyOn(chungThucService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -80,8 +118,8 @@ describe('ChungThuc Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChungThuc>>();
-      const chungThuc = { id: 123 };
-      jest.spyOn(chungThucFormService, 'getChungThuc').mockReturnValue({ id: null });
+      const chungThuc = { idChungThuc: 'ABC' };
+      jest.spyOn(chungThucFormService, 'getChungThuc').mockReturnValue({ idChungThuc: null });
       jest.spyOn(chungThucService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ chungThuc: null });
@@ -103,7 +141,7 @@ describe('ChungThuc Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChungThuc>>();
-      const chungThuc = { id: 123 };
+      const chungThuc = { idChungThuc: 'ABC' };
       jest.spyOn(chungThucService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ chungThuc });
@@ -118,6 +156,18 @@ describe('ChungThuc Management Update Component', () => {
       expect(chungThucService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Compare relationships', () => {
+    describe('compareDanhMucLoaiGiayToChungThuc', () => {
+      it('Should forward to danhMucLoaiGiayToChungThucService', () => {
+        const entity = { idLoaiGiayTo: 'ABC' };
+        const entity2 = { idLoaiGiayTo: 'CBA' };
+        jest.spyOn(danhMucLoaiGiayToChungThucService, 'compareDanhMucLoaiGiayToChungThuc');
+        comp.compareDanhMucLoaiGiayToChungThuc(entity, entity2);
+        expect(danhMucLoaiGiayToChungThucService.compareDanhMucLoaiGiayToChungThuc).toHaveBeenCalledWith(entity, entity2);
+      });
     });
   });
 });

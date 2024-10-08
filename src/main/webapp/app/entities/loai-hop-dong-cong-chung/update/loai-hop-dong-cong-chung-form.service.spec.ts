@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../loai-hop-dong-cong-chung.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../loai-hop-dong-cong-chung.test-samples';
 
 import { LoaiHopDongCongChungFormService } from './loai-hop-dong-cong-chung-form.service';
 
@@ -19,7 +19,6 @@ describe('LoaiHopDongCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idLoaiHopDongCongChung: expect.any(Object),
             dienGiai: expect.any(Object),
             giaTri: expect.any(Object),
@@ -33,7 +32,6 @@ describe('LoaiHopDongCongChung Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idLoaiHopDongCongChung: expect.any(Object),
             dienGiai: expect.any(Object),
             giaTri: expect.any(Object),
@@ -66,26 +64,6 @@ describe('LoaiHopDongCongChung Form Service', () => {
         const loaiHopDongCongChung = service.getLoaiHopDongCongChung(formGroup) as any;
 
         expect(loaiHopDongCongChung).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing ILoaiHopDongCongChung should not enable id FormControl', () => {
-        const formGroup = service.createLoaiHopDongCongChungFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewLoaiHopDongCongChung should disable id FormControl', () => {
-        const formGroup = service.createLoaiHopDongCongChungFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

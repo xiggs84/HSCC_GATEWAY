@@ -40,6 +40,8 @@ describe('TaiSanDatNha Form Service', () => {
             soVaoSo: expect.any(Object),
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });
@@ -70,6 +72,8 @@ describe('TaiSanDatNha Form Service', () => {
             soVaoSo: expect.any(Object),
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });

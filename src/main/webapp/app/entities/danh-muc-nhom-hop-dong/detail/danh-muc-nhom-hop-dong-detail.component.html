@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhMucNhomHopDong()) {
+    @if (danhMucNhomHopDong(); as danhMucNhomHopDongRef) {
       <div>
         <h2 data-cy="danhMucNhomHopDongDetailsHeading">
           <span jhiTranslate="gatewayApp.danhMucNhomHopDong.detail.title">Danh Muc Nhom Hop Dong</span>
@@ -13,17 +13,13 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhMucNhomHopDong()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucNhomHopDong.idNhom">Id Nhom</span></dt>
           <dd>
-            <span>{{ danhMucNhomHopDong()!.idNhom }}</span>
+            <span>{{ danhMucNhomHopDongRef.idNhom }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucNhomHopDong.dienGiai">Dien Giai</span></dt>
           <dd>
-            <span>{{ danhMucNhomHopDong()!.dienGiai }}</span>
+            <span>{{ danhMucNhomHopDongRef.dienGiai }}</span>
           </dd>
         </dl>
 
@@ -31,7 +27,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDong()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/danh-muc-nhom-hop-dong', danhMucNhomHopDongRef.idNhom, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

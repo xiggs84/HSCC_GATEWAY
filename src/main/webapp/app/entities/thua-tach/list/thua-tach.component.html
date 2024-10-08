@@ -56,6 +56,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="taiSan.idTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.thuaTach.taiSan">Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -67,6 +73,13 @@
               </td>
               <td>{{ thuaTach.thongTinThuaTach }}</td>
               <td>{{ thuaTach.trangThai }}</td>
+              <td>
+                @if (thuaTach.taiSan) {
+                  <div>
+                    <a [routerLink]="['/tai-san', thuaTach.taiSan.idTaiSan, 'view']">{{ thuaTach.taiSan.idTaiSan }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/thua-tach', thuaTach.idThuaTach, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

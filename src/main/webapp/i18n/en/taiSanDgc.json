@@ -18,18 +18,15 @@
         "title": "Tai San Dgc"
       },
       "id": "ID",
-      "idTaiSan": "Id Tai San",
       "tenTaiSan": "Ten Tai San",
       "trangThai": "Trang Thai",
       "thongTinTs": "Thong Tin Ts",
-      "idLoaiTs": "Id Loai Ts",
       "ghiChu": "Ghi Chu",
       "ngayThaoTac": "Ngay Thao Tac",
       "nguoiThaoTac": "Nguoi Thao Tac",
       "idDuongSu": "Id Duong Su",
       "idTsGoc": "Id Ts Goc",
       "maTaiSan": "Ma Tai San",
-      "idTinhTrang": "Id Tinh Trang",
       "idLoaiNganChan": "Id Loai Ngan Chan",
       "ngayBdNganChan": "Ngay Bd Ngan Chan",
       "ngayKtNganChan": "Ngay Kt Ngan Chan",
@@ -39,7 +36,10 @@
       "soHsCv": "So Hs Cv",
       "soCc": "So Cc",
       "soVaoSo": "So Vao So",
-      "moTa": "Mo Ta"
+      "moTa": "Mo Ta",
+      "taiSan": "Tai San",
+      "danhMucLoaiTaiSan": "Danh Muc Loai Tai San",
+      "tinhTrangTaiSan": "Tinh Trang Tai San"
     }
   }
 }

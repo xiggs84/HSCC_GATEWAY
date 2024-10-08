@@ -91,6 +91,34 @@
           <dd>
             <span>{{ taiSanDgcRef.moTa }}</span>
           </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDgc.taiSan">Tai San</span></dt>
+          <dd>
+            @if (taiSanDgc()!.taiSan) {
+              <div>
+                <a [routerLink]="['/tai-san', taiSanDgc()!.taiSan?.idTaiSan, 'view']">{{ taiSanDgcRef.taiSan?.idTaiSan }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDgc.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span></dt>
+          <dd>
+            @if (taiSanDgc()!.danhMucLoaiTaiSan) {
+              <div>
+                <a [routerLink]="['/danh-muc-loai-tai-san', taiSanDgc()!.danhMucLoaiTaiSan?.idLoaiTs, 'view']">{{
+                  taiSanDgcRef.danhMucLoaiTaiSan?.idLoaiTs
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDgc.tinhTrangTaiSan">Tinh Trang Tai San</span></dt>
+          <dd>
+            @if (taiSanDgc()!.tinhTrangTaiSan) {
+              <div>
+                <a [routerLink]="['/tinh-trang-tai-san', taiSanDgc()!.tinhTrangTaiSan?.idTinhTrang, 'view']">{{
+                  taiSanDgcRef.tinhTrangTaiSan?.idTinhTrang
+                }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

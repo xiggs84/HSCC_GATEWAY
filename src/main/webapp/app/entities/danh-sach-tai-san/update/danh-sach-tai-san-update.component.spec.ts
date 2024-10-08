@@ -4,6 +4,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
+import { IDanhMucLoaiTaiSan } from 'app/entities/danh-muc-loai-tai-san/danh-muc-loai-tai-san.model';
+import { DanhMucLoaiTaiSanService } from 'app/entities/danh-muc-loai-tai-san/service/danh-muc-loai-tai-san.service';
 import { DanhSachTaiSanService } from '../service/danh-sach-tai-san.service';
 import { IDanhSachTaiSan } from '../danh-sach-tai-san.model';
 import { DanhSachTaiSanFormService } from './danh-sach-tai-san-form.service';
@@ -16,6 +18,7 @@ describe('DanhSachTaiSan Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let danhSachTaiSanFormService: DanhSachTaiSanFormService;
   let danhSachTaiSanService: DanhSachTaiSanService;
+  let danhMucLoaiTaiSanService: DanhMucLoaiTaiSanService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,17 +41,43 @@ describe('DanhSachTaiSan Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     danhSachTaiSanFormService = TestBed.inject(DanhSachTaiSanFormService);
     danhSachTaiSanService = TestBed.inject(DanhSachTaiSanService);
+    danhMucLoaiTaiSanService = TestBed.inject(DanhMucLoaiTaiSanService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
+    it('Should call DanhMucLoaiTaiSan query and add missing value', () => {
       const danhSachTaiSan: IDanhSachTaiSan = { id: 456 };
+      const danhMucLoaiTaiSan: IDanhMucLoaiTaiSan = { idLoaiTs: 9011 };
+      danhSachTaiSan.danhMucLoaiTaiSan = danhMucLoaiTaiSan;
+
+      const danhMucLoaiTaiSanCollection: IDanhMucLoaiTaiSan[] = [{ idLoaiTs: 1012 }];
+      jest.spyOn(danhMucLoaiTaiSanService, 'query').mockReturnValue(of(new HttpResponse({ body: danhMucLoaiTaiSanCollection })));
+      const additionalDanhMucLoaiTaiSans = [danhMucLoaiTaiSan];
+      const expectedCollection: IDanhMucLoaiTaiSan[] = [...additionalDanhMucLoaiTaiSans, ...danhMucLoaiTaiSanCollection];
+      jest.spyOn(danhMucLoaiTaiSanService, 'addDanhMucLoaiTaiSanToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ danhSachTaiSan });
       comp.ngOnInit();
 
+      expect(danhMucLoaiTaiSanService.query).toHaveBeenCalled();
+      expect(danhMucLoaiTaiSanService.addDanhMucLoaiTaiSanToCollectionIfMissing).toHaveBeenCalledWith(
+        danhMucLoaiTaiSanCollection,
+        ...additionalDanhMucLoaiTaiSans.map(expect.objectContaining),
+      );
+      expect(comp.danhMucLoaiTaiSansSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should update editForm', () => {
+      const danhSachTaiSan: IDanhSachTaiSan = { id: 456 };
+      const danhMucLoaiTaiSan: IDanhMucLoaiTaiSan = { idLoaiTs: 6573 };
+      danhSachTaiSan.danhMucLoaiTaiSan = danhMucLoaiTaiSan;
+
+      activatedRoute.data = of({ danhSachTaiSan });
+      comp.ngOnInit();
+
+      expect(comp.danhMucLoaiTaiSansSharedCollection).toContain(danhMucLoaiTaiSan);
       expect(comp.danhSachTaiSan).toEqual(danhSachTaiSan);
     });
   });
@@ -118,6 +147,18 @@ describe('DanhSachTaiSan Management Update Component', () => {
       expect(danhSachTaiSanService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Compare relationships', () => {
+    describe('compareDanhMucLoaiTaiSan', () => {
+      it('Should forward to danhMucLoaiTaiSanService', () => {
+        const entity = { idLoaiTs: 123 };
+        const entity2 = { idLoaiTs: 456 };
+        jest.spyOn(danhMucLoaiTaiSanService, 'compareDanhMucLoaiTaiSan');
+        comp.compareDanhMucLoaiTaiSan(entity, entity2);
+        expect(danhMucLoaiTaiSanService.compareDanhMucLoaiTaiSan).toHaveBeenCalledWith(entity, entity2);
+      });
     });
   });
 });

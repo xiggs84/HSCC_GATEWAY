@@ -1,19 +1,17 @@
 import { ITaisanSaiQsddDgc, NewTaisanSaiQsddDgc } from './taisan-sai-qsdd-dgc.model';
 
 export const sampleWithRequiredData: ITaisanSaiQsddDgc = {
-  id: 6150,
+  id: 7255,
 };
 
 export const sampleWithPartialData: ITaisanSaiQsddDgc = {
-  id: 25603,
-  idMaster: 3281,
-  noiCapQsdd: 'besides um yearningly',
+  id: 29511,
 };
 
 export const sampleWithFullData: ITaisanSaiQsddDgc = {
-  id: 31444,
-  idMaster: 23713,
-  noiCapQsdd: 'wholly',
+  id: 30986,
+  idMaster: 28415,
+  noiCapQsdd: 'yippee progress',
 };
 
 export const sampleWithNewData: NewTaisanSaiQsddDgc = {

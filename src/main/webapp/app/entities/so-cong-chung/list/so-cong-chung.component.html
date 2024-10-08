@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (soCongChungs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.soCongChung.home.notFound">No So Cong Chungs found</span>
@@ -35,20 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="ngayThaoTac">
-              <div class="d-flex">
-                <span jhiTranslate="gatewayApp.soCongChung.ngayThaoTac">Ngay Thao Tac</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idSo">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.soCongChung.idSo">Id So</span>
@@ -77,6 +65,13 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="ngayThaoTac">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.soCongChung.ngayThaoTac">Ngay Thao Tac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col" jhiSortBy="nguoiThaoTac">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.soCongChung.nguoiThaoTac">Nguoi Thao Tac</span>
@@ -91,10 +86,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="idLoaiSo">
+            <th scope="col" jhiSortBy="danhMucLoaiSoCongChung.idLoai">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.soCongChung.idLoaiSo">Id Loai So</span>
-
+                <span jhiTranslate="gatewayApp.soCongChung.danhMucLoaiSoCongChung">Danh Muc Loai So Cong Chung</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -102,27 +96,94 @@
           </tr>
         </thead>
         <tbody>
-          @for (soCongChung of soCongChungs; track trackId) {
+          @for (soCongChung of soCongChungs; track trackIdSo) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/so-cong-chung', soCongChung.id, 'view']">{{ soCongChung.id }}</a>
+                <a [routerLink]="['/so-cong-chung', soCongChung.idSo, 'view']">{{ soCongChung.idSo }}</a>
               </td>
-              <td>{{ soCongChung.ngayThaoTac | formatMediumDate }}</td>
-              <td>{{ soCongChung.idSo }}</td>
               <td>{{ soCongChung.idDonVi }}</td>
               <td>{{ soCongChung.tenSo }}</td>
               <td>{{ soCongChung.giaTri }}</td>
+              <td>{{ soCongChung.ngayThaoTac | formatMediumDate }}</td>
               <td>{{ soCongChung.nguoiThaoTac }}</td>
               <td>{{ soCongChung.trangThai }}</td>
-              <td>{{ soCongChung.idLoaiSo }}</td>
+              <td>
+                @if (soCongChung.danhMucLoaiSoCongChung) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-so-cong-chung', soCongChung.danhMucLoaiSoCongChung.idLoai, 'view']">{{
+                      soCongChung.danhMucLoaiSoCongChung.idLoai
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/so-cong-chung', soCongChung.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <button
+                    type="submit"
+                    [routerLink]="['/hop-dong-cong-chung']"
+                    [queryParams]="{ 'filter[soCongChungId.in]': soCongChung.idSo }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.soCongChung.hopDongCongChung' | translate) }"
+                      >Show Hop Dong Cong Chung</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/thong-tin-chung-hop-dong']"
+                    [queryParams]="{ 'filter[soCongChungId.in]': soCongChung.idSo }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.soCongChung.thongTinChungHopDong' | translate) }"
+                      >Show Thong Tin Chung Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/danh-sach-hop-dong']"
+                    [queryParams]="{ 'filter[soCongChungId.in]': soCongChung.idSo }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.soCongChung.danhSachHopDong' | translate) }"
+                      >Show Danh Sach Hop Dong</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/dm-hop-dong']"
+                    [queryParams]="{ 'filter[soCongChungId.in]': soCongChung.idSo }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.soCongChung.dmHopDong' | translate) }"
+                      >Show Dm Hop Dong</span
+                    >
+                  </button>
+                  <a [routerLink]="['/so-cong-chung', soCongChung.idSo, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/so-cong-chung', soCongChung.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a [routerLink]="['/so-cong-chung', soCongChung.idSo, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>
@@ -137,6 +198,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (soCongChungs && soCongChungs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

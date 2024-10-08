@@ -1,7 +1,6 @@
 export interface IDanhMucNhomHopDong {
-  id: number;
-  idNhom?: number | null;
+  idNhom: string;
   dienGiai?: string | null;
 }
 
-export type NewDanhMucNhomHopDong = Omit<IDanhMucNhomHopDong, 'id'> & { id: null };
+export type NewDanhMucNhomHopDong = Omit<IDanhMucNhomHopDong, 'idNhom'> & { idNhom: null };

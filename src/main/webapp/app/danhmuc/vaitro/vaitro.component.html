@@ -1,0 +1,53 @@
+<nz-row [nzGutter]="16" class="filter-wrapper">
+  <nz-col nzSpan="12">
+    <input nz-input [(ngModel)]="searchTerm" (ngModelChange)="onSearch()" placeholder="Tìm kiếm ..." />
+  </nz-col>
+  <nz-col nzSpan="12" class="button-group">
+    <button nz-button nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      <span>Thêm mới</span>
+    </button>
+  </nz-col>
+</nz-row>
+
+<nz-table [nzData]="listOfData"
+          [nzPageSize]="pageSize"
+          [nzPageIndex]="pageIndex"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger
+          (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)">
+  <thead>
+  <tr>
+    <th nzWidth="50px">#</th>
+    <th>Diễn giải</th>
+    <th nzWidth="100px">Thao tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of listOfData; let i = index">
+    <td> {{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+    <td>{{ item?.dienGiai ?? 'N/A' }}</td>
+    <td>
+      <div class="action-icons">
+        <button nz-button nzType="default" nzShape="circle" nzSize="small" (click)="editItem(item)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </button>
+        <button nz-button nzType="default" nzShape="circle" nzSize="small" (click)="deleteItem(item)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <div *nzModalContent>
+    <label for="new-item">Tên vai trò:</label>
+    <input id="new-item" nz-input [(ngModel)]="newItem.dienGiai" placeholder="Nhập tên vai trò" />
+  </div>
+</nz-modal>

@@ -5,7 +5,7 @@ export interface IQuanHeDuongSu {
   idDuongSuQh?: number | null;
   thongTinQuanHe?: string | null;
   trangThai?: number | null;
-  duongSu?: IDuongSu | null;
+  duongSu?: Pick<IDuongSu, 'idDuongSu'> | null;
 }
 
 export type NewQuanHeDuongSu = Omit<IQuanHeDuongSu, 'idQuanHe'> & { idQuanHe: null };

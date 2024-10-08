@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { ChungThucComponent } from './list/chung-thuc.component';
-import { ChungThucDetailComponent } from './detail/chung-thuc-detail.component';
-import { ChungThucUpdateComponent } from './update/chung-thuc-update.component';
 import ChungThucResolve from './route/chung-thuc-routing-resolve.service';
 
 const chungThucRoute: Routes = [
   {
     path: '',
-    component: ChungThucComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/chung-thuc.component').then(m => m.ChungThucComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: ChungThucDetailComponent,
+    path: ':idChungThuc/view',
+    loadComponent: () => import('./detail/chung-thuc-detail.component').then(m => m.ChungThucDetailComponent),
     resolve: {
       chungThuc: ChungThucResolve,
     },
@@ -26,15 +20,15 @@ const chungThucRoute: Routes = [
   },
   {
     path: 'new',
-    component: ChungThucUpdateComponent,
+    loadComponent: () => import('./update/chung-thuc-update.component').then(m => m.ChungThucUpdateComponent),
     resolve: {
       chungThuc: ChungThucResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: ChungThucUpdateComponent,
+    path: ':idChungThuc/edit',
+    loadComponent: () => import('./update/chung-thuc-update.component').then(m => m.ChungThucUpdateComponent),
     resolve: {
       chungThuc: ChungThucResolve,
     },

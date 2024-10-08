@@ -9,8 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IDuongSu } from 'app/entities/duong-su/duong-su.model';
 import { DuongSuService } from 'app/entities/duong-su/service/duong-su.service';
-import { ITaiSanDuongSu } from '../tai-san-duong-su.model';
+import { ITaiSan } from 'app/entities/tai-san/tai-san.model';
+import { TaiSanService } from 'app/entities/tai-san/service/tai-san.service';
 import { TaiSanDuongSuService } from '../service/tai-san-duong-su.service';
+import { ITaiSanDuongSu } from '../tai-san-duong-su.model';
 import { TaiSanDuongSuFormGroup, TaiSanDuongSuFormService } from './tai-san-duong-su-form.service';
 
 @Component({
@@ -24,16 +26,20 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
   taiSanDuongSu: ITaiSanDuongSu | null = null;
 
   duongSusSharedCollection: IDuongSu[] = [];
+  taiSansSharedCollection: ITaiSan[] = [];
 
   protected taiSanDuongSuService = inject(TaiSanDuongSuService);
   protected taiSanDuongSuFormService = inject(TaiSanDuongSuFormService);
   protected duongSuService = inject(DuongSuService);
+  protected taiSanService = inject(TaiSanService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: TaiSanDuongSuFormGroup = this.taiSanDuongSuFormService.createTaiSanDuongSuFormGroup();
 
   compareDuongSu = (o1: IDuongSu | null, o2: IDuongSu | null): boolean => this.duongSuService.compareDuongSu(o1, o2);
+
+  compareTaiSan = (o1: ITaiSan | null, o2: ITaiSan | null): boolean => this.taiSanService.compareTaiSan(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ taiSanDuongSu }) => {
@@ -87,6 +93,10 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
       this.duongSusSharedCollection,
       taiSanDuongSu.duongSu,
     );
+    this.taiSansSharedCollection = this.taiSanService.addTaiSanToCollectionIfMissing<ITaiSan>(
+      this.taiSansSharedCollection,
+      taiSanDuongSu.taiSan,
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -97,5 +107,11 @@ export class TaiSanDuongSuUpdateComponent implements OnInit {
         map((duongSus: IDuongSu[]) => this.duongSuService.addDuongSuToCollectionIfMissing<IDuongSu>(duongSus, this.taiSanDuongSu?.duongSu)),
       )
       .subscribe((duongSus: IDuongSu[]) => (this.duongSusSharedCollection = duongSus));
+
+    this.taiSanService
+      .query()
+      .pipe(map((res: HttpResponse<ITaiSan[]>) => res.body ?? []))
+      .pipe(map((taiSans: ITaiSan[]) => this.taiSanService.addTaiSanToCollectionIfMissing<ITaiSan>(taiSans, this.taiSanDuongSu?.taiSan)))
+      .subscribe((taiSans: ITaiSan[]) => (this.taiSansSharedCollection = taiSans));
   }
 }

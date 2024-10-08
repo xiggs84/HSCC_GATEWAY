@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-thong-tin-cap-nhat-tai-san-heading"
+        data-cy="ThongTinCapNhatTaiSanCreateUpdateHeading"
+        jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.home.createOrEditLabel"
+      >
+        Thêm mới hoặc cập nhật Thong Tin Cap Nhat Tai San
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.idCapNhat.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_idCapNhat" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.idCapNhat">Id Cap Nhat</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idCapNhat"
+              id="field_idCapNhat"
+              data-cy="idCapNhat"
+              formControlName="idCapNhat"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tenTaiSan" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.tenTaiSan">Ten Tai San</label>
+          <input type="text" class="form-control" name="tenTaiSan" id="field_tenTaiSan" data-cy="tenTaiSan" formControlName="tenTaiSan" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_thongTinTaiSan" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.thongTinTaiSan"
+            >Thong Tin Tai San</label
+          >
+          <textarea
+            class="form-control"
+            name="thongTinTaiSan"
+            id="field_thongTinTaiSan"
+            data-cy="thongTinTaiSan"
+            formControlName="thongTinTaiSan"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ngayCapNhat" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.ngayCapNhat"
+            >Ngay Cap Nhat</label
+          >
+          <div class="input-group">
+            <input
+              id="field_ngayCapNhat"
+              data-cy="ngayCapNhat"
+              type="text"
+              class="form-control"
+              name="ngayCapNhat"
+              ngbDatepicker
+              #ngayCapNhatDp="ngbDatepicker"
+              formControlName="ngayCapNhat"
+            />
+            <button type="button" class="btn btn-secondary" (click)="ngayCapNhatDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_taiSan" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.taiSan">Tai San</label>
+          <select
+            class="form-control"
+            id="field_taiSan"
+            data-cy="taiSan"
+            name="taiSan"
+            formControlName="taiSan"
+            [compareWith]="compareTaiSan"
+          >
+            <option [ngValue]="null"></option>
+            @for (taiSanOption of taiSansSharedCollection; track $index) {
+              <option [ngValue]="taiSanOption">{{ taiSanOption.idTaiSan }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_danhMucLoaiTaiSan" jhiTranslate="gatewayApp.thongTinCapNhatTaiSan.danhMucLoaiTaiSan"
+            >Danh Muc Loai Tai San</label
+          >
+          <select
+            class="form-control"
+            id="field_danhMucLoaiTaiSan"
+            data-cy="danhMucLoaiTaiSan"
+            name="danhMucLoaiTaiSan"
+            formControlName="danhMucLoaiTaiSan"
+            [compareWith]="compareDanhMucLoaiTaiSan"
+          >
+            <option [ngValue]="null"></option>
+            @for (danhMucLoaiTaiSanOption of danhMucLoaiTaiSansSharedCollection; track $index) {
+              <option [ngValue]="danhMucLoaiTaiSanOption">{{ danhMucLoaiTaiSanOption.idLoaiTs }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Hủy</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

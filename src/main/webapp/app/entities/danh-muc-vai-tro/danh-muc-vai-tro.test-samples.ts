@@ -1,24 +1,22 @@
 import { IDanhMucVaiTro, NewDanhMucVaiTro } from './danh-muc-vai-tro.model';
 
 export const sampleWithRequiredData: IDanhMucVaiTro = {
-  id: 21418,
+  idVaiTro: '435d328a-6890-4b17-bddd-a452b5f3477b',
 };
 
 export const sampleWithPartialData: IDanhMucVaiTro = {
-  id: 23497,
-  idLoaiVaiTro: 11454,
+  idVaiTro: '0fe32cb4-aed1-46ca-bede-fa695a9ba6cb',
+  dienGiai: 'although grouper imperfect',
 };
 
 export const sampleWithFullData: IDanhMucVaiTro = {
-  id: 14109,
-  idVaiTro: 26651,
-  dienGiai: 'cartilage less',
-  idLoaiHopDong: 14196,
-  idLoaiVaiTro: 11778,
+  idVaiTro: '544816f5-6809-423d-8f79-871b37eab7c6',
+  dienGiai: 'clergyman',
+  idLoaiVaiTro: 24751,
 };
 
 export const sampleWithNewData: NewDanhMucVaiTro = {
-  id: null,
+  idVaiTro: null,
 };
 
 Object.freeze(sampleWithNewData);

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
@@ -30,7 +30,7 @@ export class DuongSuService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/duong-sus', 'duongsu');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/duong-sus','duongsu');
 
   create(duongSu: NewDuongSu): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(duongSu);
@@ -122,5 +122,12 @@ export class DuongSuService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  searchDuongSus(tenDuongSu: string, gioiTinh: string): Observable<EntityArrayResponseType> {
+    const params = new HttpParams().set('tenDuongSu', tenDuongSu).set('gender', gioiTinh);
+    return this.http
+      .get<RestDuongSu[]>(`${this.resourceUrl}/search`, { params, observe: 'response' })
+      .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 }

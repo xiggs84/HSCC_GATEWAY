@@ -17,8 +17,8 @@ describe('DmLoaiHd Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DmLoaiHdDetailComponent,
-              resolve: { dmLoaiHd: () => of({ id: 123 }) },
+              loadComponent: () => import('./dm-loai-hd-detail.component').then(m => m.DmLoaiHdDetailComponent),
+              resolve: { dmLoaiHd: () => of({ idLoaiHd: 'ABC' }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DmLoaiHd Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DmLoaiHdDetailComponent);
 
       // THEN
-      expect(instance.dmLoaiHd()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.dmLoaiHd()).toEqual(expect.objectContaining({ idLoaiHd: 'ABC' }));
     });
   });
 

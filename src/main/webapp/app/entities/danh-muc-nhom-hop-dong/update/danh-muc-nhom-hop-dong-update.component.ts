@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IDanhMucNhomHopDong } from '../danh-muc-nhom-hop-dong.model';
 import { DanhMucNhomHopDongService } from '../service/danh-muc-nhom-hop-dong.service';
-import { DanhMucNhomHopDongFormService, DanhMucNhomHopDongFormGroup } from './danh-muc-nhom-hop-dong-form.service';
+import { DanhMucNhomHopDongFormGroup, DanhMucNhomHopDongFormService } from './danh-muc-nhom-hop-dong-form.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ export class DanhMucNhomHopDongUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const danhMucNhomHopDong = this.danhMucNhomHopDongFormService.getDanhMucNhomHopDong(this.editForm);
-    if (danhMucNhomHopDong.id !== null) {
+    if (danhMucNhomHopDong.idNhom !== null) {
       this.subscribeToSaveResponse(this.danhMucNhomHopDongService.update(danhMucNhomHopDong));
     } else {
       this.subscribeToSaveResponse(this.danhMucNhomHopDongService.create(danhMucNhomHopDong));

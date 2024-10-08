@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { SoCongChungTempComponent } from './list/so-cong-chung-temp.component';
-import { SoCongChungTempDetailComponent } from './detail/so-cong-chung-temp-detail.component';
-import { SoCongChungTempUpdateComponent } from './update/so-cong-chung-temp-update.component';
 import SoCongChungTempResolve from './route/so-cong-chung-temp-routing-resolve.service';
 
 const soCongChungTempRoute: Routes = [
   {
     path: '',
-    component: SoCongChungTempComponent,
+    loadComponent: () => import('./list/so-cong-chung-temp.component').then(m => m.SoCongChungTempComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: SoCongChungTempDetailComponent,
+    loadComponent: () => import('./detail/so-cong-chung-temp-detail.component').then(m => m.SoCongChungTempDetailComponent),
     resolve: {
       soCongChungTemp: SoCongChungTempResolve,
     },
@@ -26,7 +23,7 @@ const soCongChungTempRoute: Routes = [
   },
   {
     path: 'new',
-    component: SoCongChungTempUpdateComponent,
+    loadComponent: () => import('./update/so-cong-chung-temp-update.component').then(m => m.SoCongChungTempUpdateComponent),
     resolve: {
       soCongChungTemp: SoCongChungTempResolve,
     },
@@ -34,7 +31,7 @@ const soCongChungTempRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: SoCongChungTempUpdateComponent,
+    loadComponent: () => import('./update/so-cong-chung-temp-update.component').then(m => m.SoCongChungTempUpdateComponent),
     resolve: {
       soCongChungTemp: SoCongChungTempResolve,
     },

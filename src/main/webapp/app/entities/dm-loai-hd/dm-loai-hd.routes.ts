@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { DmLoaiHdComponent } from './list/dm-loai-hd.component';
-import { DmLoaiHdDetailComponent } from './detail/dm-loai-hd-detail.component';
-import { DmLoaiHdUpdateComponent } from './update/dm-loai-hd-update.component';
 import DmLoaiHdResolve from './route/dm-loai-hd-routing-resolve.service';
 
 const dmLoaiHdRoute: Routes = [
   {
     path: '',
-    component: DmLoaiHdComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/dm-loai-hd.component').then(m => m.DmLoaiHdComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DmLoaiHdDetailComponent,
+    path: ':idLoaiHd/view',
+    loadComponent: () => import('./detail/dm-loai-hd-detail.component').then(m => m.DmLoaiHdDetailComponent),
     resolve: {
       dmLoaiHd: DmLoaiHdResolve,
     },
@@ -26,15 +20,15 @@ const dmLoaiHdRoute: Routes = [
   },
   {
     path: 'new',
-    component: DmLoaiHdUpdateComponent,
+    loadComponent: () => import('./update/dm-loai-hd-update.component').then(m => m.DmLoaiHdUpdateComponent),
     resolve: {
       dmLoaiHd: DmLoaiHdResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DmLoaiHdUpdateComponent,
+    path: ':idLoaiHd/edit',
+    loadComponent: () => import('./update/dm-loai-hd-update.component').then(m => m.DmLoaiHdUpdateComponent),
     resolve: {
       dmLoaiHd: DmLoaiHdResolve,
     },

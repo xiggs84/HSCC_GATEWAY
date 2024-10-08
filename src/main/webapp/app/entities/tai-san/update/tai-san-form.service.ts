@@ -39,6 +39,8 @@ type TaiSanFormGroupContent = {
   moTa: FormControl<ITaiSan['moTa']>;
   loaiNganChan: FormControl<ITaiSan['loaiNganChan']>;
   syncStatus: FormControl<ITaiSan['syncStatus']>;
+  danhMucLoaiTaiSan: FormControl<ITaiSan['danhMucLoaiTaiSan']>;
+  tinhTrangTaiSan: FormControl<ITaiSan['tinhTrangTaiSan']>;
 };
 
 export type TaiSanFormGroup = FormGroup<TaiSanFormGroupContent>;
@@ -79,6 +81,8 @@ export class TaiSanFormService {
       moTa: new FormControl(taiSanRawValue.moTa),
       loaiNganChan: new FormControl(taiSanRawValue.loaiNganChan),
       syncStatus: new FormControl(taiSanRawValue.syncStatus),
+      danhMucLoaiTaiSan: new FormControl(taiSanRawValue.danhMucLoaiTaiSan),
+      tinhTrangTaiSan: new FormControl(taiSanRawValue.tinhTrangTaiSan),
     });
   }
 

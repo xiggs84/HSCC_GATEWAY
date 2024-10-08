@@ -2,19 +2,19 @@
   "annotations": {
     "changelogDate": "20240820093357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "idDuongSu",
-      "fieldType": "Long"
+      "fieldName": "idQuanHe",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "idDuongSuQh",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idQuanHe",
       "fieldType": "Long"
     },
     {
@@ -23,11 +23,25 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "QuanHeDuongSu",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "duongSu",
+      "otherEntityRelationshipName": "quanHeDuongSu",
+      "relationshipName": "duongSu",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -2,8 +2,9 @@
   "annotations": {
     "changelogDate": "20240820092757"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idHopDong",
@@ -22,8 +23,11 @@
       "fieldType": "LocalDate"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "SoCongChungTemp",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

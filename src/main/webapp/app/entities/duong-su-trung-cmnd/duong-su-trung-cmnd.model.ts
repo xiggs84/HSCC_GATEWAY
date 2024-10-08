@@ -18,7 +18,7 @@ export interface IDuongSuTrungCmnd {
   idMasterMin?: number | null;
   idDuongSuMax?: number | null;
   idMasterMax?: number | null;
-  duongSu?: IDuongSu | null;
+  duongSu?: Pick<IDuongSu, 'idDuongSu'> | null;
 }
 
 export type NewDuongSuTrungCmnd = Omit<IDuongSuTrungCmnd, 'id'> & { id: null };

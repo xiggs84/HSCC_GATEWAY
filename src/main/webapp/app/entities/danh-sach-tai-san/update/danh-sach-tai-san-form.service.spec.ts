@@ -40,6 +40,7 @@ describe('DanhSachTaiSan Form Service', () => {
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
             maXa: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
           }),
         );
       });
@@ -70,6 +71,7 @@ describe('DanhSachTaiSan Form Service', () => {
             moTa: expect.any(Object),
             loaiNganChan: expect.any(Object),
             maXa: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
           }),
         );
       });

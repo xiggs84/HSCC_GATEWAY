@@ -22,6 +22,7 @@ describe('ThuaTach Form Service', () => {
             idThuaTach: expect.any(Object),
             thongTinThuaTach: expect.any(Object),
             trangThai: expect.any(Object),
+            taiSan: expect.any(Object),
           }),
         );
       });
@@ -34,6 +35,7 @@ describe('ThuaTach Form Service', () => {
             idThuaTach: expect.any(Object),
             thongTinThuaTach: expect.any(Object),
             trangThai: expect.any(Object),
+            taiSan: expect.any(Object),
           }),
         );
       });

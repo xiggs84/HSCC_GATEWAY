@@ -1,18 +1,17 @@
 import { IQuanHeNhanThan, NewQuanHeNhanThan } from './quan-he-nhan-than.model';
 
 export const sampleWithRequiredData: IQuanHeNhanThan = {
-  idQuanHe: 16488,
+  idQuanHe: 28463,
 };
 
 export const sampleWithPartialData: IQuanHeNhanThan = {
-  idQuanHe: 18492,
-  idQuanHeDoiUng: 30661,
+  idQuanHe: 14601,
 };
 
 export const sampleWithFullData: IQuanHeNhanThan = {
-  idQuanHe: 22763,
-  dienGiai: 'er bah',
-  idQuanHeDoiUng: 19650,
+  idQuanHe: 27024,
+  dienGiai: 'incinerate or',
+  idQuanHeDoiUng: 19330,
 };
 
 export const sampleWithNewData: NewQuanHeNhanThan = {

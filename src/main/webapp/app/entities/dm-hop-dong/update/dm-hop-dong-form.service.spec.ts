@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../dm-hop-dong.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../dm-hop-dong.test-samples';
 
 import { DmHopDongFormService } from './dm-hop-dong-form.service';
 
@@ -19,7 +19,6 @@ describe('DmHopDong Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idHopDong: expect.any(Object),
             ngayLapHd: expect.any(Object),
             nguoiLapHd: expect.any(Object),
@@ -27,7 +26,6 @@ describe('DmHopDong Form Service', () => {
             thongTinTaiSan: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -37,8 +35,6 @@ describe('DmHopDong Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -56,6 +52,8 @@ describe('DmHopDong Form Service', () => {
             ngayNum: expect.any(Object),
             ngayThaoTacRutTrich: expect.any(Object),
             thuLaoCongChung: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });
@@ -65,7 +63,6 @@ describe('DmHopDong Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idHopDong: expect.any(Object),
             ngayLapHd: expect.any(Object),
             nguoiLapHd: expect.any(Object),
@@ -73,7 +70,6 @@ describe('DmHopDong Form Service', () => {
             thongTinTaiSan: expect.any(Object),
             thongTinVanBan: expect.any(Object),
             trangThai: expect.any(Object),
-            idLoaiHd: expect.any(Object),
             dieuKhoanHd: expect.any(Object),
             idDonVi: expect.any(Object),
             ngayThaoTac: expect.any(Object),
@@ -83,8 +79,6 @@ describe('DmHopDong Form Service', () => {
             maHopDong: expect.any(Object),
             srcHopDong: expect.any(Object),
             ngayHen: expect.any(Object),
-            idSoCongChung: expect.any(Object),
-            soCongChung: expect.any(Object),
             congChungVien: expect.any(Object),
             ngayKyHd: expect.any(Object),
             nguoiRutTrich: expect.any(Object),
@@ -102,6 +96,8 @@ describe('DmHopDong Form Service', () => {
             ngayNum: expect.any(Object),
             ngayThaoTacRutTrich: expect.any(Object),
             thuLaoCongChung: expect.any(Object),
+            danhMucLoaiHopDong: expect.any(Object),
+            soCongChung: expect.any(Object),
           }),
         );
       });
@@ -130,26 +126,6 @@ describe('DmHopDong Form Service', () => {
         const dmHopDong = service.getDmHopDong(formGroup) as any;
 
         expect(dmHopDong).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IDmHopDong should not enable id FormControl', () => {
-        const formGroup = service.createDmHopDongFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewDmHopDong should disable id FormControl', () => {
-        const formGroup = service.createDmHopDongFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

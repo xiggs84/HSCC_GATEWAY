@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDanhSachHopDong, NewDanhSachHopDong } from '../danh-sach-hop-dong.model';
 
-export type PartialUpdateDanhSachHopDong = Partial<IDanhSachHopDong> & Pick<IDanhSachHopDong, 'id'>;
+export type PartialUpdateDanhSachHopDong = Partial<IDanhSachHopDong> & Pick<IDanhSachHopDong, 'idHopDong'>;
 
 type RestOf<T extends IDanhSachHopDong | NewDanhSachHopDong> = Omit<T, 'ngayLapHd' | 'ngayThaoTac' | 'ngayThaoTacRutTrich'> & {
   ngayLapHd?: string | null;
@@ -57,7 +57,7 @@ export class DanhSachHopDongService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<RestDanhSachHopDong>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -70,19 +70,19 @@ export class DanhSachHopDongService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDanhSachHopDongIdentifier(danhSachHopDong: Pick<IDanhSachHopDong, 'id'>): number {
-    return danhSachHopDong.id;
+  getDanhSachHopDongIdentifier(danhSachHopDong: Pick<IDanhSachHopDong, 'idHopDong'>): string {
+    return danhSachHopDong.idHopDong;
   }
 
-  compareDanhSachHopDong(o1: Pick<IDanhSachHopDong, 'id'> | null, o2: Pick<IDanhSachHopDong, 'id'> | null): boolean {
+  compareDanhSachHopDong(o1: Pick<IDanhSachHopDong, 'idHopDong'> | null, o2: Pick<IDanhSachHopDong, 'idHopDong'> | null): boolean {
     return o1 && o2 ? this.getDanhSachHopDongIdentifier(o1) === this.getDanhSachHopDongIdentifier(o2) : o1 === o2;
   }
 
-  addDanhSachHopDongToCollectionIfMissing<Type extends Pick<IDanhSachHopDong, 'id'>>(
+  addDanhSachHopDongToCollectionIfMissing<Type extends Pick<IDanhSachHopDong, 'idHopDong'>>(
     danhSachHopDongCollection: Type[],
     ...danhSachHopDongsToCheck: (Type | null | undefined)[]
   ): Type[] {

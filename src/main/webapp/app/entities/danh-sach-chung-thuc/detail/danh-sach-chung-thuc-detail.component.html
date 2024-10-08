@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhSachChungThuc()) {
+    @if (danhSachChungThuc(); as danhSachChungThucRef) {
       <div>
         <h2 data-cy="danhSachChungThucDetailsHeading">
           <span jhiTranslate="gatewayApp.danhSachChungThuc.detail.title">Danh Sach Chung Thuc</span>
@@ -13,69 +13,76 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhSachChungThuc()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.idChungThuc">Id Chung Thuc</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.idChungThuc }}</span>
+            <span>{{ danhSachChungThucRef.idChungThuc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.idDonVi }}</span>
+            <span>{{ danhSachChungThucRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.nguoiChungThuc">Nguoi Chung Thuc</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.nguoiChungThuc }}</span>
+            <span>{{ danhSachChungThucRef.nguoiChungThuc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.nguoiThaoTac">Nguoi Thao Tac</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.nguoiThaoTac }}</span>
+            <span>{{ danhSachChungThucRef.nguoiThaoTac }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.ngayChungThuc">Ngay Chung Thuc</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.ngayChungThuc | formatMediumDate }}</span>
+            <span>{{ danhSachChungThucRef.ngayChungThuc | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ danhSachChungThucRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.trangThai }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.idLoaiGiayTo">Id Loai Giay To</span></dt>
-          <dd>
-            <span>{{ danhSachChungThuc()!.idLoaiGiayTo }}</span>
+            <span>{{ danhSachChungThucRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.quyenSo">Quyen So</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.quyenSo }}</span>
+            <span>{{ danhSachChungThucRef.quyenSo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.srcChungThuc">Src Chung Thuc</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.srcChungThuc }}</span>
+            <span>{{ danhSachChungThucRef.srcChungThuc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.chuKyNgoaiTruSo">Chu Ky Ngoai Tru So</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.chuKyNgoaiTruSo }}</span>
+            <span>{{ danhSachChungThucRef.chuKyNgoaiTruSo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.ngayText">Ngay Text</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.ngayText }}</span>
+            <span>{{ danhSachChungThucRef.ngayText }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.strSearch">Str Search</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.strSearch }}</span>
+            <span>{{ danhSachChungThucRef.strSearch }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.soTienThu">So Tien Thu</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.soTienThu }}</span>
+            <span>{{ danhSachChungThucRef.soTienThu }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.ldPheDuyet">Ld Phe Duyet</span></dt>
           <dd>
-            <span>{{ danhSachChungThuc()!.ldPheDuyet }}</span>
+            <span>{{ danhSachChungThucRef.ldPheDuyet }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.danhSachChungThuc.danhMucLoaiGiayToChungThuc">Danh Muc Loai Giay To Chung Thuc</span></dt>
+          <dd>
+            @if (danhSachChungThuc()!.danhMucLoaiGiayToChungThuc) {
+              <div>
+                <a
+                  [routerLink]="[
+                    '/danh-muc-loai-giay-to-chung-thuc',
+                    danhSachChungThuc()!.danhMucLoaiGiayToChungThuc?.idLoaiGiayTo,
+                    'view',
+                  ]"
+                  >{{ danhSachChungThucRef.danhMucLoaiGiayToChungThuc?.idLoaiGiayTo }}</a
+                >
+              </div>
+            }
           </dd>
         </dl>
 
@@ -83,7 +90,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/danh-sach-chung-thuc', danhSachChungThuc()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/danh-sach-chung-thuc', danhSachChungThucRef.idChungThuc, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

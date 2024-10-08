@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { ThongTinChungHopDongComponent } from './list/thong-tin-chung-hop-dong.component';
-import { ThongTinChungHopDongDetailComponent } from './detail/thong-tin-chung-hop-dong-detail.component';
-import { ThongTinChungHopDongUpdateComponent } from './update/thong-tin-chung-hop-dong-update.component';
 import ThongTinChungHopDongResolve from './route/thong-tin-chung-hop-dong-routing-resolve.service';
 
 const thongTinChungHopDongRoute: Routes = [
   {
     path: '',
-    component: ThongTinChungHopDongComponent,
+    loadComponent: () => import('./list/thong-tin-chung-hop-dong.component').then(m => m.ThongTinChungHopDongComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: ThongTinChungHopDongDetailComponent,
+    loadComponent: () => import('./detail/thong-tin-chung-hop-dong-detail.component').then(m => m.ThongTinChungHopDongDetailComponent),
     resolve: {
       thongTinChungHopDong: ThongTinChungHopDongResolve,
     },
@@ -26,7 +23,7 @@ const thongTinChungHopDongRoute: Routes = [
   },
   {
     path: 'new',
-    component: ThongTinChungHopDongUpdateComponent,
+    loadComponent: () => import('./update/thong-tin-chung-hop-dong-update.component').then(m => m.ThongTinChungHopDongUpdateComponent),
     resolve: {
       thongTinChungHopDong: ThongTinChungHopDongResolve,
     },
@@ -34,7 +31,7 @@ const thongTinChungHopDongRoute: Routes = [
   },
   {
     path: ':id/edit',
-    component: ThongTinChungHopDongUpdateComponent,
+    loadComponent: () => import('./update/thong-tin-chung-hop-dong-update.component').then(m => m.ThongTinChungHopDongUpdateComponent),
     resolve: {
       thongTinChungHopDong: ThongTinChungHopDongResolve,
     },

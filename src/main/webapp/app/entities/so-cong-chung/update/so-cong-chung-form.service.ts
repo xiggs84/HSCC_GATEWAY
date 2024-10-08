@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ISoCongChung, NewSoCongChung } from '../so-cong-chung.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idSo: unknown }> = Partial<Omit<T, 'idSo'>> & { idSo: T['idSo'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,45 +14,43 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type SoCongChungFormGroupInput = ISoCongChung | PartialWithRequiredKeyOf<NewSoCongChung>;
 
-type SoCongChungFormDefaults = Pick<NewSoCongChung, 'id'>;
+type SoCongChungFormDefaults = Pick<NewSoCongChung, 'idSo'>;
 
 type SoCongChungFormGroupContent = {
-  id: FormControl<ISoCongChung['id'] | NewSoCongChung['id']>;
-  ngayThaoTac: FormControl<ISoCongChung['ngayThaoTac']>;
-  idSo: FormControl<ISoCongChung['idSo']>;
+  idSo: FormControl<ISoCongChung['idSo'] | NewSoCongChung['idSo']>;
   idDonVi: FormControl<ISoCongChung['idDonVi']>;
   tenSo: FormControl<ISoCongChung['tenSo']>;
   giaTri: FormControl<ISoCongChung['giaTri']>;
+  ngayThaoTac: FormControl<ISoCongChung['ngayThaoTac']>;
   nguoiThaoTac: FormControl<ISoCongChung['nguoiThaoTac']>;
   trangThai: FormControl<ISoCongChung['trangThai']>;
-  idLoaiSo: FormControl<ISoCongChung['idLoaiSo']>;
+  danhMucLoaiSoCongChung: FormControl<ISoCongChung['danhMucLoaiSoCongChung']>;
 };
 
 export type SoCongChungFormGroup = FormGroup<SoCongChungFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SoCongChungFormService {
-  createSoCongChungFormGroup(soCongChung: SoCongChungFormGroupInput = { id: null }): SoCongChungFormGroup {
+  createSoCongChungFormGroup(soCongChung: SoCongChungFormGroupInput = { idSo: null }): SoCongChungFormGroup {
     const soCongChungRawValue = {
       ...this.getFormDefaults(),
       ...soCongChung,
     };
     return new FormGroup<SoCongChungFormGroupContent>({
-      id: new FormControl(
-        { value: soCongChungRawValue.id, disabled: true },
+      idSo: new FormControl(
+        { value: soCongChungRawValue.idSo, disabled: soCongChungRawValue.idSo !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      ngayThaoTac: new FormControl(soCongChungRawValue.ngayThaoTac),
-      idSo: new FormControl(soCongChungRawValue.idSo),
       idDonVi: new FormControl(soCongChungRawValue.idDonVi),
       tenSo: new FormControl(soCongChungRawValue.tenSo),
       giaTri: new FormControl(soCongChungRawValue.giaTri),
+      ngayThaoTac: new FormControl(soCongChungRawValue.ngayThaoTac),
       nguoiThaoTac: new FormControl(soCongChungRawValue.nguoiThaoTac),
       trangThai: new FormControl(soCongChungRawValue.trangThai),
-      idLoaiSo: new FormControl(soCongChungRawValue.idLoaiSo),
+      danhMucLoaiSoCongChung: new FormControl(soCongChungRawValue.danhMucLoaiSoCongChung),
     });
   }
 
@@ -65,14 +63,14 @@ export class SoCongChungFormService {
     form.reset(
       {
         ...soCongChungRawValue,
-        id: { value: soCongChungRawValue.id, disabled: true },
+        idSo: { value: soCongChungRawValue.idSo, disabled: soCongChungRawValue.idSo !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): SoCongChungFormDefaults {
     return {
-      id: null,
+      idSo: null,
     };
   }
 }

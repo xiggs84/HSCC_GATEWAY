@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import { DanhMucLoaiHopDongComponent } from './list/danh-muc-loai-hop-dong.component';
-import { DanhMucLoaiHopDongDetailComponent } from './detail/danh-muc-loai-hop-dong-detail.component';
-import { DanhMucLoaiHopDongUpdateComponent } from './update/danh-muc-loai-hop-dong-update.component';
 import DanhMucLoaiHopDongResolve from './route/danh-muc-loai-hop-dong-routing-resolve.service';
 
 const danhMucLoaiHopDongRoute: Routes = [
   {
     path: '',
-    component: DanhMucLoaiHopDongComponent,
-    data: {
-      defaultSort: 'id,' + ASC,
-    },
+    loadComponent: () => import('./list/danh-muc-loai-hop-dong.component').then(m => m.DanhMucLoaiHopDongComponent),
+    data: {},
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DanhMucLoaiHopDongDetailComponent,
+    path: ':idLoaiHd/view',
+    loadComponent: () => import('./detail/danh-muc-loai-hop-dong-detail.component').then(m => m.DanhMucLoaiHopDongDetailComponent),
     resolve: {
       danhMucLoaiHopDong: DanhMucLoaiHopDongResolve,
     },
@@ -26,15 +20,15 @@ const danhMucLoaiHopDongRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhMucLoaiHopDongUpdateComponent,
+    loadComponent: () => import('./update/danh-muc-loai-hop-dong-update.component').then(m => m.DanhMucLoaiHopDongUpdateComponent),
     resolve: {
       danhMucLoaiHopDong: DanhMucLoaiHopDongResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DanhMucLoaiHopDongUpdateComponent,
+    path: ':idLoaiHd/edit',
+    loadComponent: () => import('./update/danh-muc-loai-hop-dong-update.component').then(m => m.DanhMucLoaiHopDongUpdateComponent),
     resolve: {
       danhMucLoaiHopDong: DanhMucLoaiHopDongResolve,
     },

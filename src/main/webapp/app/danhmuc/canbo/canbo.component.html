@@ -1,0 +1,90 @@
+<nz-row [nzGutter]="[16, 16]" class="filter-wrapper">
+  <!-- Đơn vị Dropdown -->
+  <nz-col nzSpan="6">
+    <nz-form-item>
+      <nz-form-label>Đơn vị</nz-form-label>
+      <nz-form-control>
+        <nz-select [(ngModel)]="selectedDonVi" (ngModelChange)="onDonViChange()" nzPlaceHolder="Chọn đơn vị">
+          <nz-option [nzValue]="null" nzLabel="Tất cả"></nz-option>
+          <nz-option *ngFor="let donVi of danhSachDonVi" [nzValue]="donVi.id" [nzLabel]="donVi.tenDonVi!"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+
+  <!-- Quyền Dropdown -->
+  <nz-col nzSpan="6">
+    <nz-form-item>
+      <nz-form-label>Quyền</nz-form-label>
+      <nz-form-control>
+        <nz-select [(ngModel)]="selectedQuyen" (ngModelChange)="onQuyenChange()" nzPlaceHolder="Chọn quyền">
+          <nz-option [nzValue]="null" nzLabel="Tất cả"></nz-option>
+          <nz-option *ngFor="let quyen of danhSachQuyen" [nzValue]="quyen.id" [nzLabel]="quyen.tenQuyen!"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+
+  <!-- Tìm kiếm -->
+  <nz-col nzSpan="6">
+    <nz-form-item>
+      <nz-form-label>Tìm kiếm</nz-form-label>
+      <nz-form-control>
+        <input nz-input [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Nhập dữ liệu cần tìm" />
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+
+  <!-- Button Group -->
+  <nz-col nzSpan="6" class="button-group">
+    <button nz-button nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      <span>Thêm mới</span>
+    </button>
+  </nz-col>
+</nz-row>
+
+<!-- Table -->
+<nz-table [nzData]="listOfData"
+          [nzPageSize]="pageSize"
+          [nzPageIndex]="pageIndex"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger
+          (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Tên cán bộ</th>
+    <th>Năm sinh</th>
+    <th>Email</th>
+    <th>Địa chỉ</th>
+    <th>Đơn vị</th>
+    <th>Trạng thái</th>
+    <th nzWidth="100px">Thao tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of listOfData; let i = index">
+    <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+    <td>{{ item.tenCanBo ?? 'N/A' }}</td>
+    <td>{{ item.namSinh ? getFormattedDate(item.namSinh) : 'N/A' }}</td>
+    <td>{{ item.email ?? 'N/A' }}</td>
+    <td>{{ item.diaChi ?? 'N/A' }}</td>
+    <td>{{ getDonViById(item.idDonVi) }}</td>
+    <td>{{ item.trangThai ?? 'N/A' }}</td>
+    <td>
+      <div class="action-icons">
+        <i nz-icon nzType="edit" nzTheme="outline" nz-tooltip nzTooltipTitle="Sửa" (click)="onEdit(item)"></i>
+        <i nz-icon nzType="delete" nzTheme="outline" nz-tooltip nzTooltipTitle="Xóa" (click)="onDelete(item)"></i>
+        <i nz-icon nzType="sync" nzTheme="outline" nz-tooltip nzTooltipTitle="Đặt lại mật khẩu" (click)="onResetPassword(item)"></i>
+        <i nz-icon nzType="user-add" nzTheme="outline" nz-tooltip nzTooltipTitle="Phân quyền" (click)="onAssignRole(item)"></i>
+        <i nz-icon nzType="lock" nzTheme="outline" nz-tooltip nzTooltipTitle="Khóa tài khoản" (click)="onLockAccount(item)"></i>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

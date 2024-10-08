@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../phan-loai-hop-dong.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../phan-loai-hop-dong.test-samples';
 
 import { PhanLoaiHopDongFormService } from './phan-loai-hop-dong-form.service';
 
@@ -19,7 +19,6 @@ describe('PhanLoaiHopDong Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idPhanLoaiHopDong: expect.any(Object),
             dienGiai: expect.any(Object),
           }),
@@ -31,7 +30,6 @@ describe('PhanLoaiHopDong Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idPhanLoaiHopDong: expect.any(Object),
             dienGiai: expect.any(Object),
           }),
@@ -62,26 +60,6 @@ describe('PhanLoaiHopDong Form Service', () => {
         const phanLoaiHopDong = service.getPhanLoaiHopDong(formGroup) as any;
 
         expect(phanLoaiHopDong).toMatchObject(sampleWithRequiredData);
-      });
-    });
-
-    describe('resetForm', () => {
-      it('passing IPhanLoaiHopDong should not enable id FormControl', () => {
-        const formGroup = service.createPhanLoaiHopDongFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, sampleWithRequiredData);
-
-        expect(formGroup.controls.id.disabled).toBe(true);
-      });
-
-      it('passing NewPhanLoaiHopDong should disable id FormControl', () => {
-        const formGroup = service.createPhanLoaiHopDongFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
-
-        service.resetForm(formGroup, { id: null });
-
-        expect(formGroup.controls.id.disabled).toBe(true);
       });
     });
   });

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDmHopDong, NewDmHopDong } from '../dm-hop-dong.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idHopDong: unknown }> = Partial<Omit<T, 'idHopDong'>> & { idHopDong: T['idHopDong'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,18 +14,16 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DmHopDongFormGroupInput = IDmHopDong | PartialWithRequiredKeyOf<NewDmHopDong>;
 
-type DmHopDongFormDefaults = Pick<NewDmHopDong, 'id'>;
+type DmHopDongFormDefaults = Pick<NewDmHopDong, 'idHopDong'>;
 
 type DmHopDongFormGroupContent = {
-  id: FormControl<IDmHopDong['id'] | NewDmHopDong['id']>;
-  idHopDong: FormControl<IDmHopDong['idHopDong']>;
+  idHopDong: FormControl<IDmHopDong['idHopDong'] | NewDmHopDong['idHopDong']>;
   ngayLapHd: FormControl<IDmHopDong['ngayLapHd']>;
   nguoiLapHd: FormControl<IDmHopDong['nguoiLapHd']>;
   thongTinDuongSu: FormControl<IDmHopDong['thongTinDuongSu']>;
   thongTinTaiSan: FormControl<IDmHopDong['thongTinTaiSan']>;
   thongTinVanBan: FormControl<IDmHopDong['thongTinVanBan']>;
   trangThai: FormControl<IDmHopDong['trangThai']>;
-  idLoaiHd: FormControl<IDmHopDong['idLoaiHd']>;
   dieuKhoanHd: FormControl<IDmHopDong['dieuKhoanHd']>;
   idDonVi: FormControl<IDmHopDong['idDonVi']>;
   ngayThaoTac: FormControl<IDmHopDong['ngayThaoTac']>;
@@ -35,8 +33,6 @@ type DmHopDongFormGroupContent = {
   maHopDong: FormControl<IDmHopDong['maHopDong']>;
   srcHopDong: FormControl<IDmHopDong['srcHopDong']>;
   ngayHen: FormControl<IDmHopDong['ngayHen']>;
-  idSoCongChung: FormControl<IDmHopDong['idSoCongChung']>;
-  soCongChung: FormControl<IDmHopDong['soCongChung']>;
   congChungVien: FormControl<IDmHopDong['congChungVien']>;
   ngayKyHd: FormControl<IDmHopDong['ngayKyHd']>;
   nguoiRutTrich: FormControl<IDmHopDong['nguoiRutTrich']>;
@@ -54,33 +50,33 @@ type DmHopDongFormGroupContent = {
   ngayNum: FormControl<IDmHopDong['ngayNum']>;
   ngayThaoTacRutTrich: FormControl<IDmHopDong['ngayThaoTacRutTrich']>;
   thuLaoCongChung: FormControl<IDmHopDong['thuLaoCongChung']>;
+  danhMucLoaiHopDong: FormControl<IDmHopDong['danhMucLoaiHopDong']>;
+  soCongChung: FormControl<IDmHopDong['soCongChung']>;
 };
 
 export type DmHopDongFormGroup = FormGroup<DmHopDongFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DmHopDongFormService {
-  createDmHopDongFormGroup(dmHopDong: DmHopDongFormGroupInput = { id: null }): DmHopDongFormGroup {
+  createDmHopDongFormGroup(dmHopDong: DmHopDongFormGroupInput = { idHopDong: null }): DmHopDongFormGroup {
     const dmHopDongRawValue = {
       ...this.getFormDefaults(),
       ...dmHopDong,
     };
     return new FormGroup<DmHopDongFormGroupContent>({
-      id: new FormControl(
-        { value: dmHopDongRawValue.id, disabled: true },
+      idHopDong: new FormControl(
+        { value: dmHopDongRawValue.idHopDong, disabled: dmHopDongRawValue.idHopDong !== null },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idHopDong: new FormControl(dmHopDongRawValue.idHopDong),
       ngayLapHd: new FormControl(dmHopDongRawValue.ngayLapHd),
       nguoiLapHd: new FormControl(dmHopDongRawValue.nguoiLapHd),
       thongTinDuongSu: new FormControl(dmHopDongRawValue.thongTinDuongSu),
       thongTinTaiSan: new FormControl(dmHopDongRawValue.thongTinTaiSan),
       thongTinVanBan: new FormControl(dmHopDongRawValue.thongTinVanBan),
       trangThai: new FormControl(dmHopDongRawValue.trangThai),
-      idLoaiHd: new FormControl(dmHopDongRawValue.idLoaiHd),
       dieuKhoanHd: new FormControl(dmHopDongRawValue.dieuKhoanHd),
       idDonVi: new FormControl(dmHopDongRawValue.idDonVi),
       ngayThaoTac: new FormControl(dmHopDongRawValue.ngayThaoTac),
@@ -90,8 +86,6 @@ export class DmHopDongFormService {
       maHopDong: new FormControl(dmHopDongRawValue.maHopDong),
       srcHopDong: new FormControl(dmHopDongRawValue.srcHopDong),
       ngayHen: new FormControl(dmHopDongRawValue.ngayHen),
-      idSoCongChung: new FormControl(dmHopDongRawValue.idSoCongChung),
-      soCongChung: new FormControl(dmHopDongRawValue.soCongChung),
       congChungVien: new FormControl(dmHopDongRawValue.congChungVien),
       ngayKyHd: new FormControl(dmHopDongRawValue.ngayKyHd),
       nguoiRutTrich: new FormControl(dmHopDongRawValue.nguoiRutTrich),
@@ -109,6 +103,8 @@ export class DmHopDongFormService {
       ngayNum: new FormControl(dmHopDongRawValue.ngayNum),
       ngayThaoTacRutTrich: new FormControl(dmHopDongRawValue.ngayThaoTacRutTrich),
       thuLaoCongChung: new FormControl(dmHopDongRawValue.thuLaoCongChung),
+      danhMucLoaiHopDong: new FormControl(dmHopDongRawValue.danhMucLoaiHopDong),
+      soCongChung: new FormControl(dmHopDongRawValue.soCongChung),
     });
   }
 
@@ -121,14 +117,14 @@ export class DmHopDongFormService {
     form.reset(
       {
         ...dmHopDongRawValue,
-        id: { value: dmHopDongRawValue.id, disabled: true },
+        idHopDong: { value: dmHopDongRawValue.idHopDong, disabled: dmHopDongRawValue.idHopDong !== null },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DmHopDongFormDefaults {
     return {
-      id: null,
+      idHopDong: null,
     };
   }
 }

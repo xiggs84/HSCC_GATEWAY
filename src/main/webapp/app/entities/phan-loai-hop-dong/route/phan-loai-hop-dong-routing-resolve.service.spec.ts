@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 import { IPhanLoaiHopDong } from '../phan-loai-hop-dong.model';
@@ -38,8 +38,8 @@ describe('PhanLoaiHopDong routing resolve service', () => {
   describe('resolve', () => {
     it('should return IPhanLoaiHopDong returned by find', () => {
       // GIVEN
-      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      service.find = jest.fn(idPhanLoaiHopDong => of(new HttpResponse({ body: { idPhanLoaiHopDong } })));
+      mockActivatedRouteSnapshot.params = { idPhanLoaiHopDong: 'ABC' };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -51,8 +51,8 @@ describe('PhanLoaiHopDong routing resolve service', () => {
       });
 
       // THEN
-      expect(service.find).toHaveBeenCalledWith(123);
-      expect(resultPhanLoaiHopDong).toEqual({ id: 123 });
+      expect(service.find).toHaveBeenCalledWith('ABC');
+      expect(resultPhanLoaiHopDong).toEqual({ idPhanLoaiHopDong: 'ABC' });
     });
 
     it('should return null if id is not provided', () => {
@@ -77,7 +77,7 @@ describe('PhanLoaiHopDong routing resolve service', () => {
     it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<IPhanLoaiHopDong>({ body: null })));
-      mockActivatedRouteSnapshot.params = { id: 123 };
+      mockActivatedRouteSnapshot.params = { idPhanLoaiHopDong: 'ABC' };
 
       // WHEN
       TestBed.runInInjectionContext(() => {
@@ -89,7 +89,7 @@ describe('PhanLoaiHopDong routing resolve service', () => {
       });
 
       // THEN
-      expect(service.find).toHaveBeenCalledWith(123);
+      expect(service.find).toHaveBeenCalledWith('ABC');
       expect(resultPhanLoaiHopDong).toEqual(undefined);
       expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });

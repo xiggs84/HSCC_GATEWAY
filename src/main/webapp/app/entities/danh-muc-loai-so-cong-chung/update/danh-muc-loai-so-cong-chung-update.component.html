@@ -12,16 +12,17 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-          </div>
-        }
-
         <div class="mb-3">
           <label class="form-label" for="field_idLoai" jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.idLoai">Id Loai</label>
-          <input type="number" class="form-control" name="idLoai" id="field_idLoai" data-cy="idLoai" formControlName="idLoai" />
+          <input
+            type="text"
+            class="form-control"
+            name="idLoai"
+            id="field_idLoai"
+            data-cy="idLoai"
+            formControlName="idLoai"
+            [readonly]="editForm.get('idLoai')!.disabled"
+          />
         </div>
 
         <div class="mb-3">

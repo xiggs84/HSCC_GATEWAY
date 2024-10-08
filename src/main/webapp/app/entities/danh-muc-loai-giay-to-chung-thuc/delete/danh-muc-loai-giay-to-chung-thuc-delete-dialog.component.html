@@ -1,5 +1,5 @@
 @if (danhMucLoaiGiayToChungThuc) {
-  <form name="deleteForm" (ngSubmit)="confirmDelete(danhMucLoaiGiayToChungThuc.id!)">
+  <form name="deleteForm" (ngSubmit)="confirmDelete(danhMucLoaiGiayToChungThuc.idLoaiGiayTo!)">
     <div class="modal-header">
       <h4 class="modal-title" data-cy="danhMucLoaiGiayToChungThucDeleteDialogHeading" jhiTranslate="entity.delete.title">
         Xác nhận hành động xóa
@@ -11,9 +11,9 @@
       <p
         id="jhi-delete-danhMucLoaiGiayToChungThuc-heading"
         jhiTranslate="gatewayApp.danhMucLoaiGiayToChungThuc.delete.question"
-        [translateValues]="{ id: danhMucLoaiGiayToChungThuc.id }"
+        [translateValues]="{ id: danhMucLoaiGiayToChungThuc.idLoaiGiayTo }"
       >
-        Bạn có chắc là muốn xóa Danh Muc Loai Giay To Chung Thuc {{ danhMucLoaiGiayToChungThuc.id }}?
+        Bạn có chắc là muốn xóa Danh Muc Loai Giay To Chung Thuc {{ danhMucLoaiGiayToChungThuc.idLoaiGiayTo }}?
       </p>
     </div>
 

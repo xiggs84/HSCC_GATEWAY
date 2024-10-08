@@ -3,31 +3,27 @@ import dayjs from 'dayjs/esm';
 import { ISoCongChung, NewSoCongChung } from './so-cong-chung.model';
 
 export const sampleWithRequiredData: ISoCongChung = {
-  id: 25242,
+  idSo: '322fb81f-1349-4813-b2c6-dad1688f5140',
 };
 
 export const sampleWithPartialData: ISoCongChung = {
-  id: 14805,
-  idSo: 20207,
-  giaTri: 24352,
-  nguoiThaoTac: 12580,
-  idLoaiSo: 31916,
+  idSo: 'c26df82b-4b77-4c49-ab1c-581a662a6246',
+  giaTri: 8630,
+  ngayThaoTac: dayjs('2024-08-19'),
 };
 
 export const sampleWithFullData: ISoCongChung = {
-  id: 21322,
+  idSo: '403b3c1f-7c89-4fb8-9b14-12220f5e704b',
+  idDonVi: 12399,
+  tenSo: 'questioningly among',
+  giaTri: 24685,
   ngayThaoTac: dayjs('2024-08-19'),
-  idSo: 22623,
-  idDonVi: 22306,
-  tenSo: 'behind as discussion',
-  giaTri: 20839,
-  nguoiThaoTac: 23313,
-  trangThai: 29727,
-  idLoaiSo: 9882,
+  nguoiThaoTac: 13442,
+  trangThai: 3990,
 };
 
 export const sampleWithNewData: NewSoCongChung = {
-  id: null,
+  idSo: null,
 };
 
 Object.freeze(sampleWithNewData);

@@ -95,6 +95,26 @@
           <dd>
             <span>{{ taiSanDatNhaRef.loaiNganChan }}</span>
           </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDatNha.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span></dt>
+          <dd>
+            @if (taiSanDatNha()!.danhMucLoaiTaiSan) {
+              <div>
+                <a [routerLink]="['/danh-muc-loai-tai-san', taiSanDatNha()!.danhMucLoaiTaiSan?.idLoaiTs, 'view']">{{
+                  taiSanDatNhaRef.danhMucLoaiTaiSan?.idLoaiTs
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.taiSanDatNha.tinhTrangTaiSan">Tinh Trang Tai San</span></dt>
+          <dd>
+            @if (taiSanDatNha()!.tinhTrangTaiSan) {
+              <div>
+                <a [routerLink]="['/tinh-trang-tai-san', taiSanDatNha()!.tinhTrangTaiSan?.idTinhTrang, 'view']">{{
+                  taiSanDatNhaRef.tinhTrangTaiSan?.idTinhTrang
+                }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

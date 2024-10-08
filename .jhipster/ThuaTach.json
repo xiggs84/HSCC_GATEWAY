@@ -2,16 +2,16 @@
   "annotations": {
     "changelogDate": "20240820100457"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idThuaTach",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idTaiSan",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "thongTinThuaTach",
@@ -23,7 +23,16 @@
     }
   ],
   "name": "ThuaTach",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "taiSan",
+      "otherEntityRelationshipName": "thuaTach",
+      "relationshipName": "taiSan",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

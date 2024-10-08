@@ -27,6 +27,7 @@ describe('TaiSanDuongSu Form Service', () => {
             idLoaiHopDong: expect.any(Object),
             idChungThuc: expect.any(Object),
             duongSu: expect.any(Object),
+            taiSan: expect.any(Object),
           }),
         );
       });
@@ -44,6 +45,7 @@ describe('TaiSanDuongSu Form Service', () => {
             idLoaiHopDong: expect.any(Object),
             idChungThuc: expect.any(Object),
             duongSu: expect.any(Object),
+            taiSan: expect.any(Object),
           }),
         );
       });

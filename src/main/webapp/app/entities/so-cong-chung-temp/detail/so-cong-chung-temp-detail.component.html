@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (soCongChungTemp()) {
+    @if (soCongChungTemp(); as soCongChungTempRef) {
       <div>
         <h2 data-cy="soCongChungTempDetailsHeading">
           <span jhiTranslate="gatewayApp.soCongChungTemp.detail.title">So Cong Chung Temp</span>
@@ -15,23 +15,23 @@
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
           <dd>
-            <span>{{ soCongChungTemp()!.id }}</span>
+            <span>{{ soCongChungTempRef.id }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.soCongChungTemp.idHopDong">Id Hop Dong</span></dt>
           <dd>
-            <span>{{ soCongChungTemp()!.idHopDong }}</span>
+            <span>{{ soCongChungTempRef.idHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.soCongChungTemp.idMaster">Id Master</span></dt>
           <dd>
-            <span>{{ soCongChungTemp()!.idMaster }}</span>
+            <span>{{ soCongChungTempRef.idMaster }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.soCongChungTemp.soCc">So Cc</span></dt>
           <dd>
-            <span>{{ soCongChungTemp()!.soCc }}</span>
+            <span>{{ soCongChungTempRef.soCc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.soCongChungTemp.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ soCongChungTemp()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ soCongChungTempRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
         </dl>
 
@@ -39,7 +39,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/so-cong-chung-temp', soCongChungTemp()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/so-cong-chung-temp', soCongChungTempRef.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

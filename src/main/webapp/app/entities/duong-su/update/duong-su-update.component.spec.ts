@@ -53,10 +53,10 @@ describe('DuongSu Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call LoaiDuongSu query and add missing value', () => {
       const duongSu: IDuongSu = { idDuongSu: 456 };
-      const loaiDuongSu: ILoaiDuongSu = { idLoaiDuongSu: 'ff5493e6-491f-4d27-aebf-2f1f1da24362' };
+      const loaiDuongSu: ILoaiDuongSu = { idLoaiDuongSu: '11d2e7c5-63e3-41ad-9ce7-95234d54085b' };
       duongSu.loaiDuongSu = loaiDuongSu;
 
-      const loaiDuongSuCollection: ILoaiDuongSu[] = [{ idLoaiDuongSu: '1f59cfdf-6e01-419f-b29f-5b50c4ad2927' }];
+      const loaiDuongSuCollection: ILoaiDuongSu[] = [{ idLoaiDuongSu: '54bface3-843f-4ecf-b152-73ef0582f35f' }];
       jest.spyOn(loaiDuongSuService, 'query').mockReturnValue(of(new HttpResponse({ body: loaiDuongSuCollection })));
       const additionalLoaiDuongSus = [loaiDuongSu];
       const expectedCollection: ILoaiDuongSu[] = [...additionalLoaiDuongSus, ...loaiDuongSuCollection];
@@ -75,10 +75,10 @@ describe('DuongSu Management Update Component', () => {
 
     it('Should call LoaiGiayTo query and add missing value', () => {
       const duongSu: IDuongSu = { idDuongSu: 456 };
-      const loaiGiayTo: ILoaiGiayTo = { idLoaiGiayTo: 'd2944d49-2e6d-4e15-9fec-39096a3c7575' };
+      const loaiGiayTo: ILoaiGiayTo = { idLoaiGiayTo: '44c4cfa7-fe79-4a33-a675-3302d00415dc' };
       duongSu.loaiGiayTo = loaiGiayTo;
 
-      const loaiGiayToCollection: ILoaiGiayTo[] = [{ idLoaiGiayTo: '4abe667f-cadd-4d4a-8079-b4ed388ddab2' }];
+      const loaiGiayToCollection: ILoaiGiayTo[] = [{ idLoaiGiayTo: 'e931c262-bf72-4949-aba5-6b5bb4c2cd75' }];
       jest.spyOn(loaiGiayToService, 'query').mockReturnValue(of(new HttpResponse({ body: loaiGiayToCollection })));
       const additionalLoaiGiayTos = [loaiGiayTo];
       const expectedCollection: ILoaiGiayTo[] = [...additionalLoaiGiayTos, ...loaiGiayToCollection];
@@ -97,9 +97,9 @@ describe('DuongSu Management Update Component', () => {
 
     it('Should update editForm', () => {
       const duongSu: IDuongSu = { idDuongSu: 456 };
-      const loaiDuongSu: ILoaiDuongSu = { idLoaiDuongSu: '0b52a6b1-fe6b-4fc8-9621-f842f546263e' };
+      const loaiDuongSu: ILoaiDuongSu = { idLoaiDuongSu: 'a331906e-763c-44ac-a7d3-aff9027ac941' };
       duongSu.loaiDuongSu = loaiDuongSu;
-      const loaiGiayTo: ILoaiGiayTo = { idLoaiGiayTo: '2770bff0-f17d-4db8-bd92-88a0daac94e5' };
+      const loaiGiayTo: ILoaiGiayTo = { idLoaiGiayTo: 'fa721456-6b90-49f4-9025-fa9cd5cc7c54' };
       duongSu.loaiGiayTo = loaiGiayTo;
 
       activatedRoute.data = of({ duongSu });

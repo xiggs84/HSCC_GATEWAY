@@ -2,8 +2,9 @@
   "annotations": {
     "changelogDate": "20240820100757"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idCauHinh",
@@ -41,5 +42,6 @@
   "name": "CauHinhThongTinLoaiTaiSan",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

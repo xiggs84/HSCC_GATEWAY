@@ -69,6 +69,21 @@
               <td>{{ tinhTrangTaiSan.trangThai }}</td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/tai-san']"
+                    [queryParams]="{ 'filter[tinhTrangTaiSanId.in]': tinhTrangTaiSan.idTinhTrang }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.tinhTrangTaiSan.tinhTrang' | translate) }"
+                      >Show Tinh Trang</span
+                    >
+                  </button>
                   <a
                     [routerLink]="['/tinh-trang-tai-san', tinhTrangTaiSan.idTinhTrang, 'view']"
                     class="btn btn-info btn-sm"

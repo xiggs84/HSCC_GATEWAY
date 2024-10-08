@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ILoaiHopDongCongChung, NewLoaiHopDongCongChung } from '../loai-hop-dong-cong-chung.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idLoaiHopDongCongChung: unknown }> = Partial<Omit<T, 'idLoaiHopDongCongChung'>> & {
+  idLoaiHopDongCongChung: T['idLoaiHopDongCongChung'];
+};
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,11 +16,10 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type LoaiHopDongCongChungFormGroupInput = ILoaiHopDongCongChung | PartialWithRequiredKeyOf<NewLoaiHopDongCongChung>;
 
-type LoaiHopDongCongChungFormDefaults = Pick<NewLoaiHopDongCongChung, 'id'>;
+type LoaiHopDongCongChungFormDefaults = Pick<NewLoaiHopDongCongChung, 'idLoaiHopDongCongChung'>;
 
 type LoaiHopDongCongChungFormGroupContent = {
-  id: FormControl<ILoaiHopDongCongChung['id'] | NewLoaiHopDongCongChung['id']>;
-  idLoaiHopDongCongChung: FormControl<ILoaiHopDongCongChung['idLoaiHopDongCongChung']>;
+  idLoaiHopDongCongChung: FormControl<ILoaiHopDongCongChung['idLoaiHopDongCongChung'] | NewLoaiHopDongCongChung['idLoaiHopDongCongChung']>;
   dienGiai: FormControl<ILoaiHopDongCongChung['dienGiai']>;
   giaTri: FormControl<ILoaiHopDongCongChung['giaTri']>;
   trangThai: FormControl<ILoaiHopDongCongChung['trangThai']>;
@@ -29,21 +30,23 @@ export type LoaiHopDongCongChungFormGroup = FormGroup<LoaiHopDongCongChungFormGr
 @Injectable({ providedIn: 'root' })
 export class LoaiHopDongCongChungFormService {
   createLoaiHopDongCongChungFormGroup(
-    loaiHopDongCongChung: LoaiHopDongCongChungFormGroupInput = { id: null },
+    loaiHopDongCongChung: LoaiHopDongCongChungFormGroupInput = { idLoaiHopDongCongChung: null },
   ): LoaiHopDongCongChungFormGroup {
     const loaiHopDongCongChungRawValue = {
       ...this.getFormDefaults(),
       ...loaiHopDongCongChung,
     };
     return new FormGroup<LoaiHopDongCongChungFormGroupContent>({
-      id: new FormControl(
-        { value: loaiHopDongCongChungRawValue.id, disabled: true },
+      idLoaiHopDongCongChung: new FormControl(
+        {
+          value: loaiHopDongCongChungRawValue.idLoaiHopDongCongChung,
+          disabled: loaiHopDongCongChungRawValue.idLoaiHopDongCongChung !== null,
+        },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idLoaiHopDongCongChung: new FormControl(loaiHopDongCongChungRawValue.idLoaiHopDongCongChung),
       dienGiai: new FormControl(loaiHopDongCongChungRawValue.dienGiai),
       giaTri: new FormControl(loaiHopDongCongChungRawValue.giaTri),
       trangThai: new FormControl(loaiHopDongCongChungRawValue.trangThai),
@@ -59,14 +62,17 @@ export class LoaiHopDongCongChungFormService {
     form.reset(
       {
         ...loaiHopDongCongChungRawValue,
-        id: { value: loaiHopDongCongChungRawValue.id, disabled: true },
+        idLoaiHopDongCongChung: {
+          value: loaiHopDongCongChungRawValue.idLoaiHopDongCongChung,
+          disabled: loaiHopDongCongChungRawValue.idLoaiHopDongCongChung !== null,
+        },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): LoaiHopDongCongChungFormDefaults {
     return {
-      id: null,
+      idLoaiHopDongCongChung: null,
     };
   }
 }

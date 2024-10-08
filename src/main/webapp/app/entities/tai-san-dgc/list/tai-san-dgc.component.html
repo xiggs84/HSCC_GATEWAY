@@ -175,6 +175,24 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="taiSan.idTaiSan">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSanDgc.taiSan">Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="danhMucLoaiTaiSan.idLoaiTs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSanDgc.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tinhTrangTaiSan.idTinhTrang">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSanDgc.tinhTrangTaiSan">Tinh Trang Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -203,6 +221,31 @@
               <td>{{ taiSanDgc.soCc }}</td>
               <td>{{ taiSanDgc.soVaoSo }}</td>
               <td>{{ taiSanDgc.moTa }}</td>
+              <td>
+                @if (taiSanDgc.taiSan) {
+                  <div>
+                    <a [routerLink]="['/tai-san', taiSanDgc.taiSan.idTaiSan, 'view']">{{ taiSanDgc.taiSan.idTaiSan }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (taiSanDgc.danhMucLoaiTaiSan) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-tai-san', taiSanDgc.danhMucLoaiTaiSan.idLoaiTs, 'view']">{{
+                      taiSanDgc.danhMucLoaiTaiSan.idLoaiTs
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (taiSanDgc.tinhTrangTaiSan) {
+                  <div>
+                    <a [routerLink]="['/tinh-trang-tai-san', taiSanDgc.tinhTrangTaiSan.idTinhTrang, 'view']">{{
+                      taiSanDgc.tinhTrangTaiSan.idTinhTrang
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/tai-san-dgc', taiSanDgc.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

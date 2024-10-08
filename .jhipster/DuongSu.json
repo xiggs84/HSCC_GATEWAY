@@ -2,32 +2,52 @@
   "annotations": {
     "changelogDate": "20240820093057"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idDuongSu",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "tenDuongSu",
       "fieldType": "String"
     },
     {
-      "fieldName": "idLoaiDs",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "diaChi",
       "fieldType": "String"
     },
     {
+      "fieldName": "soDienThoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "website",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "trangThai",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     },
     {
       "fieldName": "thongTinDs",
-      "fieldType": "String"
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "ngayThaoTac",
@@ -39,10 +59,6 @@
     },
     {
       "fieldName": "idDsGoc",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idTinhTrang",
       "fieldType": "Long"
     },
     {
@@ -62,16 +78,68 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "ghiChu",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "idLoaiNganChan",
       "fieldType": "Long"
     },
     {
       "fieldName": "syncStatus",
-      "fieldType": "Long"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DuongSu",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "thongTinCapNhatDuongSu",
+      "relationshipName": "thongTinCapNhat",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taiSanDuongSu",
+      "otherEntityRelationshipName": "duongSu",
+      "relationshipName": "taiSanDuongSu",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "quanHeDuongSu",
+      "otherEntityRelationshipName": "duongSu",
+      "relationshipName": "quanHeDuongSu",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhSachDuongSu",
+      "otherEntityRelationshipName": "duongSu",
+      "relationshipName": "danhSachDuongSu",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "duongSuTrungCmnd",
+      "otherEntityRelationshipName": "duongSu",
+      "relationshipName": "duongSuTrungCmnd",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "duongSuTrungCmndBak",
+      "otherEntityRelationshipName": "duongSu",
+      "relationshipName": "duongSuTrungCmndBak",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

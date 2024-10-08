@@ -25,6 +25,7 @@ type TaiSanDuongSuFormGroupContent = {
   idLoaiHopDong: FormControl<ITaiSanDuongSu['idLoaiHopDong']>;
   idChungThuc: FormControl<ITaiSanDuongSu['idChungThuc']>;
   duongSu: FormControl<ITaiSanDuongSu['duongSu']>;
+  taiSan: FormControl<ITaiSanDuongSu['taiSan']>;
 };
 
 export type TaiSanDuongSuFormGroup = FormGroup<TaiSanDuongSuFormGroupContent>;
@@ -53,6 +54,7 @@ export class TaiSanDuongSuFormService {
       idLoaiHopDong: new FormControl(taiSanDuongSuRawValue.idLoaiHopDong),
       idChungThuc: new FormControl(taiSanDuongSuRawValue.idChungThuc),
       duongSu: new FormControl(taiSanDuongSuRawValue.duongSu),
+      taiSan: new FormControl(taiSanDuongSuRawValue.taiSan),
     });
   }
 

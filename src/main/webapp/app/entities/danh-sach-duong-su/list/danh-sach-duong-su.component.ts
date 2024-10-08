@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,9 +7,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
+import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
+import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
 import { IDanhSachDuongSu } from '../danh-sach-duong-su.model';
+
 import { DanhSachDuongSuService, EntityArrayResponseType } from '../service/danh-sach-duong-su.service';
 import { DanhSachDuongSuDeleteDialogComponent } from '../delete/danh-sach-duong-su-delete-dialog.component';
 
@@ -25,6 +30,8 @@ import { DanhSachDuongSuDeleteDialogComponent } from '../delete/danh-sach-duong-
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    FilterComponent,
+    ItemCountComponent,
   ],
 })
 export class DanhSachDuongSuComponent implements OnInit {
@@ -33,6 +40,11 @@ export class DanhSachDuongSuComponent implements OnInit {
   isLoading = false;
 
   sortState = sortStateSignal({});
+  filters: IFilterOptions = new FilterOptions();
+
+  itemsPerPage = ITEMS_PER_PAGE;
+  totalItems = 0;
+  page = 1;
 
   public router = inject(Router);
   protected danhSachDuongSuService = inject(DanhSachDuongSuService);
@@ -47,13 +59,11 @@ export class DanhSachDuongSuComponent implements OnInit {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
       .pipe(
         tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-        tap(() => {
-          if (!this.danhSachDuongSus || this.danhSachDuongSus.length === 0) {
-            this.load();
-          }
-        }),
+        tap(() => this.load()),
       )
       .subscribe();
+
+    this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
   }
 
   delete(danhSachDuongSu: IDanhSachDuongSu): void {
@@ -77,39 +87,60 @@ export class DanhSachDuongSuComponent implements OnInit {
   }
 
   navigateToWithComponentValues(event: SortState): void {
-    this.handleNavigation(event);
+    this.handleNavigation(this.page, event, this.filters.filterOptions);
+  }
+
+  navigateToPage(page: number): void {
+    this.handleNavigation(page, this.sortState(), this.filters.filterOptions);
   }
 
   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
+    const page = params.get(PAGE_HEADER);
+    this.page = +(page ?? 1);
     this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
+    this.filters.initializeFromParams(params);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
+    this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.danhSachDuongSus = this.refineData(dataFromBody);
-  }
-
-  protected refineData(data: IDanhSachDuongSu[]): IDanhSachDuongSu[] {
-    const { predicate, order } = this.sortState();
-    return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
+    this.danhSachDuongSus = dataFromBody;
   }
 
   protected fillComponentAttributesFromResponseBody(data: IDanhSachDuongSu[] | null): IDanhSachDuongSu[] {
     return data ?? [];
   }
 
+  protected fillComponentAttributesFromResponseHeader(headers: HttpHeaders): void {
+    this.totalItems = Number(headers.get(TOTAL_COUNT_RESPONSE_HEADER));
+  }
+
   protected queryBackend(): Observable<EntityArrayResponseType> {
+    const { page, filters } = this;
+
     this.isLoading = true;
+    const pageToLoad: number = page;
     const queryObject: any = {
+      page: pageToLoad - 1,
+      size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
+    filters.filterOptions.forEach(filterOption => {
+      queryObject[filterOption.name] = filterOption.values;
+    });
     return this.danhSachDuongSuService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
-  protected handleNavigation(sortState: SortState): void {
-    const queryParamsObj = {
+  protected handleNavigation(page: number, sortState: SortState, filterOptions?: IFilterOption[]): void {
+    const queryParamsObj: any = {
+      page,
+      size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(sortState),
     };
+
+    filterOptions?.forEach(filterOption => {
+      queryParamsObj[filterOption.nameAsQueryParam()] = filterOption.values;
+    });
 
     this.ngZone.run(() => {
       this.router.navigate(['./'], {

@@ -1,21 +1,20 @@
 import { IDanhMucNhomHopDong, NewDanhMucNhomHopDong } from './danh-muc-nhom-hop-dong.model';
 
 export const sampleWithRequiredData: IDanhMucNhomHopDong = {
-  id: 13465,
+  idNhom: 'c50903ff-d01a-4167-8043-9b9057d7a2a0',
 };
 
 export const sampleWithPartialData: IDanhMucNhomHopDong = {
-  id: 21119,
+  idNhom: 'bb202af8-310b-4839-a8e6-a2cb5da52de8',
 };
 
 export const sampleWithFullData: IDanhMucNhomHopDong = {
-  id: 14950,
-  idNhom: 6928,
-  dienGiai: 'meanwhile',
+  idNhom: '631809c4-545e-48ac-9d9e-b2e0f06c5064',
+  dienGiai: 'that',
 };
 
 export const sampleWithNewData: NewDanhMucNhomHopDong = {
-  id: null,
+  idNhom: null,
 };
 
 Object.freeze(sampleWithNewData);

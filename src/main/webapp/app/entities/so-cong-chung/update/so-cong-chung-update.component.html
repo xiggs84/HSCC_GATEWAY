@@ -12,12 +12,33 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
-          <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.soCongChung.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-          </div>
-        }
+        <div class="mb-3">
+          <label class="form-label" for="field_idSo" jhiTranslate="gatewayApp.soCongChung.idSo">Id So</label>
+          <input
+            type="text"
+            class="form-control"
+            name="idSo"
+            id="field_idSo"
+            data-cy="idSo"
+            formControlName="idSo"
+            [readonly]="editForm.get('idSo')!.disabled"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idDonVi" jhiTranslate="gatewayApp.soCongChung.idDonVi">Id Don Vi</label>
+          <input type="number" class="form-control" name="idDonVi" id="field_idDonVi" data-cy="idDonVi" formControlName="idDonVi" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tenSo" jhiTranslate="gatewayApp.soCongChung.tenSo">Ten So</label>
+          <input type="text" class="form-control" name="tenSo" id="field_tenSo" data-cy="tenSo" formControlName="tenSo" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_giaTri" jhiTranslate="gatewayApp.soCongChung.giaTri">Gia Tri</label>
+          <input type="number" class="form-control" name="giaTri" id="field_giaTri" data-cy="giaTri" formControlName="giaTri" />
+        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_ngayThaoTac" jhiTranslate="gatewayApp.soCongChung.ngayThaoTac">Ngay Thao Tac</label>
@@ -39,26 +60,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idSo" jhiTranslate="gatewayApp.soCongChung.idSo">Id So</label>
-          <input type="number" class="form-control" name="idSo" id="field_idSo" data-cy="idSo" formControlName="idSo" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idDonVi" jhiTranslate="gatewayApp.soCongChung.idDonVi">Id Don Vi</label>
-          <input type="number" class="form-control" name="idDonVi" id="field_idDonVi" data-cy="idDonVi" formControlName="idDonVi" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_tenSo" jhiTranslate="gatewayApp.soCongChung.tenSo">Ten So</label>
-          <input type="text" class="form-control" name="tenSo" id="field_tenSo" data-cy="tenSo" formControlName="tenSo" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_giaTri" jhiTranslate="gatewayApp.soCongChung.giaTri">Gia Tri</label>
-          <input type="number" class="form-control" name="giaTri" id="field_giaTri" data-cy="giaTri" formControlName="giaTri" />
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_nguoiThaoTac" jhiTranslate="gatewayApp.soCongChung.nguoiThaoTac">Nguoi Thao Tac</label>
           <input
             type="number"
@@ -76,8 +77,22 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_idLoaiSo" jhiTranslate="gatewayApp.soCongChung.idLoaiSo">Id Loai So</label>
-          <input type="number" class="form-control" name="idLoaiSo" id="field_idLoaiSo" data-cy="idLoaiSo" formControlName="idLoaiSo" />
+          <label class="form-label" for="field_danhMucLoaiSoCongChung" jhiTranslate="gatewayApp.soCongChung.danhMucLoaiSoCongChung"
+            >Danh Muc Loai So Cong Chung</label
+          >
+          <select
+            class="form-control"
+            id="field_danhMucLoaiSoCongChung"
+            data-cy="danhMucLoaiSoCongChung"
+            name="danhMucLoaiSoCongChung"
+            formControlName="danhMucLoaiSoCongChung"
+            [compareWith]="compareDanhMucLoaiSoCongChung"
+          >
+            <option [ngValue]="null"></option>
+            @for (danhMucLoaiSoCongChungOption of danhMucLoaiSoCongChungsSharedCollection; track $index) {
+              <option [ngValue]="danhMucLoaiSoCongChungOption">{{ danhMucLoaiSoCongChungOption.idLoai }}</option>
+            }
+          </select>
         </div>
       </div>
 

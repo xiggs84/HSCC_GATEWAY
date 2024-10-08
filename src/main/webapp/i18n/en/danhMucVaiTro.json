@@ -17,11 +17,10 @@
       "detail": {
         "title": "Danh Muc Vai Tro"
       },
-      "id": "ID",
       "idVaiTro": "Id Vai Tro",
       "dienGiai": "Dien Giai",
-      "idLoaiHopDong": "Id Loai Hop Dong",
-      "idLoaiVaiTro": "Id Loai Vai Tro"
+      "idLoaiVaiTro": "Id Loai Vai Tro",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong"
     }
   }
 }

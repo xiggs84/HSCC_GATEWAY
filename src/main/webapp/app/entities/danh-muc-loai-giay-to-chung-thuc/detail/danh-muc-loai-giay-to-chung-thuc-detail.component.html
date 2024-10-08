@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (danhMucLoaiGiayToChungThuc()) {
+    @if (danhMucLoaiGiayToChungThuc(); as danhMucLoaiGiayToChungThucRef) {
       <div>
         <h2 data-cy="danhMucLoaiGiayToChungThucDetailsHeading">
           <span jhiTranslate="gatewayApp.danhMucLoaiGiayToChungThuc.detail.title">Danh Muc Loai Giay To Chung Thuc</span>
@@ -13,17 +13,13 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ danhMucLoaiGiayToChungThuc()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucLoaiGiayToChungThuc.idLoaiGiayTo">Id Loai Giay To</span></dt>
           <dd>
-            <span>{{ danhMucLoaiGiayToChungThuc()!.idLoaiGiayTo }}</span>
+            <span>{{ danhMucLoaiGiayToChungThucRef.idLoaiGiayTo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.danhMucLoaiGiayToChungThuc.dienGiai">Dien Giai</span></dt>
           <dd>
-            <span>{{ danhMucLoaiGiayToChungThuc()!.dienGiai }}</span>
+            <span>{{ danhMucLoaiGiayToChungThucRef.dienGiai }}</span>
           </dd>
         </dl>
 
@@ -33,7 +29,7 @@
 
         <button
           type="button"
-          [routerLink]="['/danh-muc-loai-giay-to-chung-thuc', danhMucLoaiGiayToChungThuc()!.id, 'edit']"
+          [routerLink]="['/danh-muc-loai-giay-to-chung-thuc', danhMucLoaiGiayToChungThucRef.idLoaiGiayTo, 'edit']"
           class="btn btn-primary"
         >
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>

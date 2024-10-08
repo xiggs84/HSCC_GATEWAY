@@ -17,7 +17,7 @@ describe('ThongTinChungHopDong Management Detail Component', () => {
           [
             {
               path: '**',
-              component: ThongTinChungHopDongDetailComponent,
+              loadComponent: () => import('./thong-tin-chung-hop-dong-detail.component').then(m => m.ThongTinChungHopDongDetailComponent),
               resolve: { thongTinChungHopDong: () => of({ id: 123 }) },
             },
           ],

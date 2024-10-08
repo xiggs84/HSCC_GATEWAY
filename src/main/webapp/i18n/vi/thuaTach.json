@@ -17,11 +17,10 @@
       "detail": {
         "title": "Thua Tach"
       },
-      "id": "ID",
       "idThuaTach": "Id Thua Tach",
-      "idTaiSan": "Id Tai San",
       "thongTinThuaTach": "Thong Tin Thua Tach",
-      "trangThai": "Trang Thai"
+      "trangThai": "Trang Thai",
+      "taiSan": "Tai San"
     }
   }
 }

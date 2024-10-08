@@ -21,7 +21,16 @@
     <include file="config/liquibase/changelog/20240917092214_added_entity_CapQuanLy.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240917092215_added_entity_LoaiDonVi.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240917092216_added_entity_NhiemVu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240917130611_added_entity_ChiTietNganChan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240917130612_added_entity_LoaiDuongSu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240917130613_added_entity_LoaiGiayTo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240922094102_added_entity_ThongTinCapNhatDuongSu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240928083741_added_entity_ThongTinCapNhatTaiSan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240929081538_added_entity_ChiTietNganChanTaiSan.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240922094102_added_entity_constraints_ThongTinCapNhatDuongSu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240928083741_added_entity_constraints_ThongTinCapNhatTaiSan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240929081538_added_entity_constraints_ChiTietNganChanTaiSan.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

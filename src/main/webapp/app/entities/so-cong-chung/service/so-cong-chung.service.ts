@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { ISoCongChung, NewSoCongChung } from '../so-cong-chung.model';
 
-export type PartialUpdateSoCongChung = Partial<ISoCongChung> & Pick<ISoCongChung, 'id'>;
+export type PartialUpdateSoCongChung = Partial<ISoCongChung> & Pick<ISoCongChung, 'idSo'>;
 
 type RestOf<T extends ISoCongChung | NewSoCongChung> = Omit<T, 'ngayThaoTac'> & {
   ngayThaoTac?: string | null;
@@ -53,7 +53,7 @@ export class SoCongChungService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<RestSoCongChung>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -66,19 +66,19 @@ export class SoCongChungService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getSoCongChungIdentifier(soCongChung: Pick<ISoCongChung, 'id'>): number {
-    return soCongChung.id;
+  getSoCongChungIdentifier(soCongChung: Pick<ISoCongChung, 'idSo'>): string {
+    return soCongChung.idSo;
   }
 
-  compareSoCongChung(o1: Pick<ISoCongChung, 'id'> | null, o2: Pick<ISoCongChung, 'id'> | null): boolean {
+  compareSoCongChung(o1: Pick<ISoCongChung, 'idSo'> | null, o2: Pick<ISoCongChung, 'idSo'> | null): boolean {
     return o1 && o2 ? this.getSoCongChungIdentifier(o1) === this.getSoCongChungIdentifier(o2) : o1 === o2;
   }
 
-  addSoCongChungToCollectionIfMissing<Type extends Pick<ISoCongChung, 'id'>>(
+  addSoCongChungToCollectionIfMissing<Type extends Pick<ISoCongChung, 'idSo'>>(
     soCongChungCollection: Type[],
     ...soCongChungsToCheck: (Type | null | undefined)[]
   ): Type[] {

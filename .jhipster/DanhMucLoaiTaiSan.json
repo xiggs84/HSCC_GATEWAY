@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820100857"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idLoaiTs",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "dienGiai",
@@ -16,14 +20,48 @@
     {
       "fieldName": "trangThai",
       "fieldType": "Long"
-    },
-    {
-      "fieldName": "searchStr",
-      "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucLoaiTaiSan",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "taiSan",
+      "relationshipName": "loaiTaiSan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "danhSachTaiSan",
+      "otherEntityRelationshipName": "danhMucLoaiTaiSan",
+      "relationshipName": "danhSachTaiSan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taiSanDgc",
+      "otherEntityRelationshipName": "danhMucLoaiTaiSan",
+      "relationshipName": "taiSanDgc",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taiSanDatNha",
+      "otherEntityRelationshipName": "danhMucLoaiTaiSan",
+      "relationshipName": "taiSanDatNha",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "thongTinCapNhatTaiSan",
+      "otherEntityRelationshipName": "danhMucLoaiTaiSan",
+      "relationshipName": "thongTinCapNhatTaiSan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="16" class="filter-wrapper">
   <nz-col nzSpan="12">
-    <input nz-input [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)" placeholder="Tìm kiếm ..." />
+    <input nz-input [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Tìm kiếm ..." />
   </nz-col>
   <nz-col nzSpan="12" class="button-group">
     <button nz-button nzType="primary" (click)="addNewItem()">
@@ -13,11 +13,13 @@
 <nz-table [nzData]="listOfData"
           [nzPageSize]="pageSize"
           [nzPageIndex]="pageIndex"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger
           (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
           (nzPageIndexChange)="onPageIndexChange($event)"
-          (nzPageSizeChange)="onPageSizeChange($event)"
-          class="custom-table"
-          nzShowPagination nzShowSizeChanger>
+          (nzPageSizeChange)="onPageSizeChange($event)">
   <thead>
   <tr>
     <th nzWidth="50px">Stt</th>
@@ -30,7 +32,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of listOfCurrentPageData; let i = index">
+  <tr *ngFor="let item of listOfData; let i = index">
     <td> {{ (pageIndex - 1) * pageSize + i + 1 }}</td>
     <td>{{ item?.tenDonVi ?? 'N/A' }}</td>
     <td>{{ item?.diaChi ?? 'N/A' }}</td>

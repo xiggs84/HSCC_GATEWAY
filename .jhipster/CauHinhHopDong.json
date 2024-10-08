@@ -2,12 +2,13 @@
   "annotations": {
     "changelogDate": "20240820094357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idLoaiHopDong",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "idDonVi",
@@ -34,8 +35,11 @@
       "fieldType": "Long"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "CauHinhHopDong",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

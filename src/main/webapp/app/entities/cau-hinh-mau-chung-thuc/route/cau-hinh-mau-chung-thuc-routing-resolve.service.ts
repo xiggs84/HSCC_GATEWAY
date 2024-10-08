@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { of, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ICauHinhMauChungThuc } from '../cau-hinh-mau-chung-thuc.model';
 import { CauHinhMauChungThucService } from '../service/cau-hinh-mau-chung-thuc.service';
 
 const cauHinhMauChungThucResolve = (route: ActivatedRouteSnapshot): Observable<null | ICauHinhMauChungThuc> => {
-  const id = route.params['id'];
+  const id = route.params.id;
   if (id) {
     return inject(CauHinhMauChungThucService)
       .find(id)
@@ -16,10 +16,9 @@ const cauHinhMauChungThucResolve = (route: ActivatedRouteSnapshot): Observable<n
         mergeMap((cauHinhMauChungThuc: HttpResponse<ICauHinhMauChungThuc>) => {
           if (cauHinhMauChungThuc.body) {
             return of(cauHinhMauChungThuc.body);
-          } else {
-            inject(Router).navigate(['404']);
-            return EMPTY;
           }
+          inject(Router).navigate(['404']);
+          return EMPTY;
         }),
       );
   }

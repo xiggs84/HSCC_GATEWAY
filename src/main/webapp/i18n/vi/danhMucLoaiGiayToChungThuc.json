@@ -17,9 +17,10 @@
       "detail": {
         "title": "Danh Muc Loai Giay To Chung Thuc"
       },
-      "id": "ID",
       "idLoaiGiayTo": "Id Loai Giay To",
-      "dienGiai": "Dien Giai"
+      "dienGiai": "Dien Giai",
+      "danhSachChungThuc": "Danh Sach Chung Thuc",
+      "chungThuc": "Chung Thuc"
     }
   }
 }

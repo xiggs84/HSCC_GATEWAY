@@ -14,7 +14,7 @@ export interface IDanhSachDuongSu {
   strSearch?: string | null;
   soGiayTo?: string | null;
   idLoaiNganChan?: number | null;
-  duongSu?: IDuongSu | null;
+  duongSu?: Pick<IDuongSu, 'idDuongSu'> | null;
 }
 
 export type NewDanhSachDuongSu = Omit<IDanhSachDuongSu, 'id'> & { id: null };

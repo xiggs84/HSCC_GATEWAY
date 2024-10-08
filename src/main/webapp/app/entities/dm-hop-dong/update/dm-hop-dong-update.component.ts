@@ -1,15 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IDmHopDong } from '../dm-hop-dong.model';
+import { IDanhMucLoaiHopDong } from 'app/entities/danh-muc-loai-hop-dong/danh-muc-loai-hop-dong.model';
+import { DanhMucLoaiHopDongService } from 'app/entities/danh-muc-loai-hop-dong/service/danh-muc-loai-hop-dong.service';
+import { ISoCongChung } from 'app/entities/so-cong-chung/so-cong-chung.model';
+import { SoCongChungService } from 'app/entities/so-cong-chung/service/so-cong-chung.service';
 import { DmHopDongService } from '../service/dm-hop-dong.service';
-import { DmHopDongFormService, DmHopDongFormGroup } from './dm-hop-dong-form.service';
+import { IDmHopDong } from '../dm-hop-dong.model';
+import { DmHopDongFormGroup, DmHopDongFormService } from './dm-hop-dong-form.service';
 
 @Component({
   standalone: true,
@@ -21,12 +25,22 @@ export class DmHopDongUpdateComponent implements OnInit {
   isSaving = false;
   dmHopDong: IDmHopDong | null = null;
 
+  danhMucLoaiHopDongsSharedCollection: IDanhMucLoaiHopDong[] = [];
+  soCongChungsSharedCollection: ISoCongChung[] = [];
+
   protected dmHopDongService = inject(DmHopDongService);
   protected dmHopDongFormService = inject(DmHopDongFormService);
+  protected danhMucLoaiHopDongService = inject(DanhMucLoaiHopDongService);
+  protected soCongChungService = inject(SoCongChungService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: DmHopDongFormGroup = this.dmHopDongFormService.createDmHopDongFormGroup();
+
+  compareDanhMucLoaiHopDong = (o1: IDanhMucLoaiHopDong | null, o2: IDanhMucLoaiHopDong | null): boolean =>
+    this.danhMucLoaiHopDongService.compareDanhMucLoaiHopDong(o1, o2);
+
+  compareSoCongChung = (o1: ISoCongChung | null, o2: ISoCongChung | null): boolean => this.soCongChungService.compareSoCongChung(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ dmHopDong }) => {
@@ -34,6 +48,8 @@ export class DmHopDongUpdateComponent implements OnInit {
       if (dmHopDong) {
         this.updateForm(dmHopDong);
       }
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -44,7 +60,7 @@ export class DmHopDongUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const dmHopDong = this.dmHopDongFormService.getDmHopDong(this.editForm);
-    if (dmHopDong.id !== null) {
+    if (dmHopDong.idHopDong !== null) {
       this.subscribeToSaveResponse(this.dmHopDongService.update(dmHopDong));
     } else {
       this.subscribeToSaveResponse(this.dmHopDongService.create(dmHopDong));
@@ -73,5 +89,40 @@ export class DmHopDongUpdateComponent implements OnInit {
   protected updateForm(dmHopDong: IDmHopDong): void {
     this.dmHopDong = dmHopDong;
     this.dmHopDongFormService.resetForm(this.editForm, dmHopDong);
+
+    this.danhMucLoaiHopDongsSharedCollection =
+      this.danhMucLoaiHopDongService.addDanhMucLoaiHopDongToCollectionIfMissing<IDanhMucLoaiHopDong>(
+        this.danhMucLoaiHopDongsSharedCollection,
+        dmHopDong.danhMucLoaiHopDong,
+      );
+    this.soCongChungsSharedCollection = this.soCongChungService.addSoCongChungToCollectionIfMissing<ISoCongChung>(
+      this.soCongChungsSharedCollection,
+      dmHopDong.soCongChung,
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.danhMucLoaiHopDongService
+      .query()
+      .pipe(map((res: HttpResponse<IDanhMucLoaiHopDong[]>) => res.body ?? []))
+      .pipe(
+        map((danhMucLoaiHopDongs: IDanhMucLoaiHopDong[]) =>
+          this.danhMucLoaiHopDongService.addDanhMucLoaiHopDongToCollectionIfMissing<IDanhMucLoaiHopDong>(
+            danhMucLoaiHopDongs,
+            this.dmHopDong?.danhMucLoaiHopDong,
+          ),
+        ),
+      )
+      .subscribe((danhMucLoaiHopDongs: IDanhMucLoaiHopDong[]) => (this.danhMucLoaiHopDongsSharedCollection = danhMucLoaiHopDongs));
+
+    this.soCongChungService
+      .query()
+      .pipe(map((res: HttpResponse<ISoCongChung[]>) => res.body ?? []))
+      .pipe(
+        map((soCongChungs: ISoCongChung[]) =>
+          this.soCongChungService.addSoCongChungToCollectionIfMissing<ISoCongChung>(soCongChungs, this.dmHopDong?.soCongChung),
+        ),
+      )
+      .subscribe((soCongChungs: ISoCongChung[]) => (this.soCongChungsSharedCollection = soCongChungs));
   }
 }

@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (taiSans?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.taiSan.home.notFound">No Tai Sans found</span>
@@ -189,6 +191,18 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="danhMucLoaiTaiSan.idLoaiTs">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSan.danhMucLoaiTaiSan">Danh Muc Loai Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tinhTrangTaiSan.idTinhTrang">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.taiSan.tinhTrangTaiSan">Tinh Trang Tai San</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -219,6 +233,24 @@
               <td>{{ taiSan.moTa }}</td>
               <td>{{ taiSan.loaiNganChan }}</td>
               <td>{{ taiSan.syncStatus }}</td>
+              <td>
+                @if (taiSan.danhMucLoaiTaiSan) {
+                  <div>
+                    <a [routerLink]="['/danh-muc-loai-tai-san', taiSan.danhMucLoaiTaiSan.idLoaiTs, 'view']">{{
+                      taiSan.danhMucLoaiTaiSan.idLoaiTs
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (taiSan.tinhTrangTaiSan) {
+                  <div>
+                    <a [routerLink]="['/tinh-trang-tai-san', taiSan.tinhTrangTaiSan.idTinhTrang, 'view']">{{
+                      taiSan.tinhTrangTaiSan.idTinhTrang
+                    }}</a>
+                  </div>
+                }
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/tai-san', taiSan.idTaiSan, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
@@ -241,6 +273,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (taiSans && taiSans.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

@@ -1,24 +1,20 @@
 import { IDanhMucLoaiVanBan, NewDanhMucLoaiVanBan } from './danh-muc-loai-van-ban.model';
 
 export const sampleWithRequiredData: IDanhMucLoaiVanBan = {
-  id: 32374,
+  idLoaiVb: '25c599e9-1bab-469d-91e4-ce95b227305f',
 };
 
 export const sampleWithPartialData: IDanhMucLoaiVanBan = {
-  id: 8548,
-  idLoaiVb: 6344,
-  dienGiai: 'spar',
+  idLoaiVb: '9adc68f7-cb94-4a97-8533-dffad08fc00e',
 };
 
 export const sampleWithFullData: IDanhMucLoaiVanBan = {
-  id: 2047,
-  idLoaiVb: 7055,
-  dienGiai: 'unethically potentially past',
-  idLoaiHopDong: 12693,
+  idLoaiVb: '35997d2d-bf85-4682-a944-d5176329ad8d',
+  dienGiai: 'stark',
 };
 
 export const sampleWithNewData: NewDanhMucLoaiVanBan = {
-  id: null,
+  idLoaiVb: null,
 };
 
 Object.freeze(sampleWithNewData);

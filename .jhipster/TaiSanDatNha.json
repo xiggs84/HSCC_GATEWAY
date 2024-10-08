@@ -2,13 +2,10 @@
   "annotations": {
     "changelogDate": "20240820100357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
-    {
-      "fieldName": "idTaiSan",
-      "fieldType": "Long"
-    },
     {
       "fieldName": "tenTaiSan",
       "fieldType": "String"
@@ -20,10 +17,6 @@
     {
       "fieldName": "thongTinTs",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idLoaiTs",
-      "fieldType": "Long"
     },
     {
       "fieldName": "ghiChu",
@@ -48,10 +41,6 @@
     {
       "fieldName": "maTaiSan",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "idTinhTrang",
-      "fieldType": "Long"
     },
     {
       "fieldName": "idLoaiNganChan",
@@ -99,7 +88,23 @@
     }
   ],
   "name": "TaiSanDatNha",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiTaiSan",
+      "otherEntityRelationshipName": "taiSanDatNha",
+      "relationshipName": "danhMucLoaiTaiSan",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "tinhTrangTaiSan",
+      "otherEntityRelationshipName": "taiSanDatNha",
+      "relationshipName": "tinhTrangTaiSan",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

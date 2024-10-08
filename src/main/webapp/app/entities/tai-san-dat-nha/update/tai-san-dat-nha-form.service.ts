@@ -38,6 +38,8 @@ type TaiSanDatNhaFormGroupContent = {
   soVaoSo: FormControl<ITaiSanDatNha['soVaoSo']>;
   moTa: FormControl<ITaiSanDatNha['moTa']>;
   loaiNganChan: FormControl<ITaiSanDatNha['loaiNganChan']>;
+  danhMucLoaiTaiSan: FormControl<ITaiSanDatNha['danhMucLoaiTaiSan']>;
+  tinhTrangTaiSan: FormControl<ITaiSanDatNha['tinhTrangTaiSan']>;
 };
 
 export type TaiSanDatNhaFormGroup = FormGroup<TaiSanDatNhaFormGroupContent>;
@@ -77,6 +79,8 @@ export class TaiSanDatNhaFormService {
       soVaoSo: new FormControl(taiSanDatNhaRawValue.soVaoSo),
       moTa: new FormControl(taiSanDatNhaRawValue.moTa),
       loaiNganChan: new FormControl(taiSanDatNhaRawValue.loaiNganChan),
+      danhMucLoaiTaiSan: new FormControl(taiSanDatNhaRawValue.danhMucLoaiTaiSan),
+      tinhTrangTaiSan: new FormControl(taiSanDatNhaRawValue.tinhTrangTaiSan),
     });
   }
 

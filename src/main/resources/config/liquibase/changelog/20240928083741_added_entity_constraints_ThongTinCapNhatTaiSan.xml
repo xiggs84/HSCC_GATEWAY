@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ThongTinCapNhatTaiSan.
+    -->
+    <changeSet id="20240928083741-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="tai_san_id_tai_san"
+                                 baseTableName="thong_tin_cap_nhat_tai_san"
+                                 constraintName="fk_thong_tin_cap_nhat_tai_san__tai_san_id"
+                                 referencedColumnNames="id_tai_san"
+                                 referencedTableName="tai_san"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="danh_muc_loai_tai_san_id_loai_ts"
+                                 baseTableName="thong_tin_cap_nhat_tai_san"
+                                 constraintName="fk_thong_tin_cap_nhat_tai_san__danh_muc_loai_tai_san_id"
+                                 referencedColumnNames="id_loai_ts"
+                                 referencedTableName="danh_muc_loai_tai_san"
+                                 />
+    </changeSet>
+</databaseChangeLog>

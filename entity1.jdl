@@ -1,0 +1,52 @@
+entity DuongSu {
+    @id
+    idDuongSu Long
+    tenDuongSu String
+    diaChi String
+    soDienThoai String
+    email String
+    fax String
+    website String
+    trangThai Integer min(0) max(1)
+    thongTinDs TextBlob
+    ngayThaoTac Date
+    nguoiThaoTac Long
+    idDsGoc Long
+    idMaster String
+    idDonVi Long
+    strSearch String
+    soGiayTo String
+    ghiChu String
+    idLoaiNganChan Long
+    syncStatus Integer min(0) max(1)
+}
+
+entity LoaiGiayTo {
+    @id
+    idLoaiGiayTo String
+    tenLoaiGiayTo String
+}
+
+entity LoaiDuongSu {
+    @id
+    idLoaiDuongSu String
+    tenLoaiDuongSu String
+}
+
+entity ThongTinCapNhatDuongSu {
+    @id
+    idCapNhat Long
+    tenDuongSu String
+    soGiayTo String
+    thongTinDuongSu TextBlob
+    ngayCapNhat LocalDate
+}
+
+relationship OneToMany {
+    LoaiDuongSu to ThongTinCapNhatDuongSu,
+    LoaiGiayTo to ThongTinCapNhatDuongSu,
+    DuongSu{thongTinCapNhat} to ThongTinCapNhatDuongSu
+}
+
+dto * with mapstruct
+service * with serviceClass

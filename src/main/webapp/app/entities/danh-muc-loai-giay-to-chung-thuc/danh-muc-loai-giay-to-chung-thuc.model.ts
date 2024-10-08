@@ -1,7 +1,6 @@
 export interface IDanhMucLoaiGiayToChungThuc {
-  id: number;
-  idLoaiGiayTo?: number | null;
+  idLoaiGiayTo: string;
   dienGiai?: string | null;
 }
 
-export type NewDanhMucLoaiGiayToChungThuc = Omit<IDanhMucLoaiGiayToChungThuc, 'id'> & { id: null };
+export type NewDanhMucLoaiGiayToChungThuc = Omit<IDanhMucLoaiGiayToChungThuc, 'idLoaiGiayTo'> & { idLoaiGiayTo: null };

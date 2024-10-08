@@ -23,6 +23,14 @@
           <dd>
             <span>{{ thuaTachRef.trangThai }}</span>
           </dd>
+          <dt><span jhiTranslate="gatewayApp.thuaTach.taiSan">Tai San</span></dt>
+          <dd>
+            @if (thuaTach()!.taiSan) {
+              <div>
+                <a [routerLink]="['/tai-san', thuaTach()!.taiSan?.idTaiSan, 'view']">{{ thuaTachRef.taiSan?.idTaiSan }}</a>
+              </div>
+            }
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

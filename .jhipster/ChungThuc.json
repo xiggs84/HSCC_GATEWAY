@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820092357"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idChungThuc",
-      "fieldType": "Long"
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "idDonVi",
@@ -47,10 +51,6 @@
     },
     {
       "fieldName": "trangThai",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idLoaiGiayTo",
       "fieldType": "Long"
     },
     {
@@ -102,8 +102,19 @@
       "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "ChungThuc",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "danhMucLoaiGiayToChungThuc",
+      "otherEntityRelationshipName": "chungThuc",
+      "relationshipName": "danhMucLoaiGiayToChungThuc",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
+  "service": "serviceImpl",
   "skipServer": true
 }

@@ -1,9 +1,8 @@
 export interface ILoaiHopDongCongChung {
-  id: number;
-  idLoaiHopDongCongChung?: number | null;
+  idLoaiHopDongCongChung: string;
   dienGiai?: string | null;
   giaTri?: number | null;
   trangThai?: number | null;
 }
 
-export type NewLoaiHopDongCongChung = Omit<ILoaiHopDongCongChung, 'id'> & { id: null };
+export type NewLoaiHopDongCongChung = Omit<ILoaiHopDongCongChung, 'idLoaiHopDongCongChung'> & { idLoaiHopDongCongChung: null };

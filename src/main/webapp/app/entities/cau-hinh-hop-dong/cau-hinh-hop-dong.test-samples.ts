@@ -1,25 +1,28 @@
 import { ICauHinhHopDong, NewCauHinhHopDong } from './cau-hinh-hop-dong.model';
 
 export const sampleWithRequiredData: ICauHinhHopDong = {
-  id: 15498,
+  id: 26249,
 };
 
 export const sampleWithPartialData: ICauHinhHopDong = {
-  id: 28727,
-  idLoaiHopDong: 2677,
-  tienTo: 'junk next shy',
-  trangThai: 7352,
+  id: 23920,
+  idLoaiHopDong: 'cactus',
+  idDonVi: 22176,
+  chieuDai: 19148,
+  tienTo: 'blabber',
+  giaTri: 13352,
+  hienThi: 'naughty chime besides',
 };
 
 export const sampleWithFullData: ICauHinhHopDong = {
-  id: 11401,
-  idLoaiHopDong: 10063,
-  idDonVi: 3008,
-  chieuDai: 19368,
-  tienTo: 'warble',
-  giaTri: 16312,
-  hienThi: 'rations',
-  trangThai: 21795,
+  id: 25404,
+  idLoaiHopDong: 'gadzooks nearly',
+  idDonVi: 15693,
+  chieuDai: 4520,
+  tienTo: 'which because',
+  giaTri: 31569,
+  hienThi: 'rag presidency',
+  trangThai: 9576,
 };
 
 export const sampleWithNewData: NewCauHinhHopDong = {

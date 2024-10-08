@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    @if (dmLoaiHd()) {
+    @if (dmLoaiHd(); as dmLoaiHdRef) {
       <div>
         <h2 data-cy="dmLoaiHdDetailsHeading"><span jhiTranslate="gatewayApp.dmLoaiHd.detail.title">Dm Loai Hd</span></h2>
 
@@ -11,109 +11,111 @@
         <jhi-alert></jhi-alert>
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ dmLoaiHd()!.id }}</span>
-          </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idLoaiHd">Id Loai Hd</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idLoaiHd }}</span>
+            <span>{{ dmLoaiHdRef.idLoaiHd }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.dienGiai">Dien Giai</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.dienGiai }}</span>
+            <span>{{ dmLoaiHdRef.dienGiai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idVaiTro1">Id Vai Tro 1</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idVaiTro1 }}</span>
+            <span>{{ dmLoaiHdRef.idVaiTro1 }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idVaiTro2">Id Vai Tro 2</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idVaiTro2 }}</span>
+            <span>{{ dmLoaiHdRef.idVaiTro2 }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.fileHopDong">File Hop Dong</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.fileHopDong }}</span>
+            <span>{{ dmLoaiHdRef.fileHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.srcHopDong">Src Hop Dong</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.srcHopDong }}</span>
+            <span>{{ dmLoaiHdRef.srcHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.dieuKhoan">Dieu Khoan</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.dieuKhoan }}</span>
+            <span>{{ dmLoaiHdRef.dieuKhoan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idDonVi">Id Don Vi</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idDonVi }}</span>
+            <span>{{ dmLoaiHdRef.idDonVi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.trangThai">Trang Thai</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.trangThai }}</span>
+            <span>{{ dmLoaiHdRef.trangThai }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.ngayThaoTac">Ngay Thao Tac</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.ngayThaoTac | formatMediumDate }}</span>
+            <span>{{ dmLoaiHdRef.ngayThaoTac | formatMediumDate }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.nguoiThaoTac">Nguoi Thao Tac</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.nguoiThaoTac }}</span>
+            <span>{{ dmLoaiHdRef.nguoiThaoTac }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.srcLoiChung">Src Loi Chung</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.srcLoiChung }}</span>
-          </dd>
-          <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idNhom">Id Nhom</span></dt>
-          <dd>
-            <span>{{ dmLoaiHd()!.idNhom }}</span>
+            <span>{{ dmLoaiHdRef.srcLoiChung }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.fileLoiChung">File Loi Chung</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.fileLoiChung }}</span>
+            <span>{{ dmLoaiHdRef.fileLoiChung }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.chuyenTaiSan">Chuyen Tai San</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.chuyenTaiSan }}</span>
+            <span>{{ dmLoaiHdRef.chuyenTaiSan }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.loaiSuaDoi">Loai Sua Doi</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.loaiSuaDoi }}</span>
+            <span>{{ dmLoaiHdRef.loaiSuaDoi }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.loaiHuyBo">Loai Huy Bo</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.loaiHuyBo }}</span>
+            <span>{{ dmLoaiHdRef.loaiHuyBo }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.trangThaiDuyet">Trang Thai Duyet</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.trangThaiDuyet }}</span>
+            <span>{{ dmLoaiHdRef.trangThaiDuyet }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idPhanLoaiHopDong">Id Phan Loai Hop Dong</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idPhanLoaiHopDong }}</span>
+            <span>{{ dmLoaiHdRef.idPhanLoaiHopDong }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.srcCv">Src Cv</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.srcCv }}</span>
+            <span>{{ dmLoaiHdRef.srcCv }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.srcTb">Src Tb</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.srcTb }}</span>
+            <span>{{ dmLoaiHdRef.srcTb }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.srcTtpc">Src Ttpc</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.srcTtpc }}</span>
+            <span>{{ dmLoaiHdRef.srcTtpc }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.dgTen">Dg Ten</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.dgTen }}</span>
+            <span>{{ dmLoaiHdRef.dgTen }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.nhomTen">Nhom Ten</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.nhomTen }}</span>
+            <span>{{ dmLoaiHdRef.nhomTen }}</span>
           </dd>
           <dt><span jhiTranslate="gatewayApp.dmLoaiHd.idVaiTro3">Id Vai Tro 3</span></dt>
           <dd>
-            <span>{{ dmLoaiHd()!.idVaiTro3 }}</span>
+            <span>{{ dmLoaiHdRef.idVaiTro3 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.dmLoaiHd.danhMucNhomHopDong">Danh Muc Nhom Hop Dong</span></dt>
+          <dd>
+            @if (dmLoaiHd()!.danhMucNhomHopDong) {
+              <div>
+                <a [routerLink]="['/danh-muc-nhom-hop-dong', dmLoaiHd()!.danhMucNhomHopDong?.idNhom, 'view']">{{
+                  dmLoaiHdRef.danhMucNhomHopDong?.idNhom
+                }}</a>
+              </div>
+            }
           </dd>
         </dl>
 
@@ -121,7 +123,7 @@
           <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Quay lại</span>
         </button>
 
-        <button type="button" [routerLink]="['/dm-loai-hd', dmLoaiHd()!.id, 'edit']" class="btn btn-primary">
+        <button type="button" [routerLink]="['/dm-loai-hd', dmLoaiHdRef.idLoaiHd, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Sửa</span>
         </button>
       </div>

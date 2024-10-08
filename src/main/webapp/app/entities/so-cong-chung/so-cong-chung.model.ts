@@ -1,15 +1,15 @@
 import dayjs from 'dayjs/esm';
+import { IDanhMucLoaiSoCongChung } from 'app/entities/danh-muc-loai-so-cong-chung/danh-muc-loai-so-cong-chung.model';
 
 export interface ISoCongChung {
-  id: number;
-  ngayThaoTac?: dayjs.Dayjs | null;
-  idSo?: number | null;
+  idSo: string;
   idDonVi?: number | null;
   tenSo?: string | null;
   giaTri?: number | null;
+  ngayThaoTac?: dayjs.Dayjs | null;
   nguoiThaoTac?: number | null;
   trangThai?: number | null;
-  idLoaiSo?: number | null;
+  danhMucLoaiSoCongChung?: Pick<IDanhMucLoaiSoCongChung, 'idLoai'> | null;
 }
 
-export type NewSoCongChung = Omit<ISoCongChung, 'id'> & { id: null };
+export type NewSoCongChung = Omit<ISoCongChung, 'idSo'> & { idSo: null };

@@ -39,6 +39,9 @@ describe('TaiSanDgc Form Service', () => {
             soCc: expect.any(Object),
             soVaoSo: expect.any(Object),
             moTa: expect.any(Object),
+            taiSan: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });
@@ -68,6 +71,9 @@ describe('TaiSanDgc Form Service', () => {
             soCc: expect.any(Object),
             soVaoSo: expect.any(Object),
             moTa: expect.any(Object),
+            taiSan: expect.any(Object),
+            danhMucLoaiTaiSan: expect.any(Object),
+            tinhTrangTaiSan: expect.any(Object),
           }),
         );
       });

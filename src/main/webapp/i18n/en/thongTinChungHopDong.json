@@ -23,7 +23,6 @@
       "nguoiLapHd": "Nguoi Lap Hd",
       "thongTinVanBan": "Thong Tin Van Ban",
       "trangThai": "Trang Thai",
-      "idLoaiHd": "Id Loai Hd",
       "dieuKhoanHd": "Dieu Khoan Hd",
       "idDonVi": "Id Don Vi",
       "ngayThaoTac": "Ngay Thao Tac",
@@ -32,8 +31,6 @@
       "maHopDong": "Ma Hop Dong",
       "srcHopDong": "Src Hop Dong",
       "ngayHen": "Ngay Hen",
-      "idSoCongChung": "Id So Cong Chung",
-      "soCongChung": "So Cong Chung",
       "congChungVien": "Cong Chung Vien",
       "ngayKyHd": "Ngay Ky Hd",
       "nguoiRutTrich": "Nguoi Rut Trich",
@@ -49,7 +46,9 @@
       "repRefUnique": "Rep Ref Unique",
       "ngayText": "Ngay Text",
       "thongTinChung": "Thong Tin Chung",
-      "thongTinChungClob": "Thong Tin Chung Clob"
+      "thongTinChungClob": "Thong Tin Chung Clob",
+      "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
+      "soCongChung": "So Cong Chung"
     }
   }
 }

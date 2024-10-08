@@ -179,7 +179,14 @@ export class DonviFormComponent {
 
   saveDonvi(): void {
     this.newItem.hoaDonDt = this.newItem.hoaDonDt ? 1 : 0;
-    this.danhMucDonViService.searchByTenDonVi(this.newItem.tenDonVi || '').subscribe({
+
+    const queryParams = {
+      'tenDonVi.equals': this.newItem.tenDonVi || '',
+      page: 0,
+      size: 1
+    };
+
+    this.danhMucDonViService.query(queryParams).subscribe({
       next: (res) => {
         const danhMucDonViArray = res.body || [];
 
@@ -273,7 +280,11 @@ export class DonviFormComponent {
 
   ontinhChange(maTinh: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.danhMucHuyenService.getQuanHuyenByTinh(maTinh).subscribe({
+      const queryParams = {
+        'maTinh.equals': maTinh
+      };
+
+      this.danhMucHuyenService.query(queryParams).subscribe({
         next: (res) => {
           this.huyens = res.body || [];
           this.xas = []; // Reset xã khi tỉnh thay đổi
@@ -291,7 +302,11 @@ export class DonviFormComponent {
 
   onhuyenChange(maHuyen: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.danhMucXaService.getXaPhuongByHuyen(maHuyen).subscribe({
+      const queryParams = {
+        'maHuyen.equals': maHuyen
+      };
+
+      this.danhMucXaService.query(queryParams).subscribe({
         next: (res) => {
           this.xas = res.body || [];
           this.selectedxaId = null; // Reset ID xã khi huyện thay đổi

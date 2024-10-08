@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (danhMucLoaiSoCongChungs?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.home.notFound">No Danh Muc Loai So Cong Chungs found</span>
@@ -35,13 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idLoai">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucLoaiSoCongChung.idLoai">Id Loai</span>
@@ -67,18 +62,34 @@
           </tr>
         </thead>
         <tbody>
-          @for (danhMucLoaiSoCongChung of danhMucLoaiSoCongChungs; track trackId) {
+          @for (danhMucLoaiSoCongChung of danhMucLoaiSoCongChungs; track trackIdLoai) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.id, 'view']">{{ danhMucLoaiSoCongChung.id }}</a>
+                <a [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.idLoai, 'view']">{{
+                  danhMucLoaiSoCongChung.idLoai
+                }}</a>
               </td>
-              <td>{{ danhMucLoaiSoCongChung.idLoai }}</td>
               <td>{{ danhMucLoaiSoCongChung.tenLoai }}</td>
               <td>{{ danhMucLoaiSoCongChung.trangThai }}</td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/so-cong-chung']"
+                    [queryParams]="{ 'filter[danhMucLoaiSoCongChungId.in]': danhMucLoaiSoCongChung.idLoai }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('gatewayApp.danhMucLoaiSoCongChung.soCongChung' | translate) }"
+                      >Show So Cong Chung</span
+                    >
+                  </button>
                   <a
-                    [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.id, 'view']"
+                    [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.idLoai, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
                   >
@@ -87,7 +98,7 @@
                   </a>
 
                   <a
-                    [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.id, 'edit']"
+                    [routerLink]="['/danh-muc-loai-so-cong-chung', danhMucLoaiSoCongChung.idLoai, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
                   >
@@ -105,6 +116,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (danhMucLoaiSoCongChungs && danhMucLoaiSoCongChungs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

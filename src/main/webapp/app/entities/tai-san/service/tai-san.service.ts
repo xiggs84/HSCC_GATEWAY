@@ -32,7 +32,7 @@ export class TaiSanService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/tai-sans');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/tai-sans', 'taisan');
 
   create(taiSan: NewTaiSan): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(taiSan);

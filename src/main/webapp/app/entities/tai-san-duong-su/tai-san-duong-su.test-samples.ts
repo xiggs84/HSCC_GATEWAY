@@ -3,23 +3,23 @@ import dayjs from 'dayjs/esm';
 import { ITaiSanDuongSu, NewTaiSanDuongSu } from './tai-san-duong-su.model';
 
 export const sampleWithRequiredData: ITaiSanDuongSu = {
-  id: 32307,
+  id: 105,
 };
 
 export const sampleWithPartialData: ITaiSanDuongSu = {
-  id: 27085,
-  idLoaiHopDong: 6948,
-  idChungThuc: 29615,
+  id: 30183,
+  idTaiSan: 32242,
+  ngayThaoTac: dayjs('2024-08-20'),
 };
 
 export const sampleWithFullData: ITaiSanDuongSu = {
-  id: 12493,
-  idTaiSan: 18781,
-  trangThai: 1,
+  id: 523,
+  idTaiSan: 5972,
+  trangThai: 0,
   ngayThaoTac: dayjs('2024-08-19'),
-  idHopDong: 4562,
-  idLoaiHopDong: 9966,
-  idChungThuc: 9759,
+  idHopDong: 11846,
+  idLoaiHopDong: 15053,
+  idChungThuc: 26770,
 };
 
 export const sampleWithNewData: NewTaiSanDuongSu = {

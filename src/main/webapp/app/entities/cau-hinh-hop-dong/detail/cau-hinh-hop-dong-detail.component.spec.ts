@@ -17,7 +17,7 @@ describe('CauHinhHopDong Management Detail Component', () => {
           [
             {
               path: '**',
-              component: CauHinhHopDongDetailComponent,
+              loadComponent: () => import('./cau-hinh-hop-dong-detail.component').then(m => m.CauHinhHopDongDetailComponent),
               resolve: { cauHinhHopDong: () => of({ id: 123 }) },
             },
           ],
