@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { sampleWithRequiredData, sampleWithNewData } from '../danh-muc-can-bo.test-samples';
+import { sampleWithNewData, sampleWithRequiredData } from '../danh-muc-can-bo.test-samples';
 
 import { DanhMucCanBoFormService } from './danh-muc-can-bo-form.service';
 
@@ -19,14 +19,13 @@ describe('DanhMucCanBo Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idCanBo: expect.any(Object),
             tenCanBo: expect.any(Object),
             diaChi: expect.any(Object),
             namSinh: expect.any(Object),
             email: expect.any(Object),
             soDienThoai: expect.any(Object),
-            soCmnd: expect.any(Object),
+            soGiayToTuyThan: expect.any(Object),
             idDonVi: expect.any(Object),
             tenDangNhap: expect.any(Object),
             matKhau: expect.any(Object),
@@ -35,6 +34,7 @@ describe('DanhMucCanBo Form Service', () => {
             clientSecret: expect.any(Object),
             usernameKyso: expect.any(Object),
             passwordKyso: expect.any(Object),
+            userLogin: expect.any(Object),
           }),
         );
       });
@@ -44,14 +44,13 @@ describe('DanhMucCanBo Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
             idCanBo: expect.any(Object),
             tenCanBo: expect.any(Object),
             diaChi: expect.any(Object),
             namSinh: expect.any(Object),
             email: expect.any(Object),
             soDienThoai: expect.any(Object),
-            soCmnd: expect.any(Object),
+            soGiayToTuyThan: expect.any(Object),
             idDonVi: expect.any(Object),
             tenDangNhap: expect.any(Object),
             matKhau: expect.any(Object),
@@ -60,6 +59,7 @@ describe('DanhMucCanBo Form Service', () => {
             clientSecret: expect.any(Object),
             usernameKyso: expect.any(Object),
             passwordKyso: expect.any(Object),
+            userLogin: expect.any(Object),
           }),
         );
       });
@@ -92,22 +92,22 @@ describe('DanhMucCanBo Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IDanhMucCanBo should not enable id FormControl', () => {
+      it('passing IDanhMucCanBo should not enable idCanBo FormControl', () => {
         const formGroup = service.createDanhMucCanBoFormGroup();
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idCanBo.disabled).toBe(true);
 
         service.resetForm(formGroup, sampleWithRequiredData);
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idCanBo.disabled).toBe(true);
       });
 
-      it('passing NewDanhMucCanBo should disable id FormControl', () => {
+      it('passing NewDanhMucCanBo should disable idCanBo FormControl', () => {
         const formGroup = service.createDanhMucCanBoFormGroup(sampleWithRequiredData);
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idCanBo.disabled).toBe(true);
 
-        service.resetForm(formGroup, { id: null });
+        service.resetForm(formGroup, { idCanBo: null });
 
-        expect(formGroup.controls.id.disabled).toBe(true);
+        expect(formGroup.controls.idCanBo.disabled).toBe(true);
       });
     });
   });

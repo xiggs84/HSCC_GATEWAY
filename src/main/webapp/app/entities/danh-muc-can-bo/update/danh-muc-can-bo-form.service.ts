@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IDanhMucCanBo, NewDanhMucCanBo } from '../danh-muc-can-bo.model';
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { idCanBo: unknown }> = Partial<Omit<T, 'idCanBo'>> & { idCanBo: T['idCanBo'] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,17 +14,16 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type DanhMucCanBoFormGroupInput = IDanhMucCanBo | PartialWithRequiredKeyOf<NewDanhMucCanBo>;
 
-type DanhMucCanBoFormDefaults = Pick<NewDanhMucCanBo, 'id'>;
+type DanhMucCanBoFormDefaults = Pick<NewDanhMucCanBo, 'idCanBo'>;
 
 type DanhMucCanBoFormGroupContent = {
-  id: FormControl<IDanhMucCanBo['id'] | NewDanhMucCanBo['id']>;
-  idCanBo: FormControl<IDanhMucCanBo['idCanBo']>;
+  idCanBo: FormControl<IDanhMucCanBo['idCanBo'] | NewDanhMucCanBo['idCanBo']>;
   tenCanBo: FormControl<IDanhMucCanBo['tenCanBo']>;
   diaChi: FormControl<IDanhMucCanBo['diaChi']>;
   namSinh: FormControl<IDanhMucCanBo['namSinh']>;
   email: FormControl<IDanhMucCanBo['email']>;
   soDienThoai: FormControl<IDanhMucCanBo['soDienThoai']>;
-  soCmnd: FormControl<IDanhMucCanBo['soCmnd']>;
+  soGiayToTuyThan: FormControl<IDanhMucCanBo['soGiayToTuyThan']>;
   idDonVi: FormControl<IDanhMucCanBo['idDonVi']>;
   tenDangNhap: FormControl<IDanhMucCanBo['tenDangNhap']>;
   matKhau: FormControl<IDanhMucCanBo['matKhau']>;
@@ -33,32 +32,32 @@ type DanhMucCanBoFormGroupContent = {
   clientSecret: FormControl<IDanhMucCanBo['clientSecret']>;
   usernameKyso: FormControl<IDanhMucCanBo['usernameKyso']>;
   passwordKyso: FormControl<IDanhMucCanBo['passwordKyso']>;
+  userLogin: FormControl<IDanhMucCanBo['userLogin']>;
 };
 
 export type DanhMucCanBoFormGroup = FormGroup<DanhMucCanBoFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DanhMucCanBoFormService {
-  createDanhMucCanBoFormGroup(danhMucCanBo: DanhMucCanBoFormGroupInput = { id: null }): DanhMucCanBoFormGroup {
+  createDanhMucCanBoFormGroup(danhMucCanBo: DanhMucCanBoFormGroupInput = { idCanBo: null }): DanhMucCanBoFormGroup {
     const danhMucCanBoRawValue = {
       ...this.getFormDefaults(),
       ...danhMucCanBo,
     };
     return new FormGroup<DanhMucCanBoFormGroupContent>({
-      id: new FormControl(
-        { value: danhMucCanBoRawValue.id, disabled: true },
+      idCanBo: new FormControl(
+        { value: danhMucCanBoRawValue.idCanBo, disabled: true },
         {
           nonNullable: true,
           validators: [Validators.required],
         },
       ),
-      idCanBo: new FormControl(danhMucCanBoRawValue.idCanBo),
       tenCanBo: new FormControl(danhMucCanBoRawValue.tenCanBo),
       diaChi: new FormControl(danhMucCanBoRawValue.diaChi),
       namSinh: new FormControl(danhMucCanBoRawValue.namSinh),
       email: new FormControl(danhMucCanBoRawValue.email),
       soDienThoai: new FormControl(danhMucCanBoRawValue.soDienThoai),
-      soCmnd: new FormControl(danhMucCanBoRawValue.soCmnd),
+      soGiayToTuyThan: new FormControl(danhMucCanBoRawValue.soGiayToTuyThan),
       idDonVi: new FormControl(danhMucCanBoRawValue.idDonVi),
       tenDangNhap: new FormControl(danhMucCanBoRawValue.tenDangNhap),
       matKhau: new FormControl(danhMucCanBoRawValue.matKhau),
@@ -67,6 +66,7 @@ export class DanhMucCanBoFormService {
       clientSecret: new FormControl(danhMucCanBoRawValue.clientSecret),
       usernameKyso: new FormControl(danhMucCanBoRawValue.usernameKyso),
       passwordKyso: new FormControl(danhMucCanBoRawValue.passwordKyso),
+      userLogin: new FormControl(danhMucCanBoRawValue.userLogin),
     });
   }
 
@@ -79,14 +79,14 @@ export class DanhMucCanBoFormService {
     form.reset(
       {
         ...danhMucCanBoRawValue,
-        id: { value: danhMucCanBoRawValue.id, disabled: true },
+        idCanBo: { value: danhMucCanBoRawValue.idCanBo, disabled: true },
       } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
     );
   }
 
   private getFormDefaults(): DanhMucCanBoFormDefaults {
     return {
-      id: null,
+      idCanBo: null,
     };
   }
 }

@@ -2,6 +2,7 @@ package vn.vnpt.repository;
 
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.convert.R2dbcConverter;
@@ -20,7 +21,10 @@ import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.r2dbc.core.RowsFetchSpec;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import tech.jhipster.service.ConditionBuilder;
 import vn.vnpt.domain.DanhMucCanBo;
+import vn.vnpt.domain.criteria.DanhMucCanBoCriteria;
+import vn.vnpt.repository.rowmapper.ColumnConverter;
 import vn.vnpt.repository.rowmapper.DanhMucCanBoRowMapper;
 
 /**
@@ -34,6 +38,7 @@ class DanhMucCanBoRepositoryInternalImpl extends SimpleR2dbcRepository<DanhMucCa
     private final EntityManager entityManager;
 
     private final DanhMucCanBoRowMapper danhmuccanboMapper;
+    private final ColumnConverter columnConverter;
 
     private static final Table entityTable = Table.aliased("danh_muc_can_bo", EntityManager.ENTITY_ALIAS);
 
@@ -42,7 +47,8 @@ class DanhMucCanBoRepositoryInternalImpl extends SimpleR2dbcRepository<DanhMucCa
         EntityManager entityManager,
         DanhMucCanBoRowMapper danhmuccanboMapper,
         R2dbcEntityOperations entityOperations,
-        R2dbcConverter converter
+        R2dbcConverter converter,
+        ColumnConverter columnConverter
     ) {
         super(
             new MappingRelationalEntityInformation(converter.getMappingContext().getRequiredPersistentEntity(DanhMucCanBo.class)),
@@ -53,6 +59,7 @@ class DanhMucCanBoRepositoryInternalImpl extends SimpleR2dbcRepository<DanhMucCa
         this.r2dbcEntityTemplate = template;
         this.entityManager = entityManager;
         this.danhmuccanboMapper = danhmuccanboMapper;
+        this.columnConverter = columnConverter;
     }
 
     @Override
@@ -75,7 +82,7 @@ class DanhMucCanBoRepositoryInternalImpl extends SimpleR2dbcRepository<DanhMucCa
 
     @Override
     public Mono<DanhMucCanBo> findById(Long id) {
-        Comparison whereClause = Conditions.isEqual(entityTable.column("id"), Conditions.just(id.toString()));
+        Comparison whereClause = Conditions.isEqual(entityTable.column("id_can_bo"), Conditions.just(id.toString()));
         return createQuery(null, whereClause).one();
     }
 
@@ -87,5 +94,73 @@ class DanhMucCanBoRepositoryInternalImpl extends SimpleR2dbcRepository<DanhMucCa
     @Override
     public <S extends DanhMucCanBo> Mono<S> save(S entity) {
         return super.save(entity);
+    }
+
+    @Override
+    public Flux<DanhMucCanBo> findByCriteria(DanhMucCanBoCriteria danhMucCanBoCriteria, Pageable page) {
+        return createQuery(page, buildConditions(danhMucCanBoCriteria)).all();
+    }
+
+    @Override
+    public Mono<Long> countByCriteria(DanhMucCanBoCriteria criteria) {
+        return findByCriteria(criteria, null)
+            .collectList()
+            .map(collectedList -> collectedList != null ? (long) collectedList.size() : (long) 0);
+    }
+
+    private Condition buildConditions(DanhMucCanBoCriteria criteria) {
+        ConditionBuilder builder = new ConditionBuilder(this.columnConverter);
+        List<Condition> allConditions = new ArrayList<Condition>();
+        if (criteria != null) {
+            if (criteria.getIdCanBo() != null) {
+                builder.buildFilterConditionForField(criteria.getIdCanBo(), entityTable.column("idCanBo"));
+            }
+            if (criteria.getTenCanBo() != null) {
+                builder.buildFilterConditionForField(criteria.getTenCanBo(), entityTable.column("ten_can_bo"));
+            }
+            if (criteria.getDiaChi() != null) {
+                builder.buildFilterConditionForField(criteria.getDiaChi(), entityTable.column("dia_chi"));
+            }
+            if (criteria.getNamSinh() != null) {
+                builder.buildFilterConditionForField(criteria.getNamSinh(), entityTable.column("nam_sinh"));
+            }
+            if (criteria.getEmail() != null) {
+                builder.buildFilterConditionForField(criteria.getEmail(), entityTable.column("email"));
+            }
+            if (criteria.getSoDienThoai() != null) {
+                builder.buildFilterConditionForField(criteria.getSoDienThoai(), entityTable.column("so_dien_thoai"));
+            }
+            if (criteria.getSoGiayToTuyThan() != null) {
+                builder.buildFilterConditionForField(criteria.getSoGiayToTuyThan(), entityTable.column("so_giay_to_tuy_than"));
+            }
+            if (criteria.getIdDonVi() != null) {
+                builder.buildFilterConditionForField(criteria.getIdDonVi(), entityTable.column("id_don_vi"));
+            }
+            if (criteria.getTenDangNhap() != null) {
+                builder.buildFilterConditionForField(criteria.getTenDangNhap(), entityTable.column("ten_dang_nhap"));
+            }
+            if (criteria.getMatKhau() != null) {
+                builder.buildFilterConditionForField(criteria.getMatKhau(), entityTable.column("mat_khau"));
+            }
+            if (criteria.getTrangThai() != null) {
+                builder.buildFilterConditionForField(criteria.getTrangThai(), entityTable.column("trang_thai"));
+            }
+            if (criteria.getClientId() != null) {
+                builder.buildFilterConditionForField(criteria.getClientId(), entityTable.column("client_id"));
+            }
+            if (criteria.getClientSecret() != null) {
+                builder.buildFilterConditionForField(criteria.getClientSecret(), entityTable.column("client_secret"));
+            }
+            if (criteria.getUsernameKyso() != null) {
+                builder.buildFilterConditionForField(criteria.getUsernameKyso(), entityTable.column("username_kyso"));
+            }
+            if (criteria.getPasswordKyso() != null) {
+                builder.buildFilterConditionForField(criteria.getPasswordKyso(), entityTable.column("password_kyso"));
+            }
+            if (criteria.getUserLogin() != null) {
+                builder.buildFilterConditionForField(criteria.getUserLogin(), entityTable.column("user_login"));
+            }
+        }
+        return builder.buildConditions();
     }
 }

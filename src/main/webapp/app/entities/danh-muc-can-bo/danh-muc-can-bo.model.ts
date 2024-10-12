@@ -1,14 +1,13 @@
 import dayjs from 'dayjs/esm';
 
 export interface IDanhMucCanBo {
-  id: number;
-  idCanBo?: number | null;
+  idCanBo: number;
   tenCanBo?: string | null;
   diaChi?: string | null;
   namSinh?: dayjs.Dayjs | null;
   email?: string | null;
   soDienThoai?: string | null;
-  soCmnd?: string | null;
+  soGiayToTuyThan?: string | null;
   idDonVi?: number | null;
   tenDangNhap?: string | null;
   matKhau?: string | null;
@@ -17,6 +16,7 @@ export interface IDanhMucCanBo {
   clientSecret?: string | null;
   usernameKyso?: string | null;
   passwordKyso?: string | null;
+  userLogin?: string | null;
 }
 
-export type NewDanhMucCanBo = Omit<IDanhMucCanBo, 'id'> & { id: null };
+export type NewDanhMucCanBo = Omit<IDanhMucCanBo, 'idCanBo'> & { idCanBo: null };

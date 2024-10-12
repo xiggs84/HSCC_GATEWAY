@@ -1,0 +1,91 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="900px">
+  <div *nzModalContent>
+    <nz-spin *ngIf="isLoading" nzTip="Đang tải..." [nzSpinning]="isLoading"></nz-spin>
+    <div *ngIf="!isLoading">
+      <form nz-form [nzLayout]="'horizontal'">
+        <nz-row [nzGutter]="16">
+
+          <!-- Họ -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'ho'" nzRequired>Họ</nz-form-label>
+              <nz-form-control>
+                <input id="ho" nz-input [(ngModel)]="user.ho" name="ho" placeholder="Nhập họ" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Tên -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'ten'" nzRequired>Tên</nz-form-label>
+              <nz-form-control>
+                <input id="ten" nz-input [(ngModel)]="user.ten" name="ten" placeholder="Nhập tên" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Tên đăng nhập (Username) -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'ten-dang-nhap'" nzRequired>Tên đăng nhập</nz-form-label>
+              <nz-form-control>
+                <input id="ten-dang-nhap" nz-input [(ngModel)]="newItem.tenDangNhap" name="tenDangNhap" placeholder="Nhập tên đăng nhập" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Ngày sinh (Date Picker) -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'ngay-sinh'" nzRequired>Ngày sinh</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker id="ngay-sinh" nzFormat="dd/MM/YYYY" [(ngModel)]="user.ngaySinh" name="ngaySinh" nzPlaceHolder="Chọn ngày sinh"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Số CMND -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'so-cmnd'" nzRequired>Số CMND</nz-form-label>
+              <nz-form-control>
+                <input id="so-cmnd" nz-input [(ngModel)]="user.soCMND" name="soCMND" placeholder="Nhập số CMND" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Số điện thoại -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'so-dien-thoai'">Số điện thoại</nz-form-label>
+              <nz-form-control>
+                <input id="so-dien-thoai" nz-input [(ngModel)]="newItem.soDienThoai" name="soDienThoai" placeholder="Nhập số điện thoại" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- E-mail -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'email'">E-mail</nz-form-label>
+              <nz-form-control>
+                <input id="email" nz-input [(ngModel)]="newItem.email" name="email" placeholder="Nhập e-mail" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Địa chỉ -->
+          <nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzSpan="8" class="custom-label" [nzFor]="'dia-chi'">Địa chỉ</nz-form-label>
+              <nz-form-control>
+                <input id="dia-chi" nz-input [(ngModel)]="newItem.diaChi" name="diaChi" placeholder="Nhập địa chỉ" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </nz-row>
+      </form>
+    </div>
+  </div>
+</nz-modal>

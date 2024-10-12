@@ -24,6 +24,8 @@
 
   <jhi-alert></jhi-alert>
 
+  <jhi-filter [filters]="filters"></jhi-filter>
+
   @if (danhMucCanBos?.length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="gatewayApp.danhMucCanBo.home.notFound">No Danh Muc Can Bos found</span>
@@ -35,13 +37,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="idCanBo">
               <div class="d-flex">
                 <span jhiTranslate="gatewayApp.danhMucCanBo.idCanBo">Id Can Bo</span>
@@ -84,9 +79,9 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="soCmnd">
+            <th scope="col" jhiSortBy="soGiayToTuyThan">
               <div class="d-flex">
-                <span jhiTranslate="gatewayApp.danhMucCanBo.soCmnd">So Cmnd</span>
+                <span jhiTranslate="gatewayApp.danhMucCanBo.soGiayToTuyThan">So Giay To Tuy Than</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -147,22 +142,28 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="userLogin">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.danhMucCanBo.userLogin">User Login</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (danhMucCanBo of danhMucCanBos; track trackId) {
+          @for (danhMucCanBo of danhMucCanBos; track trackIdCanBo) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/danh-muc-can-bo', danhMucCanBo.id, 'view']">{{ danhMucCanBo.id }}</a>
+                <a [routerLink]="['/danh-muc-can-bo', danhMucCanBo.idCanBo, 'view']">{{ danhMucCanBo.idCanBo }}</a>
               </td>
-              <td>{{ danhMucCanBo.idCanBo }}</td>
               <td>{{ danhMucCanBo.tenCanBo }}</td>
               <td>{{ danhMucCanBo.diaChi }}</td>
               <td>{{ danhMucCanBo.namSinh | formatMediumDate }}</td>
               <td>{{ danhMucCanBo.email }}</td>
               <td>{{ danhMucCanBo.soDienThoai }}</td>
-              <td>{{ danhMucCanBo.soCmnd }}</td>
+              <td>{{ danhMucCanBo.soGiayToTuyThan }}</td>
               <td>{{ danhMucCanBo.idDonVi }}</td>
               <td>{{ danhMucCanBo.tenDangNhap }}</td>
               <td>{{ danhMucCanBo.matKhau }}</td>
@@ -171,14 +172,23 @@
               <td>{{ danhMucCanBo.clientSecret }}</td>
               <td>{{ danhMucCanBo.usernameKyso }}</td>
               <td>{{ danhMucCanBo.passwordKyso }}</td>
+              <td>{{ danhMucCanBo.userLogin }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/danh-muc-can-bo', danhMucCanBo.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/danh-muc-can-bo', danhMucCanBo.idCanBo, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Xem</span>
                   </a>
 
-                  <a [routerLink]="['/danh-muc-can-bo', danhMucCanBo.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/danh-muc-can-bo', danhMucCanBo.idCanBo, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Sửa</span>
                   </a>
@@ -193,6 +203,25 @@
           }
         </tbody>
       </table>
+    </div>
+  }
+  @if (danhMucCanBos && danhMucCanBos.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   }
 </div>

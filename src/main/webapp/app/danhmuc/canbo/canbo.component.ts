@@ -1,17 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import SharedModule from "../../shared/shared.module";
 import dayjs from 'dayjs';
+import {DonviFormComponent} from "../../form/donvi-form/donvi-form.component";
+import {CanboFormComponent} from "../../form/canbo-form/canbo-form.component";
+import {IDanhMucCanBo} from "../../entities/danh-muc-can-bo/danh-muc-can-bo.model";
+import {DanhMucCanBoService} from "../../entities/danh-muc-can-bo/service/danh-muc-can-bo.service";
 
 @Component({
   selector: 'jhi-canbo',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, CanboFormComponent],
   templateUrl: './canbo.component.html',
   styleUrl: './canbo.component.scss'
 })
 export class CanboComponent implements OnInit {
+  listOfData: readonly IDanhMucCanBo[] = [];
+  searchValue: string = '';
+  listOfCurrentPageData: readonly IDanhMucCanBo[] = [];
+  selectedItem: IDanhMucCanBo | null = null;
+  originalData: any[] = [];
+  total: number = 1;
 
-  // Dropdown lists for Đơn vị and Quyền
+  pageIndex: number = 1;
+  pageSize: number = 10;
+
   danhSachDonVi = [
     { id: 1, tenDonVi: 'Phòng A' },
     { id: 2, tenDonVi: 'Phòng B' },
@@ -23,108 +35,70 @@ export class CanboComponent implements OnInit {
     { id: 2, tenQuyen: 'User' },
   ];
 
-  // Selected dropdown values
   selectedDonVi: number | null = null;
   selectedQuyen: number | null = null;
 
-  // Full dataset
-  listOfData = [
-    { id: 1, tenCanBo: 'Nguyễn Văn A', namSinh: '1985', email: 'a@example.com', diaChi: 'Hà Nội', idDonVi: 1, trangThai: 'Active' },
-    { id: 2, tenCanBo: 'Trần Thị B', namSinh: '1990', email: 'b@example.com', diaChi: 'TP Hồ Chí Minh', idDonVi: 2, trangThai: 'Inactive' },
-    { id: 3, tenCanBo: 'Lê Văn C', namSinh: '1987', email: 'c@example.com', diaChi: 'Đà Nẵng', idDonVi: 3, trangThai: 'Active' },
-    // Add more data here
-  ];
+  constructor(private danhMucCanBoService: DanhMucCanBoService) { }
 
-  // Displayed data for the current page
-  displayedData: any[] = [];
-
-  // Pagination properties
-  pageSize = 10;
-  pageIndex = 1;
-  total = this.listOfData.length;
-
-  searchValue = '';
-
-  constructor() { }
+  @ViewChild(CanboFormComponent) canboFormComponent!: CanboFormComponent;
 
   ngOnInit(): void {
-    // Initialize displayed data
-    this.onCurrentPageDataChange();
+    this.loadData();
   }
 
-  // Handle search input change
   onSearchChange(): void {
-    this.filterData();
   }
 
   // Handle Đơn vị dropdown change
   onDonViChange(): void {
-    this.filterData();
   }
 
   // Handle Quyền dropdown change
   onQuyenChange(): void {
-    this.filterData();
   }
 
-  // Method to filter and paginate data based on search, selected Đơn vị, Quyền
   filterData(): void {
-    let filteredData = this.listOfData;
-
-    // Apply search filter
-    if (this.searchValue) {
-      filteredData = filteredData.filter(item =>
-        item.tenCanBo.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-        item.email.toLowerCase().includes(this.searchValue.toLowerCase())
-      );
-    }
-
-    // Apply Đơn vị filter
-    if (this.selectedDonVi) {
-      filteredData = filteredData.filter(item => item.idDonVi === this.selectedDonVi);
-    }
-
-    // Update the total and filter data based on search and selected filters
-    this.total = filteredData.length;
-
-    // Paginate the filtered data
-    this.onCurrentPageDataChange(filteredData);
   }
 
-  // Method to handle changes in pagination and update the displayed data
-  onCurrentPageDataChange(filteredData: readonly any[] = this.listOfData): void {
-    const dataToShow = [...filteredData];  // Spread operator to make a copy (mutable array)
-
-    const startIndex = (this.pageIndex - 1) * this.pageSize;
-    const endIndex = this.pageIndex * this.pageSize;
-
-    this.displayedData = dataToShow.slice(startIndex, endIndex);
+  onCurrentPageDataChange(listOfCurrentPageData: readonly IDanhMucCanBo[]): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
-  // Handle page index change
-  onPageIndexChange(pageIndex: number): void {
-    this.pageIndex = pageIndex;
-    this.onCurrentPageDataChange();
+  onPageIndexChange(index: number): void {
+    this.pageIndex = index;
+    this.loadData();
   }
 
-  // Handle page size change
-  onPageSizeChange(pageSize: number): void {
-    this.pageSize = pageSize;
-    this.onCurrentPageDataChange();
+  onPageSizeChange(size: number): void {
+    this.pageSize = size;
+    this.pageIndex = 1;
+    this.loadData();
   }
 
-  // Get Đơn vị name by id
   getDonViById(idDonVi: number): string {
     const donVi = this.danhSachDonVi.find(dv => dv.id === idDonVi);
     return donVi ? donVi.tenDonVi : 'N/A';
   }
 
-  // Get formatted date using dayjs
+  loadData(): void {
+    const queryParams = {
+      page: this.pageIndex - 1, // API thường bắt đầu từ 0
+      size: this.pageSize
+    };
+
+    this.danhMucCanBoService.query(queryParams).subscribe({
+      next: (response) => {
+        this.total = parseInt(response.headers.get('X-Total-Count') || '0', 10);
+        this.listOfData = response.body || [];
+      },
+      error: (error) => console.error('Error fetching data:', error)
+    });
+  }
+
   getFormattedDate(dateString: string): string {
     return dayjs(dateString).format('DD/MM/YYYY');
   }
 
-  // Action methods (Edit, Delete, Reset Password)
   onEdit(item: any): void {
     console.log('Edit item:', item);
   }
@@ -146,6 +120,7 @@ export class CanboComponent implements OnInit {
   }
 
   addNewItem() {
-    console.log('Thêm mới cán bộ');
+    this.canboFormComponent.modalTitle = 'Thêm cán bộ';
+    this.canboFormComponent.showModal();
   }
 }

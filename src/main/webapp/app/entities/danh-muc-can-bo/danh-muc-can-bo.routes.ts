@@ -2,23 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ASC } from 'app/config/navigation.constants';
-import { DanhMucCanBoComponent } from './list/danh-muc-can-bo.component';
-import { DanhMucCanBoDetailComponent } from './detail/danh-muc-can-bo-detail.component';
-import { DanhMucCanBoUpdateComponent } from './update/danh-muc-can-bo-update.component';
 import DanhMucCanBoResolve from './route/danh-muc-can-bo-routing-resolve.service';
 
 const danhMucCanBoRoute: Routes = [
   {
     path: '',
-    component: DanhMucCanBoComponent,
+    loadComponent: () => import('./list/danh-muc-can-bo.component').then(m => m.DanhMucCanBoComponent),
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: `idCanBo,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    component: DanhMucCanBoDetailComponent,
+    path: ':idCanBo/view',
+    loadComponent: () => import('./detail/danh-muc-can-bo-detail.component').then(m => m.DanhMucCanBoDetailComponent),
     resolve: {
       danhMucCanBo: DanhMucCanBoResolve,
     },
@@ -26,15 +23,15 @@ const danhMucCanBoRoute: Routes = [
   },
   {
     path: 'new',
-    component: DanhMucCanBoUpdateComponent,
+    loadComponent: () => import('./update/danh-muc-can-bo-update.component').then(m => m.DanhMucCanBoUpdateComponent),
     resolve: {
       danhMucCanBo: DanhMucCanBoResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: DanhMucCanBoUpdateComponent,
+    path: ':idCanBo/edit',
+    loadComponent: () => import('./update/danh-muc-can-bo-update.component').then(m => m.DanhMucCanBoUpdateComponent),
     resolve: {
       danhMucCanBo: DanhMucCanBoResolve,
     },

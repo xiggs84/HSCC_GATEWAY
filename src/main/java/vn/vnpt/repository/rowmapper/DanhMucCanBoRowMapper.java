@@ -25,14 +25,13 @@ public class DanhMucCanBoRowMapper implements BiFunction<Row, String, DanhMucCan
     @Override
     public DanhMucCanBo apply(Row row, String prefix) {
         DanhMucCanBo entity = new DanhMucCanBo();
-        entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setIdCanBo(converter.fromRow(row, prefix + "_id_can_bo", Long.class));
         entity.setTenCanBo(converter.fromRow(row, prefix + "_ten_can_bo", String.class));
         entity.setDiaChi(converter.fromRow(row, prefix + "_dia_chi", String.class));
         entity.setNamSinh(converter.fromRow(row, prefix + "_nam_sinh", LocalDate.class));
         entity.setEmail(converter.fromRow(row, prefix + "_email", String.class));
         entity.setSoDienThoai(converter.fromRow(row, prefix + "_so_dien_thoai", String.class));
-        entity.setSoCmnd(converter.fromRow(row, prefix + "_so_cmnd", String.class));
+        entity.setSoGiayToTuyThan(converter.fromRow(row, prefix + "_so_giay_to_tuy_than", String.class));
         entity.setIdDonVi(converter.fromRow(row, prefix + "_id_don_vi", Long.class));
         entity.setTenDangNhap(converter.fromRow(row, prefix + "_ten_dang_nhap", String.class));
         entity.setMatKhau(converter.fromRow(row, prefix + "_mat_khau", String.class));
@@ -41,6 +40,7 @@ public class DanhMucCanBoRowMapper implements BiFunction<Row, String, DanhMucCan
         entity.setClientSecret(converter.fromRow(row, prefix + "_client_secret", String.class));
         entity.setUsernameKyso(converter.fromRow(row, prefix + "_username_kyso", String.class));
         entity.setPasswordKyso(converter.fromRow(row, prefix + "_password_kyso", String.class));
+        entity.setUserLogin(converter.fromRow(row, prefix + "_user_login", String.class));
         return entity;
     }
 }

@@ -30,7 +30,7 @@ export class DanhMucLoaiHopDongService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-loai-hop-dongs');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-loai-hop-dongs','hopdong');
 
   create(danhMucLoaiHopDong: NewDanhMucLoaiHopDong): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(danhMucLoaiHopDong);

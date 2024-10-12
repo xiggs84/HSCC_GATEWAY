@@ -2,12 +2,16 @@
   "annotations": {
     "changelogDate": "20240820090457"
   },
-  "applications": ["gateway"],
+  "applications": "*",
   "databaseType": "sql",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "idCanBo",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "tenCanBo",
@@ -30,7 +34,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "soCmnd",
+      "fieldName": "soGiayToTuyThan",
       "fieldType": "String"
     },
     {
@@ -64,9 +68,16 @@
     {
       "fieldName": "passwordKyso",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "DanhMucCanBo",
+  "pagination": "pagination",
   "relationships": [],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

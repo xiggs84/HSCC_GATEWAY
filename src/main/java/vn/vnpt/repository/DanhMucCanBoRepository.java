@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import vn.vnpt.domain.DanhMucCanBo;
+import vn.vnpt.domain.criteria.DanhMucCanBoCriteria;
 
 /**
  * Spring Data R2DBC repository for the DanhMucCanBo entity.
@@ -13,6 +14,8 @@ import vn.vnpt.domain.DanhMucCanBo;
 @SuppressWarnings("unused")
 @Repository
 public interface DanhMucCanBoRepository extends ReactiveCrudRepository<DanhMucCanBo, Long>, DanhMucCanBoRepositoryInternal {
+    Flux<DanhMucCanBo> findAllBy(Pageable pageable);
+
     @Override
     <S extends DanhMucCanBo> Mono<S> save(S entity);
 
@@ -36,4 +39,7 @@ interface DanhMucCanBoRepositoryInternal {
     Mono<DanhMucCanBo> findById(Long id);
     // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
     // Flux<DanhMucCanBo> findAllBy(Pageable pageable, Criteria criteria);
+    Flux<DanhMucCanBo> findByCriteria(DanhMucCanBoCriteria criteria, Pageable pageable);
+
+    Mono<Long> countByCriteria(DanhMucCanBoCriteria criteria);
 }

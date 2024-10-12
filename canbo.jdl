@@ -1,0 +1,23 @@
+entity DanhMucCanBo {
+    @id
+    idCanBo Long
+    tenCanBo String
+    diaChi String
+    namSinh LocalDate
+    email String
+    soDienThoai String
+    soGiayToTuyThan String
+    idDonVi Long
+    tenDangNhap String
+    matKhau String
+    trangThai Long
+    clientId String
+    clientSecret String
+    usernameKyso String
+    passwordKyso String
+    userLogin String
+}
+
+use mapstruct, serviceImpl for *
+use pagination for *
+filter *

@@ -1,78 +1,49 @@
-package vn.vnpt.domain;
+package vn.vnpt.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import java.util.Objects;
 
 /**
- * A DanhMucCanBo.
+ * A DTO for the {@link vn.vnpt.domain.DanhMucCanBo} entity.
  */
-@Table("danh_muc_can_bo")
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class DanhMucCanBo implements Serializable {
+public class DanhMucCanBoDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column("id_can_bo")
     private Long idCanBo;
 
-    @Column("ten_can_bo")
     private String tenCanBo;
 
-    @Column("dia_chi")
     private String diaChi;
 
-    @Column("nam_sinh")
     private LocalDate namSinh;
 
-    @Column("email")
     private String email;
 
-    @Column("so_dien_thoai")
     private String soDienThoai;
 
-    @Column("so_giay_to_tuy_than")
     private String soGiayToTuyThan;
 
-    @Column("id_don_vi")
     private Long idDonVi;
 
-    @Column("ten_dang_nhap")
     private String tenDangNhap;
 
-    @Column("mat_khau")
     private String matKhau;
 
-    @Column("trang_thai")
     private Long trangThai;
 
-    @Column("client_id")
     private String clientId;
 
-    @Column("client_secret")
     private String clientSecret;
 
-    @Column("username_kyso")
     private String usernameKyso;
 
-    @Column("password_kyso")
     private String passwordKyso;
 
-    @Column("user_login")
     private String userLogin;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getIdCanBo() {
-        return this.idCanBo;
-    }
-
-    public DanhMucCanBo idCanBo(Long idCanBo) {
-        this.setIdCanBo(idCanBo);
-        return this;
+        return idCanBo;
     }
 
     public void setIdCanBo(Long idCanBo) {
@@ -80,12 +51,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getTenCanBo() {
-        return this.tenCanBo;
-    }
-
-    public DanhMucCanBo tenCanBo(String tenCanBo) {
-        this.setTenCanBo(tenCanBo);
-        return this;
+        return tenCanBo;
     }
 
     public void setTenCanBo(String tenCanBo) {
@@ -93,12 +59,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getDiaChi() {
-        return this.diaChi;
-    }
-
-    public DanhMucCanBo diaChi(String diaChi) {
-        this.setDiaChi(diaChi);
-        return this;
+        return diaChi;
     }
 
     public void setDiaChi(String diaChi) {
@@ -106,12 +67,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public LocalDate getNamSinh() {
-        return this.namSinh;
-    }
-
-    public DanhMucCanBo namSinh(LocalDate namSinh) {
-        this.setNamSinh(namSinh);
-        return this;
+        return namSinh;
     }
 
     public void setNamSinh(LocalDate namSinh) {
@@ -119,12 +75,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getEmail() {
-        return this.email;
-    }
-
-    public DanhMucCanBo email(String email) {
-        this.setEmail(email);
-        return this;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -132,12 +83,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getSoDienThoai() {
-        return this.soDienThoai;
-    }
-
-    public DanhMucCanBo soDienThoai(String soDienThoai) {
-        this.setSoDienThoai(soDienThoai);
-        return this;
+        return soDienThoai;
     }
 
     public void setSoDienThoai(String soDienThoai) {
@@ -145,12 +91,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getSoGiayToTuyThan() {
-        return this.soGiayToTuyThan;
-    }
-
-    public DanhMucCanBo soGiayToTuyThan(String soGiayToTuyThan) {
-        this.setSoGiayToTuyThan(soGiayToTuyThan);
-        return this;
+        return soGiayToTuyThan;
     }
 
     public void setSoGiayToTuyThan(String soGiayToTuyThan) {
@@ -158,12 +99,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public Long getIdDonVi() {
-        return this.idDonVi;
-    }
-
-    public DanhMucCanBo idDonVi(Long idDonVi) {
-        this.setIdDonVi(idDonVi);
-        return this;
+        return idDonVi;
     }
 
     public void setIdDonVi(Long idDonVi) {
@@ -171,12 +107,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getTenDangNhap() {
-        return this.tenDangNhap;
-    }
-
-    public DanhMucCanBo tenDangNhap(String tenDangNhap) {
-        this.setTenDangNhap(tenDangNhap);
-        return this;
+        return tenDangNhap;
     }
 
     public void setTenDangNhap(String tenDangNhap) {
@@ -184,12 +115,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getMatKhau() {
-        return this.matKhau;
-    }
-
-    public DanhMucCanBo matKhau(String matKhau) {
-        this.setMatKhau(matKhau);
-        return this;
+        return matKhau;
     }
 
     public void setMatKhau(String matKhau) {
@@ -197,12 +123,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public Long getTrangThai() {
-        return this.trangThai;
-    }
-
-    public DanhMucCanBo trangThai(Long trangThai) {
-        this.setTrangThai(trangThai);
-        return this;
+        return trangThai;
     }
 
     public void setTrangThai(Long trangThai) {
@@ -210,12 +131,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getClientId() {
-        return this.clientId;
-    }
-
-    public DanhMucCanBo clientId(String clientId) {
-        this.setClientId(clientId);
-        return this;
+        return clientId;
     }
 
     public void setClientId(String clientId) {
@@ -223,12 +139,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getClientSecret() {
-        return this.clientSecret;
-    }
-
-    public DanhMucCanBo clientSecret(String clientSecret) {
-        this.setClientSecret(clientSecret);
-        return this;
+        return clientSecret;
     }
 
     public void setClientSecret(String clientSecret) {
@@ -236,12 +147,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getUsernameKyso() {
-        return this.usernameKyso;
-    }
-
-    public DanhMucCanBo usernameKyso(String usernameKyso) {
-        this.setUsernameKyso(usernameKyso);
-        return this;
+        return usernameKyso;
     }
 
     public void setUsernameKyso(String usernameKyso) {
@@ -249,12 +155,7 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getPasswordKyso() {
-        return this.passwordKyso;
-    }
-
-    public DanhMucCanBo passwordKyso(String passwordKyso) {
-        this.setPasswordKyso(passwordKyso);
-        return this;
+        return passwordKyso;
     }
 
     public void setPasswordKyso(String passwordKyso) {
@@ -262,41 +163,38 @@ public class DanhMucCanBo implements Serializable {
     }
 
     public String getUserLogin() {
-        return this.userLogin;
-    }
-
-    public DanhMucCanBo userLogin(String userLogin) {
-        this.setUserLogin(userLogin);
-        return this;
+        return userLogin;
     }
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof DanhMucCanBo)) {
+        if (!(o instanceof DanhMucCanBoDTO)) {
             return false;
         }
-        return getIdCanBo() != null && getIdCanBo().equals(((DanhMucCanBo) o).getIdCanBo());
+
+        DanhMucCanBoDTO danhMucCanBoDTO = (DanhMucCanBoDTO) o;
+        if (this.idCanBo == null) {
+            return false;
+        }
+        return Objects.equals(this.idCanBo, danhMucCanBoDTO.idCanBo);
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+        return Objects.hash(this.idCanBo);
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "DanhMucCanBo{" +
+        return "DanhMucCanBoDTO{" +
             "idCanBo=" + getIdCanBo() +
             ", tenCanBo='" + getTenCanBo() + "'" +
             ", diaChi='" + getDiaChi() + "'" +

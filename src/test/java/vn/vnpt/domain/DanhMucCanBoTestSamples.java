@@ -11,13 +11,12 @@ public class DanhMucCanBoTestSamples {
 
     public static DanhMucCanBo getDanhMucCanBoSample1() {
         return new DanhMucCanBo()
-            .id(1L)
             .idCanBo(1L)
             .tenCanBo("tenCanBo1")
             .diaChi("diaChi1")
             .email("email1")
             .soDienThoai("soDienThoai1")
-            .soCmnd("soCmnd1")
+            .soGiayToTuyThan("soGiayToTuyThan1")
             .idDonVi(1L)
             .tenDangNhap("tenDangNhap1")
             .matKhau("matKhau1")
@@ -25,18 +24,18 @@ public class DanhMucCanBoTestSamples {
             .clientId("clientId1")
             .clientSecret("clientSecret1")
             .usernameKyso("usernameKyso1")
-            .passwordKyso("passwordKyso1");
+            .passwordKyso("passwordKyso1")
+            .userLogin("userLogin1");
     }
 
     public static DanhMucCanBo getDanhMucCanBoSample2() {
         return new DanhMucCanBo()
-            .id(2L)
             .idCanBo(2L)
             .tenCanBo("tenCanBo2")
             .diaChi("diaChi2")
             .email("email2")
             .soDienThoai("soDienThoai2")
-            .soCmnd("soCmnd2")
+            .soGiayToTuyThan("soGiayToTuyThan2")
             .idDonVi(2L)
             .tenDangNhap("tenDangNhap2")
             .matKhau("matKhau2")
@@ -44,18 +43,18 @@ public class DanhMucCanBoTestSamples {
             .clientId("clientId2")
             .clientSecret("clientSecret2")
             .usernameKyso("usernameKyso2")
-            .passwordKyso("passwordKyso2");
+            .passwordKyso("passwordKyso2")
+            .userLogin("userLogin2");
     }
 
     public static DanhMucCanBo getDanhMucCanBoRandomSampleGenerator() {
         return new DanhMucCanBo()
-            .id(longCount.incrementAndGet())
             .idCanBo(longCount.incrementAndGet())
             .tenCanBo(UUID.randomUUID().toString())
             .diaChi(UUID.randomUUID().toString())
             .email(UUID.randomUUID().toString())
             .soDienThoai(UUID.randomUUID().toString())
-            .soCmnd(UUID.randomUUID().toString())
+            .soGiayToTuyThan(UUID.randomUUID().toString())
             .idDonVi(longCount.incrementAndGet())
             .tenDangNhap(UUID.randomUUID().toString())
             .matKhau(UUID.randomUUID().toString())
@@ -63,6 +62,7 @@ public class DanhMucCanBoTestSamples {
             .clientId(UUID.randomUUID().toString())
             .clientSecret(UUID.randomUUID().toString())
             .usernameKyso(UUID.randomUUID().toString())
-            .passwordKyso(UUID.randomUUID().toString());
+            .passwordKyso(UUID.randomUUID().toString())
+            .userLogin(UUID.randomUUID().toString());
     }
 }

@@ -1,0 +1,39 @@
+.button-group {
+  text-align: right;
+}
+
+.action-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+
+  i {
+    font-size: 16px;
+    color: #1890ff;
+  }
+}
+
+.custom-table {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+
+  th, td {
+    padding: 10px;
+  }
+
+  th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+}
+
+.custom-label {
+  text-align: left;
+}

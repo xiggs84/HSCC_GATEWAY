@@ -17,8 +17,8 @@ describe('DanhMucCanBo Management Detail Component', () => {
           [
             {
               path: '**',
-              component: DanhMucCanBoDetailComponent,
-              resolve: { danhMucCanBo: () => of({ id: 123 }) },
+              loadComponent: () => import('./danh-muc-can-bo-detail.component').then(m => m.DanhMucCanBoDetailComponent),
+              resolve: { danhMucCanBo: () => of({ idCanBo: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,7 +40,7 @@ describe('DanhMucCanBo Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', DanhMucCanBoDetailComponent);
 
       // THEN
-      expect(instance.danhMucCanBo()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.danhMucCanBo()).toEqual(expect.objectContaining({ idCanBo: 123 }));
     });
   });
 

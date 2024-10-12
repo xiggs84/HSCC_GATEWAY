@@ -12,17 +12,20 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+        @if (editForm.controls.idCanBo.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.danhMucCanBo.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_idCanBo" jhiTranslate="gatewayApp.danhMucCanBo.idCanBo">Id Can Bo</label>
+            <input
+              type="number"
+              class="form-control"
+              name="idCanBo"
+              id="field_idCanBo"
+              data-cy="idCanBo"
+              formControlName="idCanBo"
+              [readonly]="true"
+            />
           </div>
         }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_idCanBo" jhiTranslate="gatewayApp.danhMucCanBo.idCanBo">Id Can Bo</label>
-          <input type="number" class="form-control" name="idCanBo" id="field_idCanBo" data-cy="idCanBo" formControlName="idCanBo" />
-        </div>
 
         <div class="mb-3">
           <label class="form-label" for="field_tenCanBo" jhiTranslate="gatewayApp.danhMucCanBo.tenCanBo">Ten Can Bo</label>
@@ -69,8 +72,17 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_soCmnd" jhiTranslate="gatewayApp.danhMucCanBo.soCmnd">So Cmnd</label>
-          <input type="text" class="form-control" name="soCmnd" id="field_soCmnd" data-cy="soCmnd" formControlName="soCmnd" />
+          <label class="form-label" for="field_soGiayToTuyThan" jhiTranslate="gatewayApp.danhMucCanBo.soGiayToTuyThan"
+            >So Giay To Tuy Than</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="soGiayToTuyThan"
+            id="field_soGiayToTuyThan"
+            data-cy="soGiayToTuyThan"
+            formControlName="soGiayToTuyThan"
+          />
         </div>
 
         <div class="mb-3">
@@ -139,6 +151,11 @@
             data-cy="passwordKyso"
             formControlName="passwordKyso"
           />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_userLogin" jhiTranslate="gatewayApp.danhMucCanBo.userLogin">User Login</label>
+          <input type="text" class="form-control" name="userLogin" id="field_userLogin" data-cy="userLogin" formControlName="userLogin" />
         </div>
       </div>
 

@@ -21,6 +21,7 @@ import {TaisanComponent} from "./danhmuc/taisan/taisan.component";
 import {VaitroComponent} from "./danhmuc/vaitro/vaitro.component";
 import {LoaivanbanComponent} from "./danhmuc/loaivanban/loaivanban.component";
 import {CanboComponent} from "./danhmuc/canbo/canbo.component";
+import {LoaihopdongComponent} from "./danhmuc/loaihopdong/loaihopdong.component";
 const routes: Routes = [
   {
     path: '',
@@ -61,6 +62,11 @@ const routes: Routes = [
     path: 'loaivanban',
     component: LoaivanbanComponent,
     title: 'loaivanban',
+  },
+  {
+    path: 'loaihopdong',
+    component: LoaihopdongComponent,
+    title: 'loaihopdong',
   },
   {
     path: 'duongsu',

@@ -159,25 +159,15 @@ export class VaitroComponent {
 
   // Hàm cập nhật vai trò
   updateVaiTro(): void {
-    this.danhMucVaiTroService.filterByDienGiai(this.newItem.dienGiai || '').subscribe({
-      next: (response) => {
-        const existingItems = response.body || [];
-
-        this.danhMucVaiTroService.update(this.newItem).subscribe({
-          next: () => {
-            this.notification.success('Thông báo', 'Cập nhật vai trò thành công');
-            this.isVisible = false;
-            this.loadData();
-          },
-          error: (error) => {
-            console.error('Error updating vai tro:', error);
-            this.notification.error('Thông báo', 'Cập nhật vai trò thất bại');
-          }
-        });
+    this.danhMucVaiTroService.update(this.newItem).subscribe({
+      next: () => {
+        this.notification.success('Thông báo', 'Cập nhật vai trò thành công');
+        this.isVisible = false;
+        this.loadData();
       },
       error: (error) => {
-        console.error('Error checking dien giai:', error);
-        this.notification.error('Thông báo', 'Có lỗi xảy ra khi kiểm tra diễn giải');
+        console.error('Error updating vai tro:', error);
+        this.notification.error('Thông báo', 'Cập nhật vai trò thất bại');
       }
     });
   }

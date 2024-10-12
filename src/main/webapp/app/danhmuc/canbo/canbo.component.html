@@ -71,10 +71,10 @@
   <tr *ngFor="let item of listOfData; let i = index">
     <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
     <td>{{ item.tenCanBo ?? 'N/A' }}</td>
-    <td>{{ item.namSinh ? getFormattedDate(item.namSinh) : 'N/A' }}</td>
+    <td>{{ item.namSinh ? getFormattedDate(item.namSinh.toString()) : 'N/A' }}</td>
     <td>{{ item.email ?? 'N/A' }}</td>
     <td>{{ item.diaChi ?? 'N/A' }}</td>
-    <td>{{ getDonViById(item.idDonVi) }}</td>
+    <td>{{ getDonViById(item.idDonVi!) }}</td>
     <td>{{ item.trangThai ?? 'N/A' }}</td>
     <td>
       <div class="action-icons">
@@ -88,3 +88,5 @@
   </tr>
   </tbody>
 </nz-table>
+
+<jhi-canbo-form></jhi-canbo-form>

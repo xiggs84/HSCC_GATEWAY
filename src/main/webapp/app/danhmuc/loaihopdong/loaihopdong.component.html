@@ -1,0 +1,186 @@
+<nz-row [nzGutter]="[16, 16]" class="filter-wrapper">
+  <nz-col nzSpan="6">
+    <nz-form-item>
+      <nz-form-label>Đơn vị</nz-form-label>
+      <nz-form-control>
+        <nz-select [(ngModel)]="selectedDonVi" (ngModelChange)="onDonViChange()" nzPlaceHolder="Chọn đơn vị">
+          <nz-option [nzValue]="null" nzLabel="Tất cả"></nz-option>
+          <nz-option *ngFor="let donVi of danhSachDonVi" [nzValue]="donVi.id" [nzLabel]="donVi.tenDonVi!"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+
+  <!-- Tìm kiếm -->
+  <nz-col nzSpan="6">
+    <nz-form-item>
+      <nz-form-label>Tìm kiếm</nz-form-label>
+      <nz-form-control>
+        <input nz-input [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Nhập dữ liệu cần tìm" />
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+
+  <!-- Button Group -->
+  <nz-col nzSpan="12" class="button-group">
+    <button nz-button nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      <span>Thêm mới</span>
+    </button>
+  </nz-col>
+</nz-row>
+
+<!-- Table -->
+<nz-table [nzData]="listOfData"
+          [nzPageSize]="pageSize"
+          [nzPageIndex]="pageIndex"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          class="custom-table"
+          nzShowPagination nzShowSizeChanger
+          (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Tên loại hợp đồng</th>
+    <th>Phân loại hợp đồng</th>
+    <th>Vai trò 1</th>
+    <th>Vai trò 2</th>
+    <th>Đơn vị</th>
+    <th>Tệp hợp đồng </th>
+    <th nzWidth="100px">Thao tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of listOfData; let i = index">
+    <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+    <td>{{ item.dienGiai ?? 'N/A' }}</td>
+    <td>{{ getDienGiaiNhomHopDongById(item.danhMucNhomHopDong?.idNhom)}}</td>
+    <td>{{ getDienGiaiById(item.idVaiTro1!)}}</td>
+    <td>{{ getDienGiaiById(item.idVaiTro2!)}}</td>
+    <td>{{ getDonViById(item.idDonVi!) }}</td>
+    <td>{{ item.fileHopDong ?? 'N/A' }}</td>
+    <td>
+      <div class="action-icons">
+        <i nz-icon nzType="edit" nzTheme="outline" nz-tooltip nzTooltipTitle="Sửa" (click)="onEdit(item)"></i>
+        <i nz-icon nzType="delete" nzTheme="outline" nz-tooltip nzTooltipTitle="Xóa" (click)="onDelete(item)"></i>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="1000px">
+  <div *nzModalContent>
+    <nz-spin *ngIf="isLoading" nzTip="Đang tải..." [nzSpinning]="isLoading"></nz-spin>
+    <div *ngIf="!isLoading">
+      <form nz-form [nzLayout]="'vertical'">
+        <nz-row [nzGutter]="16">
+          <!-- Nhóm hợp đồng -->
+          <nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label class="custom-label" nzRequired>Nhóm hợp đồng</nz-form-label>
+              <nz-form-control>
+                <nz-select [(ngModel)]="newItem.danhMucNhomHopDong" name="contractGroup" nzPlaceHolder="Chọn nhóm hợp đồng">
+                  <!-- Options here -->
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Loại hợp đồng -->
+          <nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label class="custom-label" nzRequired>Loại hợp đồng</nz-form-label>
+              <nz-form-control>
+                <nz-select [(ngModel)]="newItem.dienGiai" name="contractType" nzPlaceHolder="Chọn loại hợp đồng">
+                  <nz-option nzValue="K" nzLabel="Thêm loại mới"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Tên loại hợp đồng -->
+          <nz-col nzSpan="8" [style.visibility]="newItem.dienGiai === 'K' ? 'visible' : 'hidden'">
+            <nz-form-item>
+              <nz-form-label class="custom-label" nzRequired>Tên loại hợp đồng</nz-form-label>
+              <nz-form-control>
+                <input nz-input [(ngModel)]="tenLoaiHopDong" name="contractName" placeholder="Nhập tên loại hợp đồng" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Vai trò 1 -->
+          <nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label class="custom-label">Vai trò 1</nz-form-label>
+              <nz-form-control>
+                <nz-select [(ngModel)]="newItem.idVaiTro1" name="role1" nzPlaceHolder="Chọn vai trò">
+                  <!-- Options here -->
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Vai trò 2 -->
+          <nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label class="custom-label">Vai trò 2</nz-form-label>
+              <nz-form-control>
+                <nz-select [(ngModel)]="newItem.idVaiTro2" name="role2" nzPlaceHolder="Chọn vai trò">
+                  <!-- Options here -->
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Vai trò 3 -->
+          <nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label class="custom-label">Vai trò 3 (Nếu có)</nz-form-label>
+              <nz-form-control>
+                <nz-select [(ngModel)]="newItem.idVaiTro3" name="role3" nzPlaceHolder="Chọn vai trò">
+                  <!-- Options here -->
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <!-- Điều khoản -->
+          <nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label class="custom-label">Điều khoản</nz-form-label>
+              <nz-form-control>
+                <textarea nz-input [(ngModel)]="newItem.dieuKhoan" name="terms" placeholder="Nhập điều khoản"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <nz-col nzSpan="12" style="margin-bottom: 20px;">
+            <!-- Nút chọn hợp đồng -->
+            <input type="file" #fileInputHopDong style="display: none;" (change)="onFileSelected($event, 'hopDong')" />
+            <button nz-button (click)="fileInputHopDong.click()">
+              <i nz-icon [nzType]="selectedHopDongFile ? 'reload' : 'file-add'"></i>
+              {{ selectedHopDongFile ? 'Thay đổi' : 'Chọn hợp đồng' }}
+            </button>
+            <span *ngIf="selectedHopDongFile">{{ selectedHopDongFile }}</span> <!-- Hiển thị tên file hợp đồng -->
+          </nz-col>
+
+          <nz-col nzSpan="12" style="margin-bottom: 20px;">
+            <!-- Nút chọn lời chứng -->
+            <input type="file" #fileInputLoiChung style="display: none;" (change)="onFileSelected($event, 'loiChung')" />
+            <button nz-button (click)="fileInputLoiChung.click()">
+              <i nz-icon [nzType]="selectedHopDongFile ? 'reload' : 'file-add'"></i>
+              {{ selectedLoiChungFile ? 'Thay đổi' : 'Chọn lời chứng' }}
+            </button>
+            <span *ngIf="selectedLoiChungFile">{{ selectedLoiChungFile }}</span> <!-- Hiển thị tên file lời chứng -->
+          </nz-col>
+
+        </nz-row>
+      </form>
+    </div>
+  </div>
+</nz-modal>
+

@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import {Observable, map, throwError} from 'rxjs';
 
 import dayjs from 'dayjs/esm';
 
@@ -9,8 +9,9 @@ import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDanhMucCanBo, NewDanhMucCanBo } from '../danh-muc-can-bo.model';
+import {catchError} from "rxjs/operators";
 
-export type PartialUpdateDanhMucCanBo = Partial<IDanhMucCanBo> & Pick<IDanhMucCanBo, 'id'>;
+export type PartialUpdateDanhMucCanBo = Partial<IDanhMucCanBo> & Pick<IDanhMucCanBo, 'idCanBo'>;
 
 type RestOf<T extends IDanhMucCanBo | NewDanhMucCanBo> = Omit<T, 'namSinh'> & {
   namSinh?: string | null;
@@ -30,7 +31,7 @@ export class DanhMucCanBoService {
   protected http = inject(HttpClient);
   protected applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-can-bos');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/danh-muc-can-bos','canbodonvi');
 
   create(danhMucCanBo: NewDanhMucCanBo): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(danhMucCanBo);
@@ -70,15 +71,15 @@ export class DanhMucCanBoService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getDanhMucCanBoIdentifier(danhMucCanBo: Pick<IDanhMucCanBo, 'id'>): number {
-    return danhMucCanBo.id;
+  getDanhMucCanBoIdentifier(danhMucCanBo: Pick<IDanhMucCanBo, 'idCanBo'>): number {
+    return danhMucCanBo.idCanBo;
   }
 
-  compareDanhMucCanBo(o1: Pick<IDanhMucCanBo, 'id'> | null, o2: Pick<IDanhMucCanBo, 'id'> | null): boolean {
+  compareDanhMucCanBo(o1: Pick<IDanhMucCanBo, 'idCanBo'> | null, o2: Pick<IDanhMucCanBo, 'idCanBo'> | null): boolean {
     return o1 && o2 ? this.getDanhMucCanBoIdentifier(o1) === this.getDanhMucCanBoIdentifier(o2) : o1 === o2;
   }
 
-  addDanhMucCanBoToCollectionIfMissing<Type extends Pick<IDanhMucCanBo, 'id'>>(
+  addDanhMucCanBoToCollectionIfMissing<Type extends Pick<IDanhMucCanBo, 'idCanBo'>>(
     danhMucCanBoCollection: Type[],
     ...danhMucCanBosToCheck: (Type | null | undefined)[]
   ): Type[] {
@@ -124,5 +125,20 @@ export class DanhMucCanBoService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  createCanBo(danhMucCanBoDTO: NewDanhMucCanBo): Observable<EntityResponseType> {
+    // Chuyển đổi đối tượng ngày tháng nếu cần thiết
+    const copy = this.convertDateFromClient(danhMucCanBoDTO);
+
+    return this.http.post<RestDanhMucCanBo>(this.resourceUrl, copy, { observe: 'response' })
+      .pipe(
+        map(res => this.convertResponseFromServer(res)), // Chuyển đổi phản hồi từ server
+        catchError(error => {
+          // Xử lý lỗi tại đây
+          console.error('Error creating CanBo:', error);
+          return throwError(error); // Hoặc xử lý theo cách của bạn
+        })
+      );
   }
 }

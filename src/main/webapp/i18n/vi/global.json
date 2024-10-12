@@ -8,26 +8,7 @@
       "entities": {
         "main": "Thực thể",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "danhMucLoaiGiayToChungThuc": "Danh Muc Loai Giay To Chung Thuc",
-        "chungThuc": "Chung Thuc",
-        "cauHinhMauChungThuc": "Cau Hinh Mau Chung Thuc",
-        "danhSachChungThuc": "Danh Sach Chung Thuc",
-        "soCongChung": "So Cong Chung",
-        "soCongChungTemp": "So Cong Chung Temp",
-        "danhMucLoaiSoCongChung": "Danh Muc Loai So Cong Chung",
-        "cauHinhHopDong": "Cau Hinh Hop Dong",
-        "loaiHopDongCongChung": "Loai Hop Dong Cong Chung",
-        "hopDongCongChung": "Hop Dong Cong Chung",
-        "danhMucLoaiHopDong": "Danh Muc Loai Hop Dong",
-        "danhMucNhomHopDong": "Danh Muc Nhom Hop Dong",
-        "phanLoaiHopDong": "Phan Loai Hop Dong",
-        "cauHinhMauHopDong": "Cau Hinh Mau Hop Dong",
-        "thongTinChungHopDong": "Thong Tin Chung Hop Dong",
-        "danhSachHopDong": "Danh Sach Hop Dong",
-        "dmHopDong": "Dm Hop Dong",
-        "dmLoaiHd": "Dm Loai Hd",
-        "danhMucVaiTro": "Danh Muc Vai Tro",
-        "danhMucLoaiVanBan": "Danh Muc Loai Van Ban"
+        "danhMucCanBo": "Danh Muc Can Bo"
       },
       "account": {
         "main": "Tài khoản",

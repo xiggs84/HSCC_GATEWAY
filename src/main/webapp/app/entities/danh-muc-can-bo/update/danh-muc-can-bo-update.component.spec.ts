@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject, from } from 'rxjs';
+import { Subject, from, of } from 'rxjs';
 
 import { DanhMucCanBoService } from '../service/danh-muc-can-bo.service';
 import { IDanhMucCanBo } from '../danh-muc-can-bo.model';
@@ -44,7 +44,7 @@ describe('DanhMucCanBo Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const danhMucCanBo: IDanhMucCanBo = { id: 456 };
+      const danhMucCanBo: IDanhMucCanBo = { idCanBo: 456 };
 
       activatedRoute.data = of({ danhMucCanBo });
       comp.ngOnInit();
@@ -57,7 +57,7 @@ describe('DanhMucCanBo Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucCanBo>>();
-      const danhMucCanBo = { id: 123 };
+      const danhMucCanBo = { idCanBo: 123 };
       jest.spyOn(danhMucCanBoFormService, 'getDanhMucCanBo').mockReturnValue(danhMucCanBo);
       jest.spyOn(danhMucCanBoService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -80,8 +80,8 @@ describe('DanhMucCanBo Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucCanBo>>();
-      const danhMucCanBo = { id: 123 };
-      jest.spyOn(danhMucCanBoFormService, 'getDanhMucCanBo').mockReturnValue({ id: null });
+      const danhMucCanBo = { idCanBo: 123 };
+      jest.spyOn(danhMucCanBoFormService, 'getDanhMucCanBo').mockReturnValue({ idCanBo: null });
       jest.spyOn(danhMucCanBoService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ danhMucCanBo: null });
@@ -103,7 +103,7 @@ describe('DanhMucCanBo Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDanhMucCanBo>>();
-      const danhMucCanBo = { id: 123 };
+      const danhMucCanBo = { idCanBo: 123 };
       jest.spyOn(danhMucCanBoService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ danhMucCanBo });

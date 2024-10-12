@@ -15,7 +15,7 @@ class DanhMucCanBoTest {
         DanhMucCanBo danhMucCanBo2 = new DanhMucCanBo();
         assertThat(danhMucCanBo1).isNotEqualTo(danhMucCanBo2);
 
-        danhMucCanBo2.setId(danhMucCanBo1.getId());
+        danhMucCanBo2.setIdCanBo(danhMucCanBo1.getIdCanBo());
         assertThat(danhMucCanBo1).isEqualTo(danhMucCanBo2);
 
         danhMucCanBo2 = getDanhMucCanBoSample2();
